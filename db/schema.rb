@@ -15,26 +15,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_170844) do
   enable_extension "plpgsql"
 
   create_table "enterprises", force: :cascade do |t|
-    t.bigint "tenant_id"
+    t.string "rut", null: false
     t.string "token", null: false
+    t.string "subdomain", null: false
     t.string "name", null: false
+    t.string "address"
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tenant_id"], name: "index_enterprises_on_tenant_id"
+    t.index ["rut"], name: "index_enterprises_on_rut", unique: true
+    t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
   end
 
   create_table "tenants", force: :cascade do |t|
     t.string "subdomain"
-    t.string "scheme", null: false
-    t.string "name", null: false
     t.string "token", null: false
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tenants_on_name", unique: true
-    t.index ["scheme"], name: "index_tenants_on_scheme", unique: true
     t.index ["subdomain"], name: "index_tenants_on_subdomain", unique: true
     t.index ["token"], name: "index_tenants_on_token", unique: true
   end
