@@ -19,4 +19,7 @@
 #  index_enterprises_on_token      (token) UNIQUE
 #
 class Enterprise < ApplicationRecord
+  has_many :category_petitions
+  belongs_to :user_enterprise, optional: true
+  has_many :users, through: :user_enterprise
 end
