@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_14_181323) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_181323) do
     t.index ["rut"], name: "index_enterprises_on_rut", unique: true
     t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
+  end
+
+  create_table "group_petition_roles", force: :cascade do |t|
+    t.bigint "group_petition_id", null: false
+    t.bigint "role_id", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_petition_id", "role_id"], name: "index_group_petition_roles_on_group_petition_id_and_role_id", unique: true
+    t.index ["group_petition_id"], name: "index_group_petition_roles_on_group_petition_id"
+    t.index ["role_id"], name: "index_group_petition_roles_on_role_id"
   end
 
   create_table "group_petitions", force: :cascade do |t|
