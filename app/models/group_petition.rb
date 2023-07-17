@@ -14,6 +14,6 @@
 #  index_group_petitions_on_code  (code) UNIQUE
 #
 class GroupPetition < ApplicationRecord
-  belongs_to :group_petition_role, optional: true
-  has_many :roles, through: :group_petition_role
+  has_many :group_petition_roles
+  has_many :roles, through: :group_petition_roles
 end

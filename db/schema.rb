@@ -119,6 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "lang", default: "es", null: false
+    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

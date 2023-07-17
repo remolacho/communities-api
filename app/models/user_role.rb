@@ -16,6 +16,6 @@
 #  index_user_roles_on_user_id_and_role_id  (user_id,role_id) UNIQUE
 #
 class UserRole < ApplicationRecord
-  has_many :users
-  has_many :roles
+  belongs_to :user
+  belongs_to :role
 end

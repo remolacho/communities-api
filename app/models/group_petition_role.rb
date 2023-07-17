@@ -16,6 +16,6 @@
 #  index_group_petition_roles_on_role_id                        (role_id)
 #
 class GroupPetitionRole < ApplicationRecord
-  has_many :roles
-  has_many :group_petitions
+  belongs_to :role
+  belongs_to :group_petition
 end

@@ -4,14 +4,65 @@ info:
   title: API V1
   version: v1
 paths:
-  "/v1/hi":
-    get:
-      summary: Get HI
+  "/{enterprise_subdomain}/v1/users/sign_in":
+    post:
+      summary: Create login by user
       tags:
-      - Hi
+      - Community API V1 Users
+      description: Allow to users enter to api through of the email and password
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
       responses:
         '200':
-          description: Hi
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+        '403':
+          description: error password or user is not active!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sign_in:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
 servers:
 - url: https://{defaultHost}
   variables:

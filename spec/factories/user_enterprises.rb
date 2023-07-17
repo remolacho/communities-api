@@ -14,8 +14,11 @@
 #  index_user_enterprises_on_enterprise_id              (enterprise_id)
 #  index_user_enterprises_on_user_id                    (user_id)
 #  index_user_enterprises_on_user_id_and_enterprise_id  (user_id,enterprise_id) UNIQUE
-#
-class UserEnterprise < ApplicationRecord
-  belongs_to :user
-  belongs_to :enterprise
+
+FactoryBot.define do
+  factory :user_enterprise do
+    user_id { user_id }
+    enterprise_id { enterprise_id }
+    active { active }
+  end
 end
