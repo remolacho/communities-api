@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :health, only: [:index]
-  namespace :api, path: "" do
-    namespace :v1 do
-      resources :hi, only: [:index]
+
+  scope '/:enterprise_subdomain' do
+    namespace :api, path: "" do
+      namespace :v1 do
+        resources :hi, only: [:index]
+      end
     end
   end
 end
