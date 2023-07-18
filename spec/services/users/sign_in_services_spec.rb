@@ -28,10 +28,7 @@ RSpec.describe ::Users::SignInService do
       user_enterprise
 
       service = described_class.new(email: user.email, password: user.password)
-      result = service.call
-
-      expect(result.user.present?).to eq true
-      expect(result.jwt.present?).to eq true
+      expect(service.call.present?).to eq true
     end
   end
 end

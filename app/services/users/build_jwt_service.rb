@@ -12,10 +12,10 @@ class Users::BuildJwtService
     @unit = unit
   end
 
-  def call
+  def build
     sign_jwt
   rescue StandardError
-    nil
+    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error'))
   end
 
   private

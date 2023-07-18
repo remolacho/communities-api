@@ -5,10 +5,10 @@ class Api::V1::Users::SignInController < ApplicationController
 
   # POST /:enterprise_subdomain/v1/users/sign_in?lang=es
   def create
-    service = ::Users::SignInService.new(email: allowed_params[:email],
-                                         password: allowed_params[:password]).call
+    user_service = ::Users::SignInService.new(email: allowed_params[:email], password: allowed_params[:password])
+    jwt_service =  ::Users::BuildJwtService.new(user: user_service.call)
 
-    render json: { success: true, data: { jwt: service.jwt } }
+    render json: { success: true, data: { jwt: jwt_service.build } }
   end
 
   private

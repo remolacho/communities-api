@@ -12,7 +12,7 @@ class Users::SignInService
   def call
     validate_sign_in
 
-    response.new(current_user, jwt_token)
+    current_user
   end
 
   private
@@ -21,7 +21,6 @@ class Users::SignInService
     raise PolicyException.new(I18n.t('services.users.sign_in.not_found')) unless user.present?
     raise PolicyException.new(I18n.t('services.users.sign_in.not_valid')) unless valid?
     raise PolicyException.new(I18n.t('services.users.sign_in.inactive')) unless active?
-    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error')) unless  jwt_token.present?
   end
 
   def valid?
@@ -38,13 +37,5 @@ class Users::SignInService
 
   def user
     @user ||= User.find_by(email: email)
-  end
-
-  def jwt_token
-    @jwt_token ||= ::Users::BuildJwtService.new(user: current_user).call
-  end
-
-  def response
-    Struct.new(:user, :jwt)
   end
 end
