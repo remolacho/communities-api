@@ -29,6 +29,6 @@ module SkeletonRails
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
     config.i18n.available_locales = %i[en es]
     config.i18n.default_locale = :es
-    config.time_zone = "America/Santiago"
+    config.time_zone = "America/Bogota"
   end
 end

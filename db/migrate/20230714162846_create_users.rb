@@ -8,10 +8,13 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :email, null: false
       t.string :password_digest, null: false
       t.string :lang, null: false, default: 'es'
+      t.string :reset_password_key
+      t.datetime :reset_password_key_expires_at
       t.string :phone
       t.index :identifier, unique: true
       t.index :token, unique: true
       t.index :email, unique: true
+      t.index :reset_password_key, unique: true
       t.timestamps
     end
   end

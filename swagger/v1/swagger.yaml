@@ -4,6 +4,72 @@ info:
   title: API V1
   version: v1
 paths:
+  "/{enterprise_subdomain}/v1/users/forgot_password":
+    post:
+      summary: Create a new request for change password
+      tags:
+      - Community API V1 Users
+      description: Allow to users do change to password
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '422':
+          description: error email is empty!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error user not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                forgot_password:
+                  type: object
+                  properties:
+                    email:
+                      type: string
   "/{enterprise_subdomain}/v1/users/sign_in":
     post:
       summary: Create login by user
