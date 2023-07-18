@@ -15,8 +15,8 @@
 #  index_roles_on_slug  (slug) UNIQUE
 #
 class Role < ApplicationRecord
-  belongs_to :user_role, optional: true
-  has_many :users, through: :user_role
-  belongs_to :group_petition_role, optional: true
-  has_many :group_petitions, through: :group_petition_role
+  has_many :user_roles
+  has_many :users, through: :user_roles
+  has_many :group_petition_roles
+  has_many :group_petitions, through: :group_petition_roles
 end

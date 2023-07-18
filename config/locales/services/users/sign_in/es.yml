@@ -1,0 +1,8 @@
+es:
+  services:
+    users:
+      sign_in:
+        not_found: 'El usuario no existe'
+        not_valid: 'El email o contraseña no son validos'
+        inactive: 'El usuario esta inactivo'
+        jwt_error: 'El JWT no pudo ser creado'

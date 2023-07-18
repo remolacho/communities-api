@@ -17,9 +17,13 @@
 #  index_enterprises_on_rut        (rut) UNIQUE
 #  index_enterprises_on_subdomain  (subdomain) UNIQUE
 #  index_enterprises_on_token      (token) UNIQUE
-#
-class Enterprise < ApplicationRecord
-  has_many :category_petitions
-  has_many :user_enterprises
-  has_many :users, through: :user_enterprises
+
+
+FactoryBot.define do
+  factory :enterprise do
+    token { SecureRandom.uuid }
+    name { "Test community 1" }
+    rut { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
+    subdomain { "test-community-1" }
+  end
 end

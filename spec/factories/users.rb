@@ -20,11 +20,17 @@
 #  index_users_on_identifier  (identifier) UNIQUE
 #  index_users_on_token       (token) UNIQUE
 #
-class User < ApplicationRecord
-  has_secure_password
 
-  has_one :user_enterprise
-  has_one :enterprise, through: :user_enterprise
-  has_many :user_roles
-  has_many :roles, through: :user_roles
+FactoryBot.define do
+  password = '12345678'
+
+  factory :user do
+    token { SecureRandom.uuid }
+    name { FFaker::Name.first_name }
+    lastname { FFaker::Name.last_name }
+    identifier { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
+    email { "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com" }
+    password { password }
+    password_confirmation { password }
+  end
 end

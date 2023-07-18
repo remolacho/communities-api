@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :email, null: false
       t.string :password_digest, null: false
       t.string :lang, null: false, default: 'es'
+      t.string :phone
       t.index :identifier, unique: true
       t.index :token, unique: true
       t.index :email, unique: true
