@@ -117,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
     t.string "lastname", null: false
     t.string "token", null: false
     t.string "email", null: false
+    t.string "address"
     t.string "password_digest", null: false
     t.string "lang", default: "es", null: false
     t.string "reset_password_key"

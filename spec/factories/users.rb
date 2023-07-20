@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                            :bigint           not null, primary key
+#  address                       :string
 #  email                         :string           not null
 #  identifier                    :string           not null
 #  lang                          :string           default("es"), not null
