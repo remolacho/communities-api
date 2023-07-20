@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       namespace :v1 do
         namespace :users do
           resources :sign_in, only: [:create]
+          resources :forgot_password, only: [:create]
         end
       end
     end

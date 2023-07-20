@@ -2,23 +2,26 @@
 #
 # Table name: users
 #
-#  id              :bigint           not null, primary key
-#  email           :string           not null
-#  identifier      :string           not null
-#  lang            :string           default("es"), not null
-#  lastname        :string           not null
-#  name            :string           not null
-#  password_digest :string           not null
-#  phone           :string
-#  token           :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                            :bigint           not null, primary key
+#  email                         :string           not null
+#  identifier                    :string           not null
+#  lang                          :string           default("es"), not null
+#  lastname                      :string           not null
+#  name                          :string           not null
+#  password_digest               :string           not null
+#  phone                         :string
+#  reset_password_key            :string
+#  reset_password_key_expires_at :datetime
+#  token                         :string           not null
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_email       (email) UNIQUE
-#  index_users_on_identifier  (identifier) UNIQUE
-#  index_users_on_token       (token) UNIQUE
+#  index_users_on_email               (email) UNIQUE
+#  index_users_on_identifier          (identifier) UNIQUE
+#  index_users_on_reset_password_key  (reset_password_key) UNIQUE
+#  index_users_on_token               (token) UNIQUE
 #
 class User < ApplicationRecord
   has_secure_password
@@ -27,4 +30,21 @@ class User < ApplicationRecord
   has_one :enterprise, through: :user_enterprise
   has_many :user_roles
   has_many :roles, through: :user_roles
+
+  def generate_password_token!(expired)
+    begin
+      self.reset_password_key = SecureRandom.uuid
+    end while User.exists?(reset_password_key: reset_password_key)
+
+    self.reset_password_key_expires_at = expired
+    save!
+  end
+
+  def clear_reset_password_key!(password, p_confirmation)
+    self.password = password
+    self.password_confirmation = p_confirmation
+    self.reset_password_key = nil
+    self.reset_password_key_expires_at = nil
+    save!
+  end
 end

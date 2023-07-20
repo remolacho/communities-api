@@ -117,6 +117,10 @@ GEM
     json-schema (3.0.0)
       addressable (>= 2.8)
     jwt (2.4.1)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -263,6 +267,7 @@ DEPENDENCIES
   ffaker
   figaro (~> 1.2.0)
   jwt (~> 2.4.1)
+  letter_opener
   multi_json (~> 1.11, >= 1.11.2)
   pg (~> 1.1)
   pry (~> 0.13.0)
