@@ -70,6 +70,69 @@ paths:
                   properties:
                     email:
                       type: string
+  "/{enterprise_subdomain}/v1/users/profile/show":
+    get:
+      summary: Find the profile of current user
+      tags:
+      - Community API V1 Users
+      description: Allow see the user's data logged
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      lastname:
+                        type: string
+                      email:
+                        type: string
+                      address:
+                        type: string
+                        nullable: true
+                      identifier:
+                        type: string
+                      phone:
+                        type: string
+                        nullable: true
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/sign_in":
     post:
       summary: Create login by user

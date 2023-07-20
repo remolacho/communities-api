@@ -10,6 +10,11 @@ Rails.application.routes.draw do
         namespace :users do
           resources :sign_in, only: [:create]
           resources :forgot_password, only: [:create]
+          resources :profile, only: [] do
+            collection do
+              get 'show'
+            end
+          end
         end
       end
     end
