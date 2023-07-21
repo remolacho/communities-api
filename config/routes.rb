@@ -16,6 +16,10 @@ Rails.application.routes.draw do
             end
           end
         end
+
+        namespace :petitions do
+          resources :create, only: [:create]
+        end
       end
     end
   end

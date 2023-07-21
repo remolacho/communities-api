@@ -16,7 +16,13 @@
 #  index_category_petitions_on_parent_category_id  (parent_category_id)
 #  index_category_petitions_on_slug                (slug) UNIQUE
 #
-class CategoryPetition < ApplicationRecord
-  belongs_to :enterprise
-  has_many :petitions
+FactoryBot.define do
+  factory :category_petition do
+    enterprise { enterprise }
+  end
+
+  trait :petition do
+    name { 'Petición' }
+    slug { 'Petición'.parameterize }
+  end
 end

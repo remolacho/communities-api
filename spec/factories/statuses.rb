@@ -13,10 +13,13 @@
 #
 #  index_statuses_on_code  (code) UNIQUE
 #
-class Status < ApplicationRecord
-  has_many :petitions
+FactoryBot.define do
+  factory :status do
+  end
 
-  scope :petition_pending, -> {
-    find_by(status_type: 'petition', code: 'pet-pending')
-  }
+  trait :petition_pending do
+    name {{es: "Pendiente", en: "Pending"}}
+    code {"pet-pending"}
+    status_type {'petition'}
+  end
 end

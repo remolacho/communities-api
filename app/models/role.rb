@@ -17,6 +17,7 @@
 class Role < ApplicationRecord
   has_many :user_roles
   has_many :users, through: :user_roles
-  has_many :group_petition_roles
-  has_many :group_petitions, through: :group_petition_roles
+  has_many :group_role_relations
+  has_many :group_roles, through: :group_role_relations
+  has_many :petitions, through: :group_roles
 end
