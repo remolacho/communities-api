@@ -7,6 +7,7 @@
 #  address    :string
 #  name       :string           not null
 #  rut        :string           not null
+#  short_name :string           not null
 #  subdomain  :string           not null
 #  token      :string           not null
 #  created_at :datetime         not null

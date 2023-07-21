@@ -4,6 +4,84 @@ info:
   title: API V1
   version: v1
 paths:
+  "/{enterprise_subdomain}/v1/petitions/create":
+    post:
+      summary: Create a new petition
+      tags:
+      - Community API V1 Petitions
+      description: Allow to users create petitions
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      ticket:
+                        type: string
+        '404':
+          description: error category, group_role not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: error not logged!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                petition:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    message:
+                      type: string
+                    category_petition_id:
+                      type: integer
+                    group_role_id:
+                      type: integer
   "/{enterprise_subdomain}/v1/users/forgot_password":
     post:
       summary: Create a new request for change password

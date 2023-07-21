@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_165848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
     t.string "token", null: false
     t.string "subdomain", null: false
     t.string "name", null: false
+    t.string "short_name", null: false
     t.string "address"
     t.boolean "active", default: true
     t.datetime "created_at", null: false
@@ -40,24 +41,40 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_184915) do
     t.index ["token"], name: "index_enterprises_on_token", unique: true
   end
 
-  create_table "group_petition_roles", force: :cascade do |t|
-    t.bigint "group_petition_id", null: false
+  create_table "group_role_relations", force: :cascade do |t|
+    t.bigint "group_role_id", null: false
     t.bigint "role_id", null: false
-    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_petition_id", "role_id"], name: "index_group_petition_roles_on_group_petition_id_and_role_id", unique: true
-    t.index ["group_petition_id"], name: "index_group_petition_roles_on_group_petition_id"
-    t.index ["role_id"], name: "index_group_petition_roles_on_role_id"
+    t.index ["group_role_id", "role_id"], name: "index_group_role_relations_on_group_role_id_and_role_id", unique: true
+    t.index ["group_role_id"], name: "index_group_role_relations_on_group_role_id"
+    t.index ["role_id"], name: "index_group_role_relations_on_role_id"
   end
 
-  create_table "group_petitions", force: :cascade do |t|
+  create_table "group_roles", force: :cascade do |t|
     t.string "code", null: false
     t.jsonb "name", default: {}, null: false
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_group_petitions_on_code", unique: true
+    t.index ["code"], name: "index_group_roles_on_code", unique: true
+  end
+
+  create_table "petitions", force: :cascade do |t|
+    t.string "token", null: false
+    t.string "ticket", null: false
+    t.string "title", null: false
+    t.string "message", null: false
+    t.bigint "status_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "category_petition_id", null: false
+    t.bigint "group_role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_petition_id"], name: "index_petitions_on_category_petition_id"
+    t.index ["group_role_id"], name: "index_petitions_on_group_role_id"
+    t.index ["status_id"], name: "index_petitions_on_status_id"
+    t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|

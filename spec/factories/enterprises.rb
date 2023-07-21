@@ -7,6 +7,7 @@
 #  address    :string
 #  name       :string           not null
 #  rut        :string           not null
+#  short_name :string           not null
 #  subdomain  :string           not null
 #  token      :string           not null
 #  created_at :datetime         not null
@@ -17,6 +18,7 @@
 #  index_enterprises_on_rut        (rut) UNIQUE
 #  index_enterprises_on_subdomain  (subdomain) UNIQUE
 #  index_enterprises_on_token      (token) UNIQUE
+#
 
 
 FactoryBot.define do
@@ -25,5 +27,6 @@ FactoryBot.define do
     name { "Test community 1" }
     rut { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
     subdomain { "test-community-1" }
+    short_name { 'test'.upcase }
   end
 end

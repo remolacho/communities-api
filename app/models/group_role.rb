@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: group_petitions
+# Table name: group_roles
 #
 #  id         :bigint           not null, primary key
 #  active     :boolean          default(TRUE)
@@ -11,9 +11,9 @@
 #
 # Indexes
 #
-#  index_group_petitions_on_code  (code) UNIQUE
+#  index_group_roles_on_code  (code) UNIQUE
 #
-class GroupPetition < ApplicationRecord
-  has_many :group_petition_roles
-  has_many :roles, through: :group_petition_roles
+class GroupRole < ApplicationRecord
+  has_many :group_role_relations
+  has_many :petitions
 end

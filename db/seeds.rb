@@ -6,6 +6,7 @@ Apartment::Tenant.switch!(tenancy.subdomain)
 enterprise = Enterprise.find_or_create_by(token: tenancy.token, subdomain: tenancy.subdomain) do |e|
   e.name =  "Altos de Berlin"
   e.rut = "1110602918"
+  e.short_name = "alt".upcase
 end
 
 roles = {
@@ -21,7 +22,7 @@ roles.each do |k, v|
   Role.find_or_create_by!(code: k ,slug: v.parameterize, name: v)
 end
 
-group_petitions = [
+group_roles = [
   { code: 'all', name: {es: "Todas las partes"} },
   { code: 'admincomi', name: {es: "Administración y Comité"} },
   { code: 'admincon', name: {es: "Administración y Consejo"} },
@@ -31,13 +32,13 @@ group_petitions = [
   { code: 'con', name: {es: "Sólo Consejo"} }
 ]
 
-group_petitions.each do |gp|
-  GroupPetition.find_or_create_by(code: gp[:code]) do |g|
+group_roles.each do |gp|
+  GroupRole.find_or_create_by(code: gp[:code]) do |g|
     g.name = gp[:name]
   end
 end
 
-group_roles = {
+group_roles_relations = {
   all: [:sadmin, :admin, :convi, :comite],
   admincomi: [:sadmin, :admin, :comite],
   admincon: [:sadmin, :admin, :convi],
@@ -47,11 +48,11 @@ group_roles = {
   con: [:sadmin, :convi]
 }
 
-group_roles.each do |k, v|
+group_roles_relations.each do |k, v|
   roles = Role.where(code: v)
-  group = GroupPetition.find_by(code: k)
+  group = GroupRole.find_by(code: k)
   roles.each do |r|
-    GroupPetitionRole.find_or_create_by(role_id: r.id, group_petition_id: group.id)
+    GroupRoleRelation.find_or_create_by(role_id: r.id, group_role_id: group.id)
   end
 end
 
