@@ -10,7 +10,9 @@ class Petitions::CreateService
   def call
     raise ArgumentError, I18n.t("services.petitions.create.data_empty") unless data.present?
 
-    Petition.create!(allowed_data)
+    petition = Petition.create!(allowed_data)
+    petition.follow_petitions.create!(status_id: petition.status_id, user_id: petition.user_id)
+    petition
   end
 
   private

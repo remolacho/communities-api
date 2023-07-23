@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_165848) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_180118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers_petitions", force: :cascade do |t|
+    t.bigint "petition_id", null: false
+    t.bigint "user_id", null: false
+    t.string "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petition_id"], name: "index_answers_petitions_on_petition_id"
+    t.index ["user_id"], name: "index_answers_petitions_on_user_id"
+  end
 
   create_table "category_petitions", force: :cascade do |t|
     t.bigint "enterprise_id", null: false
@@ -39,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_165848) do
     t.index ["rut"], name: "index_enterprises_on_rut", unique: true
     t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
+  end
+
+  create_table "follow_petitions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "petition_id"
+    t.bigint "status_id"
+    t.string "observation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petition_id"], name: "index_follow_petitions_on_petition_id"
+    t.index ["status_id"], name: "index_follow_petitions_on_status_id"
+    t.index ["user_id"], name: "index_follow_petitions_on_user_id"
   end
 
   create_table "group_role_relations", force: :cascade do |t|

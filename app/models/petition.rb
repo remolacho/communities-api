@@ -22,10 +22,15 @@
 #  index_petitions_on_user_id               (user_id)
 #
 class Petition < ApplicationRecord
+  include Statustable
+
   belongs_to :user
   belongs_to :status
   belongs_to :group_role
   belongs_to :category_petition
+  has_many :answers_petitions
+  has_many :roles, through: :group_role
+  has_many :follow_petitions
 
   validates :title,
             length: {

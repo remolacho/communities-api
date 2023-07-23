@@ -1,0 +1,8 @@
+es:
+  services:
+    answers_petitions:
+      delete:
+        not_allowed:
+          status: 'Solo se pueden eliminar respuestas si la partición no esta en revision o resuelta'
+          role: 'Error al eliminar la respuesta, el usuario no tiene acceso '
+        success: "Se elimino una nueva respuesta"

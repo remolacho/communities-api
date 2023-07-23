@@ -57,12 +57,13 @@ group_roles_relations.each do |k, v|
 end
 
 statuses = [
-    { name: {es: "Pendiente", en: "Pending"}, code: "pet-pending", status_type: 'petition'},
-    { name: {es: "En revisión", en: "In review"}, code: "pet-inReview", status_type: 'petition'},
-    { name: {es: "Confirmar solución", en: "Confirm solution"}, code: "pet-confirm", status_type: 'petition'},
-    { name: {es: "Resuelta", en: "Resolve"}, code: "pet-resolve", status_type: 'petition'},
-    { name: {es: "Confirmación rechazada", en: "Confirmation rejected"}, code: "pet-rejected", status_type: 'petition'},
-    { name: {es: "Rechazada", en: "Rejected"}, code: "pet-cancel", status_type: 'petition'},
+    { name: {es: "Pendiente", en: "Pending"}, code: Status::PETITION_PENDING, status_type: Status::PETITION},
+    { name: {es: "En revisión", en: "In review"}, code: Status::PETITION_REVIEWING, status_type: Status::PETITION},
+    { name: {es: "Rechazada", en: "Rejected"}, code: Status::PETITION_REJECTED, status_type: Status::PETITION},
+    { name: {es: "Confirmar solución", en: "Confirm solution"}, code: Status::PETITION_CONFIRM, status_type: Status::PETITION},
+    { name: {es: "Resuelta", en: "Resolve"}, code: Status::PETITION_RESOLVE, status_type: Status::PETITION},
+    { name: {es: "Rechazo de la solución", en: "Rejected solution"}, code: Status::PETITION_REJECTED_SOLUTION, status_type: Status::PETITION},
+    { name: {es: "Respuesta eliminada", en: "Answer destroy"}, code: Status::ANSWER_DELETE, status_type: Status::ANSWER},
 ]
 
 statuses.each do |status|

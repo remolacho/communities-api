@@ -15,5 +15,6 @@
 #
 class GroupRole < ApplicationRecord
   has_many :group_role_relations
+  has_many :roles, through: :group_role_relations
   has_many :petitions
 end
