@@ -22,7 +22,7 @@ class AnswersPetitions::CreateService
   end
 
   def policy
-    ::Petitions::Policy.new(current_user: user, petition: petition)
+    ::AnswersPetitions::Policy.new(current_user: user, petition: petition)
   end
 
   def allow_state!
