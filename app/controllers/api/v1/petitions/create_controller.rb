@@ -1,6 +1,6 @@
 class Api::V1::Petitions::CreateController < ApplicationController
 
-  # POST   /:enterprise_subdomain/v1/petitions/create
+  # POST   /:enterprise_subdomain/v1/petition/create
   def create
     service = ::Petitions::CreateService.new(user: current_user, data: allowed_params)
     render json: {success: true, data: { ticket: service.call.ticket } }

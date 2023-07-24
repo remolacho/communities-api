@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :petitions
+  has_many :answers_petitions
+  has_many :follow_petitions
 
   def generate_password_token!(expired)
     begin

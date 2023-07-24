@@ -14,9 +14,9 @@
 #  index_statuses_on_code  (code) UNIQUE
 #
 class Status < ApplicationRecord
-  has_many :petitions
+  include PetitionStatustable
+  include AnswerStatustable
 
-  scope :petition_pending, -> {
-    find_by(status_type: 'petition', code: 'pet-pending')
-  }
+  has_many :petitions
+  has_many :follow_petitions
 end

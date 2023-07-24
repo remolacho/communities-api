@@ -18,8 +18,20 @@ FactoryBot.define do
   end
 
   trait :petition_pending do
-    name {{es: "Pendiente", en: "Pending"}}
-    code {"pet-pending"}
-    status_type {'petition'}
+    name { { es: "Pendiente", en: "Pending" } }
+    code { Status::PETITION_PENDING }
+    status_type { Status::PETITION }
+  end
+
+  trait :petition_resolved do
+    name { { es: "Resuelta", en: "Resolve" } }
+    code { Status::PETITION_RESOLVE }
+    status_type { Status::PETITION }
+  end
+
+  trait :answer_delete do
+    name {{es: "Respuesta eliminada", en: "Answer destroy"}}
+    code { Status::ANSWER_DELETE }
+    status_type { Status::ANSWER }
   end
 end

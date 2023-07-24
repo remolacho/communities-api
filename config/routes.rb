@@ -17,8 +17,21 @@ Rails.application.routes.draw do
           end
         end
 
-        namespace :petitions do
+        namespace :petitions, path: 'petition' do
           resources :create, only: [:create]
+
+          namespace :answers, path: 'answer' do
+            resources :create, param: 'token', path: '', only: [] do
+              member  do
+                post 'create', to: 'create#create'
+              end
+            end
+
+            resources :delete, only: [:destroy]
+          end
+        end
+
+        scope :petitions do
         end
       end
     end

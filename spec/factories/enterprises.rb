@@ -26,7 +26,7 @@ FactoryBot.define do
     token { SecureRandom.uuid }
     name { "Test community 1" }
     rut { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
-    subdomain { "test-community-1" }
+    subdomain { "public" }
     short_name { 'test'.upcase }
   end
 end

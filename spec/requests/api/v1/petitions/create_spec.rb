@@ -8,7 +8,7 @@ RSpec.describe  Api::V1::Petitions::CreateController, type: :request do
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/petitions/create' do
+  path '/{enterprise_subdomain}/v1/petition/create' do
     post 'Create a new petition' do
       tags 'Community API V1 Petitions'
       description "Allow to users create petitions"
