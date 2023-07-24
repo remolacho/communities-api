@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
         namespace :petitions, path: 'petition' do
           resources :create, only: [:create]
+          resources :detail, param: 'token', only: [:show]
 
           namespace :answers, path: 'answer' do
             resources :create, param: 'token', path: '', only: [] do
