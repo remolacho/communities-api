@@ -143,6 +143,88 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/petition/answers/list/{token}":
+    get:
+      summary: Find all answers of one petition
+      tags:
+      - Community API V1 Answers petition
+      description: Allow to users find all answers of the petition
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token is the petition information
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        message:
+                          type: string
+                        date_at:
+                          type: string
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            lastname:
+                              type: string
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error petition not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/petition/create":
     post:
       summary: Create a new petition
@@ -258,7 +340,7 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    default: false
+                    default: true
                   data:
                     type: object
                     properties:
@@ -292,6 +374,15 @@ paths:
                           id:
                             type: integer
                           name:
+                            type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          lastname:
                             type: string
         '403':
           description: error role not allowed!!!

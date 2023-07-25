@@ -8,6 +8,7 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
   attribute :status
   attribute :category
   attribute :group_role
+  attribute :user
 
   def status
     ActiveModelSerializers::SerializableResource.new(object.status,
@@ -19,6 +20,11 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
                                                      serializer: ::CategoryPetitions::DetailSerializer )
   end
 
+
+  def user
+    ActiveModelSerializers::SerializableResource.new(object.user,
+                                                     serializer: ::Users::BasicProfileSerializer )
+  end
 
   def group_role
     ActiveModelSerializers::SerializableResource.new(object.group_role,

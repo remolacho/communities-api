@@ -2,16 +2,16 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
-  include_context 'detail_petition_stuff'
+RSpec.describe  Api::V1::Petitions::Answers::ListController, type: :request do
+  include_context 'list_answers_petition_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/petition/detail/{token}' do
-    get 'Find the detail of petition' do
-      tags 'Community API V1 Petitions'
-      description "Allow to users find petition and your detail"
+  path '/{enterprise_subdomain}/v1/petition/answers/list/{token}' do
+    get 'Find all answers of one petition' do
+      tags 'Community API V1 Answers petition'
+      description "Allow to users find all answers of the petition"
       produces 'application/json'
       consumes 'application/json'
 
@@ -20,47 +20,27 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
       parameter name: 'Authorization', in: :header, required: true
 
-      response 200, 'success!!!' do
+      response 200, 'success lists' do
         let(:'Authorization') { sign_in }
 
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: true },
                  data: {
-                   type: :object,
-                   properties: {
-                     id: { type: :integer },
-                     ticket: { type: :string },
-                     token: { type: :string },
-                     title: { type: :string },
-                     message: { type: :string },
-                     status: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string }
-                       }
-                     },
-                     category: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string }
-                       }
-                     },
-                     group_role: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string },
-                       }
-                     },
-                     user: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string },
-                         lastname: { type: :string }
+                   type: :array,
+                   items: {
+                     type: :object,
+                     properties: {
+                       id: { type: :integer },
+                       message: { type: :string },
+                       date_at: { type: :string },
+                       user: {
+                         type: :object,
+                         properties: {
+                           id: { type: :integer },
+                           name: { type: :string },
+                           lastname: { type: :string },
+                         }
                        }
                      }
                    }
@@ -69,11 +49,14 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
 
         let(:token) {
           user_role
+          answer
+          answer2
           petition.token
         }
 
         run_test!
       end
+
 
       response 403, 'error role not allowed!!!' do
         let(:'Authorization') { sign_in }
