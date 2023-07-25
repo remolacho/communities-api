@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
             resources :delete, only: [:destroy]
           end
+
+          namespace :answers do
+            get 'list/:token', to: 'list#index'
+          end
         end
 
         scope :petitions do
