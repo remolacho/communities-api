@@ -34,9 +34,10 @@ Rails.application.routes.draw do
           namespace :answers do
             get 'list/:token', to: 'list#index'
           end
-        end
 
-        scope :petitions do
+          namespace :statuses do
+            get 'list/:token', to: 'list#index'
+          end
         end
       end
     end
