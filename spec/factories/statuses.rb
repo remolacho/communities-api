@@ -12,7 +12,7 @@
 # Indexes
 #
 #  index_statuses_on_code  (code) UNIQUE
-#
+
 FactoryBot.define do
   factory :status do
   end
@@ -20,6 +20,30 @@ FactoryBot.define do
   trait :petition_pending do
     name { { es: "Pendiente", en: "Pending" } }
     code { Status::PETITION_PENDING }
+    status_type { Status::PETITION }
+  end
+
+  trait :petition_reviewing do
+    name { {es: "En revisión", en: "In review"} }
+    code { Status::PETITION_REVIEWING }
+    status_type { Status::PETITION }
+  end
+
+  trait :petition_rejected do
+    name { {es: "Rechazada", en: "Rejected"} }
+    code { Status::PETITION_REJECTED }
+    status_type { Status::PETITION }
+  end
+
+  trait :petition_confirm do
+    name { {es: "Confirmar solución", en: "Confirm solution"} }
+    code { Status::PETITION_CONFIRM }
+    status_type { Status::PETITION }
+  end
+
+  trait :petition_rejected_solution do
+    name { {es: "Rechazo de la solución", en: "Rejected solution"} }
+    code { Status::PETITION_REJECTED_SOLUTION }
     status_type { Status::PETITION }
   end
 

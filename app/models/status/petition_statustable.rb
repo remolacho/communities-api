@@ -15,12 +15,24 @@ class Status
         find_by(status_type: PETITION, code: PETITION_PENDING)
       }
 
-      scope :petition_resolve, -> {
-        find_by(status_type: PETITION, code: PETITION_RESOLVE)
-      }
-
       scope :petition_reviewing, -> {
         find_by(status_type: PETITION, code: PETITION_REVIEWING)
+      }
+
+      scope :petition_rejected, -> {
+        find_by(status_type: PETITION, code: PETITION_REJECTED)
+      }
+
+      scope :petition_confirm, -> {
+        find_by(status_type: PETITION, code: PETITION_CONFIRM)
+      }
+
+      scope :petition_rejected_solution, -> {
+        find_by(status_type: PETITION, code: PETITION_REJECTED_SOLUTION)
+      }
+
+      scope :petition_resolve, -> {
+        find_by(status_type: PETITION, code: PETITION_RESOLVE)
       }
     end
   end
