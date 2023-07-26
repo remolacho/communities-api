@@ -361,6 +361,10 @@ paths:
                             type: integer
                           name:
                             type: string
+                          code:
+                            type: string
+                          color:
+                            type: string
                       category:
                         type: object
                         properties:
@@ -455,6 +459,8 @@ paths:
                         id:
                           type: integer
                         name:
+                          type: string
+                        code:
                           type: string
                         color:
                           type: string

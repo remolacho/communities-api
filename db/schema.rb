@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_180118) do
     t.jsonb "name", null: false
     t.string "code", null: false
     t.string "status_type", null: false
+    t.string "color", default: "#E8E6E6"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_statuses_on_code", unique: true

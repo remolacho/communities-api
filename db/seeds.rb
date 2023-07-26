@@ -57,12 +57,12 @@ group_roles_relations.each do |k, v|
 end
 
 statuses = [
-    { name: {es: "Pendiente", en: "Pending"}, code: Status::PETITION_PENDING, status_type: Status::PETITION},
-    { name: {es: "En revisión", en: "In review"}, code: Status::PETITION_REVIEWING, status_type: Status::PETITION},
-    { name: {es: "Rechazada", en: "Rejected"}, code: Status::PETITION_REJECTED, status_type: Status::PETITION},
-    { name: {es: "Confirmar solución", en: "Confirm solution"}, code: Status::PETITION_CONFIRM, status_type: Status::PETITION},
-    { name: {es: "Resuelta", en: "Resolve"}, code: Status::PETITION_RESOLVE, status_type: Status::PETITION},
-    { name: {es: "Rechazo de la solución", en: "Rejected solution"}, code: Status::PETITION_REJECTED_SOLUTION, status_type: Status::PETITION},
+    { name: {es: "Pendiente", en: "Pending"}, code: Status::PETITION_PENDING, status_type: Status::PETITION, color: '#D6EAF3'},
+    { name: {es: "En revisión", en: "In review"}, code: Status::PETITION_REVIEWING, status_type: Status::PETITION, color: '#7AC6EB'},
+    { name: {es: "Rechazada", en: "Rejected"}, code: Status::PETITION_REJECTED, status_type: Status::PETITION, color: '#F0553B'},
+    { name: {es: "Confirmar solución", en: "Confirm solution"}, code: Status::PETITION_CONFIRM, status_type: Status::PETITION,color: '#3B8FF0'},
+    { name: {es: "Resuelta", en: "Resolve"}, code: Status::PETITION_RESOLVE, status_type: Status::PETITION, color: '#8BE939'},
+    { name: {es: "Rechazo de la solución", en: "Rejected solution"}, code: Status::PETITION_REJECTED_SOLUTION, status_type: Status::PETITION, color: '#F6FB43'},
     { name: {es: "Respuesta eliminada", en: "Answer destroy"}, code: Status::ANSWER_DELETE, status_type: Status::ANSWER},
 ]
 

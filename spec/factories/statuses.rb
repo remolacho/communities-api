@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  code        :string           not null
+#  color       :string           default("#E8E6E6")
 #  name        :jsonb            not null
 #  status_type :string           not null
 #  created_at  :datetime         not null
@@ -12,6 +13,7 @@
 # Indexes
 #
 #  index_statuses_on_code  (code) UNIQUE
+#
 
 FactoryBot.define do
   factory :status do

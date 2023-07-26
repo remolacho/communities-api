@@ -38,7 +38,9 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
                        type: :object,
                        properties: {
                          id: { type: :integer },
-                         name: { type: :string }
+                         name: { type: :string },
+                         code: { type: :string },
+                         color: { type: :string }
                        }
                      },
                      category: {

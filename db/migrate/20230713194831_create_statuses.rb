@@ -4,6 +4,7 @@ class CreateStatuses < ActiveRecord::Migration[7.0]
       t.jsonb :name, null: false
       t.string :code, null: false
       t.string :status_type, null: false
+      t.string :color, default: '#E8E6E6'
       t.index :code, unique: true
       t.timestamps
     end

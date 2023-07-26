@@ -1,5 +1,5 @@
 class Statuses::DetailSerializer < ActiveModel::Serializer
-  attributes :id, :code
+  attributes :id, :code, :color
   attribute :name
 
   def name

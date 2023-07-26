@@ -33,6 +33,7 @@ RSpec.describe  Api::V1::Petitions::Statuses::ListController , type: :request do
                      properties: {
                        id: { type: :integer },
                        name: { type: :string },
+                       code: { type: :string },
                        color: { type: :string }
                      }
                    }
