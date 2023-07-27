@@ -40,6 +40,9 @@ shared_context 'resolved_status_petition_stuff' do
       group_role_id: group_role.id
     }
 
-    ::Petitions::CreateService.new(user: user_2, data: data).call
+    current_petition =::Petitions::CreateService.new(user: user_2, data: data).call
+    current_petition.status_id = status_resolved.id
+    current_petition.save!
+    current_petition.reload
   }
 end

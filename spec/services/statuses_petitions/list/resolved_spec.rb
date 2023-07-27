@@ -7,22 +7,14 @@ RSpec.describe StatusesPetitions::List::Factory::Resolved do
 
   context 'when you want get a list of statuses allowed' do
     it 'the user has not access to list status resolved according to in petition' do
-      current_petition = petition
-      current_petition.status_id = status_resolved.id
-      current_petition.save!
-
-      service = described_class.new(user: user_2, petition: current_petition.reload)
+      service = described_class.new(user: user_2, petition: petition)
       expect(service.call.empty?).to eq(true)
     end
 
     it 'the user has access to list status resolved according to in petition' do
       user_role
 
-      current_petition = petition
-      current_petition.status_id = status_resolved.id
-      current_petition.save!
-
-      service = described_class.new(user: user, petition: current_petition.reload)
+      service = described_class.new(user: user, petition: petition)
       expect(service.call.empty?).to eq(true)
     end
   end
