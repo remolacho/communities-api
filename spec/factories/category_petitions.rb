@@ -25,4 +25,14 @@ FactoryBot.define do
     name { 'Petición' }
     slug { 'Petición'.parameterize }
   end
+
+  trait :complaint do
+    name { 'Queja' }
+    slug { "Queja".parameterize }
+  end
+
+  trait :claim do
+    name { 'Reclamo' }
+    slug { 'Reclamo'.parameterize }
+  end
 end

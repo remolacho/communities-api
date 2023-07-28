@@ -40,6 +40,10 @@ Rails.application.routes.draw do
             get 'list/:token', to: 'list#index'
           end
         end
+
+        namespace :categories_petitions do
+          resources :list, only: [:index]
+        end
       end
     end
   end
