@@ -19,6 +19,8 @@
 #  index_petitions_on_category_petition_id  (category_petition_id)
 #  index_petitions_on_group_role_id         (group_role_id)
 #  index_petitions_on_status_id             (status_id)
+#  index_petitions_on_ticket                (ticket) UNIQUE
+#  index_petitions_on_token                 (token) UNIQUE
 #  index_petitions_on_user_id               (user_id)
 #
 class Petition < ApplicationRecord

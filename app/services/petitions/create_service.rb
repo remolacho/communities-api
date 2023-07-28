@@ -55,6 +55,6 @@ class Petitions::CreateService
   end
 
   def define_ticket
-    data[:ticket] = "PQR-#{user.enterprise.short_name}-#{Time.now.strftime('%d%m%Y%H%M%S')}"
+    data[:ticket] = "#{user.enterprise.short_name}-#{user.id}-#{Time.now.strftime('%d%m%Y%H%M%S')}"
   end
 end

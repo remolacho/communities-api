@@ -18,6 +18,16 @@ FactoryBot.define do
   factory :group_role do
   end
 
+  trait :all do
+    code {'all'}
+    name {{es: "Todas las partes"}}
+  end
+
+  trait :admin_committee do
+    code { 'admincomi' }
+    name { {es: "Administración y Comité"} }
+  end
+
   trait :coexistence_committee do
     code { 'concomi' }
     name { {es: "Consejo y Comité"} }

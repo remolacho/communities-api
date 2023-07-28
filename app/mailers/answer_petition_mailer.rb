@@ -1,8 +1,8 @@
 class AnswerPetitionMailer < ApplicationMailer
-  def notify(enterprise:, petition:)
+  def notify(user:, enterprise:, petition:)
     return unless can_send_email?
 
-    @user = petition.user
+    @user = user
     @enterprise = enterprise
     @petition = petition
     @subject = I18n.t("services.answers_petitions.mail.nofify.subject")
