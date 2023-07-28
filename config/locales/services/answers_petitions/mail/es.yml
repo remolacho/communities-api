@@ -1,0 +1,11 @@
+es:
+  services:
+    answers_petitions:
+      mail:
+        nofify:
+          subject: "Tienes una respuesta a tu PQR"
+          body:
+            message1: "Se ha creado una nueva respuesta a tu peticion con el ticket #%{ticket}"
+          footer:
+            message1: 'Saludos,'
+            message2: 'El equipo de %{enterprise_name}'
