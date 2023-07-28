@@ -4,11 +4,11 @@
 module Translatable
   # Set current user language to I18n
   def set_language
-    I18n.locale = language
+    I18n.locale = language.to_sym
   end
 
   # Get current user language
   def language
-    params[:lang].presence.to_sym || current_user&.lang.presence.to_sym || :es
+    params[:lang].presence || current_user&.lang.presence || :es
   end
 end

@@ -6,13 +6,15 @@ class Api::V1::Petitions::UpdateStatusController < ApplicationController
 
     Petitions::UpdateStatusService.new(user: current_user, petition: petition, status: status).call
 
-    render json: { success: true, message: ''}
+    render json: { success: true, message: I18n.t('services.petitions.update_status.success')}
   end
 
   private
 
   def policy
-    @policy ||= ::UpdateStatusPetition::Policy.new
+    @policy ||= ::UpdateStatusPetition::Policy.new(current_user: current_user,
+                                                   petition: petition,
+                                                   status: status)
   end
 
   def petition
