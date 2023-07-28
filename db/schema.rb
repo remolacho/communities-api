@@ -96,6 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_180118) do
     t.index ["category_petition_id"], name: "index_petitions_on_category_petition_id"
     t.index ["group_role_id"], name: "index_petitions_on_group_role_id"
     t.index ["status_id"], name: "index_petitions_on_status_id"
+    t.index ["ticket"], name: "index_petitions_on_ticket", unique: true
+    t.index ["token"], name: "index_petitions_on_token", unique: true
     t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 

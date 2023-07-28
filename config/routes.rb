@@ -44,6 +44,10 @@ Rails.application.routes.draw do
         namespace :categories_petitions do
           resources :list, only: [:index]
         end
+
+        namespace :group_roles do
+          resources :list, only: [:index]
+        end
       end
     end
   end

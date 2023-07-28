@@ -9,6 +9,8 @@ class CreatePetitions < ActiveRecord::Migration[7.0]
       t.references :user, null: false
       t.references :category_petition, null: false
       t.references :group_role, null: false
+      t.index :token, unique: true
+      t.index :ticket, unique: true
       t.timestamps
     end
   end
