@@ -87,6 +87,8 @@ user = User.find_or_create_by(email: 'jonathangrh.25@gmail.com') do |u|
   u.token = SecureRandom.uuid
   u.password = '@admin.83'
   u.password_confirmation = '@admin.83'
+  u.address = 'T4, P11, A1102'
+  u.phone = '3174131149'
 end
 
 UserEnterprise.find_or_create_by!(user_id: user.id, enterprise_id: enterprise.id, active: true)

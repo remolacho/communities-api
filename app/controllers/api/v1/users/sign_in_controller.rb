@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::SignInController < ApplicationController
-  skip_before_action :authorized_user, :valid_subdomain!
+  skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 
   # POST /:enterprise_subdomain/v1/users/sign_in?lang=es
   def create

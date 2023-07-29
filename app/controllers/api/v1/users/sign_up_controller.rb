@@ -1,5 +1,5 @@
 class Api::V1::Users::SignUpController < ApplicationController
-  skip_before_action :authorized_user, :valid_subdomain!
+  skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 
   # POST /:enterprise_subdomain/v1/users/sign_up
   def create

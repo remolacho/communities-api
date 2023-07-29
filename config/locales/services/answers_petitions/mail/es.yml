@@ -4,6 +4,8 @@ es:
       mail:
         nofify:
           subject: "Tienes una respuesta a tu PQR"
+          header:
+            message1: 'Hola.'
           body:
             message1: "Peticion # %{ticket}"
             message2: "Se ha creado una nueva respuesta a tu peticion"
