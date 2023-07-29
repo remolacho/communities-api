@@ -11,7 +11,7 @@ development:
   EMAIL_FROM: 'example@gmail.com'
   EMAIL_TO: 'example@gmail.com'
   SEND_EMAIL: true
-  BASE_APP: http://localhost:5008/auth/password-change
+  BASE_APP: http://localhost:5008
   EMAIL_PASSWORD: ''
   EMAIL_PROVIDER: smtp.gmail.com
   EMAIL_PORT: "587"
@@ -28,7 +28,7 @@ test:
   EMAIL_FROM: 'example@gmail.com'
   EMAIL_TO: 'example@gmail.com'
   SEND_EMAIL: true
-  BASE_APP: http://localhost:5008/auth/password-change
+  BASE_APP: http://localhost:5008
   EMAIL_PASSWORD: ''
   EMAIL_PROVIDER: smtp.gmail.com
   EMAIL_PORT: "587"

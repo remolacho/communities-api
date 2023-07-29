@@ -1,5 +1,5 @@
 class HealthController < ApplicationController
-  skip_before_action :authorized_user
+  skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 
   # GET /health
   def index

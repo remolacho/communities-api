@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                            :bigint           not null, primary key
+#  active_key                    :string
+#  active_key_expires_at         :datetime
 #  address                       :string
 #  email                         :string           not null
 #  identifier                    :string           not null
@@ -19,6 +21,7 @@
 #
 # Indexes
 #
+#  index_users_on_active_key          (active_key) UNIQUE
 #  index_users_on_email               (email) UNIQUE
 #  index_users_on_identifier          (identifier) UNIQUE
 #  index_users_on_reset_password_key  (reset_password_key) UNIQUE

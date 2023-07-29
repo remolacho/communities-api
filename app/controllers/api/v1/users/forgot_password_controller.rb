@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::ForgotPasswordController < ApplicationController
-  skip_before_action :authorized_user, :valid_subdomain!
+  skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 
   # POST /:enterprise_subdomain/v1/users/forgot_password?lang=es
   def create

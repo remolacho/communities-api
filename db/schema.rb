@@ -164,9 +164,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_180118) do
     t.string "lang", default: "es", null: false
     t.string "reset_password_key"
     t.datetime "reset_password_key_expires_at"
+    t.string "active_key"
+    t.datetime "active_key_expires_at"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["active_key"], name: "index_users_on_active_key", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["identifier"], name: "index_users_on_identifier", unique: true
     t.index ["reset_password_key"], name: "index_users_on_reset_password_key", unique: true
