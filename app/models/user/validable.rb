@@ -2,6 +2,8 @@ class User
   module Validable
     extend ActiveSupport::Concern
 
+    PASSWORD_TOP = 6
+
     included do
       validates :address,
                 presence: true,
@@ -18,7 +20,7 @@ class User
                 length: { minimum: 4, maximum: 50 }
 
       validates :password,
-                length: { minimum: 6 }, on: :create
+                length: { minimum: PASSWORD_TOP }, on: :create
 
       validates :name,
                 presence: true,
