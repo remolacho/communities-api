@@ -26,3 +26,5 @@ es:
             not_found: 'Token no registrado'
           user:
             inactive: 'La cuenta esta inactiva'
+        change:
+          success: 'Se realizo el cambio con exito, podras iniciar con tu nueva contraseña'

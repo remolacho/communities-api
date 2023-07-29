@@ -14,6 +14,7 @@ Rails.application.routes.draw do
           resources :forgot_password, only: [:create] do
             collection do
               get 'verifier/:token', to: 'forgot_password#verifier'
+              post 'change/:token', to: 'forgot_password#change'
             end
           end
 

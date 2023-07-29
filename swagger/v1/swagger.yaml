@@ -669,6 +669,68 @@ paths:
                   properties:
                     status_id:
                       type: integer
+  "/{enterprise_subdomain}/v1/users/forgot_password/change/{token}":
+    post:
+      summary: Change password
+      tags:
+      - Community API V1 Users
+      description: Allow to users do change to password
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token represent the reset_password_key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: error password not match!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                forgot_password:
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
   "/{enterprise_subdomain}/v1/users/forgot_password":
     post:
       summary: Create a new request for change password
