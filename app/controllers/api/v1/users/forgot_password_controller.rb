@@ -14,7 +14,7 @@ class Api::V1::Users::ForgotPasswordController < ApplicationController
   def verifier
     verifier = ::Users::VerifierChangePasswordService.new(token: params[:token])
 
-    render json: { success: true, message: '', data: { token: verifier.call } }
+    render json: { success: true, message: '', data: { token: verifier.call.reset_password_key } }
   end
 
   private
