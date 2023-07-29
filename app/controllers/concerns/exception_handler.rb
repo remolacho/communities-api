@@ -5,25 +5,24 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
+    rescue_from ActiveRecord::RecordNotUnique, with: :duplicate
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
+    rescue_from ActiveRecord::RecordInvalid, with: :not_found
     rescue_from PolicyException, with: :forbidden
     rescue_from ArgumentError, with: :argument_error
     rescue_from NoMethodError, with: :locked
   end
 
+  def duplicate(exception)
+    message = exception.message.split('DETAIL:').try(:last).try(:strip) || 'unprocessable_entity'
+    json_response(response: { success: false, message: message }, status: :unprocessable_entity)
+  end
+
   # :nodoc:
   def not_found(exception)
     message = exception.message || 'Not Found'
-    json_response(response: { success: false, message: message, data: exception.model }, status: :not_found)
+    json_response(response: { success: false, message: message }, status: :not_found)
   end
-
-  # :nodoc:
-  def record_invalid(exception)
-    message = exception.message || 'Not Found'
-    json_response(response: { success: false, message: message, data: exception.model }, status: :not_found)
-  end
-
 
   # :nodoc:
   def forbidden(invalid)

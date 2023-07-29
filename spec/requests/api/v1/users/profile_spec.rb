@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe  Api::V1::Users::ProfileController, type: :request do
-  include_context 'login_stuff'
+  include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }

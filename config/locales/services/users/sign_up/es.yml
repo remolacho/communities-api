@@ -1,0 +1,5 @@
+es:
+  services:
+    users:
+      sign_up:
+        success: 'El usuario ha sido creado'
