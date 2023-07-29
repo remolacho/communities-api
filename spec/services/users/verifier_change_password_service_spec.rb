@@ -22,6 +22,16 @@ RSpec.describe ::Users::VerifierChangePasswordService do
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
+    it 'it return error because the user inactive' do
+      forgot = ::Users::ForgotPasswordService.new(email: user.email)
+      token = forgot.call.reset_password_key
+
+      user.user_enterprise.update(active: false)
+
+      service = described_class.new(token: token )
+      expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
     it 'it return success' do
       forgot = ::Users::ForgotPasswordService.new(email: user.email)
       service = described_class.new(token:  forgot.call.reset_password_key)

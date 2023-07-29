@@ -735,6 +735,55 @@ paths:
                   properties:
                     email:
                       type: string
+  "/{enterprise_subdomain}/v1/users/forgot_password/verifier/{token}":
+    get:
+      summary: Create a new request for verifier token to change password
+      tags:
+      - Community API V1 Users
+      description: Allow to users verifier to change password
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token represent the reset_password_key
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: error token not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/profile/show":
     get:
       summary: Find the profile of current user
