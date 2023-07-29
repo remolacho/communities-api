@@ -10,7 +10,7 @@ class Users::SignUpService
 
   def call
     user = User.create!(allowed_data)
-    user.user_enterprise.create!(enterprise_id: enterprise.id)
+    enterprise.user_enterprises.create!(user_id: user.id)
     user
   end
 
