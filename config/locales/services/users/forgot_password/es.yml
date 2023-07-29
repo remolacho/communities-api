@@ -24,3 +24,5 @@ es:
           token:
             empty: 'No se pudo identificar el token enviado'
             not_found: 'Token no registrado'
+          user:
+            inactive: 'La cuenta esta inactiva'

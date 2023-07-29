@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
   end
 
   def valid_user_active!
-    raise PolicyException, I18n.t('services.users.sign_in.inactive') unless current_user.user_enterprise.active
+    raise PolicyException, I18n.t('services.users.sign_in.inactive') unless current_user.active?
   end
 
   private

@@ -41,4 +41,8 @@ class User < ApplicationRecord
   has_many :petitions
   has_many :answers_petitions
   has_many :follow_petitions
+
+  def active?
+    user_enterprise.active
+  end
 end

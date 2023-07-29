@@ -28,7 +28,7 @@ class Users::SignInService
   end
 
   def active?
-    current_user.user_enterprise.active
+    current_user.active?
   end
 
   def current_user
