@@ -10,6 +10,10 @@ class Api::V1::Users::ForgotPasswordController < ApplicationController
     render json: { success: true, message: I18n.t("services.users.forgot_password.success") }
   end
 
+  # GET /:enterprise_subdomain/v1/users/forgot_password/verifier/:token
+  def verifier
+  end
+
   private
 
   def allowed_params

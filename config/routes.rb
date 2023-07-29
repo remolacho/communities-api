@@ -10,7 +10,13 @@ Rails.application.routes.draw do
         namespace :users do
           resources :sign_in, only: [:create]
           resources :sign_up, only: [:create]
-          resources :forgot_password, only: [:create]
+
+          resources :forgot_password, only: [:create] do
+            collection do
+              get 'verifier/:token', to: 'forgot_password#verifier'
+            end
+          end
+
           resources :profile, only: [] do
             collection do
               get 'show'
