@@ -772,6 +772,11 @@ paths:
                     default: true
                   message:
                     type: string
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
         '404':
           description: error token not valid!!!
           content:

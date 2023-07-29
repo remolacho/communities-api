@@ -23,9 +23,14 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: true },
-                 message: { type: :string }
+                 message: { type: :string },
+                 data: {
+                   type: :object,
+                   properties: {
+                     token: { type: :string }
+                   }
+                 }
                }
-
 
         let(:token) {
           forgot = ::Users::ForgotPasswordService.new(email: user.email)

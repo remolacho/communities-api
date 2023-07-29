@@ -12,9 +12,9 @@ class Api::V1::Users::ForgotPasswordController < ApplicationController
 
   # GET /:enterprise_subdomain/v1/users/forgot_password/verifier/:token
   def verifier
-    ::Users::VerifierChangePasswordService.new(token: params[:token]).call
+    verifier = ::Users::VerifierChangePasswordService.new(token: params[:token])
 
-    render json: { success: true, message: '' }
+    render json: { success: true, message: '', data: { token: verifier.call } }
   end
 
   private
