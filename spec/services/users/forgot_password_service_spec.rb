@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ::Users::ForgotPasswordService do
-  include_context 'login_stuff'
+  include_context 'sign_in_stuff'
 
   context 'When 1 user want recover password because it forgot' do
     it 'it return error because the email is empty' do

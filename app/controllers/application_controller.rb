@@ -10,4 +10,10 @@ class ApplicationController < ActionController::API
   def valid_subdomain!
     raise PolicyException unless params[:enterprise_subdomain].eql?(current_user.enterprise.subdomain)
   end
+
+  private
+
+  def enterprise
+    @enterprise ||= Enterprise.find_by!(subdomain: params[:enterprise_subdomain])
+  end
 end

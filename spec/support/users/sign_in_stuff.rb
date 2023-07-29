@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_context 'login_stuff' do
+shared_context 'sign_in_stuff' do
   include RequestHelpers
 
   let(:user) { current_user }

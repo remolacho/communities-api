@@ -2,25 +2,32 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
-  include_context 'sign_in_stuff'
+RSpec.describe  Api::V1::Users::SignInController, type: :request do
+  include_context 'sign_up_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/users/forgot_password' do
-    post 'Create a new request for change password' do
+  path '/{enterprise_subdomain}/v1/users/sign_up' do
+    post 'Create user' do
       tags 'Community API V1 Users'
-      description "Allow to users do change to password"
+      description "Allow create a account in the app"
       produces 'application/json'
       consumes 'application/json'
-      parameter name: :forgot_password, in: :body, schema: {
+      parameter name: :sign_up, in: :body, schema: {
         type: :object,
         properties: {
-          forgot_password:{
+          sign_up:{
             type: :object,
             properties: {
+              name: { type: :string },
+              lastname: { type: :string },
+              identifier: { type: :string },
               email: { type: :string },
+              phone: { type: :string },
+              address: { type: :string },
+              password: { type: :string },
+              password_confirmation: { type: :string }
             }
           }
         }
@@ -35,57 +42,49 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
                  message: { type: :string }
                }
 
+        let(:sign_up) {
+          enterprise
+          { sign_up: allowed_params }
+        }
 
-        let(:forgot_password) {
+        run_test!
+      end
+
+      response 404, 'error email empty and other attribute!!!' do
+        schema type: :object,
+               properties: {
+                 success: { type: :boolean, default: false },
+                 message: { type: :string }
+               }
+
+        let(:sign_up) {
+          enterprise
+          data = allowed_params
+          data[:password] = ""
+
+          { sign_up: data }
+        }
+
+        run_test!
+      end
+
+      response 422, 'error user already exists identifier duplicate!!!' do
+        schema type: :object,
+               properties: {
+                 success: { type: :boolean, default: false },
+                 message: { type: :string }
+               }
+
+        let(:sign_up) {
+          enterprise
           user_enterprise
+          data = allowed_params
+          data[:identifier] = user.identifier
 
-          {
-            forgot_password: { email: user.email }
-          }
+          { sign_up: data }
         }
 
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
-        end
-      end
-
-      response 422, 'error email is empty!!!' do
-        schema type: :object,
-               properties: {
-                 success: { type: :boolean, default: false },
-                 message: { type: :string }
-               }
-
-        let(:forgot_password) {
-          {
-            forgot_password: { email: "" }
-          }
-        }
-
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
-        end
-      end
-
-      response 404, 'error user not found!!!' do
-        schema type: :object,
-               properties: {
-                 success: { type: :boolean, default: false },
-                 message: { type: :string }
-               }
-
-        let(:forgot_password) {
-          {
-            forgot_password: { email: "test4@errornotfound.com" }
-          }
-        }
-
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
-        end
+        run_test!
       end
     end
   end

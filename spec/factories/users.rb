@@ -34,6 +34,8 @@ FactoryBot.define do
     lastname { FFaker::Name.last_name }
     identifier { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
     email { "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com" }
+    address { "T4, P11, A1102" }
+    phone { "3174131149" }
     password { password }
     password_confirmation { password }
   end

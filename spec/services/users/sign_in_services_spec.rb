@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ::Users::SignInService do
-  include_context 'login_stuff'
+  include_context 'sign_in_stuff'
 
   context 'When 1 user want begin in app, this return a JWT or error' do
     it 'it return error by login failed by email' do
