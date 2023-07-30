@@ -24,7 +24,7 @@
 #  index_petitions_on_user_id               (user_id)
 #
 class Petition < ApplicationRecord
-  include Statustable
+  include ::Petitions::Statustable
 
   belongs_to :user
   belongs_to :status

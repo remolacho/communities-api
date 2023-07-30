@@ -1,4 +1,4 @@
-class Petition
+module Petitions
   module Statustable
     extend ActiveSupport::Concern
 

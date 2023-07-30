@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User
+module Users
   module Ransackable
     extend ActiveSupport::Concern
 

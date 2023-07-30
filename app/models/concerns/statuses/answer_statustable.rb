@@ -1,4 +1,4 @@
-class Status
+module Statuses
   module AnswerStatustable
     extend ActiveSupport::Concern
 

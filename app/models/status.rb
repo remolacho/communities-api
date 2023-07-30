@@ -15,8 +15,8 @@
 #  index_statuses_on_code  (code) UNIQUE
 #
 class Status < ApplicationRecord
-  include PetitionStatustable
-  include AnswerStatustable
+  include ::Statuses::PetitionStatustable
+  include ::Statuses::AnswerStatustable
 
   has_many :petitions
   has_many :follow_petitions

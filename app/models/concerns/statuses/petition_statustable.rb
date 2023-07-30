@@ -1,4 +1,4 @@
-class Status
+module Statuses
   module PetitionStatustable
     extend ActiveSupport::Concern
 

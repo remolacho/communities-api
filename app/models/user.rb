@@ -28,10 +28,10 @@
 #  index_users_on_token               (token) UNIQUE
 #
 class User < ApplicationRecord
-  include Validable
-  include Tokenizable
-  include Cleanable
-  include Ransackable
+  include ::Users::Validable
+  include ::Users::Tokenizable
+  include ::Users::Cleanable
+  include ::Users::Ransackable
 
   has_secure_password
 
