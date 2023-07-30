@@ -125,6 +125,18 @@ GEM
       addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
     jwt (2.4.1)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.8.1)
@@ -207,6 +219,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ransack (4.0.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     reline (0.3.6)
       io-console (~> 0.5)
     rest-client (2.1.0)
@@ -279,6 +295,7 @@ DEPENDENCIES
   ffaker
   figaro (~> 1.2.0)
   jwt (~> 2.4.1)
+  kaminari
   letter_opener
   multi_json (~> 1.11, >= 1.11.2)
   pg (~> 1.1)
@@ -287,6 +304,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors (~> 1.1.1)
   rails (~> 7.0.3, >= 7.0.3.1)
+  ransack
   rest-client (~> 2.1.0)
   ros-apartment
   rspec-rails (~> 4.1.2)
