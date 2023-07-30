@@ -1,4 +1,4 @@
-shared_context 'list_stuff' do
+shared_context 'list_petitions_stuff' do
   include RequestHelpers
 
   let(:enterprise) { enterprise_helper }

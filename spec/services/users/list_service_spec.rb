@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ::Users::ListService do
-  include_context 'list_stuff'
+  include_context 'list_users_stuff'
 
   context 'When 1 user want see to list of users' do
     it 'it return error by role' do

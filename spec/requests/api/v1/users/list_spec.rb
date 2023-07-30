@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe  Api::V1::Users::ListController, type: :request do
-  include_context 'list_stuff'
+  include_context 'list_users_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
