@@ -14,3 +14,7 @@ es:
           footer:
             message1: 'Saludos,'
             message2: 'El equipo de %{enterprise_name}'
+        account:
+          token:
+            empty: 'No se pudo identificar el token enviado'
+            not_found: 'Token no registrado'

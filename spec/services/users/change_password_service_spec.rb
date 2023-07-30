@@ -12,7 +12,7 @@ RSpec.describe ::Users::ChangePasswordService do
     }
   }
 
-  context 'When 1 user want verifier token change password' do
+  context 'When 1 user want change password' do
     it 'it return error because the password not match' do
       forgot = ::Users::ForgotPasswordService.new(email: user.email)
 

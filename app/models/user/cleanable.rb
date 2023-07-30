@@ -7,13 +7,13 @@ class User
       self.password_confirmation = p_confirmation
       self.reset_password_key = nil
       self.reset_password_key_expires_at = nil
-      save!
+      self.save!
     end
 
     def clear_active_key!
       self.active_key = nil
-      self.active_key_expires_at = nil
-      save!
+      self.save!
+      self.user_enterprise.update(active: true)
     end
   end
 end
