@@ -22,6 +22,14 @@ RSpec.describe ::Users::SignUpService do
       expect { service.call }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
+    it 'it return error address format T1, P1, A101' do
+      data = allowed_params
+      data[:address] = "T1, A1, P101"
+
+      service = described_class.new(enterprise: enterprise, data: data)
+      expect { service.call }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
     it 'it return error phone blank' do
       data = allowed_params
       data[:phone] = ""

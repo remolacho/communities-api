@@ -7,6 +7,7 @@ class User
     included do
       validates :address,
                 presence: true,
+                format: { with: /\AT\d{1,2}, P\d{1,2}, A(?:[1-9]\d{2}|[1-9]\d{3}|[1-9]\d{4}|[1-9][0-9]{3})\z/ },
                 length: { minimum: 10, maximum: 30 }
 
       validates :phone,
