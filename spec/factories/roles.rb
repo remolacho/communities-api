@@ -18,6 +18,24 @@ FactoryBot.define do
   factory :role do
   end
 
+  trait :super_admin do
+    code { 'sadmin' }
+    name {"Super admin" }
+    slug {"Super admin".parameterize }
+  end
+
+  trait :admin do
+    code { 'admin' }
+    name {"admin" }
+    slug {"admin".parameterize }
+  end
+
+  trait :manager do
+    code { 'manager' }
+    name {"President/Manager" }
+    slug {"President/Manager".parameterize }
+  end
+
   trait :owner do
     code { 'owner' }
     name { "Owner" }

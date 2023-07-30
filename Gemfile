@@ -64,3 +64,8 @@ gem 'rest-client', '~> 2.1.0'
 gem 'ros-apartment', require: 'apartment'
 gem 'bcrypt'
 gem 'active_model_serializers'
+gem 'kaminari'
+gem 'ransack'
+
+
+

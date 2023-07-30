@@ -851,6 +851,98 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/users/list":
+    get:
+      summary: Request the user list only roles [admin, super admin, manager]
+      tags:
+      - Community API V1 Users
+      description: Allow to users get 1 list of users, the current user should have
+        nay the roles [admin, super admin, manager]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: attr
+        in: query
+        description: is optional represent the field of find
+        schema:
+          type: string
+      - name: term
+        in: query
+        description: is optional represent the value of find
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: is optional represent the number page of find
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        lastname:
+                          type: string
+                        email:
+                          type: string
+                        address:
+                          type: string
+                          nullable: true
+                        identifier:
+                          type: string
+                        phone:
+                          type: string
+                          nullable: true
+                  paginate:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                      limit:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      current_page:
+                        type: integer
+        '403':
+          description: error the user has not role!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/profile/show":
     get:
       summary: Find the profile of current user

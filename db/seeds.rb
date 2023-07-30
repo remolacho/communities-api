@@ -15,7 +15,10 @@ roles = {
   oamin:  "Owner admin",
   owner:  "Owner",
   convi:  "Coexistence Member",
-  comite: "Committee Member"
+  comite: "Committee Member",
+  manager: "President/Manager",
+  collaborator: "Collaborator",
+  tenant: "tenant"
 }
 
 roles.each do |k, v|
@@ -24,6 +27,7 @@ end
 
 group_roles = [
   { code: 'all', name: {es: "Todas las partes"} },
+  { code: 'adminmanager', name: {es: "Administración y Presidente"} },
   { code: 'admincomi', name: {es: "Administración y Comité"} },
   { code: 'admincon', name: {es: "Administración y Consejo"} },
   { code: 'concomi', name: {es: "Consejo y Comité"} },
@@ -39,7 +43,8 @@ group_roles.each do |gp|
 end
 
 group_roles_relations = {
-  all: [:sadmin, :admin, :convi, :comite],
+  all: [:sadmin, :admin, :convi, :comite, :manager],
+  adminmanager: [:sadmin, :admin, :manager],
   admincomi: [:sadmin, :admin, :comite],
   admincon: [:sadmin, :admin, :convi],
   concomi: [:sadmin, :convi, :comite],
