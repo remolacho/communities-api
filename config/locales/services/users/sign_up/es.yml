@@ -18,3 +18,4 @@ es:
           token:
             empty: 'No se pudo identificar el token enviado'
             not_found: 'Token no registrado'
+          success: 'Se activo la cuenta con exito'

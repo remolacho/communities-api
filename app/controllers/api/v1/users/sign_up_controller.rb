@@ -8,6 +8,13 @@ class Api::V1::Users::SignUpController < ApplicationController
     render json: { success: true, message: I18n.t("services.users.sign_up.success") }
   end
 
+  # GET /:enterprise_subdomain/v1/users/sign_up/active/:token
+  def active_account
+    ::Users::ActiveAccountService.new(token: params[:token]).call
+
+    render json: { success: true, message: I18n.t("services.users.sign_up.account.success") }
+  end
+
   private
 
   def allowed_params

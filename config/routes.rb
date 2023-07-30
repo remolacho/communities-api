@@ -9,7 +9,12 @@ Rails.application.routes.draw do
       namespace :v1 do
         namespace :users do
           resources :sign_in, only: [:create]
-          resources :sign_up, only: [:create]
+
+          resources :sign_up, only: [:create] do
+            collection do
+              get 'active/:token', to: 'sign_up#active_account'
+            end
+          end
 
           resources :forgot_password, only: [:create] do
             collection do

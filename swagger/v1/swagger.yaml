@@ -973,6 +973,55 @@ paths:
                       type: string
                     password:
                       type: string
+  "/{enterprise_subdomain}/v1/users/sign_up/active/{token}":
+    get:
+      summary: Request activation account
+      tags:
+      - Community API V1 Users
+      description: Allow to users activate account
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token represent the active_key
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: error token not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/sign_up":
     post:
       summary: Create user
