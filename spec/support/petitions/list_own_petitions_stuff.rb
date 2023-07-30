@@ -4,8 +4,8 @@ shared_context 'list_own_petitions_stuff' do
   let(:status_pending) { @status_pending ||= FactoryBot.create(:status, :petition_pending) }
   let(:status_resolved) { @status_resolved ||= FactoryBot.create(:status, :petition_resolved) }
 
-  let(:category_petition) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
-  let(:category_complaint) { @category ||= FactoryBot.create(:category_petition, :complaint , enterprise: enterprise_helper) }
+  let(:category_petition) { @category_petition ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
+  let(:category_complaint) { @category_complaint ||= FactoryBot.create(:category_petition, :complaint , enterprise: enterprise_helper) }
 
   let(:role1){ FactoryBot.create(:role, :coexistence_member) }
   let(:role2){ FactoryBot.create(:role, :committee_member) }
@@ -22,13 +22,6 @@ shared_context 'list_own_petitions_stuff' do
   let(:enterprise) { enterprise_helper }
   let(:user) { current_user }
   let(:user_enterprise) { user_enterprise_helper }
-
-  let(:filter){
-    {
-      status_id: '',
-      category_petition_id: ''
-    }
-  }
 
   let(:petitions) {
     status_pending

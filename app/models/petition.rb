@@ -25,6 +25,7 @@
 #
 class Petition < ApplicationRecord
   include ::Petitions::Statustable
+  include ::Petitions::Ransackable
 
   belongs_to :user
   belongs_to :status
