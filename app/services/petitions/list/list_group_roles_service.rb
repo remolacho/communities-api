@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Petitions::List::GroupRolesService
+class Petitions::List::ListGroupRolesService
   attr_accessor :user, :filter
 
   def initialize(user:, filter:)

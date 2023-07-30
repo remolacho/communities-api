@@ -1,4 +1,4 @@
-shared_context 'list_petitions_stuff' do
+shared_context 'list_group_roles_petitions_stuff' do
   include RequestHelpers
 
   let(:enterprise) { enterprise_helper }
@@ -14,7 +14,7 @@ shared_context 'list_petitions_stuff' do
   }
 
   let(:user_roles_manager){
-      FactoryBot.create(:user_role, user_id: user.id, role_id: role_manager.id)
+    FactoryBot.create(:user_role, user_id: user.id, role_id: role_manager.id)
   }
 
   let(:user_roles_committee){
