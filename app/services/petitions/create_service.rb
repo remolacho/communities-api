@@ -55,6 +55,6 @@ class Petitions::CreateService
   end
 
   def define_ticket
-    data[:ticket] = "#{user.enterprise.short_name}-#{user.id}-#{Time.now.strftime('%d%m%Y%H%M%S')}"
+    data[:ticket] = "#{user.enterprise.short_name}-#{user.id}-#{Time.now.strftime('%d%H%M%S')}#{rand(1..1000)}"
   end
 end

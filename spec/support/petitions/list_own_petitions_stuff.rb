@@ -36,14 +36,14 @@ shared_context 'list_own_petitions_stuff' do
 
     c = [
       {
-        title: FFaker::Name.first_name,
-        message: FFaker::Name.first_name ,
+        title: 'Title Text1',
+        message: FFaker::Name.first_name * 10,
         category_petition_id: category_petition.id,
         group_role_id: group_role.id
       },
       {
-        title: FFaker::Name.first_name,
-        message: FFaker::Name.first_name ,
+        title: 'Title Text2',
+        message: FFaker::Name.first_name * 10,
         category_petition_id: category_petition.id,
         group_role_id: group_role.id
       }
@@ -53,6 +53,7 @@ shared_context 'list_own_petitions_stuff' do
 
     c[0].update(status_id: status_resolved.id)
 
+    c.size
   }
 
   let(:complaints) {
@@ -61,14 +62,14 @@ shared_context 'list_own_petitions_stuff' do
 
     c = [
       {
-        title: FFaker::Name.first_name,
-        message: FFaker::Name.first_name ,
+        title: 'Title Text3',
+        message: FFaker::Name.first_name * 10,
         category_petition_id: category_complaint.id,
         group_role_id: group_role.id
       },
       {
-        title: FFaker::Name.first_name,
-        message: FFaker::Name.first_name ,
+        title: 'Title Text4',
+        message: FFaker::Name.first_name * 10,
         category_petition_id: category_complaint.id,
         group_role_id: group_role.id
       }
@@ -77,5 +78,7 @@ shared_context 'list_own_petitions_stuff' do
     end
 
     c[0].update(status_id: status_resolved.id)
+
+    c.size
   }
 end

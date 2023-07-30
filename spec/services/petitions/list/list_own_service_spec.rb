@@ -10,5 +10,13 @@ RSpec.describe ::Petitions::List::ListOwnService do
       service = described_class.new(user: user, filter: filter, page: 1)
       expect(service.call.empty?).to eq(true)
     end
+
+    it 'it return all without filter' do
+      acum = complaints
+      acum += petitions
+
+      service = described_class.new(user: user, filter: nil, page: 1)
+      expect(service.call.size).to eq(acum)
+    end
   end
 end

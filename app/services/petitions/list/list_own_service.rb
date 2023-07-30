@@ -10,8 +10,6 @@ class Petitions::List::ListOwnService
   end
 
   def call
-    binding.pry
-
     user.petitions.includes(:user).ransack(search.call).result.page(page.to_i)
   end
 
