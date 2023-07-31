@@ -64,6 +64,12 @@ Rails.application.routes.draw do
         namespace :group_roles do
           resources :list, only: [:index]
         end
+
+        namespace :user_roles do
+          namespace :templates do
+            resources :import, only: [:index]
+          end
+        end
       end
     end
   end

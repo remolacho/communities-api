@@ -66,6 +66,4 @@ gem 'bcrypt'
 gem 'active_model_serializers'
 gem 'kaminari'
 gem 'ransack'
-
-
-
+gem 'axlsx'

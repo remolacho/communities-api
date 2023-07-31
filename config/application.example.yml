@@ -17,6 +17,8 @@ development:
   EMAIL_PORT: "587"
   EMAIL_DOMAIN: localhost
   EMAIL_AUTHENTICATION: plain
+  RSWAG_USER: 'user-api-doc'
+  RSWAG_PASS: 'pass-api-doc'
 test:
   DB_HOSTNAME: localhost
   DB_USERNAME: postgres

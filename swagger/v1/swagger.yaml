@@ -903,6 +903,27 @@ paths:
                   properties:
                     status_id:
                       type: integer
+  "/{enterprise_subdomain}/v1/user_roles/templates/import":
+    get:
+      summary: Allow to users download a tempelate for importer the user roles
+      tags:
+      - Community API V1 Users Roles
+      description: Allow to users download a tempelate for importer the user roles
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success down laod file!!!
   "/{enterprise_subdomain}/v1/users/forgot_password/change/{token}":
     post:
       summary: Change password

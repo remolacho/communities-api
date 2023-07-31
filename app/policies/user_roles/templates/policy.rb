@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-class Users::List::Policy < ::BasePolicy
-  attr_accessor :enterprise
-
-  def initialize(current_user:, enterprise:)
+class UserRoles::Templates::Policy < ::BasePolicy
+  def initialize(current_user:)
     super(current_user: current_user)
-
-    @enterprise = enterprise
   end
 
   def can_read!
@@ -22,6 +18,6 @@ class Users::List::Policy < ::BasePolicy
   end
 
   def allowed_roles
-    %w[sadmin admin manager]
+    %w[sadmin admin]
   end
 end
