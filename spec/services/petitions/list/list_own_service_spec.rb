@@ -7,7 +7,8 @@ RSpec.describe ::Petitions::List::ListOwnService do
 
   context 'When 1 user want see his own list of petitions' do
     it 'it return empty, the user has not petitions' do
-      service = described_class.new(user: user, filter: nil, page: 1)
+      filter = ::Petitions::Filter::QueryService.new(params: {})
+      service = described_class.new(user: user, filter: filter, page: 1)
       expect(service.call.empty?).to eq(true)
     end
 
@@ -15,7 +16,22 @@ RSpec.describe ::Petitions::List::ListOwnService do
       acum = complaints
       acum += petitions
 
-      service = described_class.new(user: user, filter: nil, page: 1)
+      filter = ::Petitions::Filter::QueryService.new(params: {})
+      service = described_class.new(user: user, filter: filter, page: 1)
+      expect(service.call.size).to eq(acum)
+    end
+
+    it 'it return all without filter params empties' do
+      acum = complaints
+      acum += petitions
+
+      params = {
+        status_id: '',
+        category_petition_id: ''
+      }
+
+      filter = ::Petitions::Filter::QueryService.new(params: params)
+      service = described_class.new(user: user, filter: filter, page: 1)
       expect(service.call.size).to eq(acum)
     end
 
@@ -23,11 +39,12 @@ RSpec.describe ::Petitions::List::ListOwnService do
       acum = complaints
       acum += petitions
 
-      filter = {
+      params = {
         status_id: status_resolved.id,
         category_petition_id: category_complaint.id
       }
 
+      filter = ::Petitions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
@@ -39,11 +56,12 @@ RSpec.describe ::Petitions::List::ListOwnService do
       acum = complaints
       acum += petitions
 
-      filter = {
+      params = {
         status_id: status_resolved.id,
         category_petition_id: ''
       }
 
+      filter = ::Petitions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
@@ -55,11 +73,12 @@ RSpec.describe ::Petitions::List::ListOwnService do
       acum = complaints
       acum += petitions
 
-      filter = {
+      params = {
         status_id: '',
         category_petition_id: category_complaint.id
       }
 
+      filter = ::Petitions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
@@ -71,8 +90,9 @@ RSpec.describe ::Petitions::List::ListOwnService do
       complaints
       petitions
 
-      filter = { status_id: 999 }
+      params = { status_id: 999 }
 
+      filter = ::Petitions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
       expect(service.call.empty?).to eq(true)
     end

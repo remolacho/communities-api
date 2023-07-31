@@ -14,6 +14,6 @@ class Api::V1::Petitions::ListOwnController < ApplicationController
   private
 
   def filter
-    ::Petitions::Filterable::QueryTermService.new(params)
+    ::Petitions::Filter::QueryService.new(params)
   end
 end

@@ -10,12 +10,6 @@ class Petitions::List::ListOwnService
   end
 
   def call
-    user.petitions.includes(:user).ransack(search.call).result.page(page.to_i)
-  end
-
-  private
-
-  def search
-    @search ||= Petitions::Searches::QueryTermService.new(filter: filter)
+    user.petitions.includes(:user).ransack(filter.call).result.page(page.to_i)
   end
 end
