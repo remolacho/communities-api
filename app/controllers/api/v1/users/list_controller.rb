@@ -16,7 +16,7 @@ class Api::V1::Users::ListController < ApplicationController
 
   def paginate
     {
-      total: user_list.count,
+      total: user_list.total_count,
       limit: user_list.limit_value,
       total_pages: user_list.total_pages,
       current_page: user_list.current_page

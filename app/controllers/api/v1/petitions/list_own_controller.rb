@@ -9,12 +9,12 @@ class Api::V1::Petitions::ListOwnController < ApplicationController
 
   def serializer
     ActiveModelSerializers::SerializableResource.new(petition_list,
-                                                     each_serializer: ::Users::ProfileSerializer).as_json
+                                                     each_serializer: ::Petitions::DetailSerializer).as_json
   end
 
   def paginate
     {
-      total: petition_list.count,
+      total: petition_list.total_count,
       limit: petition_list.limit_value,
       total_pages: petition_list.total_pages,
       current_page: petition_list.current_page
