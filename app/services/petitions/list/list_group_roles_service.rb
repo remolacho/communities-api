@@ -13,12 +13,11 @@ class Petitions::List::ListGroupRolesService
     raise PolicyException unless user_roles_ids.present?
     raise PolicyException unless group_roles_ids.present?
 
-    user.petitions
-        .includes(:user, :status, :category_petition)
-        .where(group_role_id: group_roles_ids)
-        .ransack(filter.call)
-        .result
-        .page(page.to_i)
+    Petition.includes(:user, :status, :category_petition)
+            .where(group_role_id: group_roles_ids)
+            .ransack(filter.call)
+            .result
+            .page(page.to_i)
   end
 
   private

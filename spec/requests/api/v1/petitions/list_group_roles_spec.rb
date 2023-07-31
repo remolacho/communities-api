@@ -2,16 +2,16 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
-  include_context 'list_own_petitions_stuff'
+RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
+  include_context 'list_group_roles_petitions_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/petition/list_own' do
-    get 'Request the list of petitions own' do
+  path '/{enterprise_subdomain}/v1/petition/list_group_roles' do
+    get 'Request the list of petitions with group roles' do
       tags 'Community API V1 Petitions'
-      description "Allow to users get your list of petition"
+      description "Allow to users get list of petition with group roles"
       produces 'application/json'
       consumes 'application/json'
 
@@ -83,13 +83,19 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                }
 
         let(:status_id) {
-          complaints
+          user_role_owner_admin
+          user_role_admin
+          group_role_admin
+          user_role_committee_member
+
+          claims
           petitions
+          complaints
           status_resolved.id
         }
 
         let(:category_petition_id) {
-          category_complaint.id
+          category_claim.id
         }
 
         let(:page) { "1" }
@@ -97,8 +103,8 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
         run_test!
       end
 
-      response 403, 'error the user not logged!!!' do
-        let(:'Authorization') { '' }
+      response 403, 'error forbidden!!!' do
+        let(:'Authorization') { sign_in }
 
         schema type: :object,
                properties: {
@@ -106,9 +112,14 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                  message: { type: :string }
                }
 
-        let(:status_id) { "address" }
-        let(:category_petition_id) { "T4" }
-        let(:page) { "1" }
+        let(:status_id) {
+          user_role_owner_admin
+          group_role_coexistence_committee
+          ""
+        }
+
+        let(:category_petition_id) { "" }
+        let(:page) { "" }
 
         run_test!
       end

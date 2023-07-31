@@ -518,6 +518,123 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/petition/list_group_roles":
+    get:
+      summary: Request the list of petitions with group roles
+      tags:
+      - Community API V1 Petitions
+      description: Allow to users get list of petition with group roles
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: status_id
+        in: query
+        description: is optional represent the filter by status
+        schema:
+          type: integer
+      - name: category_petition_id
+        in: query
+        description: is optional represent the filter by category
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: is optional represent the number page of find
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        ticket:
+                          type: string
+                        token:
+                          type: string
+                        title:
+                          type: string
+                        message:
+                          type: string
+                        status:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            code:
+                              type: string
+                            color:
+                              type: string
+                        category:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                        group_role:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            lastname:
+                              type: string
+                  paginate:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      current_page:
+                        type: integer
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/petition/list_own":
     get:
       summary: Request the list of petitions own
@@ -624,7 +741,7 @@ paths:
                       current_page:
                         type: integer
         '403':
-          description: error the user t logged!!!
+          description: error the user not logged!!!
           content:
             application/json:
               schema:
