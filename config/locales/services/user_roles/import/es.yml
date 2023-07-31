@@ -3,4 +3,9 @@ es:
     user_roles:
       import:
         create:
-          file_nil: 'Debes enviar un archivo xlsx'
+          error:
+            file_nil: 'Debes enviar un archivo xlsx'
+            file_ext: 'Debe ser un archivo xlsx'
+            file_not_found: 'El archivo no pudo ser leido'
+            header:
+              not_allowed: 'El heder debe tener identifier y roles'

@@ -34,6 +34,6 @@ class UserRoles::Templates::ImportService
   end
 
   def roles_slug
-    @roles_slug ||= Role.pluck(:slug)
+    @roles_slug ||= Role.order(:slug).pluck(:slug)
   end
 end
