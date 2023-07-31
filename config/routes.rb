@@ -35,6 +35,7 @@ Rails.application.routes.draw do
           resources :create, only: [:create]
           resources :detail, param: 'token', only: [:show]
           resources :update_status, param: 'token', only: [:update]
+          resources :list_own, only: [:index]
 
           namespace :answers, path: 'answer' do
             resources :create, param: 'token', path: '', only: [] do
