@@ -132,7 +132,9 @@ RSpec.describe ::Users::SignUpService do
 
     it 'it return success' do
       service = described_class.new(enterprise: enterprise, data: allowed_params)
-      expect(service.call.enterprise.subdomain).to eq(enterprise.subdomain)
+      new_user = service.call
+      expect(new_user.enterprise.subdomain).to eq(enterprise.subdomain)
+      expect(new_user.roles.find_by(code: 'oamin').present?).to eq(true)
     end
   end
 end

@@ -16,7 +16,7 @@ class Users::SignUpService
 
     UsersMailer.verifier_account(user: user, enterprise: enterprise).deliver_now!
 
-    user
+    create_user_role(user).call
   end
 
   private
@@ -24,5 +24,9 @@ class Users::SignUpService
   def allowed_data
     data[:token] = SecureRandom.uuid
     data
+  end
+
+  def create_user_role(user)
+    ::UserRoles::OwnerAdmin::Create.new(user: user)
   end
 end

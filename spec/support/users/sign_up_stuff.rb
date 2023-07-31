@@ -4,6 +4,7 @@ shared_context 'sign_up_stuff' do
   let(:enterprise) { enterprise_helper }
   let(:user) { current_user }
   let(:user_enterprise) { user_enterprise_helper }
+  let!(:role_owner_admin) { FactoryBot.create(:role, :owner_admin) }
 
   let(:allowed_params) {
     {

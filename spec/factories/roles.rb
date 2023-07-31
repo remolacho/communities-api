@@ -42,6 +42,12 @@ FactoryBot.define do
     slug { "Owner".parameterize }
   end
 
+  trait :owner_admin do
+    code { 'oamin' }
+    name { "Owner admin" }
+    slug { "Owner admin".parameterize }
+  end
+
   trait :coexistence_member do
     code { 'convi' }
     name { "Coexistence Member" }
