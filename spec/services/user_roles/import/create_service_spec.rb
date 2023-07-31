@@ -26,5 +26,13 @@ RSpec.describe UserRoles::Import::CreateService do
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       expect { service.perform }.to raise_error(ArgumentError)
     end
+
+    it 'return error the header has not identifier' do
+      file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/import-user-roles_header_without_cc.xlsx',
+                                          ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+      service = described_class.new(enterprise: enterprise, user: user, file: file)
+      expect { service.perform }.to raise_error(ArgumentError)
+    end
   end
 end

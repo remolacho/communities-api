@@ -24,6 +24,7 @@ class UserRoles::Import::CreateService
 
   def valid_header!
     raise ArgumentError, I18n.t('services.user_roles.import.create.error.header.not_allowed') if header.size < 2
+    raise ArgumentError, I18n.t('services.user_roles.import.create.error.header.identifier') unless header.include?('identifier')
   end
 
   def header

@@ -8,4 +8,5 @@ es:
             file_ext: 'Debe ser un archivo xlsx'
             file_not_found: 'El archivo no pudo ser leido'
             header:
-              not_allowed: 'El heder debe tener identifier y roles'
+              not_allowed: 'La cabecera debe tener identifier y roles'
+              identifier: 'No existe el identifier en la cabecera'
