@@ -14,7 +14,6 @@ class Api::V1::Petitions::ListOwnController < ApplicationController
 
   def paginate
     {
-      total: petition_list.total_count,
       limit: petition_list.limit_value,
       total_pages: petition_list.total_pages,
       current_page: petition_list.current_page
@@ -32,6 +31,6 @@ class Api::V1::Petitions::ListOwnController < ApplicationController
   end
 
   def filter
-    ::Petitions::Filter::QueryService.new(params)
+    ::Petitions::Filter::QueryService.new(params: params)
   end
 end

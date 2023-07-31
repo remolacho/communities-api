@@ -46,7 +46,6 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
                  paginate: {
                    type: :object,
                    properties: {
-                     total: {type: :integer},
                      limit: {type: :integer},
                      total_pages: {type: :integer},
                      current_page: {type: :integer},
