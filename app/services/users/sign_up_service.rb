@@ -9,14 +9,19 @@ class Users::SignUpService
   end
 
   def call
-    user = User.create!(allowed_data)
-    enterprise.user_enterprises.create!(user_id: user.id)
+    ActiveRecord::Base.transaction do
+      user = User.create!(allowed_data)
 
-    user.generate_active_token!
+      create_user_enterprise.call(user)
 
-    UsersMailer.verifier_account(user: user, enterprise: enterprise).deliver_now!
+      user.generate_active_token!
 
-    create_user_role(user).call
+      create_user_role(user).call
+
+      UsersMailer.verifier_account(user: user, enterprise: enterprise).deliver_now!
+
+      user
+    end
   end
 
   private
@@ -24,6 +29,10 @@ class Users::SignUpService
   def allowed_data
     data[:token] = SecureRandom.uuid
     data
+  end
+
+  def create_user_enterprise
+    ::UserEnterprises::Create.new(enterprise: enterprise)
   end
 
   def create_user_role(user)
