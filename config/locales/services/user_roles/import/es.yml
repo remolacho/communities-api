@@ -7,6 +7,9 @@ es:
             file_nil: 'Debes enviar un archivo xlsx'
             file_ext: 'Debe ser un archivo xlsx'
             file_not_found: 'El archivo no pudo ser leido'
+            user_not_found: 'No se encontro el usuario con la cedula N# %{identifier}'
+            user_roles_error: 'el usuario con cedula N# %{identifier} ya tiene algunos roles asignados, no pueden estar duplicados'
             header:
               not_allowed: 'La cabecera debe tener identifier y roles'
               identifier: 'No existe el identifier en la cabecera'
+              roles: 'Hay roles en la cabecera que no son permitidos %{fields}'
