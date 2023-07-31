@@ -10,6 +10,10 @@ class Petitions::List::ListOwnService
   end
 
   def call
-    user.petitions.includes(:user).ransack(filter.call).result.page(page.to_i)
+    user.petitions
+        .includes(:user, :status, :category_petition)
+        .ransack(filter.call)
+        .result
+        .page(page.to_i)
   end
 end
