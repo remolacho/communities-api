@@ -23,6 +23,11 @@ FactoryBot.define do
     name {{es: "Todas las partes"}}
   end
 
+  trait :admin do
+    code { 'admin' }
+    name { {es: "Sólo Administración"}  }
+  end
+
   trait :admin_committee do
     code { 'admincomi' }
     name { {es: "Administración y Comité"} }

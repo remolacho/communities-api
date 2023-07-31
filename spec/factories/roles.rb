@@ -24,7 +24,7 @@ FactoryBot.define do
     slug {"Super admin".parameterize }
   end
 
-  trait :admin do
+  trait :role_admin do
     code { 'admin' }
     name {"admin" }
     slug {"admin".parameterize }
