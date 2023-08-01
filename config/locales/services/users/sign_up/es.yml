@@ -1,0 +1,26 @@
+es:
+  services:
+    users:
+      sign_up:
+        success: 'El usuario ha sido creado'
+        avatar:
+          nil: 'Debes agragar una imagen'
+          size: 'El tamaño de la imagen no debe ser mayor a 1 mb'
+          type: 'Solo deben ser imagenes (jpeg, jpg, png)'
+          success: 'Se cargo una nueva imagen a tu perfil'
+        email_view:
+          header:
+            message1: "Hola."
+          body:
+            message1: 'Hemos recibido una solicitud para activar tu cuenta. Para realizar esta acción, utiliza el siguiente botón:'
+            message2: 'o puedes copiar y pegar este enlace en tu navegador'
+            message3: 'Si no has hecho ningun registro, o sólo fue un error, sólo debes ignorar este mensaje.'
+            link: 'Activar cuenta'
+          footer:
+            message1: 'Saludos,'
+            message2: 'El equipo de %{enterprise_name}'
+        account:
+          token:
+            empty: 'No se pudo identificar el token enviado'
+            not_found: 'Token no registrado'
+          success: 'Se activo la cuenta con exito'

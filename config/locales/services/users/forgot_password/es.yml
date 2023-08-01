@@ -1,0 +1,30 @@
+es:
+  services:
+    users:
+      forgot_password:
+        success: "Se envío un email con la información para el cambio de su contraseña"
+        not_found: "El usuario no esta registrado"
+        inactive: 'El usuario esta inactivo'
+        email_empty: "El correo es obligatorio"
+        subject: "Recuperación contraseña"
+        send_email_error: "Hubo un error al enviar el correo de recuperacion, %{error}"
+        email_view:
+          header:
+            message1: "Hola."
+          body:
+            message1: 'Hemos recibido una solicitud para restablecer tu contraseña. Para realizarlo, utiliza el siguiente botón:'
+            message2: 'o puedes copiar y pegar este enlace en tu navegador'
+            message3: 'Recuerda que este link es temporal y expirará luego de 24 horas.'
+            message4: 'Si no has solicitado el cambio, o sólo fue un error, sólo debes ignorar este mensaje.'
+            link: 'Restablecer tu contraseña'
+          footer:
+            message1: 'Saludos,'
+            message2: 'El equipo de %{enterprise_name}'
+        verifier:
+          token:
+            empty: 'No se pudo identificar el token enviado'
+            not_found: 'Token no registrado'
+          user:
+            inactive: 'La cuenta esta inactiva'
+        change:
+          success: 'Se realizo el cambio con exito, podras iniciar con tu nueva contraseña'

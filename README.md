@@ -46,3 +46,7 @@ Things you may want to cover:
   - generate rake rswag:specs:swaggerize
   - http://localhost:3000/api-docs
 * ...
+
+* Frontend template
+  - https://github.com/coreui/coreui-free-react-admin-template
+* ...

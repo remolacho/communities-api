@@ -1,0 +1,5 @@
+es:
+  services:
+    petitions:
+      update_status:
+        success: "Se realizo el cambio de estado"

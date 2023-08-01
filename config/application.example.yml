@@ -8,6 +8,18 @@ development:
   API_KEY: ''
   APPLICATION_NAME: "skeleton-rails"
   API_VERSION: "v1"
+  EMAIL_FROM: 'example@gmail.com'
+  EMAIL_TO: 'example@gmail.com'
+  SEND_EMAIL: true
+  BASE_APP: http://localhost:5008
+  BASE_HOST: http://localhost:3000
+  EMAIL_PASSWORD: ''
+  EMAIL_PROVIDER: smtp.gmail.com
+  EMAIL_PORT: "587"
+  EMAIL_DOMAIN: localhost
+  EMAIL_AUTHENTICATION: plain
+  RSWAG_USER: 'user-api-doc'
+  RSWAG_PASS: 'pass-api-doc'
 test:
   DB_HOSTNAME: localhost
   DB_USERNAME: postgres
@@ -16,3 +28,13 @@ test:
   DB_PORT: 5432
   JWT_PASSWORD: test123
   API_KEY: ''
+  EMAIL_FROM: 'example@gmail.com'
+  EMAIL_TO: 'example@gmail.com'
+  SEND_EMAIL: true
+  BASE_APP: http://localhost:5008
+  BASE_HOST: http://localhost:3000
+  EMAIL_PASSWORD: ''
+  EMAIL_PROVIDER: smtp.gmail.com
+  EMAIL_PORT: "587"
+  EMAIL_DOMAIN: localhost
+  EMAIL_AUTHENTICATION: plain

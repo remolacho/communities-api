@@ -1,0 +1,18 @@
+<section class="center card">
+  <h2><%= I18n.t('services.answers_petitions.mail.nofify.header.message1') %> <%= @user.name %> <%= @user.lastname %>,</h2>
+
+  <span style="display: block; width: 30%;">
+    <hr style="border-bottom: 1px solid #FF2C5F;" />
+  </span>
+
+  <p style="display: block; padding: 10px; background-color: #EFF1F4;">
+    <%= I18n.t("services.answers_petitions.mail.nofify.body.message1", ticket: @petition.ticket) %>
+  </p>
+
+  <p>
+    <%= I18n.t("services.answers_petitions.mail.nofify.body.message2") %>
+  </p>
+
+  <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message1') %></p>
+  <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message2', enterprise_name: @enterprise.name) %></p>
+</section>

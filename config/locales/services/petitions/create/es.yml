@@ -1,0 +1,8 @@
+es:
+  services:
+    petitions:
+      create:
+        data_empty: "No hay imformacion que almacenar"
+        category_not_found: "La categoria seleccionada no existe"
+        status_not_found: "El estatus no existe"
+        group_role_not_found: "El grupo de roles no existe"

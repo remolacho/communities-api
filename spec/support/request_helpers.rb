@@ -2,21 +2,30 @@ module RequestHelpers
   extend ActiveSupport::Concern
   include AuthJwtGo
 
+  def sign_in
+    ::Users::BuildJwtService.new(user: current_user).build
+  end
+
+  def current_user
+    @current_user ||= generate_user
+  end
+
+  def user_enterprise_helper
+    @user_enterprise ||= FactoryBot.create(:user_enterprise, user_id: user_helper.id, enterprise_id: enterprise_helper.id, active: true)
+  end
+
+  def user_helper
+    @user_helper ||= FactoryBot.create(:user)
+  end
+
+  def enterprise_helper
+    @enterprise_helper ||= FactoryBot.create(:enterprise)
+  end
+
   private
 
-  def encode_jwt(user)
-    payload = {
-      user_id: user.id,
-      email: user.email,
-      role: user.kind,
-      exp: 1.days.from_now.to_i
-    }
-
-    encode_token(payload).dig(:jwt)
+  def generate_user
+    user_enterprise_helper
+    user_helper
   end
-
-  def setup_jwt(user)
-    "Bearer #{encode_jwt(user)}"
-  end
-
 end

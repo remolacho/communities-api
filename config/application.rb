@@ -25,5 +25,10 @@ module SkeletonRails
     config.api_only = true
     config.application_name = ENV.fetch('APPLICATION_NAME', '')
     config.api_version = ENV.fetch('API_VERSION', 'version not set')
+
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+    config.i18n.available_locales = %i[en es]
+    config.i18n.default_locale = :es
+    config.time_zone = "America/Bogota"
   end
 end
