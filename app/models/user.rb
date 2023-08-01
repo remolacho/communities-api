@@ -43,6 +43,8 @@ class User < ApplicationRecord
   has_many :answers_petitions
   has_many :follow_petitions
 
+  has_one_attached :avatar, dependent: :purge
+
   def active?
     user_enterprise.active
   end

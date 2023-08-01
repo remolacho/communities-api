@@ -10,6 +10,5 @@ class Api::V1::CategoriesPetitions::ListController < ApplicationController
   def serializer
     ActiveModelSerializers::SerializableResource.new(CategoryPetition.all,
                                                      each_serializer: ::CategoryPetitions::DetailSerializer).as_json
-
   end
 end

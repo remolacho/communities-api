@@ -307,6 +307,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
         '403':
           description: error role not allowed!!!
           content:
@@ -614,6 +617,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
                   paginate:
                     type: object
                     properties:
@@ -731,6 +737,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
                   paginate:
                     type: object
                     properties:
@@ -1302,6 +1311,9 @@ paths:
                       phone:
                         type: string
                         nullable: true
+                      avatar_url:
+                        type: string
+                        nullable: true
         '403':
           description: error user not valid!!!
           content:
@@ -1502,6 +1514,69 @@ paths:
                       type: string
                     password_confirmation:
                       type: string
+  "/{enterprise_subdomain}/v1/users/upload_avatar":
+    post:
+      summary: Allow to users load your image max 1 mb
+      tags:
+      - Community API V1 Users
+      description: Allow to users load image for your profile Max 1 mb
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: avatar_file
+        in: form
+        description: the file image user
+        schema:
+          type: file
+      responses:
+        '200':
+          description: success!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '422':
+          description: file empty!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: user not logged!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
 servers:
 - url: http://localhost:3000
   variables:

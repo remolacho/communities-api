@@ -69,6 +69,7 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    FileUtils.rm_rf(Dir["#{Rails.root}/tmp/storage/*"])
   end
 
   config.before(:suite) do

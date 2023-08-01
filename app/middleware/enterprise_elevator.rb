@@ -12,7 +12,7 @@ class EnterpriseElevator < Apartment::Elevators::Subdomain
 
   # @return [String]
   def parse_tenant_name(request)
-    request_enterprise = enterprise_subdomain(request.path)
+    request_enterprise = enterprise_subdomain(request.path,  request.params)
     # If the domain acquired is set to be excluded, set the tenant to whatever is currently
     # next in line in the schema search path.
 
@@ -25,13 +25,17 @@ class EnterpriseElevator < Apartment::Elevators::Subdomain
     tenant.presence
   end
 
-  def enterprise_subdomain(path)
-    path.split("/")[1]
+  def enterprise_subdomain(path, query_params)
+    segments = path.split("/").reject { |item| !item.present? }
+    subdomain = segments[0]
+
+    return subdomain unless subdomain.eql?('rails')
+    return query_params['enterprise_subdomain'] if subdomain.eql?('rails') && segments[1].eql?('active_storage')
   rescue StandardError
     nil
   end
 
   def exclude_subdomain
-    self.class.excluded_subdomains = %w[api-docs admin]
+    self.class.excluded_subdomains = %w[api-docs admin favicon.ico]
   end
 end

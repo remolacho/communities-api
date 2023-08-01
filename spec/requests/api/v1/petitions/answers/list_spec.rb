@@ -40,6 +40,7 @@ RSpec.describe  Api::V1::Petitions::Answers::ListController, type: :request do
                            id: { type: :integer },
                            name: { type: :string },
                            lastname: { type: :string },
+                           avatar_url: {type: :string, nullable: true }
                          }
                        }
                      }

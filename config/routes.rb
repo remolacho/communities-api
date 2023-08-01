@@ -29,6 +29,8 @@ Rails.application.routes.draw do
               get 'show'
             end
           end
+
+          resources :upload_avatar, only: [:create]
         end
 
         namespace :petitions, path: 'petition' do
