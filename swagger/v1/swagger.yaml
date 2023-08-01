@@ -307,6 +307,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
         '403':
           description: error role not allowed!!!
           content:
@@ -614,6 +617,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
                   paginate:
                     type: object
                     properties:
@@ -731,6 +737,9 @@ paths:
                               type: string
                             lastname:
                               type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
                   paginate:
                     type: object
                     properties:
@@ -1300,6 +1309,9 @@ paths:
                       identifier:
                         type: string
                       phone:
+                        type: string
+                        nullable: true
+                      avatar_url:
                         type: string
                         nullable: true
         '403':

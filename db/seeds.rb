@@ -78,7 +78,8 @@ end
 categories_petition_parent = [
   { name: "Petición", slug: "Petición".parameterize, enterprise_id: enterprise.id },
   { name: "Queja", slug: "Queja".parameterize, enterprise_id: enterprise.id },
-  { name: "Reclamo", slug: "Reclamo".parameterize, enterprise_id: enterprise.id }
+  { name: "Reclamo", slug: "Reclamo".parameterize, enterprise_id: enterprise.id },
+  { name: "Agresiones", slug: "agresiones".parameterize, enterprise_id: enterprise.id }
 ]
 
 categories_petition_parent.each do |category|
