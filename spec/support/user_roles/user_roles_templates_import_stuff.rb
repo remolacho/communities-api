@@ -29,7 +29,7 @@ shared_context 'user_roles_templates_import_stuff' do
     ::Users::SignUpService.new(enterprise: enterprise, data: allowed_params).call
   }
 
-  let(:user_role_admin){
+  let(:new_user_admin){
     u = sign_up
     FactoryBot.create(:user_role, user_id: u.id, role_id: role4.id)
     u

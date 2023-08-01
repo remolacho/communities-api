@@ -17,7 +17,7 @@ RSpec.describe Api::V1::UserRoles::Templates::ImportController, type: :request d
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
       response 200, 'success down laod file!!!' do
-        it ""
+        xit ""
       end
     end
   end

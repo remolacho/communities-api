@@ -69,6 +69,10 @@ Rails.application.routes.draw do
           namespace :templates do
             resources :import, only: [:index]
           end
+
+          namespace :import do
+            resources :create, only: [:create]
+          end
         end
       end
     end
