@@ -931,7 +931,7 @@ paths:
           type: file
       responses:
         '200':
-          description: user not role admin or super admin!!!
+          description: success, but It can finish with errors!!
           content:
             application/json:
               schema:

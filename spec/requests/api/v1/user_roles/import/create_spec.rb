@@ -19,7 +19,7 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
       parameter name: :user_roles_file, in: :form, type: :file, description: 'the file import user roles'
 
-      response 200, 'success!!' do
+      response 200, 'success, but It can finish with errors!!' do
         let(:'Authorization') {
           user_role_admin
           sign_in
