@@ -29,6 +29,8 @@ Rails.application.routes.draw do
               get 'show'
             end
           end
+
+          resources :upload_avatar, only: [:create]
         end
 
         namespace :petitions, path: 'petition' do
@@ -68,6 +70,10 @@ Rails.application.routes.draw do
         namespace :user_roles do
           namespace :templates do
             resources :import, only: [:index]
+          end
+
+          namespace :import do
+            resources :create, only: [:create]
           end
         end
       end

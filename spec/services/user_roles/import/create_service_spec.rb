@@ -81,7 +81,7 @@ RSpec.describe UserRoles::Import::CreateService do
       file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
                                           ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
-      user_role_admin
+      new_user_admin
       user_identifier = User.find_by(identifier: '12345678')
       expect(user_identifier.roles.size == 2).to eq(true)
 

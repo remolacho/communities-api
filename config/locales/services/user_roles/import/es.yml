@@ -3,6 +3,9 @@ es:
     user_roles:
       import:
         create:
+          success:
+            ok: 'Se cargaron los roles con existo'
+            error: 'Se cargaron los roles; pero con algunos errores'
           error:
             file_nil: 'Debes enviar un archivo xlsx'
             file_ext: 'Debe ser un archivo xlsx'
