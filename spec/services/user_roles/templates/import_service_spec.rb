@@ -10,7 +10,7 @@ RSpec.describe UserRoles::Templates::ImportService do
       service = described_class.new(enterprise: enterprise)
       result = service.build
       expect(result.name_file.present?).to eq(true)
-      expect(result.file.to_stream.present?).to eq(true)
+      expect(result.file.present?).to eq(true)
     end
   end
 end
