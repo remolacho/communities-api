@@ -2,7 +2,7 @@
 
 class Petitions::ValidateAttachFilesService
   attr_accessor :files
-  def initialize( data:)
+  def initialize(data:)
     @files = data[:files] || []
   end
 
