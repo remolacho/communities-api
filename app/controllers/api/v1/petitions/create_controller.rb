@@ -9,9 +9,6 @@ class Api::V1::Petitions::CreateController < ApplicationController
   private
 
   def allowed_params
-    @allowed_params ||= params.require(:petition).permit(:title,
-                                                         :message,
-                                                         :category_petition_id,
-                                                         :group_role_id )
+    @allowed_params ||= params.require(:petition).permit!
   end
 end

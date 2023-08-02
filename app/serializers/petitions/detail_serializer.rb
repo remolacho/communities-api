@@ -20,14 +20,19 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
                                                      serializer: ::CategoryPetitions::DetailSerializer )
   end
 
-
   def user
-    ActiveModelSerializers::SerializableResource.new(object.user,
-                                                     serializer: ::Users::BasicProfileSerializer )
+    ::Users::BasicProfileSerializer.new(object.user,
+                                        enterprise_subdomain: enterprise_subdomain)
   end
 
   def group_role
     ActiveModelSerializers::SerializableResource.new(object.group_role,
                                                      serializer: ::GroupRoles::DetailSerializer )
+  end
+
+  private
+
+  def enterprise_subdomain
+    instance_options[:enterprise_subdomain]
   end
 end

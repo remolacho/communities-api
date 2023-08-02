@@ -26,6 +26,7 @@
 class Petition < ApplicationRecord
   include ::Petitions::Statustable
   include ::Petitions::Ransackable
+  include ::Petitions::Validable
 
   belongs_to :user
   belongs_to :status
@@ -35,14 +36,7 @@ class Petition < ApplicationRecord
   has_many :roles, through: :group_role
   has_many :follow_petitions
 
-  validates :title,
-            length: {
-              minimum: 5,
-              maximum: 50
-            }
-  validates :message,
-            length: {
-              minimum: 10,
-              maximum: 500
-            }
+  has_many_attached :files, dependent: :purge
+
+  MAX_PETITION_FILES = 2
 end
