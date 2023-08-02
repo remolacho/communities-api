@@ -412,6 +412,10 @@ paths:
                       type: integer
                     group_role_id:
                       type: integer
+                    files:
+                      type: array
+                      items:
+                        type: string
   "/{enterprise_subdomain}/v1/petition/detail/{token}":
     get:
       summary: Find the detail of petition

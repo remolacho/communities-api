@@ -32,6 +32,7 @@ class User < ApplicationRecord
   include ::Users::Tokenizable
   include ::Users::Cleanable
   include ::Users::Ransackable
+  include ::Users::AvatarRoutable
 
   has_secure_password
 

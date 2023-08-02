@@ -4,7 +4,8 @@ class Api::V1::Petitions::DetailController < ApplicationController
   def show
     policy.can_read!
 
-    render json: {success: true,  data: ::Petitions::DetailSerializer.new(petition)}
+    render json: {success: true,  data: ::Petitions::DetailSerializer.new(petition,
+                                                                          enterprise_subdomain: enterprise.subdomain)}
   end
 
   private
