@@ -70,6 +70,6 @@ class Petitions::CreateService
   end
 
   def validate_attach_files_service
-    Petitions::ValidateAttachFilesService.new(data: data)
+    Petitions::ValidateAttachFilesService.new(data: data, max_files: Petition::MAX_FILES)
   end
 end

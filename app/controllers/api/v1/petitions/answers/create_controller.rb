@@ -14,6 +14,6 @@ class Api::V1::Petitions::Answers::CreateController < ApplicationController
   end
 
   def allowed_params
-    @allowed_params ||= params.require(:answer).permit(:message)
+    @allowed_params ||= params.require(:answer).permit!
   end
 end
