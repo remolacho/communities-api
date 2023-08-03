@@ -27,6 +27,7 @@ class Petition < ApplicationRecord
   include ::Petitions::Statustable
   include ::Petitions::Ransackable
   include ::Petitions::Validable
+  include ::Petitions::FileRoutable
 
   belongs_to :user
   belongs_to :status

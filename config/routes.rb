@@ -40,6 +40,14 @@ Rails.application.routes.draw do
           resources :list_own, only: [:index]
           resources :list_group_roles, only: [:index]
 
+          namespace :files do
+            resources :list, param: 'token', path: '', only: [] do
+              member do
+                get 'list'
+              end
+            end
+          end
+
           namespace :answers, path: 'answer' do
             resources :create, param: 'token', path: '', only: [] do
               member  do
