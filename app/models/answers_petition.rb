@@ -15,9 +15,15 @@
 #  index_answers_petitions_on_user_id      (user_id)
 #
 class AnswersPetition < ApplicationRecord
+  include ::AnswersPetitions::FileRoutable
+
   belongs_to :petition, dependent: :destroy
   belongs_to :user
   has_one :group_role, through: :petition
+
+  has_many_attached :files, dependent: :purge
+
+  MAX_FILES = 2
 
   validates :message,
             length: {

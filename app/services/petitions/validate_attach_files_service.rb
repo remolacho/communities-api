@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Petitions::ValidateAttachFilesService
-  attr_accessor :files
-  def initialize(data:)
+  attr_accessor :files, :max_files
+  def initialize(data:, max_files: 2)
     @files = data[:files] || []
+    @max_files = max_files
   end
 
   def call
@@ -34,8 +35,8 @@ class Petitions::ValidateAttachFilesService
   end
 
   def validate_max_files!
-    if files.size > Petition::MAX_PETITION_FILES
-      raise ArgumentError, I18n.t('services.petitions.create.files.max', max: Petition::MAX_PETITION_FILES)
+    if files.size > max_files
+      raise ArgumentError, I18n.t('services.petitions.create.files.max', max: max_files)
     end
   end
 

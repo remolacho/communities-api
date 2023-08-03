@@ -19,6 +19,12 @@ RSpec.describe Api::V1::Petitions::Answers::CreateController, type: :request do
             type: :object,
             properties: {
               message: { type: :string },
+              files: {
+                type: :array,
+                items: {
+                  type: :string
+                }
+              }
             }
           }
         }

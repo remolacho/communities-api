@@ -39,5 +39,5 @@ class Petition < ApplicationRecord
 
   has_many_attached :files, dependent: :purge
 
-  MAX_PETITION_FILES = 2
+  MAX_FILES = 2
 end

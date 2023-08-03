@@ -56,6 +56,14 @@ Rails.application.routes.draw do
             end
 
             resources :delete, only: [:destroy]
+
+            namespace :files do
+              resources :list, param: 'id', path: '', only: [] do
+                member do
+                  get 'list'
+                end
+              end
+            end
           end
 
           namespace :answers do
