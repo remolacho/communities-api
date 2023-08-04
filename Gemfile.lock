@@ -77,6 +77,22 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     auth_jwt_go (1.0.3)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.798.0)
+    aws-sdk-core (3.180.1)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.5)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.71.0)
+      aws-sdk-core (~> 3, >= 3.177.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.132.0)
+      aws-sdk-core (~> 3, >= 3.179.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.6)
+    aws-sigv4 (1.6.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     axlsx (2.1.0.pre)
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.4.1)
@@ -126,6 +142,7 @@ GEM
     io-console (0.6.0)
     irb (1.7.4)
       reline (>= 0.3.6)
+    jmespath (1.6.2)
     json-schema (3.0.0)
       addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
@@ -174,6 +191,8 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.5.9)
+    nokogiri (1.15.3-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
@@ -295,12 +314,14 @@ GEM
       rubyzip (>= 1.0.0)
 
 PLATFORMS
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
   active_model_serializers
   annotate (~> 3.2.0)
   auth_jwt_go (~> 1.0.3)
+  aws-sdk-s3
   axlsx (~> 2.1.0.pre)
   bcrypt
   bootsnap
@@ -335,4 +356,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.2.3
+   2.2.33

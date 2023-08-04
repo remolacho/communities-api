@@ -20,6 +20,10 @@ development:
   EMAIL_AUTHENTICATION: plain
   RSWAG_USER: 'user-api-doc'
   RSWAG_PASS: 'pass-api-doc'
+  ACCESS_KEY_ID: ''
+  SECRET_ACCESS_KEY: ''
+  REGION: ''
+  BUCKET: ''
 test:
   DB_HOSTNAME: localhost
   DB_USERNAME: postgres
