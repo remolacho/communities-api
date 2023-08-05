@@ -51,6 +51,7 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 2.0.1'
+  gem 'simplecov', require: false, group: :test
 end
 
 gem 'multi_json', '~> 1.11', '>= 1.11.2'
