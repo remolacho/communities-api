@@ -11,7 +11,7 @@ class Api::V1::Users::ListController < ApplicationController
 
   def serializer
     ActiveModelSerializers::SerializableResource.new(user_list,
-                                                     each_serializer: ::Users::ProfileSerializer,
+                                                     each_serializer: ::Users::ListSerializer,
                                                      enterprise_subdomain: enterprise.subdomain).as_json
   end
 

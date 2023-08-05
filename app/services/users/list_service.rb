@@ -13,7 +13,7 @@ class Users::ListService
   def call(page = 1)
     policy.can_read!
 
-    enterprise.users.ransack(search.call).result.page(page.to_i)
+    enterprise.users.includes(:user_enterprise).ransack(search.call).result.page(page.to_i)
   end
 
   private
