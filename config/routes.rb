@@ -30,6 +30,8 @@ Rails.application.routes.draw do
             end
           end
 
+          resources :change_status, param: 'token', only: [:show]
+
           resources :upload_avatar, only: [:create]
         end
 

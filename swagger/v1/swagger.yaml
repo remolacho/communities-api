@@ -1142,6 +1142,71 @@ paths:
       responses:
         '200':
           description: success down laod file!!!
+  "/{enterprise_subdomain}/v1/users/change_status/{token}":
+    get:
+      summary: Can change status active or inactive of the user
+      tags:
+      - Community API V1 Users
+      description: Allow a user activate or inactivate other user, the current user
+        should have nay the roles [admin, super admin]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: the user token to change status
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: error the user has not role!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error the user token!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/forgot_password/change/{token}":
     post:
       summary: Change password
