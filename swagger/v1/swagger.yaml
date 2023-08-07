@@ -185,6 +185,10 @@ paths:
                   properties:
                     message:
                       type: string
+                    files:
+                      type: array
+                      items:
+                        type: string
   "/{enterprise_subdomain}/v1/petition/answer/delete/{id}":
     delete:
       summary: Delete a answer for petition
@@ -239,6 +243,79 @@ paths:
                     type: string
         '404':
           description: error the answer not belong to user logged !!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/petition/answer/files/{id}/list":
+    get:
+      summary: Find all files of answer
+      tags:
+      - Community API V1 Answers petition
+      description: Allow to users find all files of answer
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: this identifier is the answer
+        required: true
+        schema:
+          type: integer
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        ext:
+                          type: string
+                        url:
+                          type: string
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error answer not found!!!
           content:
             application/json:
               schema:
@@ -412,6 +489,10 @@ paths:
                       type: integer
                     group_role_id:
                       type: integer
+                    files:
+                      type: array
+                      items:
+                        type: string
   "/{enterprise_subdomain}/v1/petition/detail/{token}":
     get:
       summary: Find the detail of petition
@@ -497,6 +578,79 @@ paths:
                             type: string
                           lastname:
                             type: string
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error petition not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/petition/files/{token}/list":
+    get:
+      summary: Find all files of petition
+      tags:
+      - Community API V1 Petitions
+      description: Allow to users find all files of petitions
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token is the petition information
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        ext:
+                          type: string
+                        url:
+                          type: string
         '403':
           description: error role not allowed!!!
           content:
@@ -988,6 +1142,71 @@ paths:
       responses:
         '200':
           description: success down laod file!!!
+  "/{enterprise_subdomain}/v1/users/change_status/{token}":
+    get:
+      summary: Can change status active or inactive of the user
+      tags:
+      - Community API V1 Users
+      description: Allow a user activate or inactivate other user, the current user
+        should have nay the roles [admin, super admin]
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: the user token to change status
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: error the user has not role!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error the user token!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/users/forgot_password/change/{token}":
     post:
       summary: Change password

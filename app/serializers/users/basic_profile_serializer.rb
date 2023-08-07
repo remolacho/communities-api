@@ -6,10 +6,14 @@ class Users::BasicProfileSerializer < ActiveModel::Serializer
   attribute :avatar_url
 
   def avatar_url
-    return unless object.avatar.attached?
+    raise ArgumentError if enterprise_subdomain.nil?
 
-    enterprise_subdomain = object.enterprise.subdomain
-    url_path = Rails.application.routes.url_helpers.rails_blob_path(object.avatar, only_path: true)
-    "#{ENV['BASE_HOST']}#{url_path}?enterprise_subdomain=#{enterprise_subdomain}"
+    object.avatar_url(enterprise_subdomain)
+  end
+
+  private
+
+  def enterprise_subdomain
+    instance_options[:enterprise_subdomain]
   end
 end

@@ -4,10 +4,16 @@ class AnswersPetitions::DetailSerializer < ActiveModel::Serializer
   attribute :user
 
   def user
-    ActiveModelSerializers::SerializableResource.new(object.user,
-                                                     serializer: ::Users::BasicProfileSerializer )
+    ::Users::BasicProfileSerializer.new(object.user,
+                                        enterprise_subdomain: enterprise_subdomain)
   end
   def date_at
     object.created_at
+  end
+
+  private
+
+  def enterprise_subdomain
+    instance_options[:enterprise_subdomain]
   end
 end

@@ -18,8 +18,6 @@ class Users::SignUpService
 
       create_user_role(user).call
 
-      UsersMailer.verifier_account(user: user, enterprise: enterprise).deliver_now!
-
       user
     end
   end

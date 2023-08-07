@@ -24,6 +24,12 @@ RSpec.describe  Api::V1::Petitions::CreateController, type: :request do
               message: { type: :string },
               category_petition_id: { type: :integer },
               group_role_id: { type: :integer },
+              files: {
+                type: :array,
+                items: {
+                  type: :string
+                }
+              }
             }
           }
         }

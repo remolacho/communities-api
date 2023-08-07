@@ -6,6 +6,7 @@ shared_context 'create_petition_stuff' do
   let!(:status_pending) { @status_pending ||= FactoryBot.create(:status, :petition_pending) }
   let!(:user_enterprise) { user_enterprise_helper }
 
+  let(:enterprise) { enterprise_helper }
   let(:user) { current_user }
   let(:category) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
 

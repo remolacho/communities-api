@@ -11,7 +11,8 @@ class AnswersPetitions::ListService
 
   def call
     ActiveModelSerializers::SerializableResource.new(answers,
-                                                     each_serializer: ::AnswersPetitions::DetailSerializer)
+                                                     each_serializer: ::AnswersPetitions::DetailSerializer,
+                                                     enterprise_subdomain: user.enterprise.subdomain)
   end
 
   private

@@ -4,7 +4,7 @@ class AnswersPetitions::CreateService
   def initialize(petition:, user:, data:)
     @petition = petition
     @user = user
-    @data = data
+    @data = data.to_h.deep_symbolize_keys
     @user_petition = petition.user
   end
 
@@ -13,10 +13,14 @@ class AnswersPetitions::CreateService
     policy.can_write!
     allow_state!
 
-    answer = petition.answers_petitions.create!(allowed_data)
-    notification
+    ActiveRecord::Base.transaction do
+      files = validate_attach_files_service.call
+      answer = petition.answers_petitions.create!(allowed_data)
+      answer.files.attach(files) if files.present?
+      notification
 
-    answer
+      answer
+    end
   end
 
   private
@@ -47,5 +51,10 @@ class AnswersPetitions::CreateService
 
   def allowed_data
     data.merge!(user_id: user.id)
+    data.reject{ |k, _| k == :files }
+  end
+
+  def validate_attach_files_service
+    ::Petitions::ValidateAttachFilesService.new(data: data, max_files: AnswersPetition::MAX_FILES)
   end
 end

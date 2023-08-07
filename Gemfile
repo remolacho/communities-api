@@ -51,6 +51,7 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 2.0.1'
+  gem 'simplecov', require: false, group: :test
 end
 
 gem 'multi_json', '~> 1.11', '>= 1.11.2'
@@ -71,3 +72,4 @@ gem 'rubyzip', '~> 1.1.7'
 gem 'axlsx', '~> 2.1.0.pre'
 gem 'roo', '~> 2.1.0'
 gem 'roo-xls'
+gem 'aws-sdk-s3'

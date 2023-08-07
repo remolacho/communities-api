@@ -9,7 +9,8 @@ class Api::V1::Petitions::ListOwnController < ApplicationController
 
   def serializer
     ActiveModelSerializers::SerializableResource.new(petition_list,
-                                                     each_serializer: ::Petitions::DetailSerializer).as_json
+                                                     each_serializer: ::Petitions::DetailSerializer,
+                                                     enterprise_subdomain: enterprise.subdomain).as_json
   end
 
   def paginate

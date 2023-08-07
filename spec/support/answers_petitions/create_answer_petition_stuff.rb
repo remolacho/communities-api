@@ -7,6 +7,8 @@ shared_context 'create_answer_petition_stuff' do
   let(:status_resolved) { @status_resolved ||= FactoryBot.create(:status, :petition_resolved) }
   let(:user_enterprise) { user_enterprise_helper }
 
+  let(:enterprise) { enterprise_helper }
+
   let(:user) { current_user }
   let(:category) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
 
@@ -43,6 +45,19 @@ shared_context 'create_answer_petition_stuff' do
     }
 
     ::Petitions::CreateService.new(user: user, data: data).call
+  }
+
+  let(:petition_user_answer) {
+    status_pending
+
+    data = {
+      title: "Test PQR",
+      message: "message test 1",
+      category_petition_id: category.id,
+      group_role_id: group_role.id
+    }
+
+    ::Petitions::CreateService.new(user: user_answer, data: data).call
   }
 
   let(:user_role_answer){

@@ -30,6 +30,8 @@ Rails.application.routes.draw do
             end
           end
 
+          resources :change_status, param: 'token', only: [:show]
+
           resources :upload_avatar, only: [:create]
         end
 
@@ -40,6 +42,14 @@ Rails.application.routes.draw do
           resources :list_own, only: [:index]
           resources :list_group_roles, only: [:index]
 
+          namespace :files do
+            resources :list, param: 'token', path: '', only: [] do
+              member do
+                get 'list'
+              end
+            end
+          end
+
           namespace :answers, path: 'answer' do
             resources :create, param: 'token', path: '', only: [] do
               member  do
@@ -48,6 +58,14 @@ Rails.application.routes.draw do
             end
 
             resources :delete, only: [:destroy]
+
+            namespace :files do
+              resources :list, param: 'id', path: '', only: [] do
+                member do
+                  get 'list'
+                end
+              end
+            end
           end
 
           namespace :answers do
