@@ -11,12 +11,12 @@ class Users::ChangeStatusAccount
   def call
     user_to_change.user_enterprise.update(active: !active)
 
-    UsersMailer.verifier_account(user: user_to_change, enterprise: user_to_change.enterprise).deliver_now!
+    UsersMailer.verifier_account(user: user_to_change, enterprise: user_to_change.enterprise).deliver_now! unless active
   end
 
   private
 
   def active
-    user_to_change.active?
+    @active ||= user_to_change.active?
   end
 end
