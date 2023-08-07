@@ -73,3 +73,11 @@ gem 'axlsx', '~> 2.1.0.pre'
 gem 'roo', '~> 2.1.0'
 gem 'roo-xls'
 gem 'aws-sdk-s3'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "redis", "~> 5.0"
+
+gem "sentry-ruby", "~> 5.10"
+
+gem "sentry-rails", "~> 5.10"
