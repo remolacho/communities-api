@@ -104,10 +104,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
   create_table "group_roles", force: :cascade do |t|
     t.string "code", null: false
     t.jsonb "name", default: {}, null: false
+    t.string "entity_type", default: "petitions", null: false
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_group_roles_on_code", unique: true
+    t.index ["code", "entity_type"], name: "index_group_roles_on_code_and_entity_type", unique: true
   end
 
   create_table "petitions", force: :cascade do |t|

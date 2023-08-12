@@ -39,5 +39,7 @@ class Petition < ApplicationRecord
 
   has_many_attached :files, dependent: :purge
 
+  ENTITY_TYPE = 'petitions'
+
   MAX_FILES = 2
 end

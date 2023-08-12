@@ -8,7 +8,7 @@ class Api::V1::GroupRoles::ListController < ApplicationController
   private
 
   def serializer
-    ActiveModelSerializers::SerializableResource.new(GroupRole.all_actives,
+    ActiveModelSerializers::SerializableResource.new(GroupRole.all_actives_petitions,
                                                      each_serializer: ::GroupRoles::DetailSerializer).as_json
 
   end
