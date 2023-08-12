@@ -1,6 +1,6 @@
-class Api::V1::GroupRoles::ListController < ApplicationController
+class Api::V1::GroupRoles::ListPetitionsController < ApplicationController
 
-  # GET /:enterprise_subdomain/v1/group_roles/list
+  # GET /:enterprise_subdomain/v1/group_roles/list_petitions
   def index
     render json: { success: true, data: serializer }
   end
