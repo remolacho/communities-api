@@ -16,6 +16,8 @@ roles = {
   owner:  "Owner",
   convi:  "Coexistence Member",
   comite: "Committee Member",
+  counter: "counter",
+  fiscal: "fiscal",
   manager: "President/Manager",
   collaborator: "Collaborator",
   tenant: "tenant"
@@ -26,14 +28,17 @@ roles.each do |k, v|
 end
 
 group_roles = [
-  { code: 'all', name: {es: "Todas las partes"} },
-  { code: 'adminmanager', name: {es: "Administración y Presidente"} },
-  { code: 'admincomi', name: {es: "Administración y Comité"} },
-  { code: 'admincon', name: {es: "Administración y Consejo"} },
-  { code: 'concomi', name: {es: "Consejo y Comité"} },
-  { code: 'admin', name: {es: "Sólo Administración"} },
+  { code: 'all', name: {es: "Todas los miembros"} },
+  { code: 'adminmanager', name: {es: "Solo Administración y Presidente"} },
+  { code: 'all_admin', name: {es: "Solo Administración"} },
+  { code: 'admincomi', name: {es: "Solo Administración y Comité"} },
+  { code: 'admincon', name: {es: "Solo Administración y Consejo"} },
+  { code: 'concomi', name: {es: "Solo Consejo y Comité"} },
+  { code: 'admin', name: {es: "Sólo Administrador"} },
   { code: 'comi', name: {es: "Sólo Comité"} },
-  { code: 'con', name: {es: "Sólo Consejo"} }
+  { code: 'con', name: {es: "Sólo Consejo"} },
+  { code: 'fiscal', name: {es: "Sólo Fiscal"} },
+  { code: 'counter', name: {es: "Sólo Contador"} }
 ]
 
 group_roles.each do |gp|
@@ -43,14 +48,17 @@ group_roles.each do |gp|
 end
 
 group_roles_relations = {
-  all: [:sadmin, :admin, :convi, :comite, :manager],
+  all: [:sadmin, :admin, :convi, :comite, :manager, :counter, :fiscal],
+  all_admin: [:sadmin, :admin, :counter, :fiscal],
   adminmanager: [:sadmin, :admin, :manager],
   admincomi: [:sadmin, :admin, :comite],
   admincon: [:sadmin, :admin, :convi],
   concomi: [:sadmin, :convi, :comite],
   admin: [:sadmin, :admin],
   comi: [:sadmin, :comite],
-  con: [:sadmin, :convi]
+  con: [:sadmin, :convi],
+  fiscal: [:sadmin, :fiscal],
+  counter: [:sadmin, :counter]
 }
 
 group_roles_relations.each do |k, v|
@@ -98,5 +106,5 @@ user = User.find_or_create_by(email: 'jonathangrh.25@gmail.com') do |u|
 end
 
 UserEnterprise.find_or_create_by!(user_id: user.id, enterprise_id: enterprise.id, active: true)
-UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'sadmin').id)
-UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'owner').id)
+UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'sadmin').id, created_by: user.id)
+UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'owner').id, created_by: user.id)

@@ -37,7 +37,7 @@ class UserRoles::Import::CreateService
         role = roles_index[key_role]
         next unless role.present?
 
-        { user_id:  user_h.id, role_id: role.id}
+        { user_id:  user_h.id, role_id: role.id, created_by: user.id}
       end.compact
 
       insert_all_roles(user_roles_array)

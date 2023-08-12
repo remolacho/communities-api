@@ -8,7 +8,7 @@ class UserRoles::OwnerAdmin::Create
   end
 
   def call
-    user.user_roles.create!(role_id: role.id)
+    user.user_roles.create!(role_id: role.id, created_by: user.id)
     user
   end
 

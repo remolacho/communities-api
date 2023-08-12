@@ -4,6 +4,7 @@ class CreateUserRoles < ActiveRecord::Migration[7.0]
       t.references :user, null: false
       t.references :role, null: false
       t.boolean :active, default: true
+      t.integer :created_by, null: false
       t.timestamps
     end
 

@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  active     :boolean          default(TRUE)
+#  created_by :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  role_id    :bigint           not null
