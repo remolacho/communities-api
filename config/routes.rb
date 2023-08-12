@@ -82,7 +82,7 @@ Rails.application.routes.draw do
         end
 
         namespace :group_roles do
-          resources :list, only: [:index]
+          resources :list_petitions, only: [:index]
         end
 
         namespace :user_roles do

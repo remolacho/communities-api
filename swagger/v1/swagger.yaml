@@ -57,12 +57,12 @@ paths:
                     default: false
                   message:
                     type: string
-  "/{enterprise_subdomain}/v1/group_roles/list":
+  "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
-      summary: List of group of roles
+      summary: List of group of roles by petitions entity
       tags:
       - Community API V1 Group Roles
-      description: Allow to users get group of roles
+      description: Allow to users get group of roles by petitions entity
       parameters:
       - name: enterprise_subdomain
         in: path
