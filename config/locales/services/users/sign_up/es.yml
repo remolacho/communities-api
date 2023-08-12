@@ -2,7 +2,13 @@ es:
   services:
     users:
       sign_up:
-        success: 'El usuario ha sido creado'
+        success: 'El usuario ha sido creado, la cuenta sea verificada por el administrador, de ser correcto recibiras un correo para la confirmacion'
+        validation:
+          error:
+            address:
+              empty: 'La direccion no puede estar vacia'
+              format: 'La direccion debe tener esta estructura T4, P11, A1102, las letras de inicio Son T, P, A. Respetar espacios y mayusculas'
+              limit: "La direccion ya esta mas de %{limit} veces regitrada comuniquese con el administrador"
         avatar:
           nil: 'Debes agragar una imagen'
           size: 'El tamaño de la imagen no debe ser mayor a 1 mb'
