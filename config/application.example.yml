@@ -11,7 +11,7 @@ development:
   EMAIL_FROM: 'example@gmail.com'
   EMAIL_TO: 'example@gmail.com'
   SEND_EMAIL: true
-  BASE_APP: http://localhost:5008
+  BASE_APP: http://localhost:8080
   BASE_HOST: http://localhost:3000
   EMAIL_PASSWORD: ''
   EMAIL_PROVIDER: smtp.gmail.com
@@ -20,10 +20,10 @@ development:
   EMAIL_AUTHENTICATION: plain
   RSWAG_USER: 'user-api-doc'
   RSWAG_PASS: 'pass-api-doc'
-  ACCESS_KEY_ID: ''
-  SECRET_ACCESS_KEY: ''
-  REGION: ''
-  BUCKET: ''
+  AWS_ACCESS_KEY_ID: ''
+  AWS_SECRET_ACCESS_KEY: ''
+  AWS_REGION: ''
+  AWS_BUCKET: ''
 test:
   DB_HOSTNAME: localhost
   DB_USERNAME: postgres
