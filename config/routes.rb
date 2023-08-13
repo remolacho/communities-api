@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
         namespace :enterprises, path: 'enterprise' do
           resources :setting, only: [:index]
+          resources :subdomain, only: [:index]
         end
 
         namespace :users do

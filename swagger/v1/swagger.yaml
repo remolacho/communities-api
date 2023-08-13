@@ -122,6 +122,44 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/enterprise/subdomain":
+    get:
+      summary: valid the subdomain of the enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: valid the subdomain of the enterprise
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity

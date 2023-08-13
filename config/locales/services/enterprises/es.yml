@@ -1,6 +1,9 @@
 es:
   services:
     enterprises:
+      subdomain:
+        valid: 'El subdomain es valido'
+        invalid: 'No se encontro el subdominio enviado'
       sign_up:
         avatar:
           nil: 'Debes agragar una imagen'

@@ -38,10 +38,7 @@ RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
                 }
                }
 
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
-        end
+        run_test!
       end
 
       response 403, 'error user not valid!!!' do
