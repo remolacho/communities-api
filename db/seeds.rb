@@ -7,6 +7,7 @@ enterprise = Enterprise.find_or_create_by(token: tenancy.token, subdomain: tenan
   e.name =  "Altos de Berlin"
   e.rut = "1110602918"
   e.short_name = "alt".upcase
+  e.email = "jonathangrh.25@gamil.com"
 end
 
 roles = {

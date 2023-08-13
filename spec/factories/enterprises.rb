@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  active     :boolean          default(TRUE)
 #  address    :string
+#  email      :string           not null
 #  name       :string           not null
 #  rut        :string           not null
 #  short_name :string           not null
@@ -15,11 +16,10 @@
 #
 # Indexes
 #
-#  index_enterprises_on_rut        (rut) UNIQUE
+#  index_enterprises_on_email      (email) UNIQUE
 #  index_enterprises_on_subdomain  (subdomain) UNIQUE
 #  index_enterprises_on_token      (token) UNIQUE
 #
-
 
 FactoryBot.define do
   factory :enterprise do
@@ -28,5 +28,6 @@ FactoryBot.define do
     rut { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
     subdomain { "public" }
     short_name { 'test'.upcase }
+    email { "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com" }
   end
 end

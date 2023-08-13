@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   scope '/:enterprise_subdomain' do
     namespace :api, path: "" do
       namespace :v1 do
+
+        namespace :enterprises, path: 'enterprise' do
+          resources :setting, only: [:index]
+        end
+
         namespace :users do
           resources :sign_in, only: [:create]
           resources :list, only: [:index]

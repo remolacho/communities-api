@@ -57,6 +57,71 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/enterprise/setting":
+    get:
+      summary: Find the setting and data of current enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: Find the setting and data of current enterprise
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      rut:
+                        type: string
+                      email:
+                        type: string
+                      token:
+                        type: string
+                      name:
+                        type: string
+                      address:
+                        type: string
+                        nullable: true
+                      subdomain:
+                        type: string
+                      logo_url:
+                        type: string
+                        nullable: true
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity
