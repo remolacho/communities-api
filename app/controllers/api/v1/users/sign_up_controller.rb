@@ -22,7 +22,7 @@ class Api::V1::Users::SignUpController < ApplicationController
                                                          :lastname,
                                                          :identifier,
                                                          :email,
-                                                         :address,
+                                                         :reference,
                                                          :phone,
                                                          :password,
                                                          :password_confirmation)

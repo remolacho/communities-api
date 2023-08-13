@@ -6,7 +6,7 @@ module Users
 
     included do
       def self.ransackable_attributes(auth_object = nil)
-        %w[name email token address lastname identifier phone]
+        %w[name email token reference lastname identifier phone]
       end
 
       def self.ransackable_associations(auth_object = nil)

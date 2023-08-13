@@ -5,7 +5,7 @@ module Users
     PASSWORD_TOP = 6
 
     included do
-      validates :address,
+      validates :reference,
                 length: { minimum: 10, maximum: 30 }
 
       validates :identifier,

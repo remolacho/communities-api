@@ -30,7 +30,7 @@ RSpec.describe  Api::V1::Users::ProfileController, type: :request do
                            name: {type: :string},
                            lastname: {type: :string},
                            email: {type: :string},
-                           address: {type: :string, nullable: true},
+                           reference: {type: :string, nullable: true},
                            identifier: {type: :string},
                            phone: {type: :string, nullable: true },
                            avatar_url: {type: :string, nullable: true }

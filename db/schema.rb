@@ -189,7 +189,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.string "lastname", null: false
     t.string "token", null: false
     t.string "email", null: false
-    t.string "address"
+    t.string "reference"
     t.string "password_digest", null: false
     t.string "lang", default: "es", null: false
     t.string "reset_password_key"
@@ -202,6 +202,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.index ["active_key"], name: "index_users_on_active_key", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["identifier"], name: "index_users_on_identifier", unique: true
+    t.index ["reference"], name: "index_users_on_reference"
     t.index ["reset_password_key"], name: "index_users_on_reset_password_key", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
   end

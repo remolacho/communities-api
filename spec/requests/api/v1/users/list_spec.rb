@@ -37,7 +37,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
                        name: {type: :string},
                        lastname: {type: :string},
                        email: {type: :string},
-                       address: {type: :string, nullable: true},
+                       reference: {type: :string, nullable: true},
                        identifier: {type: :string},
                        phone: {type: :string, nullable: true }
                      }
@@ -53,7 +53,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
                  }
                }
 
-        let(:attr) { "address" }
+        let(:attr) { "reference" }
         let(:term) { "T4" }
         let(:page) { "1" }
 

@@ -25,7 +25,7 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
               identifier: { type: :string },
               email: { type: :string },
               phone: { type: :string },
-              address: { type: :string },
+              reference: { type: :string },
               password: { type: :string },
               password_confirmation: { type: :string }
             }

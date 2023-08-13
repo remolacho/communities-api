@@ -1450,7 +1450,7 @@ paths:
                           type: string
                         email:
                           type: string
-                        address:
+                        reference:
                           type: string
                           nullable: true
                         identifier:
@@ -1522,7 +1522,7 @@ paths:
                         type: string
                       email:
                         type: string
-                      address:
+                      reference:
                         type: string
                         nullable: true
                       identifier:
@@ -1727,7 +1727,7 @@ paths:
                       type: string
                     phone:
                       type: string
-                    address:
+                    reference:
                       type: string
                     password:
                       type: string

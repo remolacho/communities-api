@@ -6,9 +6,9 @@ RSpec.describe ::Users::SignUpService do
   include_context 'sign_up_stuff'
 
   context 'When 1 user want begin in app, this should register' do
-    it 'it return error address blank' do
+    it 'it return error reference blank' do
       data = allowed_params
-      data[:address] = ""
+      data[:reference] = ""
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
@@ -114,7 +114,7 @@ RSpec.describe ::Users::SignUpService do
       expect { service.call }.to raise_error(ActiveRecord::RecordNotUnique)
     end
 
-    it 'it return error limit address' do
+    it 'it return error limit reference' do
       described_class.new(enterprise: enterprise, data: allowed_params).call
       described_class.new(enterprise: enterprise, data: allowed_params_2).call
 
@@ -131,90 +131,90 @@ RSpec.describe ::Users::SignUpService do
     end
   end
 
-  context 'When 1 user want begin in app, but address has error in format' do
-    it 'it return error address format T1, A1, P101' do
+  context 'When 1 user want begin in app, but reference has error in format' do
+    it 'it return error reference format T1-A1-P101' do
       data = allowed_params
-      data[:address] = "T1, A1, P101"
+      data[:reference] = "T1-A1-P101"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T, A, P' do
+    it 'it return error reference format T, A, P' do
       data = allowed_params
-      data[:address] = "T, A, P"
+      data[:reference] = "T, A, P"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T, A, P' do
+    it 'it return error reference format T4P11A-1102' do
       data = allowed_params
-      data[:address] = "hola mundo"
+      data[:reference] = "T4P11A-1102"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format t1, p1, A101' do
+    it 'it return error reference format t1-p1-A101' do
       data = allowed_params
-      data[:address] = "t1, p1, A101"
+      data[:reference] = "t1-p1-A101"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T1, P1, a101' do
+    it 'it return error reference format T1-P1-a101' do
       data = allowed_params
-      data[:address] = "T1, P1, a101"
+      data[:reference] = "T1-P1-a101"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T01, P01, A101' do
+    it 'it return error reference format T01-P01-A101' do
       data = allowed_params
-      data[:address] = "T01, P01, A101"
+      data[:reference] = "T01-P01-A101"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T1, P1, A99999' do
+    it 'it return error reference format T1, P1, A99999' do
       data = allowed_params
-      data[:address] = "T1, P1, A99999"
+      data[:reference] = "T1-P1-A99999"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T1, P1, AAA' do
+    it 'it return error reference format T1-P1-AAA' do
       data = allowed_params
-      data[:address] = "T1, P1, AAA"
+      data[:reference] = "T1-P1-AAA"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T5, P1, A108' do
+    it 'it return error reference format T5-P1-A108' do
       data = allowed_params
-      data[:address] = "T5, P1, A108"
+      data[:reference] = "T5-P1-A108"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T1, P17, A108' do
+    it 'it return error reference format T1-P17-A108' do
       data = allowed_params
-      data[:address] = "T1, P17, A108"
+      data[:reference] = "T1-P17-A108"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it return error address format T1, P16, A1609' do
+    it 'it return error reference format T1, P16, A1609' do
       data = allowed_params
-      data[:address] = "T1, P16, A1609"
+      data[:reference] = "T1-P16-A1609"
 
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)

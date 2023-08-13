@@ -3,7 +3,7 @@
 class Users::SignUpService
   attr_accessor :enterprise, :data
 
-  MAX_ADDRESS = 2
+  MAX_REFERENCE = 2
 
   def initialize(enterprise:, data:)
     @enterprise = enterprise
@@ -12,7 +12,7 @@ class Users::SignUpService
 
   def call
     ActiveRecord::Base.transaction do
-      valid_address!
+      valid_reference!
 
       user = User.create!(allowed_data)
 
@@ -28,16 +28,16 @@ class Users::SignUpService
 
   private
 
-  def valid_address!
-    regex = /\A(T[0-4], P(0?[0-9]|1[0-6]), A([0-8]{1,4}|1608))\z/
+  def valid_reference!
+    regex = /\A(T[0-4]-P(0?[0-9]|1[0-6])-A([0-8]{1,4}|1608))\z/
 
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.address.empty")  unless data[:address].present?
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.address.format") unless data[:address].match(regex)
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.address.limit", limit: MAX_ADDRESS) if record_user_limit >= MAX_ADDRESS
+    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.empty")  unless data[:reference].present?
+    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.format") unless data[:reference].match(regex)
+    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.limit", limit: MAX_REFERENCE) if record_user_limit >= MAX_REFERENCE
   end
 
   def record_user_limit
-    User.where(address: data[:address]).count
+    User.where(reference: data[:reference]).count
   end
 
   def allowed_data
