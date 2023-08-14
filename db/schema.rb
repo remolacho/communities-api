@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.string "token", null: false
     t.string "subdomain", null: false
     t.string "email", null: false
+    t.string "reference_regex"
     t.string "name", null: false
     t.string "short_name", null: false
     t.string "address"

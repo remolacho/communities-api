@@ -219,8 +219,14 @@ RSpec.describe ::Users::SignUpService do
       service = described_class.new(enterprise: enterprise, data: data)
       expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
     end
+
+    it 'it return error reference format T1, P16, A1701' do
+      data = allowed_params
+      data[:reference] = "T1-P16-A1701"
+
+      service = described_class.new(enterprise: enterprise, data: data)
+      expect { service.call }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
-
-
 end
 

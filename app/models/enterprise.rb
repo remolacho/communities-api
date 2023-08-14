@@ -2,17 +2,18 @@
 #
 # Table name: enterprises
 #
-#  id         :bigint           not null, primary key
-#  active     :boolean          default(TRUE)
-#  address    :string
-#  email      :string           not null
-#  name       :string           not null
-#  rut        :string           not null
-#  short_name :string           not null
-#  subdomain  :string           not null
-#  token      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  active          :boolean          default(TRUE)
+#  address         :string
+#  email           :string           not null
+#  name            :string           not null
+#  reference_regex :string
+#  rut             :string           not null
+#  short_name      :string           not null
+#  subdomain       :string           not null
+#  token           :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #

@@ -29,7 +29,9 @@ class Users::SignUpService
   private
 
   def valid_reference!
-    regex = /\A(T[0-4]-P(0?[0-9]|1[0-6])-A([0-8]{1,4}|1608))\z/
+    return unless enterprise.reference_regex.present?
+
+    regex = Regexp.new(enterprise.reference_regex)
 
     raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.empty")  unless data[:reference].present?
     raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.format") unless data[:reference].match(regex)

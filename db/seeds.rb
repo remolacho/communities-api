@@ -8,6 +8,7 @@ enterprise = Enterprise.find_or_create_by(token: tenancy.token, subdomain: tenan
   e.rut = "1110602918"
   e.short_name = "alt".upcase
   e.email = "jonathangrh.25@gamil.com"
+  e.reference_regex = "^T[0-4]-P(1[0-6]|[1-9])-A((10[1-8])|(20[1-8])|(30[1-8])|(40[1-8])|(50[1-8])|(60[1-8])|(70[1-8])|(80[1-8])|(90[1-8])|(100[1-8])|(110[1-8])|(120[1-8])|(130[1-8])|(140[1-8])|(150[1-8])|(160[1-8]))$"
 end
 
 roles = {

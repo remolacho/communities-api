@@ -5,6 +5,7 @@ class CreateEnterprises < ActiveRecord::Migration[7.0]
       t.string :token, null: false
       t.string :subdomain, null: false
       t.string :email, null: false
+      t.string :reference_regex, null: true
       t.string :name, null: false
       t.string :short_name, null: false
       t.string :address
