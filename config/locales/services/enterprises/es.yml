@@ -1,0 +1,12 @@
+es:
+  services:
+    enterprises:
+      subdomain:
+        valid: 'El subdomain es valido'
+        invalid: 'No se encontro el subdominio enviado'
+      sign_up:
+        avatar:
+          nil: 'Debes agragar una imagen'
+          size: 'El tamaño de la imagen no debe ser mayor a 1 mb'
+          type: 'Solo deben ser imagenes (jpeg, jpg, png)'
+          success: 'Se cargo una nueva imagen a tu perfil'

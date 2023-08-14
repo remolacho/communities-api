@@ -68,13 +68,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.string "rut", null: false
     t.string "token", null: false
     t.string "subdomain", null: false
+    t.string "email", null: false
+    t.string "reference_regex"
     t.string "name", null: false
     t.string "short_name", null: false
     t.string "address"
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rut"], name: "index_enterprises_on_rut", unique: true
+    t.index ["email"], name: "index_enterprises_on_email", unique: true
     t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
   end
@@ -189,7 +191,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.string "lastname", null: false
     t.string "token", null: false
     t.string "email", null: false
-    t.string "address"
+    t.string "reference"
     t.string "password_digest", null: false
     t.string "lang", default: "es", null: false
     t.string "reset_password_key"
@@ -202,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.index ["active_key"], name: "index_users_on_active_key", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["identifier"], name: "index_users_on_identifier", unique: true
+    t.index ["reference"], name: "index_users_on_reference"
     t.index ["reset_password_key"], name: "index_users_on_reset_password_key", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
   end

@@ -5,10 +5,13 @@ module Users
     PASSWORD_TOP = 6
 
     included do
-      validates :address,
-                presence: true,
-                format: { with: /\AT\d{1,2}, P\d{1,2}, A(?:[1-9]\d{2}|[1-9]\d{3}|[1-9]\d{4}|[1-9][0-9]{3})\z/ },
+      validates :reference,
                 length: { minimum: 10, maximum: 30 }
+
+      validates :identifier,
+                presence: true,
+                format: { with: /\d[0-9]\)*\z/  },
+                length: { minimum: 4, maximum: 15 }
 
       validates :phone,
                 presence: true,
@@ -30,10 +33,6 @@ module Users
       validates :lastname,
                 presence: true,
                 length: { minimum: 2, maximum: 30 }
-
-      validates :identifier,
-                presence: true,
-                length: { minimum: 4, maximum: 15 }
 
       validate :validate_avatar_content_type
       validate :validate_avatar_size

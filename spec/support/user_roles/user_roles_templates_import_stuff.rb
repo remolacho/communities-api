@@ -20,7 +20,7 @@ shared_context 'user_roles_templates_import_stuff' do
       lastname: FFaker::Name.last_name,
       identifier: "12345678",
       email: "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com",
-      address: "T4, P11, A1102",
+      reference: "T4-P11-A1102",
       phone: "3174131149",
       password: 'test123',
       password_confirmation: 'test123'

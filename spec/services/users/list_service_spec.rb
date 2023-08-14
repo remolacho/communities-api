@@ -13,15 +13,15 @@ RSpec.describe ::Users::ListService do
       expect{service.call(1)}.to raise_exception(PolicyException)
     end
 
-    it 'it return empty because not find [name lastname email identifier address]' do
-      %w[name lastname email identifier address].each do |attr|
+    it 'it return empty because not find [name lastname email identifier reference]' do
+      %w[name lastname email identifier reference].each do |attr|
         service = described_class.new(user: user, enterprise: enterprise, attr: attr, search_term: 'test')
         expect(service.call(1).empty?).to eq(true)
       end
     end
 
-    it 'it return users by  [name lastname email identifier address]' do
-      %w[name lastname email identifier address].each do |attr|
+    it 'it return users by  [name lastname email identifier reference]' do
+      %w[name lastname email identifier reference].each do |attr|
         service = described_class.new(user: user, enterprise: enterprise, attr: attr, search_term: user[attr.to_sym][0..3])
         expect(service.call(1).present?).to eq(true)
       end

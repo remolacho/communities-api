@@ -2,16 +2,16 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::ProfileController, type: :request do
-  include_context 'sign_in_stuff'
+RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
+  include_context 'detail_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/users/profile/show' do
-    get 'Find the profile of current user' do
-      tags 'Community API V1 Users'
-      description "Allow see the user's data logged"
+  path '/{enterprise_subdomain}/v1/enterprise/setting' do
+    get 'Find the setting and data of current enterprise' do
+      tags 'Community API V1 Enterprises'
+      description "Find the setting and data of current enterprise"
       produces 'application/json'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, required: true
@@ -27,21 +27,18 @@ RSpec.describe  Api::V1::Users::ProfileController, type: :request do
                  data: { type: :object,
                          properties: {
                            id: {type: :integer},
-                           name: {type: :string},
-                           lastname: {type: :string},
+                           rut: {type: :string},
                            email: {type: :string},
-                           reference: {type: :string, nullable: true},
-                           identifier: {type: :string},
-                           phone: {type: :string, nullable: true },
-                           avatar_url: {type: :string, nullable: true }
+                           token: {type: :string},
+                           name: {type: :string},
+                           address: {type: :string, nullable: true },
+                           subdomain: {type: :string},
+                           logo_url: {type: :string, nullable: true }
                          }
                 }
                }
 
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
-        end
+        run_test!
       end
 
       response 403, 'error user not valid!!!' do

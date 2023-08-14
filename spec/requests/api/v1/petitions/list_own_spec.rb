@@ -107,7 +107,7 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                  message: { type: :string }
                }
 
-        let(:status_id) { "address" }
+        let(:status_id) { "reference" }
         let(:category_petition_id) { "T4" }
         let(:page) { "1" }
 

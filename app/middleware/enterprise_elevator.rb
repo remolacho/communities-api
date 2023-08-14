@@ -8,6 +8,16 @@ class EnterpriseElevator < Apartment::Elevators::Subdomain
   # :nodoc:
   def call(env)
     super
+  rescue StandardError
+    [ http_status_codes(:forbidden),
+      { 'Content-Type' => 'application/json' },
+      [
+        {
+          success: false,
+          message: I18n.t('services.enterprises.subdomain.invalid')
+        }.to_json
+      ]
+    ]
   end
 
   # @return [String]
@@ -37,5 +47,9 @@ class EnterpriseElevator < Apartment::Elevators::Subdomain
 
   def exclude_subdomain
     self.class.excluded_subdomains = %w[api-docs admin favicon.ico]
+  end
+
+  def http_status_codes(symbol)
+    Rack::Utils::SYMBOL_TO_STATUS_CODE[symbol]
   end
 end

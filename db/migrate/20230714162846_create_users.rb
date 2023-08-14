@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :lastname, null: false
       t.string :token, null: false
       t.string :email, null: false
-      t.string :address
+      t.string :reference
       t.string :password_digest, null: false
       t.string :lang, null: false, default: 'es'
       t.string :reset_password_key
@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :active_key
       t.datetime :active_key_expires_at
       t.string :phone
+      t.index :reference
       t.index :identifier, unique: true
       t.index :token, unique: true
       t.index :email, unique: true

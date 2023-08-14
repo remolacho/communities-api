@@ -12,7 +12,7 @@ class Api::V1::Users::SignUpController < ApplicationController
   def active_account
     ::Users::ActiveAccountService.new(token: params[:token]).call
 
-    render json: { success: true, message: I18n.t("services.users.sign_up.account.success") }
+    render json: { success: true, message: I18n.t("services.users.sign_up.success") }
   end
 
   private
@@ -22,7 +22,7 @@ class Api::V1::Users::SignUpController < ApplicationController
                                                          :lastname,
                                                          :identifier,
                                                          :email,
-                                                         :address,
+                                                         :reference,
                                                          :phone,
                                                          :password,
                                                          :password_confirmation)

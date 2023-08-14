@@ -3,7 +3,7 @@ class Users::ListSerializer < ActiveModel::Serializer
              :name,
              :lastname,
              :email,
-             :address,
+             :reference,
              :identifier,
              :phone
 
