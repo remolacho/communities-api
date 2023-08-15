@@ -38,6 +38,9 @@ class Users::BuildJwtService
       name: user.name,
       lastname: user.lastname,
       email: user.email,
+      reference: user.reference,
+      identifier: user.identifier,
+      phone: user.phone,
       avatar_url: user.avatar_url(enterprise.subdomain),
       enterprise: {
         token: enterprise.token,

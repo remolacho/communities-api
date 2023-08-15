@@ -5,6 +5,6 @@ class Api::V1::Enterprises::SubdomainController < ApplicationController
 
   # GET /:enterprise_subdomain/v1/enterprise/subdomain
   def index
-    render json: { success: true, message: I18n.t('services.enterprises.subdomain.valid')}
+    render json: { success: true, message: I18n.t('services.enterprises.subdomain.valid'), data: { logo_url: enterprise.logo_url }}
   end
 end
