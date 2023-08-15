@@ -148,6 +148,12 @@ paths:
                     default: true
                   message:
                     type: string
+                  data:
+                    type: object
+                    properties:
+                      logo_url:
+                        type: string
+                        nullable: true
         '403':
           description: error user not valid!!!
           content:

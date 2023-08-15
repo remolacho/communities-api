@@ -19,7 +19,13 @@ RSpec.describe  Api::V1::Enterprises::SubdomainController, type: :request do
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: true },
-                 message: { type: :string }
+                 message: { type: :string },
+                 data: {
+                   type: :object,
+                   properties: {
+                     logo_url: { type: :string, nullable: true}
+                   }
+                 }
                }
 
         run_test!
