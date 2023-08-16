@@ -47,7 +47,8 @@ class Users::BuildJwtService
         name: enterprise.name,
         subdomain: enterprise.subdomain,
         reference_regex: enterprise.reference_regex,
-        logo: enterprise.logo_url
+        logo_url: enterprise.logo_url,
+        banner_url: enterprise.banner_url
       }
     }
   end

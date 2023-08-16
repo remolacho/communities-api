@@ -24,10 +24,13 @@
 class Enterprise < ApplicationRecord
   include ::Enterprises::Validable
   include ::Enterprises::LogoRoutable
+  include ::Enterprises::BannerRoutable
+
 
   has_many :category_petitions
   has_many :user_enterprises
   has_many :users, through: :user_enterprises
 
   has_one_attached :logo, dependent: :purge
+  has_one_attached :banner, dependent: :purge
 end
