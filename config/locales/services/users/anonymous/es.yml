@@ -1,0 +1,6 @@
+es:
+  services:
+    users:
+      anonymous:
+        name: 'Anonimo'
+        lastname: 'Anonimo'

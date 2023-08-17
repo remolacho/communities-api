@@ -557,6 +557,8 @@ paths:
                     properties:
                       ticket:
                         type: string
+                      token:
+                        type: string
         '404':
           description: error category, group_role not found!!!
           content:
@@ -687,6 +689,9 @@ paths:
                             type: string
                           lastname:
                             type: string
+                          avatar_url:
+                            type: string
+                            nullable: true
         '403':
           description: error role not allowed!!!
           content:
@@ -1175,6 +1180,430 @@ paths:
                   properties:
                     status_id:
                       type: integer
+  "/{enterprise_subdomain}/v1/suggestion/create":
+    post:
+      summary: Create a new suggestion
+      tags:
+      - Community API V1 Suggestions
+      description: Allow to users create suggestions
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      ticket:
+                        type: string
+                      token:
+                        type: string
+        '403':
+          description: error not logged!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                suggestion:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    anonymous:
+                      type: boolean
+                      default: false
+                    files:
+                      type: array
+                      items:
+                        type: string
+  "/{enterprise_subdomain}/v1/suggestion/detail/{token}":
+    get:
+      summary: Find the detail of suggestion
+      tags:
+      - Community API V1 Suggestions
+      description: Allow to users find suggestion and your detail
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token is the suggestion information
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      ticket:
+                        type: string
+                      token:
+                        type: string
+                      message:
+                        type: string
+                      readed:
+                        type: boolean
+                        default: false
+                      anonymous:
+                        type: boolean
+                        default: false
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          lastname:
+                            type: string
+                          avatar_url:
+                            type: string
+                            nullable: true
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error suggestion not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/suggestion/files/{token}/list":
+    get:
+      summary: Find all files of suggestion
+      tags:
+      - Community API V1 Suggestions
+      description: Allow to users find all files of petitions
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: this token is the suggestion information
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success owner!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        ext:
+                          type: string
+                        url:
+                          type: string
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error suggestion not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/suggestion/list_group_roles":
+    get:
+      summary: Request the list of suggestions with group roles
+      tags:
+      - Community API V1 Suggestions
+      description: Allow to users get list of suggestion with group roles
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: readed
+        in: query
+        description: is optional represent the filter by readed
+        schema:
+          type: integer
+      - name: anonymous
+        in: query
+        description: is optional represent the filter by user anonymous
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: is optional represent the number page of find
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        token:
+                          type: string
+                        title:
+                          type: string
+                        message:
+                          type: string
+                        readed:
+                          type: boolean
+                        anonymous:
+                          type: boolean
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              nullable: true
+                            name:
+                              type: string
+                            lastname:
+                              type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
+                  paginate:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      current_page:
+                        type: integer
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/suggestion/list_own":
+    get:
+      summary: Request the list of suggestions own
+      tags:
+      - Community API V1 Suggestions
+      description: Allow to users get your list of suggestions
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: readed
+        in: query
+        description: is optional represent the filter by readed
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: is optional represent the number page of find
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        token:
+                          type: string
+                        title:
+                          type: string
+                        message:
+                          type: string
+                        readed:
+                          type: boolean
+                        anonymous:
+                          type: boolean
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              nullable: true
+                            name:
+                              type: string
+                            lastname:
+                              type: string
+                            avatar_url:
+                              type: string
+                              nullable: true
+                  paginate:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      current_page:
+                        type: integer
+        '403':
+          description: error the user not logged!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/user_roles/import/create":
     post:
       summary: Allow to users create roles to userss

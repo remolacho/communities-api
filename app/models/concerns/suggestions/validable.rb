@@ -1,13 +1,8 @@
-module Petitions
+module Suggestions
   module Validable
     extend ActiveSupport::Concern
 
     included do
-      validates :title,
-                length: {
-                  minimum: 5,
-                  maximum: 50
-                }
       validates :message,
                 length: {
                   minimum: 10,
