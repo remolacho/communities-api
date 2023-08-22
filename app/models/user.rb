@@ -44,6 +44,7 @@ class User < ApplicationRecord
   has_many :petitions
   has_many :answers_petitions
   has_many :follow_petitions
+  has_many :suggestions
 
   has_one_attached :avatar, dependent: :purge
 

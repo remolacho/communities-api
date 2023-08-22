@@ -104,9 +104,6 @@ class UserRoles::Import::CreateService
   end
 
   def clean_identifier(value)
-    return value if value.class.eql?(String)
-
-    str = value.to_s.strip.downcase
-    str.split('.').first
+    value.to_s.clean_identifier
   end
 end

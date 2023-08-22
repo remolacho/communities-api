@@ -2,21 +2,21 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
-  include_context 'detail_petition_stuff'
+RSpec.describe  Api::V1::Suggestions::DetailController, type: :request do
+  include_context 'detail_suggestion_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/petition/detail/{token}' do
-    get 'Find the detail of petition' do
-      tags 'Community API V1 Petitions'
-      description "Allow to users find petition and your detail"
+  path '/{enterprise_subdomain}/v1/suggestion/detail/{token}' do
+    get 'Find the detail of suggestion' do
+      tags 'Community API V1 Suggestions'
+      description "Allow to users find suggestion and your detail"
       produces 'application/json'
       consumes 'application/json'
 
       parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
-      parameter name: :token, in: :path, type: :string, description: 'this token is the petition information'
+      parameter name: :token, in: :path, type: :string, description: 'this token is the suggestion information'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
       parameter name: 'Authorization', in: :header, required: true
 
@@ -32,31 +32,9 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
                      id: { type: :integer },
                      ticket: { type: :string },
                      token: { type: :string },
-                     title: { type: :string },
                      message: { type: :string },
-                     status: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string },
-                         code: { type: :string },
-                         color: { type: :string }
-                       }
-                     },
-                     category: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string }
-                       }
-                     },
-                     group_role: {
-                       type: :object,
-                       properties: {
-                         id: { type: :integer },
-                         name: { type: :string },
-                       }
-                     },
+                     readed: { type: :boolean, default: false },
+                     anonymous: { type: :boolean, default: false },
                      user: {
                        type: :object,
                        properties: {
@@ -71,8 +49,8 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
                }
 
         let(:token) {
-          user_role
-          petition.token
+          user_role_manager
+          suggestion.token
         }
 
         run_test!
@@ -87,12 +65,15 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
                  message: { type: :string }
                }
 
-        let(:token) { petition.token }
+        let(:token) {
+          user_role_owner
+          suggestion.token
+        }
 
         run_test!
       end
 
-      response 404, 'error petition not found!!!' do
+      response 404, 'error suggestion not found!!!' do
         let(:'Authorization') { sign_in }
 
         schema type: :object,

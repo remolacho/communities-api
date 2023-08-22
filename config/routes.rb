@@ -83,6 +83,21 @@ Rails.application.routes.draw do
           end
         end
 
+        namespace :suggestions, path: 'suggestion' do
+          resources :create, only: [:create]
+          resources :list_own, only: [:index]
+          resources :list_group_roles, only: [:index]
+          resources :detail, param: 'token', only: [:show]
+
+          namespace :files do
+            resources :list, param: 'token', path: '', only: [] do
+              member do
+                get 'list'
+              end
+            end
+          end
+        end
+
         namespace :categories_petitions do
           resources :list, only: [:index]
         end
