@@ -1,0 +1,10 @@
+es:
+  services:
+    suggestions:
+      create:
+        data_empty: "No hay imformacion que almacenar"
+        group_role_not_found: "El grupo de roles no existe"
+        files:
+          max: "La cantidad permitida de archivos adjuntos es de %{max}"
+          type: "El archivo que se adjunta no es permitido"
+          size: "El archivo es muy grande maximo 5 mb"

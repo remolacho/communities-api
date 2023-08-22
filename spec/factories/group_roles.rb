@@ -38,4 +38,16 @@ FactoryBot.define do
     code { 'concomi' }
     name { {es: "Consejo y Comité"} }
   end
+
+  trait :listed_suggestions do
+    code { 'view_suggestions' }
+    name { {es: "Pueden listar las sugerencias"} }
+    entity_type { 'suggestions' }
+  end
+
+  trait :show_suggestion do
+    code { 'create_suggestions' }
+    name { {es: "Pueden ver las sugerencias"} }
+    entity_type { 'suggestions' }
+  end
 end

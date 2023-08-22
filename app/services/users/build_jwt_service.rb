@@ -38,13 +38,17 @@ class Users::BuildJwtService
       name: user.name,
       lastname: user.lastname,
       email: user.email,
+      reference: user.reference,
+      identifier: user.identifier,
+      phone: user.phone,
       avatar_url: user.avatar_url(enterprise.subdomain),
       enterprise: {
         token: enterprise.token,
         name: enterprise.name,
         subdomain: enterprise.subdomain,
         reference_regex: enterprise.reference_regex,
-        logo: enterprise.logo_url
+        logo_url: enterprise.logo_url,
+        banner_url: enterprise.banner_url
       }
     }
   end

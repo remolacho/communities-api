@@ -30,44 +30,55 @@ roles.each do |k, v|
 end
 
 group_roles = [
-  { code: 'all', name: {es: "Todas los miembros"} },
-  { code: 'adminmanager', name: {es: "Solo Administración y Presidente"} },
-  { code: 'all_admin', name: {es: "Solo Administración"} },
-  { code: 'admincomi', name: {es: "Solo Administración y Comité"} },
-  { code: 'admincon', name: {es: "Solo Administración y Consejo"} },
-  { code: 'concomi', name: {es: "Solo Consejo y Comité"} },
-  { code: 'admin', name: {es: "Sólo Administrador"} },
-  { code: 'comi', name: {es: "Sólo Comité"} },
-  { code: 'con', name: {es: "Sólo Consejo"} },
-  { code: 'fiscal', name: {es: "Sólo Fiscal"} },
-  { code: 'counter', name: {es: "Sólo Contador"} }
+  { code: 'all', name: {es: "Todas los miembros"}, entity_type: 'petitions' },
+  { code: 'adminmanager', name: {es: "Solo Administración y Presidente"}, entity_type: 'petitions' },
+  { code: 'all_admin', name: {es: "Solo Administración"}, entity_type: 'petitions' },
+  { code: 'admincomi', name: {es: "Solo Administración y Comité"}, entity_type: 'petitions' },
+  { code: 'admincon', name: {es: "Solo Administración y Consejo"}, entity_type: 'petitions' },
+  { code: 'concomi', name: {es: "Solo Consejo y Comité"}, entity_type: 'petitions' },
+  { code: 'admin', name: {es: "Sólo Administrador"}, entity_type: 'petitions' },
+  { code: 'comi', name: {es: "Sólo Comité"}, entity_type: 'petitions' },
+  { code: 'con', name: {es: "Sólo Consejo"}, entity_type: 'petitions' },
+  { code: 'fiscal', name: {es: "Sólo Fiscal"}, entity_type: 'petitions' },
+  { code: 'counter', name: {es: "Sólo Contador"}, entity_type: 'petitions' },
+  { code: 'listed_suggestions', name: {es: "Pueden listar las sugerencias"}, entity_type: 'suggestions' },
+  { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: 'suggestions' }
 ]
 
 group_roles.each do |gp|
-  GroupRole.find_or_create_by(code: gp[:code]) do |g|
+  GroupRole.find_or_create_by(code: gp[:code], entity_type:  gp[:entity_type]) do |g|
     g.name = gp[:name]
   end
 end
 
 group_roles_relations = {
-  all: [:sadmin, :admin, :convi, :comite, :manager, :counter, :fiscal],
-  all_admin: [:sadmin, :admin, :counter, :fiscal],
-  adminmanager: [:sadmin, :admin, :manager],
-  admincomi: [:sadmin, :admin, :comite],
-  admincon: [:sadmin, :admin, :convi],
-  concomi: [:sadmin, :convi, :comite],
-  admin: [:sadmin, :admin],
-  comi: [:sadmin, :comite],
-  con: [:sadmin, :convi],
-  fiscal: [:sadmin, :fiscal],
-  counter: [:sadmin, :counter]
+  petitions: {
+    all: [:sadmin, :admin, :convi, :comite, :manager, :counter, :fiscal],
+    all_admin: [:sadmin, :admin, :counter, :fiscal],
+    adminmanager: [:sadmin, :admin, :manager],
+    admincomi: [:sadmin, :admin, :comite],
+    admincon: [:sadmin, :admin, :convi],
+    concomi: [:sadmin, :convi, :comite],
+    admin: [:sadmin, :admin],
+    comi: [:sadmin, :comite],
+    con: [:sadmin, :convi],
+    fiscal: [:sadmin, :fiscal],
+    counter: [:sadmin, :counter]
+  },
+  suggestions: {
+    listed_suggestions: [:sadmin, :admin, :manager],
+    show_suggestion: [:sadmin, :admin, :manager, :owner]
+  }
 }
 
-group_roles_relations.each do |k, v|
-  roles = Role.where(code: v)
-  group = GroupRole.find_by(code: k)
-  roles.each do |r|
-    GroupRoleRelation.find_or_create_by(role_id: r.id, group_role_id: group.id)
+group_roles_relations.each do |type, group_role|
+  group_role.each do |code, rs|
+    roles = Role.where(code: rs)
+    group = GroupRole.find_by(code: code, entity_type: type)
+
+    roles.each do |r|
+      GroupRoleRelation.find_or_create_by(role_id: r.id, group_role_id: group.id)
+    end
   end
 end
 

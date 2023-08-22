@@ -62,7 +62,8 @@ RSpec.describe  Api::V1::Petitions::DetailController, type: :request do
                        properties: {
                          id: { type: :integer },
                          name: { type: :string },
-                         lastname: { type: :string }
+                         lastname: { type: :string },
+                         avatar_url: {type: :string, nullable: true}
                        }
                      }
                    }

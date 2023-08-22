@@ -2,8 +2,6 @@ module Petitions
   module Validable
     extend ActiveSupport::Concern
 
-    PASSWORD_TOP = 6
-
     included do
       validates :title,
                 length: {

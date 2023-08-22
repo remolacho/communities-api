@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_133557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -150,6 +150,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_141107) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_statuses_on_code", unique: true
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.string "token", null: false
+    t.string "ticket", null: false
+    t.string "message", null: false
+    t.boolean "readed", default: false
+    t.boolean "anonymous", default: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket"], name: "index_suggestions_on_ticket", unique: true
+    t.index ["token"], name: "index_suggestions_on_token", unique: true
+    t.index ["user_id"], name: "index_suggestions_on_user_id"
   end
 
   create_table "tenants", force: :cascade do |t|

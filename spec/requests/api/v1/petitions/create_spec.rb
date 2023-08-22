@@ -46,7 +46,8 @@ RSpec.describe  Api::V1::Petitions::CreateController, type: :request do
                  success: { type: :boolean, default: true },
                  data: { type: :object,
                          properties: {
-                           ticket: { type: :string }
+                           ticket: { type: :string },
+                           token: { type: :string }
                          }
                  }
                }
