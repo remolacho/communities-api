@@ -1,6 +1,6 @@
-class Api::V1::Petitions::UpdateStatusController < ApplicationController
+class Api::V1::Petitions::Statuses::UpdateStatusController < ApplicationController
 
-  # PUT /:enterprise_subdomain/v1/petition/update_status/:token
+  # PUT /:enterprise_subdomain/v1/petition/statuses/update/:token
   def update
     policy.can_write!
 

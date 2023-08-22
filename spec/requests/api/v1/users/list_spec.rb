@@ -23,7 +23,10 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
       parameter name: :page, in: :query, type: :string, description: 'is optional represent the number page of find'
 
       response 200, 'success!!!' do
-        let(:'Authorization') { sign_in }
+        let(:'Authorization') {
+          group_role_relations
+          sign_in
+        }
 
         schema type: :object,
                properties: {
@@ -61,7 +64,10 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
       end
 
       response 403, 'error the user has not role!!!' do
-        let(:'Authorization') { sign_in }
+        let(:'Authorization') {
+          group_role_relations
+          sign_in
+        }
 
         schema type: :object,
                properties: {
@@ -75,7 +81,6 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
           ""
         }
         let(:page) { "1" }
-
 
         run_test!
       end

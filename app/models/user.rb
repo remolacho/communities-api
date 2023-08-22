@@ -48,6 +48,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar, dependent: :purge
 
+  ENTITY_TYPE = 'users'
+
   def active?
     user_enterprise.active
   end

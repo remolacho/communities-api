@@ -2,13 +2,13 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Petitions::UpdateStatusController, type: :request do
+RSpec.describe  Api::V1::Petitions::Statuses::UpdateStatusController, type: :request do
   include_context 'pending_status_petition_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/petition/update_status/{token}' do
+  path '/{enterprise_subdomain}/v1/petition/statuses/update/{token}' do
     put 'Change status to petition' do
       tags 'Community API V1 Petitions'
       description "Allow to users change of status in the petitions"

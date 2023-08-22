@@ -7,11 +7,11 @@ shared_context 'detail_suggestion_stuff' do
   let(:role_manager){ FactoryBot.create(:role, :manager) }
   let(:role_owner){ FactoryBot.create(:role, :owner) }
 
-  let(:group_listed_suggestions) { FactoryBot.create(:group_role, :listed_suggestions) }
+  let(:show_suggestion) { FactoryBot.create(:group_role, :show_suggestion) }
 
   let(:group_role_relations) {
-    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_listed_suggestions),
-     FactoryBot.create(:group_role_relation, role: role_manager, group_role: group_listed_suggestions)]
+    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: show_suggestion),
+     FactoryBot.create(:group_role_relation, role: role_manager, group_role: show_suggestion)]
   }
 
   let(:enterprise) { enterprise_helper }
@@ -26,7 +26,6 @@ shared_context 'detail_suggestion_stuff' do
   let(:user_suggestion_role_owner) { FactoryBot.create(:user_role, user_id: user_suggestion.id, role_id: role_owner.id) }
 
   let(:suggestion) {
-    group_listed_suggestions
     group_role_relations
     user_enterprise_suggestion
     user_suggestion_role_owner
@@ -39,7 +38,6 @@ shared_context 'detail_suggestion_stuff' do
   }
 
   let(:suggestion_2) {
-    group_listed_suggestions
     group_role_relations
     user_enterprise
     user_role_owner

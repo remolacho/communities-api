@@ -42,7 +42,14 @@ group_roles = [
   { code: 'fiscal', name: {es: "Sólo Fiscal"}, entity_type: 'petitions' },
   { code: 'counter', name: {es: "Sólo Contador"}, entity_type: 'petitions' },
   { code: 'listed_suggestions', name: {es: "Pueden listar las sugerencias"}, entity_type: 'suggestions' },
-  { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: 'suggestions' }
+  { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: 'suggestions' },
+  { code: 'listed_users', name: {es: "Pueden listar los usuarios del sistema"}, entity_type: 'users' },
+  { code: 'show_user', name: {es: "Pueden ver el perfil de un usuario"}, entity_type: 'users' },
+  { code: 'change_status_user', name: {es: "Pueden cambiar el estado de un usuario"}, entity_type: 'users' },
+  { code: 'edit_enterprise', name: {es: "Pueden editar los datos de la empresa"}, entity_type: 'enterprises' },
+  { code: 'show_enterprise', name: {es: "Pueden ver los datos de la empresa"}, entity_type: 'enterprises' },
+  { code: 'assign_user_roles', name: {es: "Puede asignar roles a los usuarios"}, entity_type: 'user_roles' },
+  { code: 'remove_user_roles', name: {es: "Puede remover roles a los usuarios"}, entity_type: 'user_roles' },
 ]
 
 group_roles.each do |gp|
@@ -67,7 +74,20 @@ group_roles_relations = {
   },
   suggestions: {
     listed_suggestions: [:sadmin, :admin, :manager],
-    show_suggestion: [:sadmin, :admin, :manager, :owner]
+    show_suggestion: [:sadmin, :admin, :manager]
+  },
+  users: {
+    listed_users: [:sadmin, :admin, :manager],
+    show_user: [:sadmin, :admin, :manager],
+    change_status_user: [:sadmin, :admin]
+  },
+  enterprises: {
+    edit_enterprise: [:sadmin, :admin],
+    show_enterprise: [:sadmin, :admin]
+  },
+  user_roles: {
+    assign_user_roles: [:sadmin, :admin],
+    remove_user_roles: [:sadmin, :admin]
   }
 }
 

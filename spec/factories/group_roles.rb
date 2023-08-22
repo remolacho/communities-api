@@ -40,14 +40,32 @@ FactoryBot.define do
   end
 
   trait :listed_suggestions do
-    code { 'view_suggestions' }
+    code { 'listed_suggestions' }
     name { {es: "Pueden listar las sugerencias"} }
     entity_type { 'suggestions' }
   end
 
   trait :show_suggestion do
-    code { 'create_suggestions' }
+    code { 'show_suggestion' }
     name { {es: "Pueden ver las sugerencias"} }
     entity_type { 'suggestions' }
+  end
+
+  trait :show_user do
+    code { 'show_user' }
+    name { {es: "Pueden ver el perfil de un usuario"} }
+    entity_type { 'users' }
+  end
+
+  trait :change_status_user do
+    code { 'change_status_user' }
+    name { {es: "Pueden cambiar el estado de un usuario"} }
+    entity_type { 'users' }
+  end
+
+  trait :listed_users do
+    code { 'listed_users' }
+    name { {es: "Pueden listar los usuarios del sistema"} }
+    entity_type { 'users' }
   end
 end

@@ -19,4 +19,6 @@
 class UserRole < ApplicationRecord
   belongs_to :user
   belongs_to :role
+
+  ENTITY_TYPE = 'user_roles'
 end

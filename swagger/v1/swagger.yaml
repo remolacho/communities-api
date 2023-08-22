@@ -110,6 +110,9 @@ paths:
                       logo_url:
                         type: string
                         nullable: true
+                      banner_url:
+                        type: string
+                        nullable: true
         '403':
           description: error user not valid!!!
           content:
@@ -1105,7 +1108,7 @@ paths:
                     default: false
                   message:
                     type: string
-  "/{enterprise_subdomain}/v1/petition/update_status/{token}":
+  "/{enterprise_subdomain}/v1/petition/statuses/update/{token}":
     put:
       summary: Change status to petition
       tags:

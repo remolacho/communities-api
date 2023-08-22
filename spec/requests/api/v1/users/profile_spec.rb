@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe  Api::V1::Users::ProfileController, type: :request do
-  include_context 'sign_in_stuff'
+  include_context 'user_profile_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
@@ -16,10 +16,12 @@ RSpec.describe  Api::V1::Users::ProfileController, type: :request do
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, required: true
       parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :token, in: :query, type: :string, description: 'is optional, the token of user'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
-      response 200, 'success!!!' do
+      response 200, 'success user admin, manager!!!' do
         let(:'Authorization') { sign_in }
+        let(:token) { '' }
 
         schema type: :object,
                properties: {
@@ -38,14 +40,56 @@ RSpec.describe  Api::V1::Users::ProfileController, type: :request do
                 }
                }
 
-        run_test! do |response|
-          body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
-        end
+        run_test!
+      end
+
+      response 200, 'success other user!!!' do
+        let(:'Authorization') { sign_in }
+        let(:token) {
+          group_role_relations
+          user_role_admin
+          user_other.token
+        }
+
+        schema type: :object,
+               properties: {
+                 success: { type: :boolean, default: true },
+                 data: { type: :object,
+                         properties: {
+                           id: {type: :integer},
+                           name: {type: :string},
+                           lastname: {type: :string},
+                           email: {type: :string},
+                           reference: {type: :string, nullable: true},
+                           identifier: {type: :string},
+                           phone: {type: :string, nullable: true },
+                           avatar_url: {type: :string, nullable: true }
+                         }
+                 }
+               }
+
+        run_test!
+      end
+
+      response 404, 'user token not found !!!' do
+        let(:'Authorization') { sign_in }
+        let(:token) { SecureRandom.uuid }
+
+        schema type: :object,
+               properties: {
+                 success: { type: :boolean, default: false },
+                 message: { type: :string }
+               }
+
+        run_test!
       end
 
       response 403, 'error user not valid!!!' do
-        let(:'Authorization') { "" }
+        let(:'Authorization') { sign_in }
+        let(:token) {
+          group_role_relations
+          user_other.token
+        }
 
         schema type: :object,
                properties: {
