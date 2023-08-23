@@ -5,6 +5,7 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
+    rescue_from ActiveModel::UnknownAttributeError, with: :argument_error
     rescue_from ActiveRecord::RecordNotUnique, with: :duplicate
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::RecordInvalid, with: :not_found

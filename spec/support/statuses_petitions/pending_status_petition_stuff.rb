@@ -10,21 +10,21 @@ shared_context 'pending_status_petition_stuff' do
 
   let(:category) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
 
-  let(:role1){ FactoryBot.create(:role, :coexistence_member) }
-  let(:role2){ FactoryBot.create(:role, :committee_member) }
+  let(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
+  let(:role_council_member){ FactoryBot.create(:role, :council_member) }
 
   let(:group_role) {
-    group = FactoryBot.create(:group_role, :coexistence_committee)
+    group = FactoryBot.create(:group_role, :council_coexistence)
 
-    FactoryBot.create(:group_role_relation, role: role1, group_role: group)
-    FactoryBot.create(:group_role_relation, role: role2, group_role: group)
+    FactoryBot.create(:group_role_relation, role: role_coexistence_member, group_role: group)
+    FactoryBot.create(:group_role_relation, role: role_council_member, group_role: group)
 
     group
   }
 
   let(:user) { current_user }
   let(:user_enterprise) { user_enterprise_helper }
-  let(:user_role){ FactoryBot.create(:user_role, user_id: user.id, role_id: role2.id) }
+  let(:user_role){ FactoryBot.create(:user_role, user_id: user.id, role_id: role_council_member.id) }
 
   let(:user_2) { @user_2 ||= FactoryBot.create(:user) }
   let(:user_enterprise_2) {  FactoryBot.create(:user_enterprise, user_id: user_2.id, enterprise_id: enterprise_helper.id, active: true) }

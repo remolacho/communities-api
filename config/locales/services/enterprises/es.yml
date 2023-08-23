@@ -10,3 +10,9 @@ es:
           size: 'El tamaño de la imagen no debe ser mayor a 1 mb'
           type: 'Solo deben ser imagenes (jpeg, jpg, png)'
           success: 'Se cargo una nueva imagen'
+      update:
+        data_empty: 'No hay datos que actualizar'
+        attribute:
+          not_allowed: 'El campo %{attr} no esta permitido'
+        not_found: 'La empresa enviada no es valida'
+        success: 'Se actualizo la empresa con exito'

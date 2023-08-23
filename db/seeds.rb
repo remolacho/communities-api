@@ -12,12 +12,12 @@ enterprise = Enterprise.find_or_create_by(token: tenancy.token, subdomain: tenan
 end
 
 roles = {
-  sadmin: "Super admin",
+  super_admin: "Super admin",
   admin:  "admin",
-  oamin:  "Owner admin",
+  owner_admin:  "Owner admin",
   owner:  "Owner",
-  convi:  "Coexistence Member",
-  comite: "Committee Member",
+  coexistence: "Coexistence Member",
+  council: "Council Member",
   counter: "counter",
   fiscal: "fiscal",
   manager: "President/Manager",
@@ -30,26 +30,26 @@ roles.each do |k, v|
 end
 
 group_roles = [
-  { code: 'all', name: {es: "Todas los miembros"}, entity_type: 'petitions' },
-  { code: 'adminmanager', name: {es: "Solo Administración y Presidente"}, entity_type: 'petitions' },
-  { code: 'all_admin', name: {es: "Solo Administración"}, entity_type: 'petitions' },
-  { code: 'admincomi', name: {es: "Solo Administración y Comité"}, entity_type: 'petitions' },
-  { code: 'admincon', name: {es: "Solo Administración y Consejo"}, entity_type: 'petitions' },
-  { code: 'concomi', name: {es: "Solo Consejo y Comité"}, entity_type: 'petitions' },
-  { code: 'admin', name: {es: "Sólo Administrador"}, entity_type: 'petitions' },
-  { code: 'comi', name: {es: "Sólo Comité"}, entity_type: 'petitions' },
-  { code: 'con', name: {es: "Sólo Consejo"}, entity_type: 'petitions' },
-  { code: 'fiscal', name: {es: "Sólo Fiscal"}, entity_type: 'petitions' },
-  { code: 'counter', name: {es: "Sólo Contador"}, entity_type: 'petitions' },
-  { code: 'listed_suggestions', name: {es: "Pueden listar las sugerencias"}, entity_type: 'suggestions' },
-  { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: 'suggestions' },
-  { code: 'listed_users', name: {es: "Pueden listar los usuarios del sistema"}, entity_type: 'users' },
-  { code: 'show_user', name: {es: "Pueden ver el perfil de un usuario"}, entity_type: 'users' },
-  { code: 'change_status_user', name: {es: "Pueden cambiar el estado de un usuario"}, entity_type: 'users' },
-  { code: 'edit_enterprise', name: {es: "Pueden editar los datos de la empresa"}, entity_type: 'enterprises' },
-  { code: 'show_enterprise', name: {es: "Pueden ver los datos de la empresa"}, entity_type: 'enterprises' },
-  { code: 'assign_user_roles', name: {es: "Puede asignar roles a los usuarios"}, entity_type: 'user_roles' },
-  { code: 'remove_user_roles', name: {es: "Puede remover roles a los usuarios"}, entity_type: 'user_roles' },
+  { code: 'all', name: {es: "Todas los miembros"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_manager', name: {es: "Solo Administración y Presidente"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'all_admin', name: {es: "Solo Administración"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_coexistence', name: {es: "Solo Administración y Comité"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_council', name: {es: "Solo Administración y Consejo"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'council_coexistence', name: {es: "Solo Consejo y Comité"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin', name: {es: "Sólo Administrador"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'coexistence', name: {es: "Sólo Comité"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'council', name: {es: "Sólo Consejo"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'fiscal', name: {es: "Sólo Fiscal"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'counter', name: {es: "Sólo Contador"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'listed_suggestions', name: {es: "Pueden listar las sugerencias"}, entity_type: Suggestion::ENTITY_TYPE },
+  { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: Suggestion::ENTITY_TYPE },
+  { code: 'listed_users', name: {es: "Pueden listar los usuarios del sistema"}, entity_type: User::ENTITY_TYPE },
+  { code: 'show_user', name: {es: "Pueden ver el perfil de un usuario"}, entity_type: User::ENTITY_TYPE },
+  { code: 'change_status_user', name: {es: "Pueden cambiar el estado de un usuario"}, entity_type: User::ENTITY_TYPE },
+  { code: 'edit_enterprise', name: {es: "Pueden editar los datos de la empresa"}, entity_type: Enterprise::ENTITY_TYPE },
+  { code: 'show_enterprise', name: {es: "Pueden ver los datos de la empresa"}, entity_type: Enterprise::ENTITY_TYPE },
+  { code: 'assign_user_roles', name: {es: "Puede asignar roles a los usuarios"}, entity_type: UserRole::ENTITY_TYPE },
+  { code: 'remove_user_roles', name: {es: "Puede remover roles a los usuarios"}, entity_type: UserRole::ENTITY_TYPE },
 ]
 
 group_roles.each do |gp|
@@ -60,34 +60,34 @@ end
 
 group_roles_relations = {
   petitions: {
-    all: [:sadmin, :admin, :convi, :comite, :manager, :counter, :fiscal],
-    all_admin: [:sadmin, :admin, :counter, :fiscal],
-    adminmanager: [:sadmin, :admin, :manager],
-    admincomi: [:sadmin, :admin, :comite],
-    admincon: [:sadmin, :admin, :convi],
-    concomi: [:sadmin, :convi, :comite],
-    admin: [:sadmin, :admin],
-    comi: [:sadmin, :comite],
-    con: [:sadmin, :convi],
-    fiscal: [:sadmin, :fiscal],
-    counter: [:sadmin, :counter]
+    all: [:super_admin, :admin, :coexistence, :council, :manager, :counter, :fiscal],
+    all_admin: [:super_admin, :admin, :counter, :fiscal],
+    admin_manager: [:super_admin, :admin, :manager],
+    admin_coexistence: [:super_admin, :admin, :coexistence],
+    admin_council: [:super_admin, :admin, :council],
+    council_coexistence: [:super_admin, :coexistence, :council],
+    admin: [:super_admin, :admin],
+    council: [:super_admin, :council],
+    coexistence: [:super_admin, :coexistence],
+    fiscal: [:super_admin, :fiscal],
+    counter: [:super_admin, :counter]
   },
   suggestions: {
-    listed_suggestions: [:sadmin, :admin, :manager],
-    show_suggestion: [:sadmin, :admin, :manager]
+    listed_suggestions: [:super_admin, :admin, :manager],
+    show_suggestion: [:super_admin, :admin, :manager]
   },
   users: {
-    listed_users: [:sadmin, :admin, :manager],
-    show_user: [:sadmin, :admin, :manager],
-    change_status_user: [:sadmin, :admin]
+    listed_users: [:super_admin, :admin, :manager],
+    show_user: [:super_admin, :admin, :manager],
+    change_status_user: [:super_admin, :admin]
   },
   enterprises: {
-    edit_enterprise: [:sadmin, :admin],
-    show_enterprise: [:sadmin, :admin]
+    edit_enterprise: [:super_admin, :admin],
+    show_enterprise: [:super_admin, :admin, :manager]
   },
   user_roles: {
-    assign_user_roles: [:sadmin, :admin],
-    remove_user_roles: [:sadmin, :admin]
+    assign_user_roles: [:super_admin, :admin],
+    remove_user_roles: [:super_admin, :admin]
   }
 }
 
@@ -139,5 +139,5 @@ user = User.find_or_create_by(email: 'jonathangrh.25@gmail.com') do |u|
 end
 
 UserEnterprise.find_or_create_by!(user_id: user.id, enterprise_id: enterprise.id, active: true)
-UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'sadmin').id, created_by: user.id)
+UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'super_admin').id, created_by: user.id)
 UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'owner').id, created_by: user.id)

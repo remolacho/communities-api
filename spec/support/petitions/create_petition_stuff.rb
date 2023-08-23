@@ -11,12 +11,13 @@ shared_context 'create_petition_stuff' do
   let(:category) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
 
   let(:group_role) {
-    role1 = FactoryBot.create(:role, :coexistence_member)
-    role2 = FactoryBot.create(:role, :committee_member)
-    group = FactoryBot.create(:group_role, :coexistence_committee)
+    role_coexistence_member = FactoryBot.create(:role, :coexistence_member)
+    role_council_member = FactoryBot.create(:role, :council_member)
 
-    FactoryBot.create(:group_role_relation, role: role1, group_role: group)
-    FactoryBot.create(:group_role_relation, role: role2, group_role: group)
+    group = FactoryBot.create(:group_role, :council_coexistence)
+
+    FactoryBot.create(:group_role_relation, role: role_coexistence_member, group_role: group)
+    FactoryBot.create(:group_role_relation, role: role_council_member, group_role: group)
 
     group
   }
