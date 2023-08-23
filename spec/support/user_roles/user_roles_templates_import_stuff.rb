@@ -7,12 +7,12 @@ shared_context 'user_roles_templates_import_stuff' do
   let(:enterprise) { enterprise_helper }
   let!(:user_enterprise) { user_enterprise_helper }
 
-  let!(:role1){ FactoryBot.create(:role, :coexistence_member) }
-  let!(:role2){ FactoryBot.create(:role, :committee_member) }
-  let!(:role3){ FactoryBot.create(:role, :owner_admin) }
-  let!(:role4){ FactoryBot.create(:role, :role_admin) }
+  let!(:coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
+  let!(:committee_member){ FactoryBot.create(:role, :committee_member) }
+  let!(:owner_admin){ FactoryBot.create(:role, :owner_admin) }
+  let!(:role_admin){ FactoryBot.create(:role, :role_admin) }
 
-  let(:user_role_admin) { FactoryBot.create(:user_role, user_id: user.id, role_id: role4.id) }
+  let(:user_role_admin) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_admin.id) }
 
   let(:sign_up) {
     allowed_params = {
@@ -31,7 +31,7 @@ shared_context 'user_roles_templates_import_stuff' do
 
   let(:new_user_admin){
     u = sign_up
-    FactoryBot.create(:user_role, user_id: u.id, role_id: role4.id)
+    FactoryBot.create(:user_role, user_id: u.id, role_id: role_admin.id)
     u
   }
 end

@@ -33,7 +33,8 @@ RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
                            name: {type: :string},
                            address: {type: :string, nullable: true },
                            subdomain: {type: :string},
-                           logo_url: {type: :string, nullable: true }
+                           logo_url: {type: :string, nullable: true },
+                           banner_url: {type: :string, nullable: true }
                          }
                 }
                }

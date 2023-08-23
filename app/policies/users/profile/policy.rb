@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-class Suggestions::Detail::Policy < ::BasePolicy
-  attr_accessor :suggestion
+class Users::Profile::Policy < ::BasePolicy
+  attr_accessor :profile
 
-  def initialize(current_user:, suggestion:)
+  def initialize(current_user:, profile:)
     super(current_user: current_user)
 
-    @suggestion = suggestion
+    @profile = profile
   end
 
   def can_read!
     loudly do
-      is_owner? || has_role?
+      owner? || has_role?
     end
   end
 
   private
 
-  def is_owner?
-    current_user.id == suggestion.user_id
+  def owner?
+    current_user.id == profile.id
   end
 
   def has_role?
@@ -30,7 +30,7 @@ class Suggestions::Detail::Policy < ::BasePolicy
   end
 
   def group_role
-    @group_role ||= GroupRole.find_by(code: :show_suggestion, entity_type: Suggestion::ENTITY_TYPE)
+    @group_role ||= GroupRole.find_by(code: :show_user, entity_type: User::ENTITY_TYPE)
   end
 
   def user_roles_ids

@@ -11,17 +11,25 @@ class Users::ChangeStatus::Policy < ::BasePolicy
 
   def can_write!
     loudly do
-      (allowed_roles & user_roles).any?
+      has_role?
     end
   end
 
   private
 
-  def user_roles
-    @user_roles ||= current_user.roles.pluck(:code)
+  def has_role?
+    group_role.present? && !group_role_relations.zero?
   end
 
-  def allowed_roles
-    %w[sadmin admin]
+  def group_role_relations
+    @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids).count
+  end
+
+  def group_role
+    @group_role ||= GroupRole.find_by(code: :change_status_user, entity_type: User::ENTITY_TYPE)
+  end
+
+  def user_roles_ids
+    @user_roles_ids ||= current_user.roles.ids
   end
 end

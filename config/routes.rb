@@ -44,7 +44,6 @@ Rails.application.routes.draw do
         namespace :petitions, path: 'petition' do
           resources :create, only: [:create]
           resources :detail, param: 'token', only: [:show]
-          resources :update_status, param: 'token', only: [:update]
           resources :list_own, only: [:index]
           resources :list_group_roles, only: [:index]
 
@@ -80,6 +79,8 @@ Rails.application.routes.draw do
 
           namespace :statuses do
             get 'list/:token', to: 'list#index'
+            put 'update/:token', to: 'update_status#update'
+            # resources :update_status, param: 'token', only: [:update]
           end
         end
 

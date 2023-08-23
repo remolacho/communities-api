@@ -4,10 +4,16 @@ class Api::V1::Users::ListController < ApplicationController
 
   # GET /:enterprise_subdomain/v1/users/list
   def index
+    policy.can_read!
+
     render json: {success: true, data: serializer, paginate: paginate}
   end
 
   private
+
+  def policy
+    ::Users::List::Policy.new(current_user: current_user, enterprise: enterprise)
+  end
 
   def serializer
     ActiveModelSerializers::SerializableResource.new(user_list,
@@ -30,7 +36,10 @@ class Api::V1::Users::ListController < ApplicationController
   def service
     @service ||= ::Users::ListService.new(user: current_user,
                                           enterprise: enterprise,
-                                          attr: params[:attr],
-                                          search_term: params[:term])
+                                          search: search)
+  end
+
+  def search
+    @search ||= Users::Searches::QueryTermService.new(attr: params[:attr] , term: params[:term])
   end
 end
