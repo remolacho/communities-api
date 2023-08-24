@@ -13,11 +13,11 @@ RSpec.describe Petitions::CreateService do
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-         "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+         "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-         "3"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+         "3"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         }
       }
@@ -33,9 +33,9 @@ RSpec.describe Petitions::CreateService do
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-          "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/1-extension-error.csv',
+          "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/1-extension-error.csv',
                                               ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         }
       }
@@ -51,7 +51,7 @@ RSpec.describe Petitions::CreateService do
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/muy-grande.png',
                                               ' image/png')
@@ -69,7 +69,7 @@ RSpec.describe Petitions::CreateService do
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
                                               ' image/jpeg')

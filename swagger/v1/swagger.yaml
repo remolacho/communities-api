@@ -1764,10 +1764,65 @@ paths:
                     type: string
   "/{enterprise_subdomain}/v1/user_roles/import/create":
     post:
-      summary: Allow to users create roles to userss
+      summary: Allow to users create roles to users
       tags:
       - Community API V1 Users Roles
-      description: Allow to users create roles to users by xlsxs
+      description: Allow to users create roles to users by xlsx
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: user_roles_file
+        in: form
+        description: the file import user roles
+        schema:
+          type: file
+      responses:
+        '200':
+          description: success, but It can finish with errors!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '403':
+          description: user not role admin or super admin!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/user_roles/import/remove":
+    delete:
+      summary: Allow to users remove roles to users
+      tags:
+      - Community API V1 Users Roles
+      description: Allow to users remove roles to users by xlsx
       parameters:
       - name: Authorization
         in: header

@@ -116,6 +116,11 @@ Rails.application.routes.draw do
 
           namespace :import do
             resources :create, only: [:create]
+            resources :remove, path: '', only: [] do
+              collection do
+                delete 'remove', to: 'remove#delete'
+              end
+            end
           end
         end
       end

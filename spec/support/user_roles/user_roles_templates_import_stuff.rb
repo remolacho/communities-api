@@ -12,7 +12,20 @@ shared_context 'user_roles_templates_import_stuff' do
   let!(:role_owner_admin){ FactoryBot.create(:role, :owner_admin) }
   let!(:role_admin){ FactoryBot.create(:role, :role_admin) }
 
+  let(:group_remove_user_roles) { FactoryBot.create(:group_role, :remove_user_roles) }
+
+  let(:group_role_relations_remove) {
+    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_remove_user_roles)]
+  }
+
+  let(:group_assign_user_roles) { FactoryBot.create(:group_role, :assign_user_roles) }
+
+  let(:group_role_relations_assign) {
+    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_assign_user_roles)]
+  }
+
   let(:user_role_admin) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_admin.id) }
+  let(:user_role_coexistence) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_coexistence_member.id) }
 
   let(:sign_up) {
     allowed_params = {
@@ -32,6 +45,13 @@ shared_context 'user_roles_templates_import_stuff' do
   let(:new_user_admin){
     u = sign_up
     FactoryBot.create(:user_role, user_id: u.id, role_id: role_admin.id)
+    u
+  }
+
+  let(:new_user){
+    u = sign_up
+    FactoryBot.create(:user_role, user_id: u.id, role_id: role_admin.id)
+    FactoryBot.create(:user_role, user_id: u.id, role_id: role_coexistence_member.id)
     u
   }
 end
