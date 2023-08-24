@@ -31,7 +31,7 @@ module Enterprises
     def validate_logo_content_type
       return unless logo.attached?
 
-      types = %w(image/jpeg image/png image/jpg)
+      types = %w(image/jpeg image/png image/jpeg)
 
       raise ArgumentError, I18n.t('services.enterprises.sign_up.image.type') unless logo.content_type.in?(types)
     end
@@ -45,7 +45,7 @@ module Enterprises
     def validate_banner_content_type
       return unless banner.attached?
 
-      types = %w(image/jpeg image/png image/jpg)
+      types = %w(image/jpeg image/png image/jpeg)
 
       raise ArgumentError, I18n.t('services.enterprises.sign_up.image.type') unless banner.content_type.in?(types)
     end

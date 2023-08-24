@@ -1,10 +1,5 @@
 class Enterprises::SettingSerializer < ActiveModel::Serializer
-  attributes :id,
-             :token,
-             :name,
-             :rut,
-             :address,
-             :email,
+  attributes :token,
              :subdomain
 
   attribute :logo_url

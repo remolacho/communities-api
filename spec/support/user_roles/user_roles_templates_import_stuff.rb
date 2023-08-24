@@ -7,9 +7,9 @@ shared_context 'user_roles_templates_import_stuff' do
   let(:enterprise) { enterprise_helper }
   let!(:user_enterprise) { user_enterprise_helper }
 
-  let!(:coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
-  let!(:committee_member){ FactoryBot.create(:role, :committee_member) }
-  let!(:owner_admin){ FactoryBot.create(:role, :owner_admin) }
+  let!(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
+  let!(:role_council_member){ FactoryBot.create(:role, :council_member) }
+  let!(:role_owner_admin){ FactoryBot.create(:role, :owner_admin) }
   let!(:role_admin){ FactoryBot.create(:role, :role_admin) }
 
   let(:user_role_admin) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_admin.id) }

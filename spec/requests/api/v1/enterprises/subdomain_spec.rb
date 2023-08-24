@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe  Api::V1::Enterprises::SubdomainController, type: :request do
-  include_context 'detail_stuff'
+  include_context 'enterprise_setting_stuff'
 
   path '/{enterprise_subdomain}/v1/enterprise/subdomain' do
     get 'valid the subdomain of the enterprise' do

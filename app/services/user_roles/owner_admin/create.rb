@@ -15,6 +15,6 @@ class UserRoles::OwnerAdmin::Create
   private
 
   def role
-    @role ||= Role.find_by!(code: 'oamin')
+    @role ||= Role.find_by!(code: 'owner_admin')
   end
 end

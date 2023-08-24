@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
         namespace :enterprises, path: 'enterprise' do
           resources :setting, only: [:index]
+          resources :profile, only: [:index]
           resources :subdomain, only: [:index]
+          resources :update, param: :token, only: [:update]
         end
 
         namespace :users do

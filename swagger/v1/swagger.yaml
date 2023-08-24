@@ -57,12 +57,12 @@ paths:
                     default: false
                   message:
                     type: string
-  "/{enterprise_subdomain}/v1/enterprise/setting":
+  "/{enterprise_subdomain}/v1/enterprise/profile":
     get:
-      summary: Find the setting and data of current enterprise
+      summary: Find the profile and data of current enterprise
       tags:
       - Community API V1 Enterprises
-      description: Find the setting and data of current enterprise
+      description: Find the profile and data of current enterprise
       parameters:
       - name: Authorization
         in: header
@@ -105,6 +105,74 @@ paths:
                       address:
                         type: string
                         nullable: true
+                      subdomain:
+                        type: string
+                      logo_url:
+                        type: string
+                        nullable: true
+                      banner_url:
+                        type: string
+                        nullable: true
+                      reference_regex:
+                        type: string
+                      short_name:
+                        type: string
+                      active:
+                        type: boolean
+                        default: true
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/enterprise/setting":
+    get:
+      summary: Find the setting and data of current enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: Find the setting and data of current enterprise
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
                       subdomain:
                         type: string
                       logo_url:
@@ -169,6 +237,93 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/enterprise/update/{token}":
+    put:
+      summary: Modify the profile of the current enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: Modify the profile of the current enterprise
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: token of the enterprise"
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: error enterprise not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enterprise:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    address:
+                      type: string
+                    rut:
+                      type: string
+                    logo:
+                      type: string
+                      description: the file of image
+                    banner:
+                      type: string
+                      description: the file of image
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity
@@ -2036,6 +2191,11 @@ paths:
         required: true
         schema:
           type: string
+      - name: token
+        in: query
+        description: is optional, the token of user
+        schema:
+          type: string
       - name: lang
         in: query
         description: is optional by default is "es"
@@ -2043,7 +2203,7 @@ paths:
           type: string
       responses:
         '200':
-          description: success!!!
+          description: success other user!!!
           content:
             application/json:
               schema:
@@ -2074,6 +2234,18 @@ paths:
                       avatar_url:
                         type: string
                         nullable: true
+        '404':
+          description: user token not found !!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
         '403':
           description: error user not valid!!!
           content:

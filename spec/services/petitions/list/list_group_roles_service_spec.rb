@@ -14,7 +14,7 @@ RSpec.describe ::Petitions::List::ListGroupRolesService do
 
     it 'it return error, the user only has role owner admin' do
       user_role_owner_admin
-      group_role_coexistence_committee
+      group_role_council_coexistence
 
       filter = ::Petitions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
@@ -103,7 +103,7 @@ RSpec.describe ::Petitions::List::ListGroupRolesService do
       user_role_owner_admin
       user_role_admin
       group_role_admin
-      user_role_committee_member
+      user_role_council_member
 
       acum = claims
       acum += petitions

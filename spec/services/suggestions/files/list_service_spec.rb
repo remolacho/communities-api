@@ -25,7 +25,7 @@ RSpec.describe Suggestions::Files::ListService do
           "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
-                                              ' image/jpg')
+                                              ' image/jpeg')
         }
       }
 
