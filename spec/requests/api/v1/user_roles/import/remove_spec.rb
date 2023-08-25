@@ -2,16 +2,16 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
+RSpec.describe Api::V1::UserRoles::Import::RemoveController, type: :request do
   include_context 'user_roles_templates_import_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
 
-  path '/{enterprise_subdomain}/v1/user_roles/import/create' do
-    post 'Allow to users create roles to users' do
+  path '/{enterprise_subdomain}/v1/user_roles/import/remove' do
+    delete 'Allow to users remove roles to users' do
       tags 'Community API V1 Users Roles'
-      description "Allow to users create roles to users by xlsx"
+      description "Allow to users remove roles to users by xlsx"
       produces 'application/json'
       consumes 'multipart/form-data'
       parameter name: 'Authorization', in: :header, required: true
@@ -22,14 +22,14 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
       response 200, 'success, but It can finish with errors!!' do
         let(:'Authorization') {
           new_user
-          group_role_relations_assign
+          group_role_relations_remove
           user_role_admin
           sign_in
         }
 
         let(:user_roles_file) {
           {
-            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/remove/6-finish-with-errors-user-not-found.xlsx',
                                                      ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
           }
         }
@@ -52,7 +52,7 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
       response 403, 'user not role admin or super admin!!!' do
         let(:'Authorization') {
           new_user
-          group_role_relations_assign
+          group_role_relations_remove
           user_role_coexistence
           sign_in
         }

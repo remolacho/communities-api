@@ -7,7 +7,7 @@ RSpec.describe Enterprises::UpdateService do
 
   context 'when you want modify an enterprise' do
     it 'it return error logo extension' do
-      logo = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+      logo = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                            ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
       params = {
@@ -23,7 +23,7 @@ RSpec.describe Enterprises::UpdateService do
     end
 
     it 'it return error banner extension' do
-      banner = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+      banner = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                            ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
       params = {

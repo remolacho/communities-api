@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserRoles::Import::Policy < ::BasePolicy
+class UserRoles::Import::Remove::Policy < ::BasePolicy
   def initialize(current_user:)
     super(current_user: current_user)
   end
@@ -22,7 +22,7 @@ class UserRoles::Import::Policy < ::BasePolicy
   end
 
   def group_role
-    @group_role ||= GroupRole.find_by(code: :assign_user_roles, entity_type: UserRole::ENTITY_TYPE)
+    @group_role ||= GroupRole.find_by(code: :remove_user_roles, entity_type: UserRole::ENTITY_TYPE)
   end
 
   def user_roles_ids

@@ -28,7 +28,7 @@ RSpec.describe Petitions::Files::ListService do
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
                                               ' image/jpeg')

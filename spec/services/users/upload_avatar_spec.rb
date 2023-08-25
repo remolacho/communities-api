@@ -13,7 +13,7 @@ RSpec.describe ::Users::UploadAvatar do
     end
 
     it 'it return error xlsx' do
-      file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+      file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                           ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
       service = described_class.new(user: user, avatar_file: file)

@@ -80,4 +80,16 @@ FactoryBot.define do
     name { {es: "Pueden editar los datos de la empresa"} }
     entity_type { Enterprise::ENTITY_TYPE }
   end
+
+  trait :assign_user_roles do
+    code { 'assign_user_roles' }
+    name { {es: "Puede asignar roles a los usuarios"} }
+    entity_type { UserRole::ENTITY_TYPE }
+  end
+
+  trait :remove_user_roles do
+    code { 'remove_user_roles' }
+    name { {es: "Puede remover roles a los usuarios"} }
+    entity_type { UserRole::ENTITY_TYPE }
+  end
 end
