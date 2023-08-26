@@ -175,6 +175,8 @@ paths:
                         type: string
                       subdomain:
                         type: string
+                      name:
+                        type: string
                       logo_url:
                         type: string
                         nullable: true

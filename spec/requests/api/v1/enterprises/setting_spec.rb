@@ -28,6 +28,7 @@ RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
                          properties: {
                            token: {type: :string},
                            subdomain: {type: :string},
+                           name: {type: :string},
                            logo_url: {type: :string, nullable: true },
                            banner_url: {type: :string, nullable: true }
                          }

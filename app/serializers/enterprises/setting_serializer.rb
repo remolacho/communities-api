@@ -1,6 +1,7 @@
 class Enterprises::SettingSerializer < ActiveModel::Serializer
   attributes :token,
-             :subdomain
+             :subdomain,
+             :name
 
   attribute :logo_url
   attribute :banner_url
