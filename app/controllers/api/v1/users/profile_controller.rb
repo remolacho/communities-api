@@ -7,7 +7,8 @@ class Api::V1::Users::ProfileController < ApplicationController
     policy.can_read!
 
     render json: {success: true,  data: ::Users::ProfileSerializer.new(profile,
-                                                                       enterprise_subdomain: enterprise.subdomain).as_json}
+                                                                       enterprise_subdomain: enterprise.subdomain,
+                                                                       current_user: current_user).as_json}
   end
 
   private

@@ -2197,6 +2197,8 @@ paths:
                       properties:
                         id:
                           type: integer
+                        token:
+                          type: string
                         name:
                           type: string
                         lastname:
@@ -2274,6 +2276,8 @@ paths:
                     properties:
                       id:
                         type: integer
+                      token:
+                        type: string
                       name:
                         type: string
                       lastname:
@@ -2291,6 +2295,12 @@ paths:
                       avatar_url:
                         type: string
                         nullable: true
+                      setting:
+                        type: object
+                        properties:
+                          can_edit:
+                            type: boolean
+                            default: true
         '404':
           description: user token not found !!!
           content:

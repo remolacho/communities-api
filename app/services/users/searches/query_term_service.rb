@@ -5,13 +5,12 @@ class Users::Searches::QueryTermService
 
   def initialize(attr:, term:)
     @term = term
-    @attr = attr.presence || 'name'
+    @attr = attr.presence
   end
 
   def call
-    return unless term.present?
-    return if attr.size > 15
-    return if term.size > 25
+    return if !term.present? || !attr.present?
+    return if attr.size > 15 || term.size > 25
 
     { "#{attr}_cont".to_sym => term }
   end

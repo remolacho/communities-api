@@ -37,6 +37,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
                      type: :object,
                      properties: {
                        id: {type: :integer},
+                       token: {type: :string},
                        name: {type: :string},
                        lastname: {type: :string},
                        email: {type: :string},

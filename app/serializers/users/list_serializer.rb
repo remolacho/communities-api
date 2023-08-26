@@ -5,7 +5,8 @@ class Users::ListSerializer < ActiveModel::Serializer
              :email,
              :reference,
              :identifier,
-             :phone
+             :phone,
+             :token
 
   attribute :avatar_url
   attribute :active

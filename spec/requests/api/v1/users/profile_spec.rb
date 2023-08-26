@@ -29,13 +29,20 @@ RSpec.describe  Api::V1::Users::ProfileController, type: :request do
                  data: { type: :object,
                          properties: {
                            id: {type: :integer},
+                           token: {type: :string},
                            name: {type: :string},
                            lastname: {type: :string},
                            email: {type: :string},
                            reference: {type: :string, nullable: true},
                            identifier: {type: :string},
                            phone: {type: :string, nullable: true },
-                           avatar_url: {type: :string, nullable: true }
+                           avatar_url: {type: :string, nullable: true },
+                           setting: {
+                             type: :object,
+                             properties: {
+                               can_edit: { type: :boolean, default: true }
+                             }
+                           }
                          }
                 }
                }
