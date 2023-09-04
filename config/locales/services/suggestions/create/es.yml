@@ -4,6 +4,7 @@ es:
       create:
         data_empty: "No hay imformacion que almacenar"
         group_role_not_found: "El grupo de roles no existe"
+        success: "Se crea la sugerencia con exito"
         files:
           max: "La cantidad permitida de archivos adjuntos es de %{max}"
           type: "El archivo que se adjunta no es permitido"

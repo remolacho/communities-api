@@ -41,7 +41,7 @@ class Suggestions::ValidateAttachFilesService
   end
 
   def validate_avatar_content_type!(file)
-    raise ArgumentError, I18n.t(I18n.t('services.suggestions.create.files.type')) unless types.include?(extension(file))
+    raise ArgumentError, I18n.t('services.suggestions.create.files.type') unless types.include?(extension(file))
   end
 
   def validate_avatar_size!(file)
