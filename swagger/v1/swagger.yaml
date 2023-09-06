@@ -1016,6 +1016,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             code:
@@ -1041,6 +1043,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             lastname:
@@ -1136,6 +1140,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             code:
@@ -1736,6 +1742,8 @@ paths:
                             id:
                               type: integer
                               nullable: true
+                            identifier:
+                              type: string
                             name:
                               type: string
                             lastname:
