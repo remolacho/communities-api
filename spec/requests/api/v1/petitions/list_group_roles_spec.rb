@@ -42,6 +42,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            code: { type: :string },
                            color: { type: :string }
@@ -65,6 +66,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }

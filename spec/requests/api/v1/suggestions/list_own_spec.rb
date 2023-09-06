@@ -42,6 +42,7 @@ RSpec.describe  Api::V1::Suggestions::ListOwnController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer, nullable: true },
+                           identifier: { type: :string },
                            name: { type: :string },
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }

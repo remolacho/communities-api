@@ -1,5 +1,6 @@
 class Users::BasicProfileSerializer < ActiveModel::Serializer
   attributes :id,
+             :identifier,
              :name,
              :lastname
 

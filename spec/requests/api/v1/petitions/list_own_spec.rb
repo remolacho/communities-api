@@ -42,6 +42,7 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            code: { type: :string },
                            color: { type: :string }
