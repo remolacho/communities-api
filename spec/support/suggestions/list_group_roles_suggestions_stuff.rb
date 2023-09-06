@@ -49,8 +49,8 @@ shared_context 'list_group_roles_suggestions_stuff' do
     user_enterprise_suggestion
 
     [
-      { message: FFaker::Name.first_name * 10, readed: true },
-      { message: FFaker::Name.first_name * 10, readed: true }
+      { message: FFaker::Name.first_name * 10, read: true },
+      { message: FFaker::Name.first_name * 10, read: true }
     ].map do |data|
       ::Suggestions::CreateService.new(user: user_suggestion, data: data).call
     end
@@ -60,8 +60,8 @@ shared_context 'list_group_roles_suggestions_stuff' do
     user_enterprise_suggestion
 
     [
-      { message: FFaker::Name.first_name * 10, readed: true, anonymous: true },
-      { message: FFaker::Name.first_name * 10, readed: true, anonymous: true }
+      { message: FFaker::Name.first_name * 10, read: true, anonymous: true },
+      { message: FFaker::Name.first_name * 10, read: true, anonymous: true }
     ].map do |data|
       ::Suggestions::CreateService.new(user: user_suggestion, data: data).call
     end

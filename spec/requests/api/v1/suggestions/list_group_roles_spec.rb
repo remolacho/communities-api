@@ -18,7 +18,7 @@ RSpec.describe  Api::V1::Suggestions::ListGroupRolesController, type: :request d
       parameter name: 'Authorization', in: :header, required: true
       parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
-      parameter name: :readed, in: :query, type: :integer, description: 'is optional represent the filter by readed'
+      parameter name: :read, in: :query, type: :integer, description: 'is optional represent the filter by read'
       parameter name: :anonymous, in: :query, type: :integer, description: 'is optional represent the filter by user anonymous'
       parameter name: :page, in: :query, type: :string, description: 'is optional represent the number page of find'
 
@@ -37,7 +37,7 @@ RSpec.describe  Api::V1::Suggestions::ListGroupRolesController, type: :request d
                        token: { type: :string },
                        title: { type: :string },
                        message: { type: :string },
-                       readed: { type: :boolean },
+                       read: { type: :boolean },
                        anonymous: { type: :boolean },
                        user: {
                          type: :object,
@@ -69,7 +69,7 @@ RSpec.describe  Api::V1::Suggestions::ListGroupRolesController, type: :request d
           true
         }
 
-        let(:readed) {
+        let(:read) {
           suggestions
           suggestions_anonymous_readed
           suggestions_readed
@@ -95,7 +95,7 @@ RSpec.describe  Api::V1::Suggestions::ListGroupRolesController, type: :request d
           nil
         }
 
-        let(:readed) {
+        let(:read) {
           suggestions
           suggestions_anonymous_readed
           suggestions_readed

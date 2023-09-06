@@ -21,11 +21,11 @@ RSpec.describe ::Suggestions::List::ListOwnService do
       expect(service.call.size).to eq(acum)
     end
 
-    it 'it return only readed' do
+    it 'it return only read' do
       acum_readed = suggestions_readed.size
       suggestions.size
 
-      params = { readed: true }
+      params = { read: true }
 
       filter = ::Suggestions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)

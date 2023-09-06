@@ -4,7 +4,7 @@ class CreateSuggestions < ActiveRecord::Migration[7.0]
       t.string :token, null: false
       t.string :ticket, null: false
       t.string :message, null: false
-      t.boolean :readed, default: false
+      t.boolean :read, default: false
       t.boolean :anonymous, default: false
       t.references :user, null: false
       t.index :token, unique: true

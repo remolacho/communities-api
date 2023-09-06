@@ -9,7 +9,7 @@ class Suggestions::Filter::QueryService
 
   def call
     {}.tap do |f|
-      f[:readed_eq] = params[:readed]
+      f[:read_eq] = params[:read]
       f[:anonymous_eq] = params[:anonymous]
     end
   end

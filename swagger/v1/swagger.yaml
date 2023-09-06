@@ -1458,7 +1458,7 @@ paths:
                         type: string
                       message:
                         type: string
-                      readed:
+                      read:
                         type: boolean
                         default: false
                       anonymous:
@@ -1594,9 +1594,9 @@ paths:
         description: is optional by default is "es"
         schema:
           type: string
-      - name: readed
+      - name: read
         in: query
-        description: is optional represent the filter by readed
+        description: is optional represent the filter by read
         schema:
           type: integer
       - name: anonymous
@@ -1633,7 +1633,7 @@ paths:
                           type: string
                         message:
                           type: string
-                        readed:
+                        read:
                           type: boolean
                         anonymous:
                           type: boolean
@@ -1692,9 +1692,9 @@ paths:
         description: is optional by default is "es"
         schema:
           type: string
-      - name: readed
+      - name: read
         in: query
-        description: is optional represent the filter by readed
+        description: is optional represent the filter by read
         schema:
           type: integer
       - name: page
@@ -1726,7 +1726,7 @@ paths:
                           type: string
                         message:
                           type: string
-                        readed:
+                        read:
                           type: boolean
                         anonymous:
                           type: boolean

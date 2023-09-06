@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  anonymous  :boolean          default(FALSE)
 #  message    :string           not null
-#  readed     :boolean          default(FALSE)
+#  read       :boolean          default(FALSE)
 #  ticket     :string           not null
 #  token      :string           not null
 #  created_at :datetime         not null
