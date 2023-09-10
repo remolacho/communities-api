@@ -4,14 +4,18 @@ class Api::V1::Suggestions::DetailController < ApplicationController
   def show
     policy.can_read!
 
-    render json: {success: true,  data: ::Suggestions::DetailSerializer.new(suggestion,
+    service_suggestion = ::Suggestions::ReadService.new(user: current_user,
+                                                        suggestion: suggestion).call
+
+    render json: {success: true,  data: ::Suggestions::DetailSerializer.new(service_suggestion,
                                                                             enterprise_subdomain: enterprise.subdomain)}
   end
 
   private
 
   def policy
-    ::Suggestions::Detail::Policy.new(current_user: current_user, suggestion: suggestion)
+    ::Suggestions::Detail::Policy.new(current_user: current_user,
+                                      suggestion: suggestion)
   end
 
   def suggestion
