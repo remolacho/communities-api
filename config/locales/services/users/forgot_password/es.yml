@@ -27,4 +27,4 @@ es:
           user:
             inactive: 'La cuenta esta inactiva'
         change:
-          success: 'Se realizo el cambio con exito, podras iniciar con tu nueva contraseña'
+          success: 'Se realizo el cambio con éxito, podras iniciar con tu nueva contraseña'

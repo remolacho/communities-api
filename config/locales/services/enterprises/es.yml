@@ -15,4 +15,4 @@ es:
         attribute:
           not_allowed: 'El campo %{attr} no esta permitido'
         not_found: 'La empresa enviada no es valida'
-        success: 'Se actualizo la empresa con exito'
+        success: 'Se actualizo la empresa con éxito'

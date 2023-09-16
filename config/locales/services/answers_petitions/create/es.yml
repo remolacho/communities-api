@@ -5,4 +5,4 @@ es:
         data_empty: "No hay imformacion que almacenar"
         is_resolved: "El estado de la peicion es resuelta, no se pueden crear respuestas"
         allowed_role: "No tiene permiso para crear una respuesta"
-        success: "Se creo una nueva respuesta"
+        success: "Se creo una la respuesta con éxito"

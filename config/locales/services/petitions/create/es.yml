@@ -2,6 +2,7 @@ es:
   services:
     petitions:
       create:
+        success: "Se crea el PQR con éxito"
         data_empty: "No hay imformacion que almacenar"
         category_not_found: "La categoria seleccionada no existe"
         status_not_found: "El estatus no existe"
