@@ -81,6 +81,7 @@ Rails.application.routes.draw do
 
           namespace :statuses do
             get 'list/:token', to: 'list#index'
+            get 'all', to: 'all#index'
             put 'update/:token', to: 'update_status#update'
             # resources :update_status, param: 'token', only: [:update]
           end
