@@ -8,7 +8,13 @@ class Suggestions::ReadService
   end
 
   def call
-    suggestion.update(read: true)
+    suggestion.update(read: can_change_to_read?)
     suggestion.reload
+  end
+
+  private
+
+  def can_change_to_read?
+    user.id != suggestion.user_id
   end
 end
