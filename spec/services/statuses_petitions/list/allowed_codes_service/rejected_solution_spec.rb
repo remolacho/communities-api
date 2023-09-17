@@ -67,6 +67,13 @@ RSpec.describe ::StatusesPetitions::List::AllowedCodesService do
       expect(service.exists?(status_pending.code)).to eq(true)
     end
 
+    it 'error change rejected solution to reviewing' do
+      user_role
+
+      service = described_class.new(user: user, petition: petition)
+      expect(service.exists?(status_reviewing.code)).to eq(true)
+    end
+
     it 'error change rejected solution to confirm' do
       user_role
 
@@ -86,13 +93,6 @@ RSpec.describe ::StatusesPetitions::List::AllowedCodesService do
 
       service = described_class.new(user: user, petition: petition)
       expect(service.exists?(status_resolved.code)).to eq(false)
-    end
-
-    it 'error change rejected solution to reviewing' do
-      user_role
-
-      service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_reviewing.code)).to eq(false)
     end
   end
 end
