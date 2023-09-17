@@ -3,7 +3,9 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
              :title,
              :token,
              :message,
-             :ticket
+             :ticket,
+             :updated_at,
+             :created_at
 
   attribute :status
   attribute :category

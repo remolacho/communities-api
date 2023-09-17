@@ -1,5 +1,9 @@
 class AnswersPetitions::DetailSerializer < ActiveModel::Serializer
-  attributes :id, :message
+  attributes :id,
+             :message,
+             :updated_at,
+             :created_at
+
   attribute :date_at
   attribute :user
 
