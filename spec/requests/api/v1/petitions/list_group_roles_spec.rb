@@ -71,6 +71,18 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }
                          }
+                       },
+                       setting: {
+                         type: :object,
+                         properties: {
+                           reply: {
+                             type: :object,
+                             properties: {
+                               action: { type: :boolean, default: true },
+                               description: { type: :string }
+                             }
+                           }
+                         }
                        }
                      }
                    }

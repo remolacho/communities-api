@@ -854,6 +854,17 @@ paths:
                           avatar_url:
                             type: string
                             nullable: true
+                      setting:
+                        type: object
+                        properties:
+                          reply:
+                            type: object
+                            properties:
+                              action:
+                                type: boolean
+                                default: true
+                              description:
+                                type: string
         '403':
           description: error role not allowed!!!
           content:
@@ -1054,6 +1065,17 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        setting:
+                          type: object
+                          properties:
+                            reply:
+                              type: object
+                              properties:
+                                action:
+                                  type: boolean
+                                  default: true
+                                description:
+                                  type: string
                   paginate:
                     type: object
                     properties:
@@ -1176,6 +1198,17 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        setting:
+                          type: object
+                          properties:
+                            reply:
+                              type: object
+                              properties:
+                                action:
+                                  type: boolean
+                                  default: true
+                                description:
+                                  type: string
                   paginate:
                     type: object
                     properties:
