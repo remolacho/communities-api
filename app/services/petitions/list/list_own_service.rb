@@ -14,6 +14,7 @@ class Petitions::List::ListOwnService
         .includes(:user, :status, :category_petition)
         .ransack(filter.call)
         .result
+        .order(updated_at: :desc)
         .page(page.to_i)
   end
 end

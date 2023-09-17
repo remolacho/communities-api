@@ -17,6 +17,7 @@ class Petitions::List::ListGroupRolesService
             .where(group_role_id: group_roles_ids)
             .ransack(filter.call)
             .result
+            .order(updated_at: :desc)
             .page(page.to_i)
   end
 

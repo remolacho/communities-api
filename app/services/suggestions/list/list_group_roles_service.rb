@@ -15,6 +15,7 @@ class Suggestions::List::ListGroupRolesService
     Suggestion.includes(:user)
               .ransack(filter.call)
               .result
+              .order(updated_at: :desc)
               .page(page.to_i)
   end
 
