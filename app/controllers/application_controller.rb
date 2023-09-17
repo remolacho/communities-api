@@ -1,27 +1,7 @@
 class ApplicationController < ActionController::API
-  include AuthJwtGo
+  include Authorizable
   include ExceptionHandler
   include Translatable
-
-  before_action :switch_tenant
-  before_action :authorized_user
-  before_action :set_language
-  before_action :valid_subdomain!
-  before_action :valid_user_active!
-
-  def switch_tenant
-    Apartment::Tenant.switch!(params[:enterprise_subdomain])
-  rescue StandardError
-    raise PolicyException, I18n.t('services.enterprises.subdomain.invalid')
-  end
-
-  def valid_subdomain!
-    raise PolicyException unless params[:enterprise_subdomain].eql?(current_user.enterprise.subdomain)
-  end
-
-  def valid_user_active!
-    raise PolicyException, I18n.t('services.users.sign_in.inactive') unless current_user.active?
-  end
 
   private
 
