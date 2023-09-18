@@ -1,29 +1,17 @@
 <section class="center card">
-  <h2><%= I18n.t('services.users.sign_up.email_view.header.message1') %> <%= @user.name %> <%= @user.lastname %>,</h2>
+  <h2><%= I18n.t('services.users.sign_up.email_view.header.message1') %> <%= @user.name %> <%= @user.lastname %></h2>
 
   <span style="display: block; width: 30%;">
     <hr style="border-bottom: 1px solid #FF2C5F;" />
   </span>
 
   <p>
-    <%= I18n.t('services.users.sign_up.email_view.body.message1') %>
+    <%= I18n.t('services.users.sign_up.email_view.body.message1', enterprise_name: @enterprise.name) %>
   </p>
-
-  <a href=<%= "#{ENV['BASE_APP']}/auth/active-account?subdomain=#{@enterprise.subdomain}&token=#{@user.active_key}" %>>
-    <button>
-      <%= I18n.t('services.users.sign_up.email_view.body.link') %>
-    </button>
-  </a>
 
   <hr />
 
   <p><%= I18n.t('services.users.sign_up.email_view.body.message2') %></p>
-
-  <span style="display: block; padding: 10px; background-color: #EFF1F4;">
-    <%= "#{ENV['BASE_APP']}/auth/active-account?subdomain=#{@enterprise.subdomain}&token=#{@user.active_key}" %>
-  </span>
-
-  <p><%= I18n.t('services.users.sign_up.email_view.body.message3') %></p>
 
   <p><%= I18n.t('services.users.sign_up.email_view.footer.message1') %></p>
   <p><%= I18n.t('services.users.sign_up.email_view.footer.message2', enterprise_name: @enterprise.name) %></p>

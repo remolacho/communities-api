@@ -17,6 +17,6 @@ class AnswersPetitions::ListService
 
   private
   def answers
-    @answers ||= petition.answers_petitions.includes(:user).order(id: :desc)
+    @answers ||= petition.answers_petitions.includes(:user).order(created_at: :asc)
   end
 end

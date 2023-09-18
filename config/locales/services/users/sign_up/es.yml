@@ -18,10 +18,8 @@ es:
           header:
             message1: "Hola."
           body:
-            message1: 'Hemos recibido una solicitud para activar tu cuenta. Para realizar esta acción, utiliza el siguiente botón:'
-            message2: 'o puedes copiar y pegar este enlace en tu navegador'
-            message3: 'Si no has hecho ningun registro, o sólo fue un error, sólo debes ignorar este mensaje.'
-            link: 'Activar cuenta'
+            message1: 'te damos la bienvenida a %{enterprise_name}, te hemos activado tu cuenta'
+            message2: 'Si no has hecho ningun registro, o sólo fue un error, sólo debes ignorar este mensaje.'
           footer:
             message1: 'Saludos,'
             message2: 'El equipo de %{enterprise_name}'

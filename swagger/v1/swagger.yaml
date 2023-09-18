@@ -658,6 +658,18 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        files:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              ext:
+                                type: string
+                              url:
+                                type: string
+                                nullable: true
         '403':
           description: error role not allowed!!!
           content:
