@@ -53,6 +53,18 @@ RSpec.describe  Api::V1::Petitions::Answers::ListController, type: :request do
                              url: {type: :string, nullable: true }
                            }
                          }
+                       },
+                       setting: {
+                         type: :object,
+                         properties: {
+                           delete: {
+                             type: :object,
+                             properties: {
+                               action: { type: :boolean, default: true },
+                               description: { type: :string }
+                             }
+                           }
+                         }
                        }
                      }
                    }
