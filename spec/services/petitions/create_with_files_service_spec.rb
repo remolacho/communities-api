@@ -82,5 +82,61 @@ RSpec.describe Petitions::CreateService do
       expect(petition.files.attached?).to eq(true)
       expect(petition.files.size).to eq(2)
     end
+
+    it 'error size video file attached!!!' do
+      data = {
+        title: "Test PQR",
+        message: "message test 1",
+        category_petition_id: category.id,
+        group_role_id: group_role.id,
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-14mb.mp4',
+                                             'video/mp4'),
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      expect{service.call}.to raise_error(ArgumentError)
+    end
+
+    it 'success video file attached!!!' do
+      data = {
+        title: "Test PQR",
+        message: "message test 1",
+        category_petition_id: category.id,
+        group_role_id: group_role.id,
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-9mb.mp4',
+                                             'video/mp4'),
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      petition = service.call
+      expect(petition.present?).to eq(true)
+      expect(petition.files.attached?).to eq(true)
+      expect(petition.files.size).to eq(1)
+    end
+
+    it 'success video and audio files attached!!!' do
+      data = {
+        title: "Test PQR",
+        message: "message test 1",
+        category_petition_id: category.id,
+        group_role_id: group_role.id,
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-9mb.mp4',
+                                             'video/mp4'),
+          "1"=> Rack::Test::UploadedFile.new('./spec/files/audios/audio-1.opus',
+                                             'audio/opus'),
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      petition = service.call
+      expect(petition.present?).to eq(true)
+      expect(petition.files.attached?).to eq(true)
+      expect(petition.files.size).to eq(2)
+    end
   end
 end
