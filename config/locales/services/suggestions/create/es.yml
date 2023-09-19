@@ -8,4 +8,4 @@ es:
         files:
           max: "La cantidad permitida de archivos adjuntos es de %{max}"
           type: "El archivo que se adjunta no es permitido"
-          size: "El archivo es muy grande maximo 5 mb"
+          size: "El archivo es muy grande maximo %{mb_size} mb"

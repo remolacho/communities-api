@@ -29,8 +29,8 @@ class Suggestions::ValidateAttachFilesService
 
   def validate_files!
     files.each do |_, file|
-      validate_avatar_content_type!(file)
-      validate_avatar_size!(file)
+      validate_file_content_type!(file)
+      validate_file_size!(file)
     end
   end
 
@@ -40,16 +40,37 @@ class Suggestions::ValidateAttachFilesService
     end
   end
 
-  def validate_avatar_content_type!(file)
+  def validate_file_content_type!(file)
     raise ArgumentError, I18n.t('services.suggestions.create.files.type') unless types.include?(extension(file))
   end
 
-  def validate_avatar_size!(file)
-    raise ArgumentError, I18n.t('services.suggestions.create.files.size') if file.size  > 5.megabytes
+  def validate_file_size!(file)
+    if videos.include?(extension(file))
+      raise ArgumentError, I18n.t('services.suggestions.create.files.size', mb_size: 10) if file.size > 10.megabytes
+      return
+    end
+
+    raise ArgumentError, I18n.t('services.suggestions.create.files.size', mb_size: 5) if file.size  > 5.megabytes
   end
 
   def types
-    @types ||= %w(jpeg jpg png xlsx doc docx xls pdf)
+    @types ||= docs | videos | images | audios
+  end
+
+  def docs
+    @docs ||= %w(xlsx doc docx xls pdf)
+  end
+
+  def videos
+    @videos ||= %w(mp4)
+  end
+
+  def images
+    @images ||= %w(jpeg jpg png)
+  end
+
+  def audios
+    @audios ||= %w(opus)
   end
 
   def extension(file)
