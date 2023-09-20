@@ -1,0 +1,78 @@
+{
+  "dashboard":  {
+    "code": "dashboard",
+    "show": true
+  },
+  "enterprise": {
+    "code": "enterprise",
+    "show": true,
+    "items": {
+      "detail": {
+        "code": "detail",
+        "show":  true
+      },
+      "edit": {
+        "code": "edit",
+        "show":  true
+      }
+    }
+  },
+  "users": {
+    "code": "users",
+    "show": true,
+    "items": {
+      "profile": {
+        "code": "profile",
+        "show":  true
+      },
+      "list": {
+        "code": "list",
+        "show":  true
+      },
+      "assignRoles": {
+        "code": "assignRoles",
+        "show":  true
+      },
+      "removeRoles": {
+        "code": "removeRoles",
+        "show":  true
+      }
+    }
+  },
+  "pqrs": {
+    "code": "pqrs",
+    "show": true,
+    "items": {
+      "create": {
+        "code": "create",
+        "show": true
+      },
+      "selfPqrs": {
+        "code": "selfPqrs",
+        "show": true
+      },
+      "list": {
+        "code": "list",
+        "show": true
+      }
+    }
+  },
+  "suggestions": {
+    "code": "suggestions",
+    "show": true,
+    "items": {
+      "create": {
+        "code": "create",
+        "show": true
+      },
+      "selfSuggestions": {
+        "code": "selfSuggestions",
+        "show": true
+      },
+      "list": {
+        "code": "list",
+        "show": true
+      }
+    }
+  }
+}

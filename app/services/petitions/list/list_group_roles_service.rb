@@ -10,8 +10,7 @@ class Petitions::List::ListGroupRolesService
   end
 
   def call
-    raise PolicyException unless user_roles_ids.present?
-    raise PolicyException unless group_roles_ids.present?
+    policy.can_read!
 
     Petition.includes(:user, :status, :category_petition)
             .where(group_role_id: group_roles_ids)
@@ -22,6 +21,10 @@ class Petitions::List::ListGroupRolesService
   end
 
   private
+
+  def policy
+    @policy ||= ::Petitions::List::Policy.new(current_user: user)
+  end
 
   def group_roles_ids
     @group_roles_ids ||= GroupRoleRelation.where(role_id: user_roles_ids).pluck(:group_role_id).uniq
