@@ -42,6 +42,7 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            code: { type: :string },
                            color: { type: :string }
@@ -68,6 +69,18 @@ RSpec.describe  Api::V1::Petitions::ListOwnController, type: :request do
                            name: { type: :string },
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }
+                         }
+                       },
+                       setting: {
+                         type: :object,
+                         properties: {
+                           reply: {
+                             type: :object,
+                             properties: {
+                               action: { type: :boolean, default: true },
+                               description: { type: :string }
+                             }
+                           }
                          }
                        }
                      }

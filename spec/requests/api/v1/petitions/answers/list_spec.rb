@@ -42,6 +42,29 @@ RSpec.describe  Api::V1::Petitions::Answers::ListController, type: :request do
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }
                          }
+                       },
+                       files: {
+                         type: :array,
+                         items: {
+                           type: :object,
+                           properties: {
+                             name: { type: :string },
+                             ext: { type: :string },
+                             url: {type: :string, nullable: true }
+                           }
+                         }
+                       },
+                       setting: {
+                         type: :object,
+                         properties: {
+                           delete: {
+                             type: :object,
+                             properties: {
+                               action: { type: :boolean, default: true },
+                               description: { type: :string }
+                             }
+                           }
+                         }
                        }
                      }
                    }

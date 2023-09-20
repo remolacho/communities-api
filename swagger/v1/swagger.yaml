@@ -43,6 +43,8 @@ paths:
                       properties:
                         id:
                           type: integer
+                        slug:
+                          type: string
                         name:
                           type: string
         '403':
@@ -57,12 +59,12 @@ paths:
                     default: false
                   message:
                     type: string
-  "/{enterprise_subdomain}/v1/enterprise/setting":
+  "/{enterprise_subdomain}/v1/enterprise/profile":
     get:
-      summary: Find the setting and data of current enterprise
+      summary: Find the profile and data of current enterprise
       tags:
       - Community API V1 Enterprises
-      description: Find the setting and data of current enterprise
+      description: Find the profile and data of current enterprise
       parameters:
       - name: Authorization
         in: header
@@ -108,6 +110,79 @@ paths:
                       subdomain:
                         type: string
                       logo_url:
+                        type: string
+                        nullable: true
+                      banner_url:
+                        type: string
+                        nullable: true
+                      reference_regex:
+                        type: string
+                      short_name:
+                        type: string
+                      active:
+                        type: boolean
+                        default: true
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/enterprise/setting":
+    get:
+      summary: Find the setting and data of current enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: Find the setting and data of current enterprise
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      subdomain:
+                        type: string
+                      name:
+                        type: string
+                      logo_url:
+                        type: string
+                        nullable: true
+                      banner_url:
                         type: string
                         nullable: true
         '403':
@@ -166,6 +241,93 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/enterprise/update/{token}":
+    put:
+      summary: Modify the profile of the current enterprise
+      tags:
+      - Community API V1 Enterprises
+      description: Modify the profile of the current enterprise
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: token of the enterprise"
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: error enterprise not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: error user not valid!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enterprise:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    address:
+                      type: string
+                    rut:
+                      type: string
+                    logo:
+                      type: string
+                      description: the file of image
+                    banner:
+                      type: string
+                      description: the file of image
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity
@@ -496,6 +658,29 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        files:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              ext:
+                                type: string
+                              url:
+                                type: string
+                                nullable: true
+                        setting:
+                          type: object
+                          properties:
+                            delete:
+                              type: object
+                              properties:
+                                action:
+                                  type: boolean
+                                  default: true
+                                description:
+                                  type: string
         '403':
           description: error role not allowed!!!
           content:
@@ -604,6 +789,71 @@ paths:
                       type: array
                       items:
                         type: string
+  "/{enterprise_subdomain}/v1/petition/dashboard/chart_statuses":
+    get:
+      summary: Find all petitions by status and calculate percentage
+      tags:
+      - Community API V1 Petitions
+      description: Find all petitions by status and calculate percentage
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        code:
+                          type: string
+                        name:
+                          type: string
+                        color:
+                          type: string
+                        percentage:
+                          type: number
+                        counter:
+                          type: integer
+                        total:
+                          type: integer
+                        symbol:
+                          type: string
+        '403':
+          description: error role not allowed!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/petition/detail/{token}":
     get:
       summary: Find the detail of petition
@@ -692,6 +942,17 @@ paths:
                           avatar_url:
                             type: string
                             nullable: true
+                      setting:
+                        type: object
+                        properties:
+                          reply:
+                            type: object
+                            properties:
+                              action:
+                                type: boolean
+                                default: true
+                              description:
+                                type: string
         '403':
           description: error role not allowed!!!
           content:
@@ -856,6 +1117,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             code:
@@ -881,6 +1144,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             lastname:
@@ -888,6 +1153,17 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        setting:
+                          type: object
+                          properties:
+                            reply:
+                              type: object
+                              properties:
+                                action:
+                                  type: boolean
+                                  default: true
+                                description:
+                                  type: string
                   paginate:
                     type: object
                     properties:
@@ -976,6 +1252,8 @@ paths:
                           properties:
                             id:
                               type: integer
+                            identifier:
+                              type: string
                             name:
                               type: string
                             code:
@@ -1008,6 +1286,17 @@ paths:
                             avatar_url:
                               type: string
                               nullable: true
+                        setting:
+                          type: object
+                          properties:
+                            reply:
+                              type: object
+                              properties:
+                                action:
+                                  type: boolean
+                                  default: true
+                                description:
+                                  type: string
                   paginate:
                     type: object
                     properties:
@@ -1019,6 +1308,63 @@ paths:
                         type: integer
         '403':
           description: error the user not logged!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/petition/statuses/all":
+    get:
+      summary: Find all statuses of type petition
+      tags:
+      - Community API V1 Statuses petition
+      description: Allow to users find all statuses of type petition
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        as_name:
+                          type: string
+                        code:
+                          type: string
+                        color:
+                          type: string
+        '403':
+          description: error user logged!
           content:
             application/json:
               schema:
@@ -1105,7 +1451,7 @@ paths:
                     default: false
                   message:
                     type: string
-  "/{enterprise_subdomain}/v1/petition/update_status/{token}":
+  "/{enterprise_subdomain}/v1/petition/statuses/update/{token}":
     put:
       summary: Change status to petition
       tags:
@@ -1298,7 +1644,7 @@ paths:
                         type: string
                       message:
                         type: string
-                      readed:
+                      read:
                         type: boolean
                         default: false
                       anonymous:
@@ -1434,9 +1780,9 @@ paths:
         description: is optional by default is "es"
         schema:
           type: string
-      - name: readed
+      - name: read
         in: query
-        description: is optional represent the filter by readed
+        description: is optional represent the filter by read
         schema:
           type: integer
       - name: anonymous
@@ -1473,7 +1819,7 @@ paths:
                           type: string
                         message:
                           type: string
-                        readed:
+                        read:
                           type: boolean
                         anonymous:
                           type: boolean
@@ -1532,9 +1878,9 @@ paths:
         description: is optional by default is "es"
         schema:
           type: string
-      - name: readed
+      - name: read
         in: query
-        description: is optional represent the filter by readed
+        description: is optional represent the filter by read
         schema:
           type: integer
       - name: page
@@ -1566,7 +1912,7 @@ paths:
                           type: string
                         message:
                           type: string
-                        readed:
+                        read:
                           type: boolean
                         anonymous:
                           type: boolean
@@ -1576,6 +1922,8 @@ paths:
                             id:
                               type: integer
                               nullable: true
+                            identifier:
+                              type: string
                             name:
                               type: string
                             lastname:
@@ -1606,10 +1954,65 @@ paths:
                     type: string
   "/{enterprise_subdomain}/v1/user_roles/import/create":
     post:
-      summary: Allow to users create roles to userss
+      summary: Allow to users create roles to users
       tags:
       - Community API V1 Users Roles
-      description: Allow to users create roles to users by xlsxs
+      description: Allow to users create roles to users by xlsx
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: user_roles_file
+        in: form
+        description: the file import user roles
+        schema:
+          type: file
+      responses:
+        '200':
+          description: success, but It can finish with errors!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '403':
+          description: user not role admin or super admin!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/user_roles/import/remove":
+    delete:
+      summary: Allow to users remove roles to users
+      tags:
+      - Community API V1 Users Roles
+      description: Allow to users remove roles to users by xlsx
       parameters:
       - name: Authorization
         in: header
@@ -1982,6 +2385,8 @@ paths:
                       properties:
                         id:
                           type: integer
+                        token:
+                          type: string
                         name:
                           type: string
                         lastname:
@@ -2033,6 +2438,11 @@ paths:
         required: true
         schema:
           type: string
+      - name: token
+        in: query
+        description: is optional, the token of user
+        schema:
+          type: string
       - name: lang
         in: query
         description: is optional by default is "es"
@@ -2040,7 +2450,7 @@ paths:
           type: string
       responses:
         '200':
-          description: success!!!
+          description: success other user!!!
           content:
             application/json:
               schema:
@@ -2054,6 +2464,8 @@ paths:
                     properties:
                       id:
                         type: integer
+                      token:
+                        type: string
                       name:
                         type: string
                       lastname:
@@ -2071,6 +2483,24 @@ paths:
                       avatar_url:
                         type: string
                         nullable: true
+                      setting:
+                        type: object
+                        properties:
+                          can_edit:
+                            type: boolean
+                            default: true
+        '404':
+          description: user token not found !!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
         '403':
           description: error user not valid!!!
           content:

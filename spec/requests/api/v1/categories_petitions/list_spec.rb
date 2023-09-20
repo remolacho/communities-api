@@ -30,6 +30,7 @@ RSpec.describe Api::V1::CategoriesPetitions::ListController , type: :request do
                      type: :object,
                        properties: {
                          id: { type: :integer },
+                         slug: { type: :string },
                          name: { type: :string }
                        }
                    }

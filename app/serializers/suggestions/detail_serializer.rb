@@ -3,7 +3,7 @@ class Suggestions::DetailSerializer < ActiveModel::Serializer
              :token,
              :message,
              :ticket,
-             :readed,
+             :read,
              :anonymous
 
   attribute :user

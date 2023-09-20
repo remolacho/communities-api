@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::ListController, type: :request do
+RSpec.describe Api::V1::Users::ChangeStatusController, type: :request do
   include_context 'change_status_stuff'
 
   let(:lang) { 'es' }
@@ -22,6 +22,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
 
       response 200, 'success!!!' do
         let(:'Authorization') {
+          group_role_relations
           user_role_admin
           sign_in
         }
@@ -50,6 +51,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
                }
 
         let(:token) {
+          group_role_relations
           user_enterprise_to_change
           user_to_change.token
         }
@@ -59,6 +61,7 @@ RSpec.describe  Api::V1::Users::ListController, type: :request do
 
       response 404, 'error the user token!!!' do
         let(:'Authorization') {
+          group_role_relations
           user_role_admin
           sign_in
         }

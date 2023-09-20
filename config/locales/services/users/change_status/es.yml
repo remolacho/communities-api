@@ -2,4 +2,4 @@ es:
   services:
     users:
       change_status:
-        success: 'Se cambio el estado de su cuenta con exito'
+        success: 'Se cambio el estado de la cuenta con éxito'

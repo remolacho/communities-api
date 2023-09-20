@@ -23,6 +23,6 @@ class Api::V1::UserRoles::Import::CreateController < ApplicationController
   end
 
   def policy
-    ::UserRoles::Import::Policy.new(current_user: current_user)
+    ::UserRoles::Import::Create::Policy.new(current_user: current_user)
   end
 end

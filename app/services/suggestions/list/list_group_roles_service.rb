@@ -10,11 +10,12 @@ class Suggestions::List::ListGroupRolesService
   end
 
   def call
-    raise PolicyException unless policy.can_read!
+    policy.can_read!
 
     Suggestion.includes(:user)
               .ransack(filter.call)
               .result
+              .order(updated_at: :desc)
               .page(page.to_i)
   end
 

@@ -12,11 +12,12 @@ class AnswersPetitions::ListService
   def call
     ActiveModelSerializers::SerializableResource.new(answers,
                                                      each_serializer: ::AnswersPetitions::DetailSerializer,
-                                                     enterprise_subdomain: user.enterprise.subdomain)
+                                                     enterprise_subdomain: user.enterprise.subdomain,
+                                                     current_user: user)
   end
 
   private
   def answers
-    @answers ||= petition.answers_petitions.includes(:user).order(id: :desc)
+    @answers ||= petition.answers_petitions.includes(:user, :petition).order(created_at: :asc)
   end
 end

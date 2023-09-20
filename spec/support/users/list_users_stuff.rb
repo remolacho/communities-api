@@ -13,6 +13,12 @@ shared_context 'list_users_stuff' do
     FactoryBot.create(:role, :owner)
   }
 
+  let(:listed_users) { FactoryBot.create(:group_role, :listed_users) }
+
+  let(:group_role_relations) {
+    [FactoryBot.create(:group_role_relation, role: role_manager, group_role: listed_users)]
+  }
+
   let!(:user_roles){
     [
       FactoryBot.create(:user_role, user_id: user.id, role_id: role_manager.id),

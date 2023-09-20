@@ -61,14 +61,14 @@ RSpec.describe ::Suggestions::List::ListGroupRolesService do
       expect(service.call.size).to eq(acum)
     end
 
-    it 'it return success, all suggestions readed' do
+    it 'it return success, all suggestions read' do
       user_role_manager
       group_listed_suggestions
       group_role_relations
       acum = suggestions_readed.size
       suggestions.size
 
-      params = { readed: true }
+      params = { read: true }
 
       filter = ::Suggestions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
@@ -89,14 +89,14 @@ RSpec.describe ::Suggestions::List::ListGroupRolesService do
       expect(service.call.size).to eq(acum)
     end
 
-    it 'it return success, all suggestions readed and anonymous' do
+    it 'it return success, all suggestions read and anonymous' do
       user_role_manager
       group_listed_suggestions
       group_role_relations
       acum = suggestions_anonymous_readed.size
       suggestions.size
 
-      params = { anonymous: true, readed: true}
+      params = { anonymous: true, read: true}
 
       filter = ::Suggestions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
@@ -121,7 +121,7 @@ RSpec.describe ::Suggestions::List::ListGroupRolesService do
       expect(service.call.size).to eq(acum)
     end
 
-    it 'it return success, all suggestions that are not readed' do
+    it 'it return success, all suggestions that are not read' do
       user_role_manager
       group_listed_suggestions
       group_role_relations
@@ -132,7 +132,7 @@ RSpec.describe ::Suggestions::List::ListGroupRolesService do
       suggestions_readed
       suggestions_anonymous_readed
 
-      params = { readed: false }
+      params = { read: false }
 
       filter = ::Suggestions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)

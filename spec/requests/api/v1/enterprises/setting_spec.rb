@@ -3,7 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
-  include_context 'detail_stuff'
+  include_context 'enterprise_setting_stuff'
 
   let(:lang) { 'es' }
   let(:enterprise_subdomain) { 'public' }
@@ -26,14 +26,11 @@ RSpec.describe  Api::V1::Enterprises::SettingController, type: :request do
                  success: { type: :boolean, default: true },
                  data: { type: :object,
                          properties: {
-                           id: {type: :integer},
-                           rut: {type: :string},
-                           email: {type: :string},
                            token: {type: :string},
-                           name: {type: :string},
-                           address: {type: :string, nullable: true },
                            subdomain: {type: :string},
-                           logo_url: {type: :string, nullable: true }
+                           name: {type: :string},
+                           logo_url: {type: :string, nullable: true },
+                           banner_url: {type: :string, nullable: true }
                          }
                 }
                }

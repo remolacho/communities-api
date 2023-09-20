@@ -6,11 +6,10 @@ module Enterprises
 
     def logo_url
       return unless logo.attached?
-
-      return logo.url unless Rails.env.test?
+      return logo.url unless Rails.env.test? || ENV['LOCAL_STORAGE'].eql?('local')
 
       url_path = Rails.application.routes.url_helpers.rails_blob_path(logo, only_path: true)
-      "#{ENV['BASE_HOST']}#{url_path}?enterprise_subdomain=#{enterprise.subdomain}"
+      "#{ENV['BASE_HOST']}#{url_path}?enterprise_subdomain=#{subdomain}"
     end
   end
 end

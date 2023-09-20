@@ -18,7 +18,7 @@ RSpec.describe  Api::V1::Suggestions::ListOwnController, type: :request do
       parameter name: 'Authorization', in: :header, required: true
       parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
-      parameter name: :readed, in: :query, type: :integer, description: 'is optional represent the filter by readed'
+      parameter name: :read, in: :query, type: :integer, description: 'is optional represent the filter by read'
       parameter name: :page, in: :query, type: :string, description: 'is optional represent the number page of find'
 
       response 200, 'success!!!' do
@@ -36,12 +36,13 @@ RSpec.describe  Api::V1::Suggestions::ListOwnController, type: :request do
                        token: { type: :string },
                        title: { type: :string },
                        message: { type: :string },
-                       readed: { type: :boolean },
+                       read: { type: :boolean },
                        anonymous: { type: :boolean },
                        user: {
                          type: :object,
                          properties: {
                            id: { type: :integer, nullable: true },
+                           identifier: { type: :string },
                            name: { type: :string },
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }
@@ -66,7 +67,7 @@ RSpec.describe  Api::V1::Suggestions::ListOwnController, type: :request do
           "1"
         }
 
-        let(:readed) { }
+        let(:read) { }
 
         run_test!
       end
@@ -80,7 +81,7 @@ RSpec.describe  Api::V1::Suggestions::ListOwnController, type: :request do
                  message: { type: :string }
                }
 
-        let(:readed) {}
+        let(:read) {}
         let(:page) { "1" }
 
         run_test!

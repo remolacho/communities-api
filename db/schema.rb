@@ -156,7 +156,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_133557) do
     t.string "token", null: false
     t.string "ticket", null: false
     t.string "message", null: false
-    t.boolean "readed", default: false
+    t.boolean "read", default: false
     t.boolean "anonymous", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

@@ -25,8 +25,8 @@ shared_context 'list_own_suggestions_stuff' do
 
   let(:suggestions_readed) {
     [
-      { message: FFaker::Name.first_name * 10, readed: true },
-      { message: FFaker::Name.first_name * 10, readed: true }
+      { message: FFaker::Name.first_name * 10, read: true },
+      { message: FFaker::Name.first_name * 10, read: true }
     ].map do |data|
       ::Suggestions::CreateService.new(user: user, data: data).call
     end
@@ -34,8 +34,8 @@ shared_context 'list_own_suggestions_stuff' do
 
   let(:suggestions_anonymous_readed) {
     [
-      { message: FFaker::Name.first_name * 10, readed: true, anonymous: true },
-      { message: FFaker::Name.first_name * 10, readed: true, anonymous: true }
+      { message: FFaker::Name.first_name * 10, read: true, anonymous: true },
+      { message: FFaker::Name.first_name * 10, read: true, anonymous: true }
     ].map do |data|
       ::Suggestions::CreateService.new(user: user, data: data).call
     end

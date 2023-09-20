@@ -22,15 +22,15 @@ class Suggestions::Detail::Policy < ::BasePolicy
   end
 
   def has_role?
-    group_role.present? && group_role_relations.present?
+    group_role.present? && !group_role_relations.zero?
   end
 
   def group_role_relations
-    @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids)
+    @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids).count
   end
 
   def group_role
-    @group_role ||= GroupRole.find_by(code: :view_suggestions)
+    @group_role ||= GroupRole.find_by(code: :show_suggestion, entity_type: Suggestion::ENTITY_TYPE)
   end
 
   def user_roles_ids

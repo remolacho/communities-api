@@ -6,9 +6,12 @@ class StatusesPetitions::List::Factory::RejectedSolution < StatusesPetitions::Li
 
   # override
   def statuses
-    return [Status.petition_pending] unless owner?
+    return [Status.petition_confirm] if owner?
 
-    [Status.petition_confirm]
+    [
+      Status.petition_pending,
+      Status.petition_reviewing
+    ]
   end
 
   # override

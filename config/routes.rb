@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
         namespace :enterprises, path: 'enterprise' do
           resources :setting, only: [:index]
+          resources :profile, only: [:index]
           resources :subdomain, only: [:index]
+          resources :update, param: :token, only: [:update]
         end
 
         namespace :users do
@@ -44,7 +46,6 @@ Rails.application.routes.draw do
         namespace :petitions, path: 'petition' do
           resources :create, only: [:create]
           resources :detail, param: 'token', only: [:show]
-          resources :update_status, param: 'token', only: [:update]
           resources :list_own, only: [:index]
           resources :list_group_roles, only: [:index]
 
@@ -80,6 +81,13 @@ Rails.application.routes.draw do
 
           namespace :statuses do
             get 'list/:token', to: 'list#index'
+            get 'all', to: 'all#index'
+            put 'update/:token', to: 'update_status#update'
+            # resources :update_status, param: 'token', only: [:update]
+          end
+
+          namespace :dashboard do
+            resources :chart_statuses, only: [:index]
           end
         end
 
@@ -113,6 +121,11 @@ Rails.application.routes.draw do
 
           namespace :import do
             resources :create, only: [:create]
+            resources :remove, path: '', only: [] do
+              collection do
+                delete 'remove', to: 'remove#delete'
+              end
+            end
           end
         end
       end

@@ -17,7 +17,7 @@ class AnswersPetitions::CreateService
       files = validate_attach_files_service.call
       answer = petition.answers_petitions.create!(allowed_data)
       answer.files.attach(files) if files.present?
-      notification
+      notification(answer)
 
       answer
     end
@@ -25,12 +25,13 @@ class AnswersPetitions::CreateService
 
   private
 
-  def notification
+  def notification(answer)
     return unless allowed_mail?
 
     AnswerPetitionMailer.notify(user: user_petition,
                                 enterprise: user.enterprise ,
-                                petition: petition).deliver_now!
+                                petition: petition,
+                                answer: answer).deliver_now!
   end
 
   def allowed_mail?

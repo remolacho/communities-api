@@ -22,14 +22,14 @@ shared_context 'create_answer_petition_stuff' do
 
   }
 
-  let(:role1){ FactoryBot.create(:role, :coexistence_member) }
-  let(:role2){ FactoryBot.create(:role, :committee_member) }
+  let(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
+  let(:role_council_member){ FactoryBot.create(:role, :council_member) }
 
   let(:group_role) {
-    group = FactoryBot.create(:group_role, :coexistence_committee)
+    group = FactoryBot.create(:group_role, :council_coexistence)
 
-    FactoryBot.create(:group_role_relation, role: role1, group_role: group)
-    FactoryBot.create(:group_role_relation, role: role2, group_role: group)
+    FactoryBot.create(:group_role_relation, role: role_coexistence_member, group_role: group)
+    FactoryBot.create(:group_role_relation, role: role_council_member, group_role: group)
 
     group
   }
@@ -61,6 +61,6 @@ shared_context 'create_answer_petition_stuff' do
   }
 
   let(:user_role_answer){
-    FactoryBot.create(:user_role, user_id: user_answer.id, role_id: role2.id)
+    FactoryBot.create(:user_role, user_id: user_answer.id, role_id: role_council_member.id)
   }
 end

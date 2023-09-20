@@ -11,6 +11,11 @@ module Statuses
     PETITION_RESOLVE = 'pet-resolve'
 
     included do
+      scope :all_of_petitions, ->(lang) {
+        where(status_type: PETITION)
+          .select("id, code, color, name::json->>'#{lang}' as as_name")
+      }
+
       scope :petition_pending, -> {
         find_by(status_type: PETITION, code: PETITION_PENDING)
       }

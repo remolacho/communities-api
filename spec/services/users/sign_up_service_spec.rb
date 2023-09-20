@@ -127,7 +127,7 @@ RSpec.describe ::Users::SignUpService do
       new_user = service.call
 
       expect(new_user.enterprise.subdomain).to eq(enterprise.subdomain)
-      expect(new_user.roles.find_by(code: 'oamin').present?).to eq(true)
+      expect(new_user.roles.find_by(code: 'owner_admin').present?).to eq(true)
     end
   end
 

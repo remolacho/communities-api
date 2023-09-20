@@ -10,11 +10,11 @@ RSpec.describe Suggestions::CreateService do
       data = {
         message: "message test 1",
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-         "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-         "3"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+         "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+         "3"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         }
       }
@@ -27,9 +27,9 @@ RSpec.describe Suggestions::CreateService do
       data = {
         message: "message test 1",
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-          "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/1-extension-error.csv',
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          "1"=>  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/1-extension-error.csv',
                                               ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         }
       }
@@ -42,8 +42,8 @@ RSpec.describe Suggestions::CreateService do
       data = {
         message: "message test 1",
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/muy-grande.png',
                                               ' image/png')
         }
@@ -57,10 +57,57 @@ RSpec.describe Suggestions::CreateService do
       data = {
         message: "message test 1",
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
           "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
-                                              ' image/jpg')
+                                              ' image/jpeg')
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      suggestion = service.call
+      expect(suggestion.present?).to eq(true)
+      expect(suggestion.files.attached?).to eq(true)
+      expect(suggestion.files.size).to eq(2)
+    end
+
+    it 'error size video file attached!!!' do
+      data = {
+        message: "message test 1",
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-14mb.mp4',
+                                             'video/mp4'),
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      expect{service.call}.to raise_error(ArgumentError)
+    end
+
+    it 'success video file attached!!!' do
+      data = {
+        message: "message test 1",
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-9mb.mp4',
+                                             'video/mp4'),
+        }
+      }
+
+      service = described_class.new(user: user, data: data)
+      suggestion = service.call
+      expect(suggestion.present?).to eq(true)
+      expect(suggestion.files.attached?).to eq(true)
+      expect(suggestion.files.size).to eq(1)
+    end
+
+    it 'success video and audio files attached!!!' do
+      data = {
+        message: "message test 1",
+        files: {
+          "0"=> Rack::Test::UploadedFile.new('./spec/files/videos/video-9mb.mp4',
+                                             'video/mp4'),
+          "1"=> Rack::Test::UploadedFile.new('./spec/files/audios/audio-1.opus',
+                                             'audio/opus'),
         }
       }
 

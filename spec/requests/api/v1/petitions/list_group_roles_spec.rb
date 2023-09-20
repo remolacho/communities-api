@@ -42,6 +42,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            code: { type: :string },
                            color: { type: :string }
@@ -65,9 +66,22 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
+                           identifier: { type: :string },
                            name: { type: :string },
                            lastname: { type: :string },
                            avatar_url: {type: :string, nullable: true }
+                         }
+                       },
+                       setting: {
+                         type: :object,
+                         properties: {
+                           reply: {
+                             type: :object,
+                             properties: {
+                               action: { type: :boolean, default: true },
+                               description: { type: :string }
+                             }
+                           }
                          }
                        }
                      }
@@ -87,7 +101,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
           user_role_owner_admin
           user_role_admin
           group_role_admin
-          user_role_committee_member
+          user_role_council_member
 
           claims
           petitions
@@ -115,7 +129,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
 
         let(:status_id) {
           user_role_owner_admin
-          group_role_coexistence_committee
+          group_role_council_coexistence
           ""
         }
 

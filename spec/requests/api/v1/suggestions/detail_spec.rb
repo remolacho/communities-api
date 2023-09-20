@@ -33,7 +33,7 @@ RSpec.describe  Api::V1::Suggestions::DetailController, type: :request do
                      ticket: { type: :string },
                      token: { type: :string },
                      message: { type: :string },
-                     readed: { type: :boolean, default: false },
+                     read: { type: :boolean, default: false },
                      anonymous: { type: :boolean, default: false },
                      user: {
                        type: :object,

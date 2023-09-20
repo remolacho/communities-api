@@ -9,9 +9,9 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
   let(:enterprise_subdomain) { 'public' }
 
   path '/{enterprise_subdomain}/v1/user_roles/import/create' do
-    post 'Allow to users create roles to userss' do
+    post 'Allow to users create roles to users' do
       tags 'Community API V1 Users Roles'
-      description "Allow to users create roles to users by xlsxs"
+      description "Allow to users create roles to users by xlsx"
       produces 'application/json'
       consumes 'multipart/form-data'
       parameter name: 'Authorization', in: :header, required: true
@@ -21,13 +21,15 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
 
       response 200, 'success, but It can finish with errors!!' do
         let(:'Authorization') {
+          new_user
+          group_role_relations_assign
           user_role_admin
           sign_in
         }
 
         let(:user_roles_file) {
           {
-            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                                      ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
           }
         }
@@ -48,11 +50,16 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
       end
 
       response 403, 'user not role admin or super admin!!!' do
-        let(:'Authorization') { sign_in }
+        let(:'Authorization') {
+          new_user
+          group_role_relations_assign
+          user_role_coexistence
+          sign_in
+        }
 
         let(:user_roles_file) {
           {
-            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/6-finish.xlsx',
+            user_roles_file: Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
                                                      ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
           }
         }

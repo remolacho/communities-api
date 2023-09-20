@@ -41,7 +41,7 @@ module Users
     def validate_avatar_content_type
       return unless avatar.attached?
 
-      types = %w(image/jpeg image/png image/jpg)
+      types = %w(image/jpeg image/png image/jpeg)
 
       raise ArgumentError, I18n.t('services.users.sign_up.avatar.type') unless avatar.content_type.in?(types)
     end

@@ -12,7 +12,7 @@ Apartment.configure do |config|
   config.excluded_models = %w[Tenant]
 end
 
-Rails.application.config.middleware.use EnterpriseElevator
+# Rails.application.config.middleware.use EnterpriseElevator
 
 # Rails.application.config.middleware.use Apartment::Elevators::Domain
 # Apartment::Elevators::Subdomain.excluded_subdomains = ['www']

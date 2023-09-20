@@ -10,8 +10,8 @@ shared_context 'group_roles_stuff' do
   let!(:group_roles) {
     [
       FactoryBot.create(:group_role, :all),
-      FactoryBot.create(:group_role, :admin_committee),
-      FactoryBot.create(:group_role, :coexistence_committee)
+      FactoryBot.create(:group_role, :admin_coexistence),
+      FactoryBot.create(:group_role, :council_coexistence)
     ]
   }
 end

@@ -17,6 +17,12 @@ shared_context 'change_status_stuff' do
     FactoryBot.create(:role, :role_admin)
   }
 
+  let(:change_status_user) { FactoryBot.create(:group_role, :change_status_user) }
+
+  let(:group_role_relations) {
+    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: change_status_user)]
+  }
+
   let!(:user_roles){
     [
       FactoryBot.create(:user_role, user_id: user.id, role_id: role_manager.id),

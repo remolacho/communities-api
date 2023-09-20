@@ -2,6 +2,7 @@ es:
   services:
     petitions:
       create:
+        success: "Se crea el PQR con éxito"
         data_empty: "No hay imformacion que almacenar"
         category_not_found: "La categoria seleccionada no existe"
         status_not_found: "El estatus no existe"
@@ -9,4 +10,4 @@ es:
         files:
           max: "La cantidad permitida de archivos adjuntos es de %{max}"
           type: "El archivo que se adjunta no es permitido"
-          size: "El archivo es muy grande maximo 5 mb"
+          size: "El archivo es muy grande maximo %{mb_size} mb"

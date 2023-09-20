@@ -1,3 +1,3 @@
 class CategoryPetitions::DetailSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :slug
 end
