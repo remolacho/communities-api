@@ -13,7 +13,7 @@
     <%= I18n.t("services.answers_petitions.mail.nofify.body.message2") %>
   </p>
   <p>
-    <%= html_safe(@answer.message) %>
+    <%= @answer.message %>
   </p>
   <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message1') %></p>
   <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message2', enterprise_name: @enterprise.name) %></p>
