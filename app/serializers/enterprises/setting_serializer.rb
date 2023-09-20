@@ -5,6 +5,7 @@ class Enterprises::SettingSerializer < ActiveModel::Serializer
 
   attribute :logo_url
   attribute :banner_url
+  attribute :menu
 
   def logo_url
     raise ArgumentError if object.subdomain.nil?
@@ -16,5 +17,9 @@ class Enterprises::SettingSerializer < ActiveModel::Serializer
     raise ArgumentError if object.subdomain.nil?
 
     object.banner_url
+  end
+
+  def menu
+    instance_options[:menu].build
   end
 end
