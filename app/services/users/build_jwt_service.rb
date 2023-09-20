@@ -14,8 +14,8 @@ class Users::BuildJwtService
 
   def build
     sign_jwt
-  rescue StandardError
-    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error'))
+  rescue StandardError => e
+    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error', e: e.to_s))
   end
 
   private
