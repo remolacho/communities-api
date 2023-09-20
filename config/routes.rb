@@ -85,6 +85,10 @@ Rails.application.routes.draw do
             put 'update/:token', to: 'update_status#update'
             # resources :update_status, param: 'token', only: [:update]
           end
+
+          namespace :dashboard do
+            resources :chart_statuses, only: [:index]
+          end
         end
 
         namespace :suggestions, path: 'suggestion' do
