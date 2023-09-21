@@ -2,6 +2,8 @@ class AnswerPetitionMailer < ApplicationMailer
   def notify(user:, enterprise:, petition:, answer:)
     return unless can_send_email?
 
+    attachments.inline['logo2.png'] = File.read("#{Rails.root}/app/assets/images/logo2.png")
+
     @user = user
     @enterprise = enterprise
     @petition = petition
