@@ -11,7 +11,7 @@ es:
               limit: "La referencia ya esta mas de %{limit} veces regitrada comuniquese con el administrador"
         avatar:
           nil: 'Debes agragar una imagen'
-          size: 'El tamaño de la imagen no debe ser mayor a 1 mb'
+          size: 'El tamaño de la imagen no debe ser mayor a 5 mb'
           type: 'Solo deben ser imagenes (jpeg, jpg, png)'
           success: 'Se cargo una nueva imagen a tu perfil'
         email_view:

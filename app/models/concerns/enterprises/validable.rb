@@ -39,7 +39,7 @@ module Enterprises
     def validate_logo_size
       return unless logo.attached?
 
-      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if logo.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if logo.byte_size > 5.megabytes
     end
 
     def validate_banner_content_type
@@ -53,7 +53,7 @@ module Enterprises
     def validate_banner_size
       return unless banner.attached?
 
-      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if banner.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if banner.byte_size > 5.megabytes
     end
   end
 end

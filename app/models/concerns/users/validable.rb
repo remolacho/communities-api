@@ -49,7 +49,7 @@ module Users
     def validate_avatar_size
       return unless avatar.attached?
 
-      raise ArgumentError, I18n.t('services.users.sign_up.avatar.size') if avatar.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.users.sign_up.avatar.size') if avatar.byte_size > 5.megabytes
     end
   end
 end

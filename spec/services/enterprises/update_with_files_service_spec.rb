@@ -39,7 +39,7 @@ RSpec.describe Enterprises::UpdateService do
     end
 
     it 'it return error logo size' do
-      logo = Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
+      logo = Rack::Test::UploadedFile.new('./spec/files/users/avatars/muy-grande.png',
                                            'image/jpeg')
 
       params = {
@@ -55,7 +55,7 @@ RSpec.describe Enterprises::UpdateService do
     end
 
     it 'it return error banner size' do
-      banner = Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
+      banner = Rack::Test::UploadedFile.new('./spec/files/users/avatars/muy-grande.png',
                                            'image/jpeg')
 
       params = {

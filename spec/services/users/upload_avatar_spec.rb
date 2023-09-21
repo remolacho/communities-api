@@ -22,8 +22,8 @@ RSpec.describe ::Users::UploadAvatar do
     end
 
     it 'it return error avatar size' do
-      file = Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
-                                          'image/jpeg')
+      file = Rack::Test::UploadedFile.new('./spec/files/users/avatars/muy-grande.png',
+                                          'image/png')
 
       service = described_class.new(user: user, avatar_file: file)
 
