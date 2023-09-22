@@ -5,10 +5,8 @@ es:
         nofify:
           subject: "Tienes una respuesta a tu PQR"
           header:
-            message1: 'Hola.'
+            greeting: 'Hola! %{user_name}'
           body:
-            message1: "Peticion # %{ticket}"
-            message2: "Se ha creado una nueva respuesta a tu peticion"
-          footer:
-            message1: 'Saludos,'
-            message2: 'El equipo de %{enterprise_name}'
+            concept: "Se ha creado una nueva respuesta a tu petición"
+            pqr: "PQR # %{ticket}"
+            btn_view: "Responder"

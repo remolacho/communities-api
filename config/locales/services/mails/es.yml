@@ -1,0 +1,8 @@
+es:
+  services:
+    mails:
+      header:
+        greeting: 'Hola! %{user_name}'
+      sign:
+        footer: 'Atentamente la administración de %{enterprise_name}'
+        slogan: 'Trabajamos para una mejor comunidad.'

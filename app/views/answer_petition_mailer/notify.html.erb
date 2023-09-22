@@ -1,24 +1,26 @@
-<section class="center card">
-  <h2><%= I18n.t('services.answers_petitions.mail.nofify.header.message1') %> <%= @user.name %> <%= @user.lastname %></h2>
+<p style="padding: 10px;">
+  <%= I18n.t("services.answers_petitions.mail.nofify.body.concept") %>
+</p>
 
-  <span style="display: block; width: 30%;">
-    <hr style="border-bottom: 1px solid #FF2C5F;" />
-  </span>
+<span style="display: block; width: 100%;">
+  <hr style="border-bottom: 1px solid #FF2C5F;" />
+</span>
 
-  <p style="display: block; padding: 10px; background-color: #EFF1F4;">
-    <%= I18n.t("services.answers_petitions.mail.nofify.body.message1", ticket: @petition.ticket) %>
-  </p>
+<p style="display: block; padding: 10px; background-color: #EFF1F4;">
+  <%= I18n.t("services.answers_petitions.mail.nofify.body.pqr", ticket: @petition.ticket) %>
+</p>
 
-  <p>
-    <%= I18n.t("services.answers_petitions.mail.nofify.body.message2") %>
-  </p>
-  <p>
-    <%= @answer.message %>
-  </p>
-  <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message1') %></p>
-  <p><%= I18n.t('services.answers_petitions.mail.nofify.footer.message2', enterprise_name: @enterprise.name) %></p>
+<p style="padding: 10px;">
+  <%= @answer.message %>
+</p>
 
-  <div style="margin: 0 auto;">
-    <%= image_tag attachments['logo2.png'].url, style: "width: 15%;", align: "center" %>
-  </div>
-</section>
+<a style="padding: 10px;" href=<%= "#{ENV['BASE_APP']}/petitions/detail/#{@petition.token}"%>>
+  <button style="background-color: #8abd36;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;">
+    <%= I18n.t('services.answers_petitions.mail.nofify.body.btn_view') %>
+  </button>
+</a>

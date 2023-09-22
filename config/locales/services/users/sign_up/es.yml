@@ -18,8 +18,8 @@ es:
           header:
             message1: "Hola."
           body:
-            message1: 'te damos la bienvenida a %{enterprise_name}, te hemos activado tu cuenta'
-            message2: 'Si no has hecho ningun registro, o sólo fue un error, sólo debes ignorar este mensaje.'
+            concept: 'te damos la bienvenida a %{enterprise_name}, te hemos activado tu cuenta'
+            skip_message: 'Si no has hecho ningun registro o sólo fue un error, sólo debes ignorar este mensaje.'
           footer:
             message1: 'Saludos,'
             message2: 'El equipo de %{enterprise_name}'

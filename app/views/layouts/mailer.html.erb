@@ -3,11 +3,33 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <section class="center card">
+      <h2>
+        <%= I18n.t('services.mails.header.greeting',
+                   user_name: "#{@user.name} #{@user.lastname}")
+        %>
+      </h2>
+
+      <%= yield %>
+
+      <span style="display: block; width: 100%;">
+        <hr style="border-bottom: 1px solid #FF2C5F;" />
+      </span>
+
+      <p style="padding: 10px;" >
+        <%= I18n.t('services.mails.sign.footer', enterprise_name: @enterprise.name) %>
+        <br>
+        <%= I18n.t('services.mails.sign.slogan') %>
+        <br>
+        <%= image_tag @logo.present? ?
+                        @logo :
+                        attachments['logo.png'].url, style: "width: 10%;", align: "center"
+        %>
+      </p>
+    </section>
   </body>
 </html>
