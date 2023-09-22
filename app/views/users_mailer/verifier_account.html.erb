@@ -1,18 +1,6 @@
-<section class="center card">
-  <h2><%= I18n.t('services.users.sign_up.email_view.header.message1') %> <%= @user.name %> <%= @user.lastname %></h2>
-
-  <span style="display: block; width: 30%;">
-    <hr style="border-bottom: 1px solid #FF2C5F;" />
-  </span>
-
-  <p>
-    <%= I18n.t('services.users.sign_up.email_view.body.message1', enterprise_name: @enterprise.name) %>
-  </p>
-
-  <hr />
-
-  <p><%= I18n.t('services.users.sign_up.email_view.body.message2') %></p>
-
-  <p><%= I18n.t('services.users.sign_up.email_view.footer.message1') %></p>
-  <p><%= I18n.t('services.users.sign_up.email_view.footer.message2', enterprise_name: @enterprise.name) %></p>
-</section>
+<p>
+  <%= I18n.t('services.users.sign_up.email_view.body.concept', enterprise_name: @enterprise.name) %>
+</p>
+<p>
+  <%= I18n.t('services.users.sign_up.email_view.body.skip_message') %>
+</p>

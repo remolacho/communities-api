@@ -12,10 +12,10 @@ es:
           header:
             message1: "Hola."
           body:
-            message1: 'Hemos recibido una solicitud para restablecer tu contraseña. Para realizarlo, utiliza el siguiente botón:'
-            message2: 'o puedes copiar y pegar este enlace en tu navegador'
-            message3: 'Recuerda que este link es temporal y expirará luego de 24 horas.'
-            message4: 'Si no has solicitado el cambio, o sólo fue un error, sólo debes ignorar este mensaje.'
+            concept: 'Hemos recibido una solicitud para restablecer tu contraseña. Para realizarlo, utiliza el siguiente botón:'
+            concept2: 'o puedes copiar y pegar este enlace en tu navegador'
+            message: 'Recuerda que este link es temporal y expirará luego de 24 horas.'
+            skip_message: 'Si no has solicitado el cambio o sólo fue un error, sólo debes ignorar este mensaje.'
             link: 'Restablecer tu contraseña'
           footer:
             message1: 'Saludos,'
