@@ -1583,6 +1583,28 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}v1/properties/templates/assign":
+    get:
+      summary: Allow to users download a tempelate for assign the properties to enterprise
+      tags:
+      - Community API V1 properties
+      description: Allow to users download a tempelate for assign the properties to
+        enterprise
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: this subdomain of enterprise create in creations tenant
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success down laod file!!!
   "/{enterprise_subdomain}/v1/suggestion/create":
     post:
       summary: Create a new suggestion

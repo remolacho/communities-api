@@ -133,6 +133,10 @@ Rails.application.routes.draw do
           namespace :statuses do
             get 'all', to: 'all#index'
           end
+
+          namespace :templates do
+            resources :assign, only: [:index]
+          end
         end
 
       end
