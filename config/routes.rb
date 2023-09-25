@@ -128,6 +128,13 @@ Rails.application.routes.draw do
             end
           end
         end
+
+        namespace :properties do
+          namespace :statuses do
+            get 'all', to: 'all#index'
+          end
+        end
+
       end
     end
   end

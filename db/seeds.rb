@@ -30,17 +30,17 @@ roles.each do |k, v|
 end
 
 group_roles = [
-  { code: 'all', name: {es: "Todas los miembros"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'admin_manager', name: {es: "Solo Administración y Presidente"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'all_admin', name: {es: "Solo Administración"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'admin_coexistence', name: {es: "Solo Administración y Comité"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'admin_council', name: {es: "Solo Administración y Consejo"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'council_coexistence', name: {es: "Solo Consejo y Comité"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'admin', name: {es: "Sólo Administrador"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'coexistence', name: {es: "Sólo Comité"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'council', name: {es: "Sólo Consejo"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'fiscal', name: {es: "Sólo Fiscal"}, entity_type: Petition::ENTITY_TYPE },
-  { code: 'counter', name: {es: "Sólo Contador"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'all', name: {es: "Todos los miembros"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_manager', name: {es: "Administración y Presidente"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'all_admin', name: {es: "Administración"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_coexistence', name: {es: "Administración y Comité"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin_council', name: {es: "Administración y Consejo"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'council_coexistence', name: {es: "Consejo y Comité"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'admin', name: {es: "Administrador"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'coexistence', name: {es: "Comité de convivencia"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'council', name: {es: "Consejo"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'fiscal', name: {es: "Fiscal"}, entity_type: Petition::ENTITY_TYPE },
+  { code: 'counter', name: {es: "Contador"}, entity_type: Petition::ENTITY_TYPE },
   { code: 'listed_suggestions', name: {es: "Pueden listar las sugerencias"}, entity_type: Suggestion::ENTITY_TYPE },
   { code: 'show_suggestion', name: {es: "Pueden ver las sugerencias"}, entity_type: Suggestion::ENTITY_TYPE },
   { code: 'listed_users', name: {es: "Pueden listar los usuarios del sistema"}, entity_type: User::ENTITY_TYPE },
@@ -110,6 +110,9 @@ statuses = [
     { name: {es: "Resuelta", en: "Resolve"}, code: Status::PETITION_RESOLVE, status_type: Status::PETITION, color: '#8BE939'},
     { name: {es: "Rechazo de la solución", en: "Rejected solution"}, code: Status::PETITION_REJECTED_SOLUTION, status_type: Status::PETITION, color: '#F6FB43'},
     { name: {es: "Respuesta eliminada", en: "Answer destroy"}, code: Status::ANSWER_DELETE, status_type: Status::ANSWER},
+    { name: {es: "Propio", en: "Own"}, code: Status::PROPERTY_OWN, status_type: Status::PROPERTY,color: '#3B8FF0'},
+    { name: {es: "Rentado", en: "Rented"}, code: Status::PROPERTY_RENTED, status_type: Status::PROPERTY, color: '#8BE939'},
+    { name: {es: "Prestamo", en: "Loan"}, code: Status::PROPERTY_LOAN, status_type: Status::PROPERTY, color: '#F6FB43'},
 ]
 
 statuses.each do |status|
