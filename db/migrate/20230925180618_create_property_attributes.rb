@@ -7,8 +7,10 @@ class CreatePropertyAttributes < ActiveRecord::Migration[7.0]
       t.jsonb   :name_as, default: {}
       t.integer :min_range, default: 1
       t.integer :max_range, default: 1
-      t.string  :prefix, null: false
+      t.string  :prefix
       t.string  :input, null: false, default: 'list'
+      t.integer :created_by, null: false
+      t.integer :updated_by, null: false
       t.timestamps
       t.index :token, unique: true
     end

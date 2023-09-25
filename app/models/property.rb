@@ -3,8 +3,10 @@
 # Table name: properties
 #
 #  id         :bigint           not null, primary key
+#  created_by :integer          not null
 #  name       :jsonb            not null
 #  token      :string           not null
+#  updated_by :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -13,4 +15,5 @@
 #  index_properties_on_token  (token) UNIQUE
 #
 class Property < ApplicationRecord
+  has_many :property_attributes, dependent: :destroy
 end

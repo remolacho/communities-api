@@ -144,3 +144,72 @@ end
 UserEnterprise.find_or_create_by!(user_id: user.id, enterprise_id: enterprise.id, active: true)
 UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'super_admin').id, created_by: user.id)
 UserRole.find_or_create_by!(user_id: user.id, role_id: Role.find_by!(code: 'owner').id, created_by: user.id)
+
+properties = [
+  {
+    name: {es: "Apartamento"},
+    attributes: [
+      {
+        name: {es: "Torre"},
+        min_range: 1,
+        max_range: 4
+      },
+      {
+        name: {es: "Piso"},
+        min_range: 1,
+        max_range: 16
+      },
+      {
+        name: {es: "Número"},
+        min_range: 1,
+        max_range: 8,
+        prefix: 0
+      },
+    ]
+  },
+  {
+    name: {es: "Bicicletero"},
+    attributes: [
+      {
+        name: {es: "Número"},
+        min_range: 1,
+        max_range: 100,
+        prefix: 0
+      },
+    ]
+  },
+  {
+    name: {es: "Depósito"},
+    attributes: [
+      {
+        name: {es: "Piso"},
+        min_range: 1,
+        max_range: 8
+      },
+      {
+        name: {es: "Número"},
+        min_range: 1,
+        max_range: 20,
+        prefix: 0
+      },
+    ]
+  },
+  {
+    name: {es: "Parqueadero"},
+    attributes: [
+      {
+      name: {es: "Piso"},
+      min_range: 1,
+      max_range: 8
+      },
+      {
+        name: {es: "Número"},
+        min_range: 1,
+        max_range: 700,
+        prefix: 0
+      },
+    ]
+  },
+]
+
+::Properties::Imports::CreateService.new(user: user, data: properties).perform
