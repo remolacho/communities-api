@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_133557) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -132,6 +132,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_133557) do
     t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 
+  create_table "properties", force: :cascade do |t|
+    t.jsonb "name", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_properties_on_token", unique: true
+  end
+
+  create_table "property_attributes", force: :cascade do |t|
+    t.bigint "property_id"
+    t.string "token", null: false
+    t.jsonb "name", default: {}, null: false
+    t.jsonb "name_as", default: {}
+    t.integer "min_range", default: 1
+    t.integer "max_range", default: 1
+    t.string "prefix", null: false
+    t.string "input", default: "list", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_property_attributes_on_property_id"
+    t.index ["token"], name: "index_property_attributes_on_token", unique: true
+  end
+
   create_table "roles", force: :cascade do |t|
     t.jsonb "name", null: false
     t.string "code", null: false
@@ -185,6 +208,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_133557) do
     t.index ["enterprise_id"], name: "index_user_enterprises_on_enterprise_id"
     t.index ["user_id", "enterprise_id"], name: "index_user_enterprises_on_user_id_and_enterprise_id", unique: true
     t.index ["user_id"], name: "index_user_enterprises_on_user_id"
+  end
+
+  create_table "user_properties", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "user_id"
+    t.bigint "status_id"
+    t.string "observation", null: false
+    t.jsonb "property_attributes", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_user_properties_on_property_id"
+    t.index ["status_id"], name: "index_user_properties_on_status_id"
+    t.index ["user_id"], name: "index_user_properties_on_user_id"
   end
 
   create_table "user_roles", force: :cascade do |t|

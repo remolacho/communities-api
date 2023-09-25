@@ -17,6 +17,7 @@
 class Status < ApplicationRecord
   include ::Statuses::PetitionStatustable
   include ::Statuses::AnswerStatustable
+  include ::Statuses::PropertyStatustable
 
   has_many :petitions
   has_many :follow_petitions

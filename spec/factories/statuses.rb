@@ -60,4 +60,24 @@ FactoryBot.define do
     code { Status::ANSWER_DELETE }
     status_type { Status::ANSWER }
   end
+
+
+  # Estatus de las propiedades
+  trait :property_own do
+    name { {es: "Propio", en: "Own"} }
+    code { Status::PROPERTY_OWN }
+    status_type { Status::PROPERTY }
+  end
+
+  trait :property_rented do
+    name { {es: "Rentado", en: "Rented"} }
+    code { Status::PROPERTY_RENTED }
+    status_type { Status::PROPERTY }
+  end
+
+  trait :property_loan do
+    name { {es: "Prestado", en: "Loan"} }
+    code { Status::PROPERTY_LOAN }
+    status_type { Status::PROPERTY }
+  end
 end
