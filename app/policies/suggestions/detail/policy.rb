@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Suggestions::Detail::Policy < ::BasePolicy
+class Suggestions::Detail::Policy < BasePolicy
   attr_accessor :suggestion
 
   def initialize(current_user:, suggestion:)

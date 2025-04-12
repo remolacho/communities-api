@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "Shopify.ruby-lsp",
+        "zhuangtongfa.material-theme",
+        "PKief.material-icon-theme",
+        "formulahendry.code-runner",
+        "naumovs.color-highlight",
+        "dracula-theme.theme-dracula",
+        "GitHub.github-vscode-theme",
+        "sdras.night-owl",
+        "enkia.tokyo-night"
+    ]
+}

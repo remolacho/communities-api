@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-class Enterprises::Profile::Policy < ::BasePolicy
-
+class Enterprises::Profile::Policy < BasePolicy
   def initialize(current_user:)
-    super(current_user: current_user)
+    super
   end
 
   def can_read!

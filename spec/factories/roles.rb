@@ -20,43 +20,43 @@ FactoryBot.define do
 
   trait :super_admin do
     code { 'super_admin' }
-    name {"Super admin" }
-    slug {"Super admin".parameterize }
+    name { 'Super admin' }
+    slug { 'Super admin'.parameterize }
   end
 
   trait :role_admin do
     code { 'admin' }
-    name {"admin" }
-    slug {"admin".parameterize }
+    name { 'admin' }
+    slug { 'admin'.parameterize }
   end
 
   trait :manager do
     code { 'manager' }
-    name {"President/Manager" }
-    slug {"President/Manager".parameterize }
+    name { 'President/Manager' }
+    slug { 'President/Manager'.parameterize }
   end
 
   trait :owner do
     code { 'owner' }
-    name { "Owner" }
-    slug { "Owner".parameterize }
+    name { 'Owner' }
+    slug { 'Owner'.parameterize }
   end
 
   trait :owner_admin do
     code { 'owner_admin' }
-    name { "Owner admin" }
-    slug { "Owner admin".parameterize }
+    name { 'Owner admin' }
+    slug { 'Owner admin'.parameterize }
   end
 
   trait :coexistence_member do
     code { 'coexistence' }
-    name { "Coexistence Member" }
-    slug { "Coexistence Member".parameterize }
+    name { 'Coexistence Member' }
+    slug { 'Coexistence Member'.parameterize }
   end
 
   trait :council_member do
     code { 'council' }
-    name { "Committee Member" }
-    slug { "Committee Member".parameterize }
+    name { 'Committee Member' }
+    slug { 'Committee Member'.parameterize }
   end
 end

@@ -18,6 +18,5 @@
 #
 FactoryBot.define do
   factory :follow_petition do
-    
   end
 end

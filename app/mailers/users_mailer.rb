@@ -4,8 +4,8 @@ class UsersMailer < ApplicationMailer
 
     @user = user
     @enterprise = enterprise
-    @subject = I18n.t("services.users.forgot_password.subject")
-    @email_to = Rails.env.production? ? @user.email : ENV['EMAIL_TO']
+    @subject = I18n.t('services.users.forgot_password.subject')
+    @email_to = Rails.env.production? ? @user.email : ENV.fetch('EMAIL_TO', nil)
 
     logo(enterprise)
 
@@ -17,8 +17,8 @@ class UsersMailer < ApplicationMailer
 
     @user = user
     @enterprise = enterprise
-    @subject = I18n.t("services.users.sign_up.verifier_account")
-    @email_to = Rails.env.production? ? @user.email : ENV['EMAIL_TO']
+    @subject = I18n.t('services.users.sign_up.verifier_account')
+    @email_to = Rails.env.production? ? @user.email : ENV.fetch('EMAIL_TO', nil)
 
     logo(enterprise)
 

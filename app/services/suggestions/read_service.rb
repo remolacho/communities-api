@@ -2,6 +2,7 @@
 
 class Suggestions::ReadService
   attr_accessor :user, :suggestion
+
   def initialize(user:, suggestion:)
     @user = user
     @suggestion = suggestion

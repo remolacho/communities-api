@@ -28,9 +28,9 @@ RSpec.describe AnswersPetitions::Files::ListService do
       data = {
         message: 'test message 1',
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-          "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
+          '0' => Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          '1' => Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
                                               ' image/jpeg')
         }
       }

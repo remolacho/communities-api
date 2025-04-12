@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-class Petitions::List::Policy < ::BasePolicy
-
+class Petitions::List::Policy < BasePolicy
   def initialize(current_user:)
-    super(current_user: current_user)
+    super
   end
 
   def can_read!
     loudly do
-       has_role?
+      has_role?
     end
   end
 

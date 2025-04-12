@@ -21,14 +21,17 @@ class UserRoles::Import::CreateService
 
   def create_roles
     data_hash = []
-    xlsx.select(&:any?).each { |row| data_hash << header.zip(row).to_h }
+    xlsx.select(&:any?).drop(1).each { |row| data_hash << header.zip(row).to_h }
     roles_index = current_roles.index_by(&:slug)
 
     data_hash.each do |data|
       next unless data['identifier'].present?
 
-      user_h =  enterprise.users.find_by(identifier: clean_identifier(data['identifier']))
-      next errors << I18n.t('services.user_roles.import.create.error.user_not_found', identifier: data['identifier']) unless user_h.present?
+      user_h = enterprise.users.find_by(identifier: clean_identifier(data['identifier']))
+      unless user_h.present?
+        next errors << I18n.t('services.user_roles.import.create.error.user_not_found',
+                              identifier: data['identifier'])
+      end
 
       user_roles_array = data.map do |key_role, value|
         next if key_role.eql?('identifier')
@@ -37,7 +40,7 @@ class UserRoles::Import::CreateService
         role = roles_index[key_role]
         next unless role.present?
 
-        { user_id:  user_h.id, role_id: role.id, created_by: user.id}
+        { user_id:  user_h.id, role_id: role.id, created_by: user.id }
       end.compact
 
       insert_all_roles(user_roles_array)
@@ -48,8 +51,8 @@ class UserRoles::Import::CreateService
 
   def insert_all_roles(user_roles_array)
     UserRole.insert_all(user_roles_array,
-                        unique_by: %i[user_id role_id],
-                        returning: %i[role_id])
+                        unique_by: [:user_id, :role_id],
+                        returning: [:role_id])
   end
 
   def valid_file!
@@ -60,19 +63,32 @@ class UserRoles::Import::CreateService
 
   def valid_header!
     raise ArgumentError, I18n.t('services.user_roles.import.create.error.header.not_allowed') if header.size < 2
-    raise ArgumentError, I18n.t('services.user_roles.import.create.error.header.identifier') unless header.include?('identifier')
-    raise ArgumentError, I18n.t('services.user_roles.import.create.error.header.roles', fields: header_roles[:fields]) unless header_roles[:empty]
+
+    unless header.include?('identifier')
+      raise ArgumentError,
+            I18n.t('services.user_roles.import.create.error.header.identifier')
+    end
+    return if header_roles[:empty]
+
+    raise ArgumentError,
+          I18n.t('services.user_roles.import.create.error.header.roles',
+                 fields: header_roles[:fields])
   end
 
   def header
-    @header ||= xlsx.shift
+    @header ||= xlsx.first
   end
+
   def xlsx
-    @xlsx ||= read_xlsx.parse
+    @xlsx ||= read_xlsx
   end
 
   def read_xlsx
-    @read_xlsx ||= (Roo::Spreadsheet.open file.tempfile.path, extension: extension) rescue nil
+    @read_xlsx ||= begin
+      (Roo::Spreadsheet.open file.tempfile.path, extension: extension)
+    rescue StandardError
+      nil
+    end
   end
 
   def extension

@@ -15,12 +15,12 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
 
   def status
     ActiveModelSerializers::SerializableResource.new(object.status,
-                                                     serializer: ::Statuses::DetailSerializer )
+                                                     serializer: ::Statuses::DetailSerializer)
   end
 
   def category
     ActiveModelSerializers::SerializableResource.new(object.category_petition,
-                                                     serializer: ::CategoryPetitions::DetailSerializer )
+                                                     serializer: ::CategoryPetitions::DetailSerializer)
   end
 
   def user
@@ -30,13 +30,13 @@ class Petitions::DetailSerializer < ActiveModel::Serializer
 
   def group_role
     ActiveModelSerializers::SerializableResource.new(object.group_role,
-                                                     serializer: ::GroupRoles::DetailSerializer )
+                                                     serializer: ::GroupRoles::DetailSerializer)
   end
 
   def setting
     {
       reply: {
-        description: "Only reply if is different to resolve",
+        description: 'Only reply if is different to resolve',
         action: !object.status.code.eql?(Status::PETITION_RESOLVE)
       }
     }

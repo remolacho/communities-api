@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AnswersPetitions::ListService
-
   attr_accessor :user, :petition
 
   def initialize(user:, petition:)
@@ -17,6 +16,7 @@ class AnswersPetitions::ListService
   end
 
   private
+
   def answers
     @answers ||= petition.answers_petitions.includes(:user, :petition).order(created_at: :asc)
   end

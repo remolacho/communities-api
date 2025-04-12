@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::ChangeStatusController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/users/change_status/:token
   def show
     policy.can_write!
 
-    Users::ChangeStatusAccount.new(user: current_user, user_to_change: user_to_change ).call
+    Users::ChangeStatusAccount.new(user: current_user, user_to_change: user_to_change).call
 
-    render json: {success: true, message: I18n.t('services.users.change_status.success')}
+    render json: { success: true, message: I18n.t('services.users.change_status.success') }
   end
 
   private

@@ -12,6 +12,6 @@ class Users::Searches::QueryTermService
     return if !term.present? || !attr.present?
     return if attr.size > 15 || term.size > 25
 
-    { "#{attr}_cont".to_sym => term }
+    { "#{attr}_cont": term }
   end
 end

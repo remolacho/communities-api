@@ -13,7 +13,7 @@ RSpec.describe UserRoles::Import::CreateService do
 
     it 'return error the file is not xlsx' do
       file =  Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/1-extension-error.csv',
-                                                   ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                                           ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       expect { service.perform }.to raise_error(ArgumentError)
@@ -21,7 +21,7 @@ RSpec.describe UserRoles::Import::CreateService do
 
     it 'return error the header has not roles' do
       file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/2-error-without-roles-header.xlsx',
-                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                                          ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       expect { service.perform }.to raise_error(ArgumentError)

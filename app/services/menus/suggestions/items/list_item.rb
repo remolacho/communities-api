@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Menus::Suggestions::Items::ListItem < ::Suggestions::List::Policy
+class Menus::Suggestions::Items::ListItem < Suggestions::List::Policy
   def initialize(user:)
     super(current_user: user)
   end

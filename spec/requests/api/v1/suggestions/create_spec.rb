@@ -11,13 +11,13 @@ RSpec.describe Api::V1::Suggestions::CreateController, type: :request do
   path '/{enterprise_subdomain}/v1/suggestion/create' do
     post 'Create a new suggestion' do
       tags 'Community API V1 Suggestions'
-      description "Allow to users create suggestions"
+      description 'Allow to users create suggestions'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :suggestion, in: :body, schema: {
         type: :object,
         properties: {
-          suggestion:{
+          suggestion: {
             type: :object,
             properties: {
               message: { type: :string },
@@ -32,12 +32,13 @@ RSpec.describe Api::V1::Suggestions::CreateController, type: :request do
           }
         }
       }
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
       parameter name: 'Authorization', in: :header, required: true
 
       response 200, 'success!!!' do
-        let(:'Authorization') { sign_in }
+        let(:Authorization) { sign_in }
 
         schema type: :object,
                properties: {
@@ -46,23 +47,22 @@ RSpec.describe Api::V1::Suggestions::CreateController, type: :request do
                          properties: {
                            ticket: { type: :string },
                            token: { type: :string }
-                         }
-                 }
+                         } }
                }
 
-        let(:suggestion) {
+        let(:suggestion) do
           {
             suggestion: {
-              message: "message test 1"
+              message: 'message test 1'
             }
           }
-        }
+        end
 
         run_test!
       end
 
       response 403, 'error not logged!!!' do
-        let(:'Authorization') { "" }
+        let(:Authorization) { '' }
 
         schema type: :object,
                properties: {
@@ -70,13 +70,13 @@ RSpec.describe Api::V1::Suggestions::CreateController, type: :request do
                  message: { type: :string }
                }
 
-        let(:suggestion) {
+        let(:suggestion) do
           {
             suggestion: {
-              message: "message test 1"
+              message: 'message test 1'
             }
           }
-        }
+        end
 
         run_test!
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Petitions::Policy < ::BasePolicy
+class Petitions::Policy < BasePolicy
   attr_accessor :petition
 
   def initialize(current_user:, petition:)

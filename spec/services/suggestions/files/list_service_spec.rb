@@ -8,7 +8,7 @@ RSpec.describe Suggestions::Files::ListService do
   context 'when you want get the files of the suggestion' do
     it 'success files attached empty!!!' do
       data = {
-        message: "message test 1",
+        message: 'message test 1'
       }
 
       suggestion_service = Suggestions::CreateService.new(user: user, data: data)
@@ -20,11 +20,11 @@ RSpec.describe Suggestions::Files::ListService do
 
     it 'success files attached!!!' do
       data = {
-        message: "message test 1",
+        message: 'message test 1',
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-          "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
+          '0' => Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          '1' => Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
                                               ' image/jpeg')
         }
       }

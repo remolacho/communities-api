@@ -2,6 +2,7 @@
 
 class Petitions::UpdateStatusService
   attr_accessor :user, :petition, :status
+
   def initialize(user:, petition:, status:)
     @user = user
     @status = status

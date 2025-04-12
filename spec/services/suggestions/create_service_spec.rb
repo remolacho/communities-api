@@ -13,7 +13,7 @@ RSpec.describe Suggestions::CreateService do
 
     it 'error message greater than 500 charters' do
       data = {
-        message: "1" * 501,
+        message: '1' * 501
       }
 
       service = described_class.new(user: user, data: data)
@@ -22,7 +22,7 @@ RSpec.describe Suggestions::CreateService do
 
     it 'success anonymous!!!' do
       data = {
-        message: "message test 1",
+        message: 'message test 1',
         anonymous: true
       }
 
@@ -32,7 +32,7 @@ RSpec.describe Suggestions::CreateService do
 
     it 'success not anonymous!!!' do
       data = {
-        message: "message test 1",
+        message: 'message test 1'
       }
 
       service = described_class.new(user: user, data: data)

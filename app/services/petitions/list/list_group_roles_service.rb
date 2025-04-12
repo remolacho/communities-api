@@ -13,11 +13,11 @@ class Petitions::List::ListGroupRolesService
     policy.can_read!
 
     Petition.includes(:user, :status, :category_petition)
-            .where(group_role_id: group_roles_ids)
-            .ransack(filter.call)
-            .result
-            .order(updated_at: :desc)
-            .page(page.to_i)
+      .where(group_role_id: group_roles_ids)
+      .ransack(filter.call)
+      .result
+      .order(updated_at: :desc)
+      .page(page.to_i)
   end
 
   private

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::V1::Enterprises::UpdateController < ApplicationController
-
   # PUT /:enterprise_subdomain/v1/enterprise/update/:token
   def update
     policy.can_write!
@@ -22,8 +21,10 @@ class Api::V1::Enterprises::UpdateController < ApplicationController
   end
 
   def valid_enterprise!
+    return unless current_enterprise.id != current_user.enterprise.id
+
     raise ActiveRecord::RecordNotFound,
-          I18n.t('services.enterprises.update.not_found') if current_enterprise.id != current_user.enterprise.id
+          I18n.t('services.enterprises.update.not_found')
   end
 
   def current_enterprise

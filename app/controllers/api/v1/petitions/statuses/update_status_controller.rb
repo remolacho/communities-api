@@ -1,12 +1,11 @@
 class Api::V1::Petitions::Statuses::UpdateStatusController < ApplicationController
-
   # PUT /:enterprise_subdomain/v1/petition/statuses/update/:token
   def update
     policy.can_write!
 
     Petitions::UpdateStatusService.new(user: current_user, petition: petition, status: status).call
 
-    render json: { success: true, message: I18n.t('services.petitions.update_status.success')}
+    render json: { success: true, message: I18n.t('services.petitions.update_status.success') }
   end
 
   private

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-class Enterprises::Update::Policy < ::BasePolicy
-
+class Enterprises::Update::Policy < BasePolicy
   def initialize(current_user:)
-    super(current_user: current_user)
+    super
   end
 
   def can_write!

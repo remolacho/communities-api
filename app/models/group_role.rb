@@ -19,5 +19,5 @@ class GroupRole < ApplicationRecord
   has_many :roles, through: :group_role_relations
   has_many :petitions
 
-  scope :all_actives_petitions, -> { where(active: true, entity_type: Petition::ENTITY_TYPE ) }
+  scope :all_actives_petitions, -> { where(active: true, entity_type: Petition::ENTITY_TYPE) }
 end
