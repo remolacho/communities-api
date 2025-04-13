@@ -33,4 +33,5 @@
 
 # Ingore IDE folder
 /.idea
+/.vscode
 coverage
