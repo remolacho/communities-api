@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::ChangeStatusController, type: :request do
+RSpec.describe Api::V1::Users::ChangeStatusController do
   include_context 'change_status_stuff'
 
   let(:lang) { 'es' }

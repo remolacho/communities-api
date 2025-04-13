@@ -50,7 +50,7 @@ RSpec.describe AnswersPetitions::CreateService do
       }
 
       service = described_class.new(petition: petition, user: user, data: data)
-      expect(service.call.present?).to eq true
+      expect(service.call).to be_present
     end
 
     it 'success the user has role in the petition' do
@@ -62,7 +62,7 @@ RSpec.describe AnswersPetitions::CreateService do
       }
 
       service = described_class.new(petition: petition, user: user_answer, data: data)
-      expect(service.call.present?).to eq true
+      expect(service.call).to be_present
     end
   end
 end

@@ -55,27 +55,27 @@ RSpec.describe UserRoles::Import::RemoveService do
       file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/remove/6-finish-with-errors-user-not-found.xlsx',
                                           ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
-      expect(new_user.roles.size == 3).to eq(true)
+      expect(new_user.roles.size == 3).to be(true)
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       service.perform
 
-      expect(service.errors.empty?).to eq(false)
-      expect(service.errors.size == 1).to eq(true)
-      expect(new_user.roles.size == 1).to eq(true)
+      expect(service.errors).not_to be_empty
+      expect(service.errors.size == 1).to be(true)
+      expect(new_user.roles.size == 1).to be(true)
     end
 
     it 'finish success!!!' do
       file = Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/remove/7-finish.xlsx',
                                           ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
-      expect(new_user.roles.size == 3).to eq(true)
+      expect(new_user.roles.size == 3).to be(true)
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       service.perform
 
-      expect(service.errors.empty?).to eq(true)
-      expect(new_user.roles.size == 1).to eq(true)
+      expect(service.errors).to be_empty
+      expect(new_user.roles.size == 1).to be(true)
     end
   end
 end

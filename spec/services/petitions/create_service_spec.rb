@@ -67,7 +67,7 @@ RSpec.describe Petitions::CreateService do
       }
 
       service = described_class.new(user: user, data: data)
-      expect(service.call.ticket.present?).to eq true
+      expect(service.call.ticket).to be_present
     end
   end
 end

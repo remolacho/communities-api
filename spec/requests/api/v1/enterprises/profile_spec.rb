@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Enterprises::ProfileController, type: :request do
+RSpec.describe Api::V1::Enterprises::ProfileController do
   include_context 'enterprise_profile_stuff'
 
   let(:lang) { 'es' }

@@ -12,7 +12,7 @@ RSpec.describe Users::ChangeStatusAccount do
       service = described_class.new(user: user, user_to_change: user_to_change)
       service.call
 
-      expect(!user_to_change.active?).to eq(true)
+      expect(!user_to_change.active?).to be(true)
     end
 
     it 'return sucess when from inactive to active' do
@@ -23,7 +23,7 @@ RSpec.describe Users::ChangeStatusAccount do
       service = described_class.new(user: user, user_to_change: user_to_change)
       service.call
 
-      expect(user_to_change.active?).to eq(true)
+      expect(user_to_change).to be_active
     end
   end
 end

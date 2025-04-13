@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Answers::Files::ListController, type: :request do
+RSpec.describe Api::V1::Petitions::Answers::Files::ListController do
   include_context 'create_answer_petition_stuff'
 
   let(:lang) { 'es' }

@@ -79,8 +79,8 @@ RSpec.describe AnswersPetitions::CreateService do
       service = described_class.new(petition: petition, user: user_answer, data: data)
 
       answer = service.call
-      expect(answer.present?).to eq(true)
-      expect(answer.files.attached?).to eq(true)
+      expect(answer).to be_present
+      expect(answer.files).to be_attached
       expect(answer.files.size).to eq(2)
     end
   end

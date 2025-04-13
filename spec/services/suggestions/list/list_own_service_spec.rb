@@ -9,7 +9,7 @@ RSpec.describe Suggestions::List::ListOwnService do
     it 'return empty, the user has not Suggestions' do
       filter = Suggestions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'return all' do

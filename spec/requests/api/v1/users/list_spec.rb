@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::ListController, type: :request do
+RSpec.describe Api::V1::Users::ListController do
   include_context 'list_users_stuff'
 
   let(:lang) { 'es' }

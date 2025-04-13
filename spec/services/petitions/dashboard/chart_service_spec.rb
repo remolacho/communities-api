@@ -10,10 +10,10 @@ RSpec.describe Petitions::Dashboard::ChartStatusesService do
       statuses = Status.all_of_petitions('es')
       total = petitions + complaints + claims
 
-      pending   = ((3 * 100).to_f / total.to_f).round(2)
-      reviewing = ((1 * 100).to_f / total.to_f).round(2)
-      rejected  = ((1 * 100).to_f / total.to_f).round(2)
-      resolved  = ((1 * 100).to_f / total.to_f).round(2)
+      pending   = ((3 * 100).to_f / total).round(2)
+      reviewing = ((1 * 100).to_f / total).round(2)
+      rejected  = ((1 * 100).to_f / total).round(2)
+      resolved  = ((1 * 100).to_f / total).round(2)
       confirm   = 0
       rejected_solution = 0
 
@@ -27,12 +27,12 @@ RSpec.describe Petitions::Dashboard::ChartStatusesService do
       confirm_h = result.detect { |r| r[:code] == 'pet-confirm' }
       rejected_solution_h = result.detect { |r| r[:code] == 'pet-rejected-solution' }
 
-      expect(pending_h[:percentage] == pending).to eq(true)
-      expect(reviewing_h[:percentage] == reviewing).to eq(true)
-      expect(rejected_h[:percentage] == rejected).to eq(true)
-      expect(resolved_h[:percentage] == resolved).to eq(true)
-      expect(confirm_h[:percentage] == confirm).to eq(true)
-      expect(rejected_solution_h[:percentage] == rejected_solution).to eq(true)
+      expect(pending_h[:percentage] == pending).to be(true)
+      expect(reviewing_h[:percentage] == reviewing).to be(true)
+      expect(rejected_h[:percentage] == rejected).to be(true)
+      expect(resolved_h[:percentage] == resolved).to be(true)
+      expect(confirm_h[:percentage] == confirm).to be(true)
+      expect(rejected_solution_h[:percentage] == rejected_solution).to be(true)
     end
   end
 end

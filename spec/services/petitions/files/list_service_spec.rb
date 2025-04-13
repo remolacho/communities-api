@@ -18,7 +18,7 @@ RSpec.describe Petitions::Files::ListService do
       petition = petition_service.call
 
       service = described_class.new(enterprise: enterprise, user: user, petition: petition)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'success files attached!!!' do
@@ -39,7 +39,7 @@ RSpec.describe Petitions::Files::ListService do
       petition = petition_service.call
 
       service = described_class.new(enterprise: enterprise, user: user, petition: petition)
-      expect(service.call.empty?).to eq(false)
+      expect(service.call).not_to be_empty
     end
   end
 end

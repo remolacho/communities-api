@@ -27,7 +27,7 @@ RSpec.describe Suggestions::CreateService do
       }
 
       service = described_class.new(user: user, data: data)
-      expect(service.call.anonymous).to eq true
+      expect(service.call.anonymous).to be true
     end
 
     it 'success not anonymous!!!' do
@@ -36,7 +36,7 @@ RSpec.describe Suggestions::CreateService do
       }
 
       service = described_class.new(user: user, data: data)
-      expect(service.call.anonymous).to eq false
+      expect(service.call.anonymous).to be false
     end
   end
 end

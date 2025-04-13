@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::CreateController, type: :request do
+RSpec.describe Api::V1::Petitions::CreateController do
   include_context 'create_petition_stuff'
 
   let(:lang) { 'es' }
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::Petitions::CreateController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
+          expect(body['success']).to be(true)
         end
       end
 
@@ -91,7 +91,7 @@ RSpec.describe Api::V1::Petitions::CreateController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
+          expect(body['success']).to be(false)
         end
       end
 

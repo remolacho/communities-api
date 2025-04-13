@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Enterprises::UpdateController, type: :request do
+RSpec.describe Api::V1::Enterprises::UpdateController do
   include_context 'enterprise_update_stuff'
 
   let(:lang) { 'es' }

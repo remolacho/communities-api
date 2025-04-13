@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Answers::DeleteController, type: :request do
+RSpec.describe Api::V1::Petitions::Answers::DeleteController do
   include_context 'delete_answer_petition_stuff'
 
   let(:lang) { 'es' }

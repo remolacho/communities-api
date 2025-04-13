@@ -19,7 +19,7 @@ RSpec.describe AnswersPetitions::DeleteService do
     it 'success and create follow petition for answer delete' do
       described_class.new(answer: answer, user: user).call
 
-      expect(answer.petition.follow_petitions.where(status_id: Status.answer_deleted.id).present?).to eq true
+      expect(answer.petition.follow_petitions.where(status_id: Status.answer_deleted.id)).to be_present
     end
   end
 end

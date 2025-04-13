@@ -66,8 +66,8 @@ RSpec.describe Suggestions::CreateService do
 
       service = described_class.new(user: user, data: data)
       suggestion = service.call
-      expect(suggestion.present?).to eq(true)
-      expect(suggestion.files.attached?).to eq(true)
+      expect(suggestion).to be_present
+      expect(suggestion.files).to be_attached
       expect(suggestion.files.size).to eq(2)
     end
 
@@ -95,8 +95,8 @@ RSpec.describe Suggestions::CreateService do
 
       service = described_class.new(user: user, data: data)
       suggestion = service.call
-      expect(suggestion.present?).to eq(true)
-      expect(suggestion.files.attached?).to eq(true)
+      expect(suggestion).to be_present
+      expect(suggestion.files).to be_attached
       expect(suggestion.files.size).to eq(1)
     end
 
@@ -113,8 +113,8 @@ RSpec.describe Suggestions::CreateService do
 
       service = described_class.new(user: user, data: data)
       suggestion = service.call
-      expect(suggestion.present?).to eq(true)
-      expect(suggestion.files.attached?).to eq(true)
+      expect(suggestion).to be_present
+      expect(suggestion.files).to be_attached
       expect(suggestion.files.size).to eq(2)
     end
   end

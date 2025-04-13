@@ -78,8 +78,8 @@ RSpec.describe Petitions::CreateService do
 
       service = described_class.new(user: user, data: data)
       petition = service.call
-      expect(petition.present?).to eq(true)
-      expect(petition.files.attached?).to eq(true)
+      expect(petition).to be_present
+      expect(petition.files).to be_attached
       expect(petition.files.size).to eq(2)
     end
 
@@ -113,8 +113,8 @@ RSpec.describe Petitions::CreateService do
 
       service = described_class.new(user: user, data: data)
       petition = service.call
-      expect(petition.present?).to eq(true)
-      expect(petition.files.attached?).to eq(true)
+      expect(petition).to be_present
+      expect(petition.files).to be_attached
       expect(petition.files.size).to eq(1)
     end
 
@@ -134,8 +134,8 @@ RSpec.describe Petitions::CreateService do
 
       service = described_class.new(user: user, data: data)
       petition = service.call
-      expect(petition.present?).to eq(true)
-      expect(petition.files.attached?).to eq(true)
+      expect(petition).to be_present
+      expect(petition.files).to be_attached
       expect(petition.files.size).to eq(2)
     end
   end

@@ -8,54 +8,54 @@ RSpec.describe StatusesPetitions::List::AllowedCodesService do
   context 'when the user owner petition want change the status to reviewing to other' do
     it 'error change reviewing to pending' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.exists?(status_pending.code)).to eq(false)
+      expect(service).not_to exist(status_pending.code)
     end
 
     it 'error change reviewing to confirm' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.exists?(status_confirm.code)).to eq(false)
+      expect(service).not_to exist(status_confirm.code)
     end
 
     it 'error change reviewing to rejected solution' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.exists?(status_rejected_solution.code)).to eq(false)
+      expect(service).not_to exist(status_rejected_solution.code)
     end
 
     it 'error change reviewing to rejected' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.exists?(status_rejected.code)).to eq(false)
+      expect(service).not_to exist(status_rejected.code)
     end
 
     it 'error change reviewing to resolved' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.exists?(status_resolved.code)).to eq(false)
+      expect(service).not_to exist(status_resolved.code)
     end
   end
 
   context 'when the user without role im petition want change the status to reviewing to other' do
     it 'error change reviewing to pending' do
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_pending.code)).to eq(false)
+      expect(service).not_to exist(status_pending.code)
     end
 
     it 'error change reviewing to confirm' do
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_confirm.code)).to eq(false)
+      expect(service).not_to exist(status_confirm.code)
     end
 
     it 'error change reviewing to rejected solution' do
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_rejected_solution.code)).to eq(false)
+      expect(service).not_to exist(status_rejected_solution.code)
     end
 
     it 'error change reviewing to rejected' do
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_rejected.code)).to eq(false)
+      expect(service).not_to exist(status_rejected.code)
     end
 
     it 'error change reviewing to resolved' do
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_resolved.code)).to eq(false)
+      expect(service).not_to exist(status_resolved.code)
     end
   end
 
@@ -64,35 +64,35 @@ RSpec.describe StatusesPetitions::List::AllowedCodesService do
       user_role
 
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_pending.code)).to eq(true)
+      expect(service).to exist(status_pending.code)
     end
 
     it 'error change reviewing to confirm' do
       user_role
 
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_confirm.code)).to eq(true)
+      expect(service).to exist(status_confirm.code)
     end
 
     it 'error change reviewing to rejected solution' do
       user_role
 
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_rejected_solution.code)).to eq(false)
+      expect(service).not_to exist(status_rejected_solution.code)
     end
 
     it 'error change reviewing to rejected' do
       user_role
 
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_rejected.code)).to eq(false)
+      expect(service).not_to exist(status_rejected.code)
     end
 
     it 'error change reviewing to resolved' do
       user_role
 
       service = described_class.new(user: user, petition: petition)
-      expect(service.exists?(status_resolved.code)).to eq(false)
+      expect(service).not_to exist(status_resolved.code)
     end
   end
 end

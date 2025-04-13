@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::SignInController, type: :request do
+RSpec.describe Api::V1::Users::SignInController do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
@@ -52,8 +52,8 @@ RSpec.describe Api::V1::Users::SignInController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
-          expect(body['data']['jwt'].present?).to eq(true)
+          expect(body['success']).to be(true)
+          expect(body['data']['jwt']).to be_present
         end
       end
 
@@ -74,7 +74,7 @@ RSpec.describe Api::V1::Users::SignInController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
+          expect(body['success']).to be(false)
         end
       end
     end

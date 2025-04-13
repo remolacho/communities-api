@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Suggestions::Files::ListController, type: :request do
+RSpec.describe Api::V1::Suggestions::Files::ListController do
   include_context 'detail_suggestion_stuff'
 
   let(:lang) { 'es' }

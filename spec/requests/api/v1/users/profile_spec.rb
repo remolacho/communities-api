@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::ProfileController, type: :request do
+RSpec.describe Api::V1::Users::ProfileController do
   include_context 'user_profile_stuff'
 
   let(:lang) { 'es' }

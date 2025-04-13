@@ -28,7 +28,7 @@ RSpec.describe Petitions::List::ListGroupRolesService do
 
       filter = Petitions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'return only group admin, the user has role admin' do
@@ -55,7 +55,7 @@ RSpec.describe Petitions::List::ListGroupRolesService do
 
       filter = Petitions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'return only group admin with filter status rejected, the user has role admin' do
@@ -76,7 +76,7 @@ RSpec.describe Petitions::List::ListGroupRolesService do
       service = described_class.new(user: user, filter: filter, page: 1)
 
       result = service.call
-      expect(result.size > 0 && result.size < acum).to eq(true)
+      expect(!result.empty? && result.size < acum).to be(true)
     end
 
     it 'return only group admin with filter category claim, the user has role admin' do

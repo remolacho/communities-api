@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Enterprises::SettingController, type: :request do
+RSpec.describe Api::V1::Enterprises::SettingController do
   include_context 'enterprise_setting_stuff'
 
   let(:lang) { 'es' }

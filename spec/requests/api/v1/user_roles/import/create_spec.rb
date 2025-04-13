@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::UserRoles::Import::CreateController, type: :request do
+RSpec.describe Api::V1::UserRoles::Import::CreateController do
   include_context 'user_roles_templates_import_stuff'
 
   let(:lang) { 'es' }

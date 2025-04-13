@@ -10,7 +10,7 @@ RSpec.describe Users::ListService do
       ['name', 'lastname', 'email', 'identifier', 'reference'].each do |attr|
         search = Users::Searches::QueryTermService.new(attr: attr, term: 'test')
         service = described_class.new(user: user, enterprise: enterprise, search: search)
-        expect(service.call(1).empty?).to eq(true)
+        expect(service.call(1)).to be_empty
       end
     end
 
@@ -18,14 +18,14 @@ RSpec.describe Users::ListService do
       ['name', 'lastname', 'email', 'identifier', 'reference'].each do |attr|
         search = Users::Searches::QueryTermService.new(attr: attr, term: user[attr.to_sym][0..3])
         service = described_class.new(user: user, enterprise: enterprise, search: search)
-        expect(service.call(1).present?).to eq(true)
+        expect(service.call(1)).to be_present
       end
     end
 
     it 'return all users' do
       search = Users::Searches::QueryTermService.new(attr: '', term: '')
       service = described_class.new(user: user, enterprise: enterprise, search: search)
-      expect(service.call(1).present?).to eq(true)
+      expect(service.call(1)).to be_present
     end
 
     it 'return all users only role manager' do
@@ -33,7 +33,7 @@ RSpec.describe Users::ListService do
 
       search = Users::Searches::QueryTermService.new(attr: '', term: '')
       service = described_class.new(user: user, enterprise: enterprise, search: search)
-      expect(service.call(1).present?).to eq(true)
+      expect(service.call(1)).to be_present
     end
   end
 end

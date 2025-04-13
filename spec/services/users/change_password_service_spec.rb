@@ -48,9 +48,9 @@ RSpec.describe Users::ChangePasswordService do
       forgot = Users::ForgotPasswordService.new(email: user.email)
       service = described_class.new(token: forgot.call.reset_password_key, data: allowed_params)
 
-      expect(user.reload.reset_password_key.nil?).to eq(false)
-      expect(service.call).to eq(true)
-      expect(user.reload.reset_password_key.nil?).to eq(true)
+      expect(user.reload.reset_password_key).not_to be_nil
+      expect(service.call).to be(true)
+      expect(user.reload.reset_password_key).to be_nil
     end
   end
 end

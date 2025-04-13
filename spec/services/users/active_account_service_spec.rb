@@ -18,14 +18,14 @@ RSpec.describe Users::ActiveAccountService do
 
     it 'return success' do
       user_sign_up = Users::SignUpService.new(enterprise: enterprise, data: allowed_params).call
-      expect(user_sign_up.active?).to eq(false)
+      expect(user_sign_up).not_to be_active
 
       service = described_class.new(token: user_sign_up.active_key)
-      expect(service.call).to eq(true)
+      expect(service.call).to be(true)
 
       user_sign_up = user_sign_up.reload
-      expect(user_sign_up.active_key.nil?).to eq(true)
-      expect(user_sign_up.active?).to eq(true)
+      expect(user_sign_up.active_key).to be_nil
+      expect(user_sign_up).to be_active
     end
   end
 end

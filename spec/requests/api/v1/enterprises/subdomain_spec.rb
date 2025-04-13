@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Enterprises::SubdomainController, type: :request do
+RSpec.describe Api::V1::Enterprises::SubdomainController do
   include_context 'enterprise_setting_stuff'
 
   path '/{enterprise_subdomain}/v1/enterprise/subdomain' do

@@ -9,8 +9,8 @@ RSpec.describe UserRoles::Templates::ImportService do
     it 'return success' do
       service = described_class.new(enterprise: enterprise)
       result = service.build
-      expect(result.name_file.present?).to eq(true)
-      expect(result.file.to_stream.present?).to eq(true)
+      expect(result.name_file).to be_present
+      expect(result.file.to_stream).to be_present
     end
   end
 end

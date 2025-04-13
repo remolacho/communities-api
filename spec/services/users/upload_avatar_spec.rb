@@ -36,7 +36,7 @@ RSpec.describe Users::UploadAvatar do
 
       service = described_class.new(user: user, avatar_file: file)
 
-      expect(service.perform).to eq(true)
+      expect(service.perform).to be(true)
     end
   end
 end

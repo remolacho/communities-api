@@ -9,7 +9,7 @@ RSpec.describe Petitions::List::ListOwnService do
     it 'return empty, the user has not petitions' do
       filter = Petitions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'return all without filter' do
@@ -48,8 +48,8 @@ RSpec.describe Petitions::List::ListOwnService do
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
-      expect(!result.size.zero? && result.size < acum).to eq(true)
-      expect(result.size == 1).to eq(true)
+      expect(!result.empty? && result.size < acum).to be(true)
+      expect(result.size == 1).to be(true)
     end
 
     it 'return all with filter status resolved' do
@@ -65,8 +65,8 @@ RSpec.describe Petitions::List::ListOwnService do
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
-      expect(!result.size.zero? && result.size < acum).to eq(true)
-      expect(result.size == 2).to eq(true)
+      expect(!result.empty? && result.size < acum).to be(true)
+      expect(result.size == 2).to be(true)
     end
 
     it 'return all with filter category complaint' do
@@ -82,8 +82,8 @@ RSpec.describe Petitions::List::ListOwnService do
       service = described_class.new(user: user, filter: filter, page: 1)
       result = service.call
 
-      expect(!result.size.zero? && result.size < acum).to eq(true)
-      expect(result.size == 2).to eq(true)
+      expect(!result.empty? && result.size < acum).to be(true)
+      expect(result.size == 2).to be(true)
     end
 
     it 'return empty with filter' do
@@ -94,7 +94,7 @@ RSpec.describe Petitions::List::ListOwnService do
 
       filter = Petitions::Filter::QueryService.new(params: params)
       service = described_class.new(user: user, filter: filter, page: 1)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
   end
 end

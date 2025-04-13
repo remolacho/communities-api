@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
+RSpec.describe Api::V1::Users::ForgotPasswordController do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }

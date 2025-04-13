@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::ListOwnController, type: :request do
+RSpec.describe Api::V1::Petitions::ListOwnController do
   include_context 'list_own_petitions_stuff'
 
   let(:lang) { 'es' }

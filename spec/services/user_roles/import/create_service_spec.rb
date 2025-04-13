@@ -58,7 +58,7 @@ RSpec.describe UserRoles::Import::CreateService do
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       service.perform
 
-      expect(service.errors.empty?).to eq(false)
+      expect(service.errors).not_to be_empty
     end
 
     it 'finish success!!!' do
@@ -68,13 +68,13 @@ RSpec.describe UserRoles::Import::CreateService do
       sign_up
 
       user_identifier = User.find_by(identifier: '12345678')
-      expect(user_identifier.roles.size == 1).to eq(true)
+      expect(user_identifier.roles.size == 1).to be(true)
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       service.perform
 
-      expect(service.errors.empty?).to eq(true)
-      expect(user_identifier.roles.size == 3).to eq(true)
+      expect(service.errors).to be_empty
+      expect(user_identifier.roles.size == 3).to be(true)
     end
 
     it 'finish skip duplicate roles' do
@@ -83,13 +83,13 @@ RSpec.describe UserRoles::Import::CreateService do
 
       new_user_admin
       user_identifier = User.find_by(identifier: '12345678')
-      expect(user_identifier.roles.size == 2).to eq(true)
+      expect(user_identifier.roles.size == 2).to be(true)
 
       service = described_class.new(enterprise: enterprise, user: user, file: file)
       service.perform
 
-      expect(service.errors.empty?).to eq(true)
-      expect(user_identifier.roles.size == 3).to eq(true)
+      expect(service.errors).to be_empty
+      expect(user_identifier.roles.size == 3).to be(true)
     end
   end
 end

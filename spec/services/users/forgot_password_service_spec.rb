@@ -28,7 +28,7 @@ RSpec.describe Users::ForgotPasswordService do
       user_enterprise
 
       service = described_class.new(email: user.email)
-      expect(service.call.reset_password_key.nil?).to eq false
+      expect(service.call.reset_password_key).not_to be_nil
     end
   end
 end

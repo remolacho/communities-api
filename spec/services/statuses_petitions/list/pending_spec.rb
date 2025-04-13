@@ -8,7 +8,7 @@ RSpec.describe StatusesPetitions::List::Factory::Pending do
   context 'when you want get a list of statuses allowed' do
     it 'the user has not access to list status pending according to in petition' do
       service = described_class.new(user: user_2, petition: petition)
-      expect(service.call.empty?).to eq(true)
+      expect(service.call).to be_empty
     end
 
     it 'the user has access to list status pending according to in petition' do
@@ -17,8 +17,8 @@ RSpec.describe StatusesPetitions::List::Factory::Pending do
       service = described_class.new(user: user, petition: petition)
       result = service.call
 
-      expect(result.detect { |r| r[:code] == Status::PETITION_REVIEWING }.present?).to eq(true)
-      expect(result.detect { |r| r[:code] == Status::PETITION_REJECTED }.present?).to eq(true)
+      expect(result.detect { |r| r[:code] == Status::PETITION_REVIEWING }).to be_present
+      expect(result.detect { |r| r[:code] == Status::PETITION_REJECTED }).to be_present
     end
   end
 end

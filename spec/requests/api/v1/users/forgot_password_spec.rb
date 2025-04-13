@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
+RSpec.describe Api::V1::Users::ForgotPasswordController do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
@@ -46,7 +46,7 @@ RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(true)
+          expect(body['success']).to be(true)
         end
       end
 
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
+          expect(body['success']).to be(false)
         end
       end
 
@@ -84,7 +84,7 @@ RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
 
         run_test! do |response|
           body = JSON.parse(response.body)
-          expect(body['success']).to eq(false)
+          expect(body['success']).to be(false)
         end
       end
     end

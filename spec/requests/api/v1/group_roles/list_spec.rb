@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::GroupRoles::ListPetitionsController, type: :request do
+RSpec.describe Api::V1::GroupRoles::ListPetitionsController do
   include_context 'group_roles_stuff'
 
   let(:lang) { 'es' }

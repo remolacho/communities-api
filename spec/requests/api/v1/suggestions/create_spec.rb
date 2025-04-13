@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Suggestions::CreateController, type: :request do
+RSpec.describe Api::V1::Suggestions::CreateController do
   include_context 'create_suggestion_stuff'
 
   let(:lang) { 'es' }

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Answers::CreateController, type: :request do
+RSpec.describe Api::V1::Petitions::Answers::CreateController do
   include_context 'create_answer_petition_stuff'
 
   let(:lang) { 'es' }

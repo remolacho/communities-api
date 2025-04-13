@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Statuses::AllController, type: :request do
+RSpec.describe Api::V1::Petitions::Statuses::AllController do
   include_context 'pending_status_petition_stuff'
 
   let(:lang) { 'es' }

@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Dashboard::ChartStatusesController, type: :request do
+RSpec.describe Api::V1::Petitions::Dashboard::ChartStatusesController do
   include_context 'dashboard_percentage_stuff'
 
   let(:lang) { 'es' }

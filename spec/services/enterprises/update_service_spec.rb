@@ -58,7 +58,7 @@ RSpec.describe Enterprises::UpdateService do
       }
 
       service = described_class.new(user: user, enterprise: enterprise, data: params)
-      expect(service.call).to eq(true)
+      expect(service.call).to be(true)
     end
   end
 end

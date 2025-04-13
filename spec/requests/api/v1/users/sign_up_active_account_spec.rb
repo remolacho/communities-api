@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Users::SignUpController, type: :request do
+RSpec.describe Api::V1::Users::SignUpController do
   include_context 'sign_up_stuff'
 
   let(:lang) { 'es' }
