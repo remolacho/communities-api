@@ -13,17 +13,17 @@ module Suggestions
 
       def can_read!
         loudly do
-          is_owner? || has_role?
+          owner? || role?
         end
       end
 
       private
 
-      def is_owner?
+      def owner?
         current_user.id == suggestion.user_id
       end
 
-      def has_role?
+      def role?
         group_role.present? && !group_role_relations.zero?
       end
 

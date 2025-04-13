@@ -12,13 +12,13 @@ module Petitions
 
     def can_read!
       loudly do
-        owner? || has_role?
+        owner? || role?
       end
     end
 
     def can_write!
       loudly do
-        owner? || has_role?
+        owner? || role?
       end
     end
 
@@ -28,7 +28,7 @@ module Petitions
       petition.user_id == current_user.id
     end
 
-    def has_role?
+    def role?
       (petition.roles.ids & current_user.roles.ids).any?
     end
   end

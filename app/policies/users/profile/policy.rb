@@ -13,7 +13,7 @@ module Users
 
       def can_read!
         loudly do
-          owner? || has_role?
+          owner? || role?
         end
       end
 
@@ -23,7 +23,7 @@ module Users
         current_user.id == profile.id
       end
 
-      def has_role?
+      def role?
         group_role.present? && !group_role_relations.zero?
       end
 

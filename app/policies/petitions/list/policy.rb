@@ -5,13 +5,13 @@ module Petitions
     class Policy < BasePolicy
       def can_read!
         loudly do
-          has_role?
+          role?
         end
       end
 
       private
 
-      def has_role?
+      def role?
         user_roles_ids.present? && group_roles_ids.present?
       end
 

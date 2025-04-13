@@ -13,13 +13,13 @@ module Users
 
       def can_read!
         loudly do
-          has_role?
+          role?
         end
       end
 
       private
 
-      def has_role?
+      def role?
         group_role.present? && !group_role_relations.zero?
       end
 
