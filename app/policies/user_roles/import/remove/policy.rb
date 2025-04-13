@@ -6,26 +6,15 @@ module UserRoles
       class Policy < BasePolicy
         def can_write!
           loudly do
-            role?
+            role?(:can_destroy)
           end
         end
 
         private
 
-        def role?
-          group_role.present? && !group_role_relations.zero?
-        end
-
-        def group_role_relations
-          @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids).count
-        end
-
-        def group_role
-          @group_role ||= GroupRole.find_by(code: :remove_user_roles, entity_type: UserRole::ENTITY_TYPE)
-        end
-
-        def user_roles_ids
-          @user_roles_ids ||= current_user.roles.ids
+        # override
+        def entity
+          @entity ||= UserRole.name
         end
       end
     end

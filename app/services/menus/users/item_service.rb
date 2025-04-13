@@ -13,7 +13,7 @@ module Menus
         {
           users: {
             code: 'users',
-            show: true,
+            show: can_show?,
             items: items
           }
         }
@@ -21,9 +21,13 @@ module Menus
 
       private
 
+      def can_show?
+        @can_show ||= items.values.any? { |item| item[:show] }
+      end
+
       def items
-        {}.merge!(profile_item.perform)
-          .merge!(list_item.perform)
+        @items ||= {}.merge!(list_item.perform)
+          .merge!(profile_item.perform)
           .merge!(assign_roles.perform)
           .merge!(remove_roles.perform)
       end

@@ -96,7 +96,9 @@ paths:
                     properties:
                       id:
                         type: integer
-                      rut:
+                      identifier:
+                        type: string
+                      social_reason:
                         type: string
                       email:
                         type: string
@@ -127,7 +129,7 @@ paths:
                       updated_at:
                         type: string
         '403':
-          description: error user not valid!!!
+          description: error user has not read permission!!!
           content:
             application/json:
               schema:
@@ -294,7 +296,7 @@ paths:
                   message:
                     type: string
         '403':
-          description: error user not valid!!!
+          description: error user not valid, has not edit permission!!!
           content:
             application/json:
               schema:
@@ -320,7 +322,9 @@ paths:
                       type: string
                     address:
                       type: string
-                    rut:
+                    identifier:
+                      type: string
+                    social_reason:
                       type: string
                     logo:
                       type: string
@@ -328,6 +332,332 @@ paths:
                     banner:
                       type: string
                       description: the file of image
+  "/{enterprise_subdomain}/v1/fines/categories/create":
+    post:
+      summary: Create a new fine category
+      tags:
+      - Community API V1 Fines
+      description: Allow users to create a new fine category, optionally as a child
+        of an existing category
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      code:
+                        type: string
+                      formula:
+                        type: string
+                      value:
+                        type: number
+                      active:
+                        type: boolean
+                      parent_category_fine_id:
+                        type: integer
+                        nullable: true
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '422':
+          description: error unprocessable entity!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                      code:
+                        type: array
+                        items:
+                          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_fine:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the category
+                    code:
+                      type: string
+                      description: Unique code for the category
+                    description:
+                      type: string
+                      description: Optional description
+                    formula:
+                      type: string
+                      description: Optional formula for calculation
+                    value:
+                      type: number
+                      description: Optional base value
+                    parent_category_fine_id:
+                      type: integer
+                      description: Optional ID of parent category
+                      nullable: true
+                    active:
+                      type: boolean
+                      description: Optional status, defaults to true
+                  required:
+                  - name
+                  - code
+  "/{enterprise_subdomain}/v1/fines/categories/delete/{id}":
+    delete:
+      summary: Deactivate a fine category
+      tags:
+      - Community API V1 Fines
+      description: Allow users to deactivate a fine category
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: ID of the category to deactivate
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+                  data:
+                    type: object
+        '404':
+          description: error not found!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/fines/categories/import":
+    post:
+      summary: Import fine categories from Excel file
+      tags:
+      - Community API V1 Fines
+      description: Allow users to import fine categories from an Excel file
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '422':
+          description: error invalid header!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+                  data:
+                    type: object
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+        required: true
+        description: Excel file with categories data
+  "/{enterprise_subdomain}/v1/fines/categories/list":
+    get:
+      summary: Request the list of fine categories
+      tags:
+      - Community API V1 Fines
+      description: Allow users to get list of fine categories with their children
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Optional, represents the page number
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        code:
+                          type: string
+                        formula:
+                          type: string
+                        value:
+                          type: number
+                        active:
+                          type: boolean
+                        parent_category_fine_id:
+                          type: integer
+                          nullable: true
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity
@@ -462,11 +792,14 @@ paths:
                         type: string
   "/{enterprise_subdomain}/v1/petition/answer/delete/{id}":
     delete:
-      summary: Delete a answer for petition
+      summary: Delete answer from petition
       tags:
       - Community API V1 Answers petition
-      description: Allow to users create answer in a petition
+      description: Allow users to delete their answers from a petition
       parameters:
+      - name: Authorization
+        in: header
+        required: true
       - name: enterprise_subdomain
         in: path
         description: this subdomain of enterprise create in creations tenant
@@ -484,12 +817,9 @@ paths:
         description: is optional by default is "es"
         schema:
           type: string
-      - name: Authorization
-        in: header
-        required: true
       responses:
         '200':
-          description: success!!!
+          description: success the user has can destroy the answer is not owner
           content:
             application/json:
               schema:
@@ -513,7 +843,7 @@ paths:
                   message:
                     type: string
         '404':
-          description: error the answer not belong to user logged !!!
+          description: error the answer not found !!!
           content:
             application/json:
               schema:
@@ -1526,6 +1856,42 @@ paths:
                   properties:
                     status_id:
                       type: integer
+  "/{enterprise_subdomain}/v1/properties/import/template":
+    get:
+      summary: Download template for property import
+      tags:
+      - Community API V1 Properties Import
+      description: Allow users to download the template for importing properties
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: template downloaded successfully
+        '403':
+          description: error forbidden!!!
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
   "/{enterprise_subdomain}/v1/properties/statuses/all":
     get:
       summary: Find all statuses of type property
@@ -2182,7 +2548,7 @@ paths:
                   message:
                     type: string
         '403':
-          description: error the user has not role!!!
+          description: error the user has not role can_write!!!
           content:
             application/json:
               schema:
@@ -2242,7 +2608,7 @@ paths:
                     default: true
                   message:
                     type: string
-        '404':
+        '422':
           description: error password not match!!!
           content:
             application/json:
@@ -2426,7 +2792,7 @@ paths:
           type: string
       responses:
         '200':
-          description: success!!!
+          description: success can list!!!
           content:
             application/json:
               schema:
@@ -2707,18 +3073,6 @@ paths:
                   success:
                     type: boolean
                     default: true
-                  message:
-                    type: string
-        '404':
-          description: error email empty and other attribute!!!
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    default: false
                   message:
                     type: string
         '422':

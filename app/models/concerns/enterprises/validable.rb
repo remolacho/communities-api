@@ -5,9 +5,9 @@ module Enterprises
     PASSWORD_TOP = 6
 
     included do
-      validates :rut,
+      validates :identifier,
                 presence: true,
-                length: { minimum: 10, maximum: 30 }
+                length: { minimum: 9, maximum: 30 }
 
       validates :email,
                 presence: true,

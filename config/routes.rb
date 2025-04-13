@@ -110,6 +110,15 @@ Rails.application.routes.draw do
           resources :list, only: [:index]
         end
 
+        namespace :fines do
+          namespace :categories do
+            resources :list, only: [:index]
+            resources :create, only: [:create]
+            resources :import, only: [:create]
+            resources :delete, only: [:destroy]
+          end
+        end
+
         namespace :group_roles do
           resources :list_petitions, only: [:index]
         end
@@ -132,6 +141,11 @@ Rails.application.routes.draw do
         namespace :properties do
           namespace :statuses do
             get 'all', to: 'all#index'
+          end
+
+          namespace :import do
+            resources :template, only: [:index]
+            resources :create, only: [:create]
           end
         end
 

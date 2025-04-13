@@ -7,7 +7,9 @@ module Menus
                   :enterprise_item,
                   :users_item,
                   :suggestions_item,
-                  :pqrs_item
+                  :pqrs_item,
+                  :fines_item,
+                  :properties_item
 
     def build
       menu = init_menu
@@ -16,6 +18,8 @@ module Menus
       menu.merge!(users_item.perform)
       menu.merge!(suggestions_item.perform)
       menu.merge!(pqrs_item.perform)
+      menu.merge!(fines_item.perform)
+      menu.merge!(properties_item.perform)
       menu
     end
 

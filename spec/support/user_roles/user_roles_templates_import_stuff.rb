@@ -7,26 +7,41 @@ shared_context 'user_roles_templates_import_stuff' do
   let(:enterprise) { enterprise_helper }
   let!(:user_enterprise) { user_enterprise_helper }
 
-  let!(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
-  let!(:role_council_member){ FactoryBot.create(:role, :council_member) }
-  let!(:role_owner_admin){ FactoryBot.create(:role, :owner_admin) }
-  let!(:role_admin){ FactoryBot.create(:role, :role_admin) }
+  # Roles base
+  let!(:role_coexistence_member) { FactoryBot.create(:role, :coexistence_member) }
+  let!(:role_council_member) { FactoryBot.create(:role, :council_member) }
+  let!(:role_owner_admin) { FactoryBot.create(:role, :owner_admin) }
+  let!(:role_admin) { FactoryBot.create(:role, :role_admin) }
 
-  let(:group_remove_user_roles) { FactoryBot.create(:group_role, :remove_user_roles) }
-
-  let(:group_role_relations_remove) {
-    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_remove_user_roles)]
+  # Permisos de entidad para los diferentes roles
+  let!(:entity_roles) {
+    [
+      # Admin tiene todos los permisos
+      FactoryBot.create(:entity_permission,
+        role: role_admin,
+        entity_type: UserRole.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      ),
+      # Coexistence member tiene permisos limitados
+      FactoryBot.create(:entity_permission,
+        role: role_coexistence_member,
+        entity_type: UserRole.name,
+        can_read: true,
+        can_write: false,
+        can_destroy: false,
+        can_change_status: false
+      )
+    ]
   }
 
-  let(:group_assign_user_roles) { FactoryBot.create(:group_role, :assign_user_roles) }
-
-  let(:group_role_relations_assign) {
-    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_assign_user_roles)]
-  }
-
+  # Asignación de roles a usuarios
   let(:user_role_admin) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_admin.id) }
   let(:user_role_coexistence) { FactoryBot.create(:user_role, user_id: user.id, role_id: role_coexistence_member.id) }
 
+  # Servicio de registro de usuarios
   let(:sign_up) {
     allowed_params = {
       name: FFaker::Name.first_name,
@@ -42,13 +57,14 @@ shared_context 'user_roles_templates_import_stuff' do
     ::Users::SignUpService.new(enterprise: enterprise, data: allowed_params).call
   }
 
-  let(:new_user_admin){
+  # Usuarios de prueba con diferentes roles
+  let(:new_user_admin) {
     u = sign_up
     FactoryBot.create(:user_role, user_id: u.id, role_id: role_admin.id)
     u
   }
 
-  let(:new_user){
+  let(:new_user) {
     u = sign_up
     FactoryBot.create(:user_role, user_id: u.id, role_id: role_admin.id)
     FactoryBot.create(:user_role, user_id: u.id, role_id: role_coexistence_member.id)

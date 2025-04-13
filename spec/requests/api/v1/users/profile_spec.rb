@@ -53,7 +53,7 @@ RSpec.describe Api::V1::Users::ProfileController do
       response 200, 'success other user!!!' do
         let(:Authorization) { sign_in }
         let(:token) do
-          group_role_relations
+          entity_roles
           user_role_admin
           user_other.token
         end
@@ -93,7 +93,7 @@ RSpec.describe Api::V1::Users::ProfileController do
       response 403, 'error user not valid!!!' do
         let(:Authorization) { sign_in }
         let(:token) do
-          group_role_relations
+          entity_roles
           user_other.token
         end
 

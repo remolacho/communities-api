@@ -50,7 +50,8 @@ RSpec.describe Api::V1::Suggestions::DetailController do
                }
 
         let(:token) do
-          user_role_manager
+          entity_permissions
+          user_role_admin
           suggestion.token
         end
 
@@ -67,7 +68,8 @@ RSpec.describe Api::V1::Suggestions::DetailController do
                }
 
         let(:token) do
-          user_role_owner
+          entity_permissions
+          user_role_manager
           suggestion.token
         end
 
@@ -83,7 +85,11 @@ RSpec.describe Api::V1::Suggestions::DetailController do
                  message: { type: :string }
                }
 
-        let(:token) { SecureRandom.uuid }
+        let(:token) do
+          entity_permissions
+          user_role_admin
+          SecureRandom.uuid
+        end
 
         run_test!
       end

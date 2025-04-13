@@ -4,18 +4,21 @@
 #
 # Table name: enterprises
 #
-#  id              :bigint           not null, primary key
-#  active          :boolean          default(TRUE)
-#  address         :string
-#  email           :string           not null
-#  name            :string           not null
-#  reference_regex :string
-#  rut             :string           not null
-#  short_name      :string           not null
-#  subdomain       :string           not null
-#  token           :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                    :bigint           not null, primary key
+#  active                :boolean          default(TRUE)
+#  address               :string
+#  document_type         :string           default("NIT"), not null
+#  email                 :string           not null
+#  identifier            :string           not null
+#  name                  :string           not null
+#  placeholder_reference :string           default("T4-P11-A1102"), not null
+#  reference_regex       :string
+#  short_name            :string           not null
+#  social_reason         :string           not null
+#  subdomain             :string           not null
+#  token                 :string           not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
 # Indexes
 #
@@ -28,7 +31,8 @@ FactoryBot.define do
   factory :enterprise do
     token { SecureRandom.uuid }
     name { 'Test community 1' }
-    rut { "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}" }
+    social_reason { 'Test community 1' }
+    identifier { "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}" }
     subdomain { 'public' }
     short_name { 'test'.upcase }
     email do

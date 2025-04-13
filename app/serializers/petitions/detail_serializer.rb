@@ -40,7 +40,7 @@ module Petitions
       {
         reply: {
           description: 'Only reply if is different to resolve',
-          action: !object.status.code.eql?(Status::PETITION_RESOLVE)
+          action: !object.status.code.eql?(Statuses::Petition::PETITION_RESOLVED)
         }
       }
     end

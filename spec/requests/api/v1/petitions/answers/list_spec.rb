@@ -73,6 +73,7 @@ RSpec.describe Api::V1::Petitions::Answers::ListController do
                }
 
         let(:token) do
+          entity_permissions
           user_role
           answer
           answer2

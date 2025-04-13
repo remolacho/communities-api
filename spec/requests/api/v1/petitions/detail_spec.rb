@@ -100,7 +100,10 @@ RSpec.describe Api::V1::Petitions::DetailController do
                  message: { type: :string }
                }
 
-        let(:token) { petition.token }
+        let(:token) do
+          user_role_coexistence_member
+          petition.token
+        end
 
         run_test!
       end
@@ -114,7 +117,9 @@ RSpec.describe Api::V1::Petitions::DetailController do
                  message: { type: :string }
                }
 
-        let(:token) { SecureRandom.uuid }
+        let(:token) do
+          SecureRandom.uuid
+        end
 
         run_test!
       end

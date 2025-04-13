@@ -18,5 +18,8 @@
 #
 FactoryBot.define do
   factory :answers_petition do
+    message { "This is a test answer message" }
+    association :petition
+    association :user
   end
 end

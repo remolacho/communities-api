@@ -12,7 +12,7 @@ module StatusesPetitions
 
           [
             Status.petition_rejected_solution,
-            Status.petition_resolve
+            Status.petition_resolved
           ]
         end
 
