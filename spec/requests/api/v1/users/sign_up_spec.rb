@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::SignInController, type: :request do
+RSpec.describe Api::V1::Users::SignInController, type: :request do
   include_context 'sign_up_stuff'
 
   let(:lang) { 'es' }
@@ -11,13 +11,13 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
   path '/{enterprise_subdomain}/v1/users/sign_up' do
     post 'Create user' do
       tags 'Community API V1 Users'
-      description "Allow create a account in the app"
+      description 'Allow create a account in the app'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :sign_up, in: :body, schema: {
         type: :object,
         properties: {
-          sign_up:{
+          sign_up: {
             type: :object,
             properties: {
               name: { type: :string },
@@ -32,7 +32,8 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
           }
         }
       }
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
       response 200, 'success!!!' do
@@ -42,10 +43,10 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
                  message: { type: :string }
                }
 
-        let(:sign_up) {
+        let(:sign_up) do
           enterprise
           { sign_up: allowed_params }
-        }
+        end
 
         run_test!
       end
@@ -57,13 +58,13 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
                  message: { type: :string }
                }
 
-        let(:sign_up) {
+        let(:sign_up) do
           enterprise
           data = allowed_params
-          data[:password] = ""
+          data[:password] = ''
 
           { sign_up: data }
-        }
+        end
 
         run_test!
       end
@@ -75,14 +76,14 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
                  message: { type: :string }
                }
 
-        let(:sign_up) {
+        let(:sign_up) do
           enterprise
           user_enterprise
           data = allowed_params
           data[:identifier] = user.identifier
 
           { sign_up: data }
-        }
+        end
 
         run_test!
       end

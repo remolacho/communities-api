@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
+RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
@@ -11,21 +11,22 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
   path '/{enterprise_subdomain}/v1/users/forgot_password' do
     post 'Create a new request for change password' do
       tags 'Community API V1 Users'
-      description "Allow to users do change to password"
+      description 'Allow to users do change to password'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :forgot_password, in: :body, schema: {
         type: :object,
         properties: {
-          forgot_password:{
+          forgot_password: {
             type: :object,
             properties: {
-              email: { type: :string },
+              email: { type: :string }
             }
           }
         }
       }
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
       response 200, 'success!!!' do
@@ -35,14 +36,13 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
                  message: { type: :string }
                }
 
-
-        let(:forgot_password) {
+        let(:forgot_password) do
           user_enterprise
 
           {
             forgot_password: { email: user.email }
           }
-        }
+        end
 
         run_test! do |response|
           body = JSON.parse(response.body)
@@ -57,11 +57,11 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
                  message: { type: :string }
                }
 
-        let(:forgot_password) {
+        let(:forgot_password) do
           {
-            forgot_password: { email: "" }
+            forgot_password: { email: '' }
           }
-        }
+        end
 
         run_test! do |response|
           body = JSON.parse(response.body)
@@ -76,11 +76,11 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
                  message: { type: :string }
                }
 
-        let(:forgot_password) {
+        let(:forgot_password) do
           {
-            forgot_password: { email: "test4@errornotfound.com" }
+            forgot_password: { email: 'test4@errornotfound.com' }
           }
-        }
+        end
 
         run_test! do |response|
           body = JSON.parse(response.body)

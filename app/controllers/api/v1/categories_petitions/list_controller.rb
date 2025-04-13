@@ -1,5 +1,4 @@
 class Api::V1::CategoriesPetitions::ListController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/categories_petitions/list
   def index
     render json: { success: true, data: serializer }

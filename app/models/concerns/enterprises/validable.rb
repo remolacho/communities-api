@@ -31,7 +31,7 @@ module Enterprises
     def validate_logo_content_type
       return unless logo.attached?
 
-      types = %w(image/jpeg image/png image/jpeg)
+      types = ['image/jpeg', 'image/png', 'image/jpeg']
 
       raise ArgumentError, I18n.t('services.enterprises.sign_up.image.type') unless logo.content_type.in?(types)
     end
@@ -39,13 +39,13 @@ module Enterprises
     def validate_logo_size
       return unless logo.attached?
 
-      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if logo.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if logo.byte_size > 5.megabytes
     end
 
     def validate_banner_content_type
       return unless banner.attached?
 
-      types = %w(image/jpeg image/png image/jpeg)
+      types = ['image/jpeg', 'image/png', 'image/jpeg']
 
       raise ArgumentError, I18n.t('services.enterprises.sign_up.image.type') unless banner.content_type.in?(types)
     end
@@ -53,7 +53,7 @@ module Enterprises
     def validate_banner_size
       return unless banner.attached?
 
-      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if banner.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.enterprises.sign_up.image.size') if banner.byte_size > 5.megabytes
     end
   end
 end

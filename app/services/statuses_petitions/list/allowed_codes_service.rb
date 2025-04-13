@@ -12,6 +12,6 @@ class StatusesPetitions::List::AllowedCodesService < StatusesPetitions::List::Fa
   private
 
   def generate_codes
-    @generate_codes ||= factory.call.map{|s| s[:code] }
+    @generate_codes ||= factory.call.map { |s| s[:code] }
   end
 end

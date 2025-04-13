@@ -11,32 +11,32 @@ module Statuses
     PETITION_RESOLVE = 'pet-resolve'
 
     included do
-      scope :all_of_petitions, ->(lang) {
+      scope :all_of_petitions, lambda { |lang|
         where(status_type: PETITION)
           .select("id, code, color, name::json->>'#{lang}' as as_name")
       }
 
-      scope :petition_pending, -> {
+      scope :petition_pending, lambda {
         find_by(status_type: PETITION, code: PETITION_PENDING)
       }
 
-      scope :petition_reviewing, -> {
+      scope :petition_reviewing, lambda {
         find_by(status_type: PETITION, code: PETITION_REVIEWING)
       }
 
-      scope :petition_rejected, -> {
+      scope :petition_rejected, lambda {
         find_by(status_type: PETITION, code: PETITION_REJECTED)
       }
 
-      scope :petition_confirm, -> {
+      scope :petition_confirm, lambda {
         find_by(status_type: PETITION, code: PETITION_CONFIRM)
       }
 
-      scope :petition_rejected_solution, -> {
+      scope :petition_rejected_solution, lambda {
         find_by(status_type: PETITION, code: PETITION_REJECTED_SOLUTION)
       }
 
-      scope :petition_resolve, -> {
+      scope :petition_resolve, lambda {
         find_by(status_type: PETITION, code: PETITION_RESOLVE)
       }
     end

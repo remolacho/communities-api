@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::UploadAvatarController < ApplicationController
-
   # POST /:enterprise_subdomain/v1/users/upload_avatar
   def create
     service = ::Users::UploadAvatar.new(user: current_user, avatar_file: allowed_params)

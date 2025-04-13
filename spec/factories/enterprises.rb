@@ -25,11 +25,15 @@
 FactoryBot.define do
   factory :enterprise do
     token { SecureRandom.uuid }
-    name { "Test community 1" }
-    rut { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
-    subdomain { "public" }
+    name { 'Test community 1' }
+    rut { "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}" }
+    subdomain { 'public' }
     short_name { 'test'.upcase }
-    email { "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com" }
-    reference_regex {"^T[0-4]-P(1[0-6]|[1-9])-A((10[1-8])|(20[1-8])|(30[1-8])|(40[1-8])|(50[1-8])|(60[1-8])|(70[1-8])|(80[1-8])|(90[1-8])|(100[1-8])|(110[1-8])|(120[1-8])|(130[1-8])|(140[1-8])|(150[1-8])|(160[1-8]))$"}
+    email do
+      "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com"
+    end
+    reference_regex do
+      '^T[0-4]-P(1[0-6]|[1-9])-A((10[1-8])|(20[1-8])|(30[1-8])|(40[1-8])|(50[1-8])|(60[1-8])|(70[1-8])|(80[1-8])|(90[1-8])|(100[1-8])|(110[1-8])|(120[1-8])|(130[1-8])|(140[1-8])|(150[1-8])|(160[1-8]))$'
+    end
   end
 end

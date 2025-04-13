@@ -13,7 +13,7 @@ RSpec.describe Petitions::CreateService do
 
     it 'error title greater than 500 charters' do
       data = {
-        title: "T" * 50,
+        title: 'T' * 50,
         category_petition_id: category.id,
         group_role_id: group_role.id
       }
@@ -24,8 +24,8 @@ RSpec.describe Petitions::CreateService do
 
     it 'error message greater than 500 charters' do
       data = {
-        title: "Test PQR",
-        message: "1" * 501,
+        title: 'Test PQR',
+        message: '1' * 501,
         category_petition_id: category.id,
         group_role_id: group_role.id
       }
@@ -36,8 +36,8 @@ RSpec.describe Petitions::CreateService do
 
     it 'error message category not found' do
       data = {
-        title: "Test PQR",
-        message: "message test 1",
+        title: 'Test PQR',
+        message: 'message test 1',
         category_petition_id: 9999,
         group_role_id: group_role.id
       }
@@ -48,8 +48,8 @@ RSpec.describe Petitions::CreateService do
 
     it 'error message group role not found' do
       data = {
-        title: "Test PQR",
-        message: "message test 1",
+        title: 'Test PQR',
+        message: 'message test 1',
         category_petition_id: category.id,
         group_role_id: 9999
       }
@@ -60,8 +60,8 @@ RSpec.describe Petitions::CreateService do
 
     it 'success!!!' do
       data = {
-        title: "Test PQR",
-        message: "message test 1",
+        title: 'Test PQR',
+        message: 'message test 1',
         category_petition_id: category.id,
         group_role_id: group_role.id
       }

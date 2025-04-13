@@ -2,13 +2,14 @@
 
 class Suggestions::CreateService
   attr_accessor :user, :data
+
   def initialize(user:, data:)
     @user = user
     @data = data.to_h.deep_symbolize_keys
   end
 
   def call
-    raise ArgumentError, I18n.t("services.suggestions.create.data_empty") unless data.present?
+    raise ArgumentError, I18n.t('services.suggestions.create.data_empty') unless data.present?
 
     ActiveRecord::Base.transaction do
       files      = validate_attach_files_service.call
@@ -38,12 +39,12 @@ class Suggestions::CreateService
   end
 
   def define_ticket
-    data[:ticket] = "SUG-#{Time.now.strftime('%d%H%M%S')}#{rand(1..10000)}"
+    data[:ticket] = "SUG-#{Time.now.strftime('%d%H%M%S')}#{rand(1..10_000)}"
     data
   end
 
   def define_files
-    data.reject{ |k, _| k == :files }
+    data.reject { |k, _| k == :files }
   end
 
   def validate_attach_files_service

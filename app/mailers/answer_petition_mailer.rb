@@ -6,8 +6,11 @@ class AnswerPetitionMailer < ApplicationMailer
     @enterprise = enterprise
     @petition = petition
     @answer = answer
-    @subject = I18n.t("services.answers_petitions.mail.nofify.subject")
-    @email_to = Rails.env.production? ? @user.email : ENV['EMAIL_TO']
+    @subject = I18n.t('services.answers_petitions.mail.nofify.subject')
+    @email_to = Rails.env.production? ? @user.email : ENV.fetch('EMAIL_TO', nil)
+
+    logo(enterprise)
+
     mail(to: @email_to, subject: @subject)
   end
 end

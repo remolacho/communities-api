@@ -33,9 +33,19 @@ class Users::SignUpService
 
     regex = Regexp.new(enterprise.reference_regex)
 
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.empty")  unless data[:reference].present?
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.format") unless data[:reference].match(regex)
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.sign_up.validation.error.reference.limit", limit: MAX_REFERENCE) if record_user_limit >= MAX_REFERENCE
+    unless data[:reference].present?
+      raise ActiveRecord::RecordNotFound,
+            I18n.t('services.users.sign_up.validation.error.reference.empty')
+    end
+    unless data[:reference].match(regex)
+      raise ActiveRecord::RecordNotFound,
+            I18n.t('services.users.sign_up.validation.error.reference.format')
+    end
+    return unless record_user_limit >= MAX_REFERENCE
+
+    raise ActiveRecord::RecordNotFound,
+          I18n.t('services.users.sign_up.validation.error.reference.limit',
+                 limit: MAX_REFERENCE)
   end
 
   def record_user_limit

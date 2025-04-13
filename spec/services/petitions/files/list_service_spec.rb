@@ -8,8 +8,8 @@ RSpec.describe Petitions::Files::ListService do
   context 'when you want get the files of the petition' do
     it 'success files attached empty!!!' do
       data = {
-        title: "Test PQR",
-        message: "message test 1",
+        title: 'Test PQR',
+        message: 'message test 1',
         category_petition_id: category.id,
         group_role_id: group_role.id
       }
@@ -23,14 +23,14 @@ RSpec.describe Petitions::Files::ListService do
 
     it 'success files attached!!!' do
       data = {
-        title: "Test PQR",
-        message: "message test 1",
+        title: 'Test PQR',
+        message: 'message test 1',
         category_petition_id: category.id,
         group_role_id: group_role.id,
         files: {
-          "0"=> Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
-                                             ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-          "1"=>  Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
+          '0' => Rack::Test::UploadedFile.new('./spec/files/user_roles/templates/create/6-finish.xlsx',
+                                              ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+          '1' => Rack::Test::UploadedFile.new('./spec/files/users/avatars/avatar2mb.jpg',
                                               ' image/jpeg')
         }
       }

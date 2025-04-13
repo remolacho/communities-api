@@ -2,16 +2,17 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Enterprises::SubdomainController, type: :request do
+RSpec.describe Api::V1::Enterprises::SubdomainController, type: :request do
   include_context 'enterprise_setting_stuff'
 
   path '/{enterprise_subdomain}/v1/enterprise/subdomain' do
     get 'valid the subdomain of the enterprise' do
       tags 'Community API V1 Enterprises'
-      description "valid the subdomain of the enterprise"
+      description 'valid the subdomain of the enterprise'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
 
       response 200, 'success!!!' do
         let(:enterprise_subdomain) { 'public' }
@@ -23,7 +24,7 @@ RSpec.describe  Api::V1::Enterprises::SubdomainController, type: :request do
                  data: {
                    type: :object,
                    properties: {
-                     logo_url: { type: :string, nullable: true}
+                     logo_url: { type: :string, nullable: true }
                    }
                  }
                }

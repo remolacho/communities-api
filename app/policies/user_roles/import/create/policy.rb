@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class UserRoles::Import::Create::Policy < ::BasePolicy
+class UserRoles::Import::Create::Policy < BasePolicy
   def initialize(current_user:)
-    super(current_user: current_user)
+    super
   end
 
   def can_write!

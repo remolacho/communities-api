@@ -17,8 +17,8 @@ RSpec.describe StatusesPetitions::List::Factory::Pending do
       service = described_class.new(user: user, petition: petition)
       result = service.call
 
-      expect(result.detect{|r| r[:code] == Status::PETITION_REVIEWING}.present?).to eq(true)
-      expect(result.detect{|r| r[:code] == Status::PETITION_REJECTED}.present?).to eq(true)
+      expect(result.detect { |r| r[:code] == Status::PETITION_REVIEWING }.present?).to eq(true)
+      expect(result.detect { |r| r[:code] == Status::PETITION_REJECTED }.present?).to eq(true)
     end
   end
 end

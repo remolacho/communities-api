@@ -11,10 +11,10 @@ class Suggestions::List::ListOwnService
 
   def call
     user.suggestions
-        .includes(:user)
-        .ransack(filter.call)
-        .result
-        .order(updated_at: :desc)
-        .page(page.to_i)
+      .includes(:user)
+      .ransack(filter.call)
+      .result
+      .order(updated_at: :desc)
+      .page(page.to_i)
   end
 end

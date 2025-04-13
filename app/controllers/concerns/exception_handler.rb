@@ -31,7 +31,8 @@ module ExceptionHandler
   end
 
   def locked(message)
-    json_response(response: { success: false, message: (message || 'Unable to access to asked resources'), data: {} }, status: :locked)
+    json_response(response: { success: false, message: message || 'Unable to access to asked resources', data: {} },
+                  status: :locked)
   end
 
   # :nodoc:

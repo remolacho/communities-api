@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::Profile::Policy < ::BasePolicy
+class Users::Profile::Policy < BasePolicy
   attr_accessor :profile
 
   def initialize(current_user:, profile:)

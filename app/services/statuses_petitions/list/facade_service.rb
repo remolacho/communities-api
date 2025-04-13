@@ -18,9 +18,16 @@ class StatusesPetitions::List::FacadeService
     return StatusesPetitions::List::Factory::Pending.new(user: user, petition: petition)          if petition.pending?
     return StatusesPetitions::List::Factory::Rejected.new(user: user, petition: petition)         if petition.rejected?
     return StatusesPetitions::List::Factory::Reviewing.new(user: user, petition: petition)        if petition.reviewing?
-    return StatusesPetitions::List::Factory::Confirm.new(user: user, petition: petition)          if petition.by_confirm?
-    return StatusesPetitions::List::Factory::RejectedSolution.new(user: user, petition: petition) if petition.rejected_solution?
-    return StatusesPetitions::List::Factory::Resolved.new(user: user, petition: petition)         if petition.resolved?
+
+    if petition.by_confirm?
+      return StatusesPetitions::List::Factory::Confirm.new(user: user,
+                                                           petition: petition)
+    end
+    if petition.rejected_solution?
+      return StatusesPetitions::List::Factory::RejectedSolution.new(user: user,
+                                                                    petition: petition)
+    end
+    return StatusesPetitions::List::Factory::Resolved.new(user: user, petition: petition) if petition.resolved?
 
     raise NotImplementedError
   end

@@ -1,5 +1,4 @@
 class Api::V1::UserRoles::Import::CreateController < ApplicationController
-
   # POST /:enterprise_subdomain/v1/user_roles/import/create
   def create
     policy.can_write!
@@ -13,7 +12,7 @@ class Api::V1::UserRoles::Import::CreateController < ApplicationController
                 I18n.t('services.user_roles.import.create.success.error')
               end
 
-    render json: {success: true, message: message, errors: service.errors}
+    render json: { success: true, message: message, errors: service.errors }
   end
 
   private

@@ -10,13 +10,13 @@ module Users
 
       validates :identifier,
                 presence: true,
-                format: { with: /\d[0-9]\)*\z/  },
+                format: { with: /\d[0-9]\)*\z/ },
                 length: { minimum: 4, maximum: 15 }
 
       validates :phone,
                 presence: true,
                 numericality: true,
-                format: { with: /\d[0-9]\)*\z/  },
+                format: { with: /\d[0-9]\)*\z/ },
                 length: { minimum: 8, maximum: 15 }
 
       validates :email,
@@ -41,7 +41,7 @@ module Users
     def validate_avatar_content_type
       return unless avatar.attached?
 
-      types = %w(image/jpeg image/png image/jpeg)
+      types = ['image/jpeg', 'image/png', 'image/jpeg']
 
       raise ArgumentError, I18n.t('services.users.sign_up.avatar.type') unless avatar.content_type.in?(types)
     end
@@ -49,7 +49,7 @@ module Users
     def validate_avatar_size
       return unless avatar.attached?
 
-      raise ArgumentError, I18n.t('services.users.sign_up.avatar.size') if avatar.byte_size > 1.megabytes
+      raise ArgumentError, I18n.t('services.users.sign_up.avatar.size') if avatar.byte_size > 5.megabytes
     end
   end
 end

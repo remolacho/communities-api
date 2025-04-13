@@ -13,10 +13,10 @@ class Suggestions::List::ListGroupRolesService
     policy.can_read!
 
     Suggestion.includes(:user)
-              .ransack(filter.call)
-              .result
-              .order(updated_at: :desc)
-              .page(page.to_i)
+      .ransack(filter.call)
+      .result
+      .order(updated_at: :desc)
+      .page(page.to_i)
   end
 
   private

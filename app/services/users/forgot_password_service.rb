@@ -11,7 +11,7 @@ class Users::ForgotPasswordService
   def call
     raise ArgumentError, I18n.t('services.users.forgot_password.email_empty') unless email.present?
     raise ActiveRecord::RecordNotFound, I18n.t('services.users.forgot_password.not_found') unless user.present?
-    raise ActiveRecord::RecordNotFound, I18n.t("services.users.forgot_password.inactive") unless user.active?
+    raise ActiveRecord::RecordNotFound, I18n.t('services.users.forgot_password.inactive') unless user.active?
 
     user.generate_password_token!(expired)
     UsersMailer.recover_password(user: user, enterprise: user.enterprise).deliver_now!

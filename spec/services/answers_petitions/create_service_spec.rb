@@ -26,7 +26,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'error message greater than 500 charters' do
       data = {
-        message: "1" * 501,
+        message: '1' * 501
       }
 
       service = described_class.new(petition: petition, user: user, data: data)

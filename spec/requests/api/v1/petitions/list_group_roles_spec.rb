@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
+RSpec.describe Api::V1::Petitions::ListGroupRolesController, type: :request do
   include_context 'list_group_roles_petitions_stuff'
 
   let(:lang) { 'es' }
@@ -11,26 +11,28 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
   path '/{enterprise_subdomain}/v1/petition/list_group_roles' do
     get 'Request the list of petitions with group roles' do
       tags 'Community API V1 Petitions'
-      description "Allow to users get list of petition with group roles"
+      description 'Allow to users get list of petition with group roles'
       produces 'application/json'
       consumes 'application/json'
 
       parameter name: 'Authorization', in: :header, required: true
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
       parameter name: :status_id, in: :query, type: :integer, description: 'is optional represent the filter by status'
-      parameter name: :category_petition_id, in: :query, type: :integer, description: 'is optional represent the filter by category'
+      parameter name: :category_petition_id, in: :query, type: :integer,
+                description: 'is optional represent the filter by category'
       parameter name: :page, in: :query, type: :string, description: 'is optional represent the number page of find'
 
       response 200, 'success!!!' do
-        let(:'Authorization') { sign_in }
+        let(:Authorization) { sign_in }
 
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: true },
                  data: {
                    type: :array,
-                   items:{
+                   items: {
                      type: :object,
                      properties: {
                        id: { type: :integer },
@@ -59,7 +61,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                          type: :object,
                          properties: {
                            id: { type: :integer },
-                           name: { type: :string },
+                           name: { type: :string }
                          }
                        },
                        user: {
@@ -69,7 +71,7 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                            identifier: { type: :string },
                            name: { type: :string },
                            lastname: { type: :string },
-                           avatar_url: {type: :string, nullable: true }
+                           avatar_url: { type: :string, nullable: true }
                          }
                        },
                        setting: {
@@ -90,14 +92,14 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                  paginate: {
                    type: :object,
                    properties: {
-                     limit: {type: :integer},
-                     total_pages: {type: :integer},
-                     current_page: {type: :integer},
+                     limit: { type: :integer },
+                     total_pages: { type: :integer },
+                     current_page: { type: :integer }
                    }
                  }
                }
 
-        let(:status_id) {
+        let(:status_id) do
           user_role_owner_admin
           user_role_admin
           group_role_admin
@@ -107,19 +109,19 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
           petitions
           complaints
           status_resolved.id
-        }
+        end
 
-        let(:category_petition_id) {
+        let(:category_petition_id) do
           category_claim.id
-        }
+        end
 
-        let(:page) { "1" }
+        let(:page) { '1' }
 
         run_test!
       end
 
       response 403, 'error forbidden!!!' do
-        let(:'Authorization') { sign_in }
+        let(:Authorization) { sign_in }
 
         schema type: :object,
                properties: {
@@ -127,14 +129,14 @@ RSpec.describe  Api::V1::Petitions::ListGroupRolesController, type: :request do
                  message: { type: :string }
                }
 
-        let(:status_id) {
+        let(:status_id) do
           user_role_owner_admin
           group_role_council_coexistence
-          ""
-        }
+          ''
+        end
 
-        let(:category_petition_id) { "" }
-        let(:page) { "" }
+        let(:category_petition_id) { '' }
+        let(:page) { '' }
 
         run_test!
       end

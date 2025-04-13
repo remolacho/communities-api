@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Api::V1::Users::ListController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/users/list
   def index
     policy.can_read!
 
-    render json: {success: true, data: serializer, paginate: paginate}
+    render json: { success: true, data: serializer, paginate: paginate }
   end
 
   private
@@ -40,6 +39,6 @@ class Api::V1::Users::ListController < ApplicationController
   end
 
   def search
-    @search ||= Users::Searches::QueryTermService.new(attr: params[:attr] , term: params[:term])
+    @search ||= Users::Searches::QueryTermService.new(attr: params[:attr], term: params[:term])
   end
 end

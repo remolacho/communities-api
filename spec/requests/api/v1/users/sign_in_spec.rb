@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::SignInController, type: :request do
+RSpec.describe Api::V1::Users::SignInController, type: :request do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
@@ -11,13 +11,13 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
   path '/{enterprise_subdomain}/v1/users/sign_in' do
     post 'Create login by user' do
       tags 'Community API V1 Users'
-      description "Allow to users enter to api through of the email and password"
+      description 'Allow to users enter to api through of the email and password'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :sign_in, in: :body, schema: {
         type: :object,
         properties: {
-          sign_in:{
+          sign_in: {
             type: :object,
             properties: {
               email: { type: :string },
@@ -26,7 +26,8 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
           }
         }
       }
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
       response 200, 'success!!!' do
@@ -41,14 +42,13 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
                  }
                }
 
-
-        let(:sign_in) {
+        let(:sign_in) do
           user_enterprise
 
           {
             sign_in: { email: user.email, password: user.password }
           }
-        }
+        end
 
         run_test! do |response|
           body = JSON.parse(response.body)
@@ -64,13 +64,13 @@ RSpec.describe  Api::V1::Users::SignInController, type: :request do
                  message: { type: :string }
                }
 
-        let(:sign_in) {
+        let(:sign_in) do
           user_enterprise
 
           {
             sign_in: { email: user.email, password: 'errorTest' }
           }
-        }
+        end
 
         run_test! do |response|
           body = JSON.parse(response.body)

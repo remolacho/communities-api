@@ -7,15 +7,15 @@ class Users::BuildJwtService
 
   def initialize(user:, quantity: 1, unit: 'd')
     @user = user
-    @prefix = 'Bearer'.freeze
+    @prefix = 'Bearer'
     @quantity = quantity
     @unit = unit
   end
 
   def build
     sign_jwt
-  rescue StandardError
-    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error'))
+  rescue StandardError => e
+    raise PolicyException.new(I18n.t('services.users.sign_in.jwt_error', e: e.to_s))
   end
 
   private
