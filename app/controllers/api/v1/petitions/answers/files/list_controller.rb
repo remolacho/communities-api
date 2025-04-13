@@ -1,22 +1,34 @@
-class Api::V1::Petitions::Answers::Files::ListController < ApplicationController
-  # GET /:enterprise_subdomain/v1/petition/answer/files/:id/list
-  def list
-    policy.can_read!
+# frozen_string_literal: true
 
-    service = ::AnswersPetitions::Files::ListService.new(enterprise: enterprise,
-                                                         user: current_user,
-                                                         answer: answer)
+module Api
+  module V1
+    module Petitions
+      module Answers
+        module Files
+          class ListController < ApplicationController
+            # GET /:enterprise_subdomain/v1/petition/answer/files/:id/list
+            def list
+              policy.can_read!
 
-    render json: { success: true, data: service.call }
-  end
+              service = ::AnswersPetitions::Files::ListService.new(enterprise: enterprise,
+                                                                   user: current_user,
+                                                                   answer: answer)
 
-  private
+              render json: { success: true, data: service.call }
+            end
 
-  def policy
-    ::AnswersPetitions::Policy.new(current_user: current_user, petition: answer.petition)
-  end
+            private
 
-  def answer
-    @answer ||= AnswersPetition.find(params[:id])
+            def policy
+              ::AnswersPetitions::Policy.new(current_user: current_user, petition: answer.petition)
+            end
+
+            def answer
+              @answer ||= AnswersPetition.find(params[:id])
+            end
+          end
+        end
+      end
+    end
   end
 end

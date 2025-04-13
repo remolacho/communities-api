@@ -1,23 +1,32 @@
-class Api::V1::Suggestions::DetailController < ApplicationController
-  # GET /:enterprise_subdomain/v1/suggestion/detail/:token
-  def show
-    policy.can_read!
+# frozen_string_literal: true
 
-    service_suggestion = ::Suggestions::ReadService.new(user: current_user,
-                                                        suggestion: suggestion).call
+module Api
+  module V1
+    module Suggestions
+      class DetailController < ApplicationController
+        # GET /:enterprise_subdomain/v1/suggestion/detail/:token
+        def show
+          policy.can_read!
 
-    render json: { success: true, data: ::Suggestions::DetailSerializer.new(service_suggestion,
-                                                                            enterprise_subdomain: enterprise.subdomain) }
-  end
+          service_suggestion = ::Suggestions::ReadService.new(user: current_user,
+                                                              suggestion: suggestion).call
 
-  private
+          render json: { success: true,
+                         data: ::Suggestions::DetailSerializer.new(service_suggestion,
+                                                                   enterprise_subdomain: enterprise.subdomain) }
+        end
 
-  def policy
-    ::Suggestions::Detail::Policy.new(current_user: current_user,
-                                      suggestion: suggestion)
-  end
+        private
 
-  def suggestion
-    @suggestion ||= Suggestion.find_by!(token: params[:token])
+        def policy
+          ::Suggestions::Detail::Policy.new(current_user: current_user,
+                                            suggestion: suggestion)
+        end
+
+        def suggestion
+          @suggestion ||= Suggestion.find_by!(token: params[:token])
+        end
+      end
+    end
   end
 end

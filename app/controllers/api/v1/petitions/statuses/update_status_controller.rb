@@ -1,30 +1,40 @@
-class Api::V1::Petitions::Statuses::UpdateStatusController < ApplicationController
-  # PUT /:enterprise_subdomain/v1/petition/statuses/update/:token
-  def update
-    policy.can_write!
+# frozen_string_literal: true
 
-    Petitions::UpdateStatusService.new(user: current_user, petition: petition, status: status).call
+module Api
+  module V1
+    module Petitions
+      module Statuses
+        class UpdateStatusController < ApplicationController
+          # PUT /:enterprise_subdomain/v1/petition/statuses/update/:token
+          def update
+            policy.can_write!
 
-    render json: { success: true, message: I18n.t('services.petitions.update_status.success') }
-  end
+            ::Petitions::UpdateStatusService.new(user: current_user, petition: petition, status: status).call
 
-  private
+            render json: { success: true, message: I18n.t('services.petitions.update_status.success') }
+          end
 
-  def policy
-    @policy ||= ::UpdateStatusPetition::Policy.new(current_user: current_user,
-                                                   petition: petition,
-                                                   status: status)
-  end
+          private
 
-  def petition
-    @petition ||= Petition.includes(:status).find_by!(token: params[:token])
-  end
+          def policy
+            @policy ||= ::UpdateStatusPetition::Policy.new(current_user: current_user,
+                                                           petition: petition,
+                                                           status: status)
+          end
 
-  def status
-    Status.find(allowed_params[:status_id])
-  end
+          def petition
+            @petition ||= Petition.includes(:status).find_by!(token: params[:token])
+          end
 
-  def allowed_params
-    @allowed_params ||= params.require(:petition).permit(:status_id)
+          def status
+            Status.find(allowed_params[:status_id])
+          end
+
+          def allowed_params
+            @allowed_params ||= params.require(:petition).permit(:status_id)
+          end
+        end
+      end
+    end
   end
 end

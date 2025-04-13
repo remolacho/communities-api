@@ -1,20 +1,30 @@
-class Api::V1::Petitions::Answers::ListController < ApplicationController
-  # GET /:enterprise_subdomain/v1/petition/answers/list/:token
-  def index
-    policy.can_read!
+# frozen_string_literal: true
 
-    service = ::AnswersPetitions::ListService.new(user: current_user, petition: petition)
+module Api
+  module V1
+    module Petitions
+      module Answers
+        class ListController < ApplicationController
+          # GET /:enterprise_subdomain/v1/petition/answers/list/:token
+          def index
+            policy.can_read!
 
-    render json: { success: true, data: service.call }
-  end
+            service = ::AnswersPetitions::ListService.new(user: current_user, petition: petition)
 
-  private
+            render json: { success: true, data: service.call }
+          end
 
-  def policy
-    ::AnswersPetitions::Policy.new(current_user: current_user, petition: petition)
-  end
+          private
 
-  def petition
-    @petition ||= Petition.find_by!(token: params[:token])
+          def policy
+            ::AnswersPetitions::Policy.new(current_user: current_user, petition: petition)
+          end
+
+          def petition
+            @petition ||= Petition.find_by!(token: params[:token])
+          end
+        end
+      end
+    end
   end
 end

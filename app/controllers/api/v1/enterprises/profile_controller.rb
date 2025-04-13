@@ -1,17 +1,23 @@
 # frozen_string_literal: true
 
-class Api::V1::Enterprises::ProfileController < ApplicationController
-  # GET /:enterprise_subdomain/v1/enterprise/profile?lang=es
-  def index
-    policy.can_read!
+module Api
+  module V1
+    module Enterprises
+      class ProfileController < ApplicationController
+        # GET /:enterprise_subdomain/v1/enterprise/profile?lang=es
+        def index
+          policy.can_read!
 
-    render json: { success: true,
-                   data: ::Enterprises::ProfileSerializer.new(current_user.enterprise).as_json }
-  end
+          render json: { success: true,
+                         data: ::Enterprises::ProfileSerializer.new(current_user.enterprise).as_json }
+        end
 
-  private
+        private
 
-  def policy
-    @policy ||= Enterprises::Profile::Policy.new(current_user: current_user)
+        def policy
+          @policy ||= ::Enterprises::Profile::Policy.new(current_user: current_user)
+        end
+      end
+    end
   end
 end

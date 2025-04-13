@@ -1,27 +1,38 @@
-class Api::V1::UserRoles::Import::RemoveController < ApplicationController
-  # DELETE /:enterprise_subdomain/v1/user_roles/import/remove
-  def delete
-    policy.can_write!
+# frozen_string_literal: true
 
-    service = ::UserRoles::Import::RemoveService.new(enterprise: enterprise, user: current_user, file: allowed_params)
-    service.perform
+module Api
+  module V1
+    module UserRoles
+      module Import
+        class RemoveController < ApplicationController
+          # DELETE /:enterprise_subdomain/v1/user_roles/import/remove
+          def delete
+            policy.can_write!
 
-    message = if service.errors.empty?
-                I18n.t('services.user_roles.import.remove.success.ok')
-              else
-                I18n.t('services.user_roles.import.create.remove.error')
-              end
+            service = ::UserRoles::Import::RemoveService.new(enterprise: enterprise, user: current_user,
+                                                             file: allowed_params)
+            service.perform
 
-    render json: { success: true, message: message, errors: service.errors }
-  end
+            message = if service.errors.empty?
+                        I18n.t('services.user_roles.import.remove.success.ok')
+                      else
+                        I18n.t('services.user_roles.import.create.remove.error')
+                      end
 
-  private
+            render json: { success: true, message: message, errors: service.errors }
+          end
 
-  def allowed_params
-    @allowed_params ||= params[:user_roles_file]
-  end
+          private
 
-  def policy
-    ::UserRoles::Import::Remove::Policy.new(current_user: current_user)
+          def allowed_params
+            @allowed_params ||= params[:user_roles_file]
+          end
+
+          def policy
+            ::UserRoles::Import::Remove::Policy.new(current_user: current_user)
+          end
+        end
+      end
+    end
   end
 end

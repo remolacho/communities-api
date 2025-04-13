@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthController < ApplicationController
   skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 

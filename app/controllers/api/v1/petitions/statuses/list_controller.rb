@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
-class Api::V1::Petitions::Statuses::ListController < ApplicationController
-  # GET /:enterprise_subdomain/v1/petition/statuses/list/:token
-  def index
-    service = StatusesPetitions::List::FacadeService.new(user: current_user, petition: petition)
+module Api
+  module V1
+    module Petitions
+      module Statuses
+        class ListController < ApplicationController
+          # GET /:enterprise_subdomain/v1/petition/statuses/list/:token
+          def index
+            service = StatusesPetitions::List::FacadeService.new(user: current_user, petition: petition)
 
-    render json: { success: true, data: service.build }
-  end
+            render json: { success: true, data: service.build }
+          end
 
-  private
+          private
 
-  def petition
-    @petition ||= Petition.includes(:status).find_by!(token: params[:token])
+          def petition
+            @petition ||= Petition.includes(:status).find_by!(token: params[:token])
+          end
+        end
+      end
+    end
   end
 end

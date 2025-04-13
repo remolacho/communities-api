@@ -1,30 +1,38 @@
-class Api::V1::Users::SignUpController < ApplicationController
-  skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
+# frozen_string_literal: true
 
-  # POST /:enterprise_subdomain/v1/users/sign_up
-  def create
-    ::Users::SignUpService.new(enterprise: enterprise, data: allowed_params).call
+module Api
+  module V1
+    module Users
+      class SignUpController < ApplicationController
+        skip_before_action :authorized_user, :valid_subdomain!, :valid_user_active!
 
-    render json: { success: true, message: I18n.t('services.users.sign_up.success') }
-  end
+        # POST /:enterprise_subdomain/v1/users/sign_up
+        def create
+          ::Users::SignUpService.new(enterprise: enterprise, data: allowed_params).call
 
-  # GET /:enterprise_subdomain/v1/users/sign_up/active/:token
-  def active_account
-    ::Users::ActiveAccountService.new(token: params[:token]).call
+          render json: { success: true, message: I18n.t('services.users.sign_up.success') }
+        end
 
-    render json: { success: true, message: I18n.t('services.users.sign_up.success') }
-  end
+        # GET /:enterprise_subdomain/v1/users/sign_up/active/:token
+        def active_account
+          ::Users::ActiveAccountService.new(token: params[:token]).call
 
-  private
+          render json: { success: true, message: I18n.t('services.users.sign_up.success') }
+        end
 
-  def allowed_params
-    @allowed_params ||= params.require(:sign_up).permit(:name,
-                                                        :lastname,
-                                                        :identifier,
-                                                        :email,
-                                                        :reference,
-                                                        :phone,
-                                                        :password,
-                                                        :password_confirmation)
+        private
+
+        def allowed_params
+          @allowed_params ||= params.require(:sign_up).permit(:name,
+                                                              :lastname,
+                                                              :identifier,
+                                                              :email,
+                                                              :reference,
+                                                              :phone,
+                                                              :password,
+                                                              :password_confirmation)
+        end
+      end
+    end
   end
 end

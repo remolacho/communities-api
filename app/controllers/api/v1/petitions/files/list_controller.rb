@@ -1,21 +1,31 @@
-class Api::V1::Petitions::Files::ListController < ApplicationController
-  def list
-    policy.can_read!
+# frozen_string_literal: true
 
-    service = ::Petitions::Files::ListService.new(enterprise: enterprise,
-                                                  user: current_user,
-                                                  petition: petition)
+module Api
+  module V1
+    module Petitions
+      module Files
+        class ListController < ApplicationController
+          def list
+            policy.can_read!
 
-    render json: { success: true, data: service.call }
-  end
+            service = ::Petitions::Files::ListService.new(enterprise: enterprise,
+                                                          user: current_user,
+                                                          petition: petition)
 
-  private
+            render json: { success: true, data: service.call }
+          end
 
-  def policy
-    ::Petitions::Policy.new(current_user: current_user, petition: petition)
-  end
+          private
 
-  def petition
-    @petition ||= Petition.find_by!(token: params[:token])
+          def policy
+            ::Petitions::Policy.new(current_user: current_user, petition: petition)
+          end
+
+          def petition
+            @petition ||= Petition.find_by!(token: params[:token])
+          end
+        end
+      end
+    end
   end
 end
