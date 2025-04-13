@@ -19,6 +19,5 @@
 #
 FactoryBot.define do
   factory :user_property do
-    
   end
 end

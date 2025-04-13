@@ -7,10 +7,10 @@ module Users
     def avatar_url(enterprise_subdomain)
       return unless avatar.attached?
 
-      return avatar.url(expires_in: 2.day) unless Rails.env.test? || ENV['LOCAL_STORAGE'].eql?('local')
+      return avatar.url(expires_in: 2.days) unless Rails.env.test? || ENV['LOCAL_STORAGE'].eql?('local')
 
       url_path = Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true)
-      "#{ENV['BASE_HOST']}#{url_path}?enterprise_subdomain=#{enterprise_subdomain}"
+      "#{ENV.fetch('BASE_HOST', nil)}#{url_path}?enterprise_subdomain=#{enterprise_subdomain}"
     end
   end
 end

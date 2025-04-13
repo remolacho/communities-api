@@ -1,5 +1,4 @@
 class Api::V1::Suggestions::DetailController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/suggestion/detail/:token
   def show
     policy.can_read!
@@ -7,8 +6,8 @@ class Api::V1::Suggestions::DetailController < ApplicationController
     service_suggestion = ::Suggestions::ReadService.new(user: current_user,
                                                         suggestion: suggestion).call
 
-    render json: {success: true,  data: ::Suggestions::DetailSerializer.new(service_suggestion,
-                                                                            enterprise_subdomain: enterprise.subdomain)}
+    render json: { success: true, data: ::Suggestions::DetailSerializer.new(service_suggestion,
+                                                                            enterprise_subdomain: enterprise.subdomain) }
   end
 
   private

@@ -8,22 +8,22 @@ module Statuses
     PROPERTY_LOAN = 'pro-loan'
 
     included do
-        scope :all_of_properties, ->(lang) {
-          where(status_type: PROPERTY)
-            .select("id, code, color, name::json->>'#{lang}' as as_name")
-        }
+      scope :all_of_properties, lambda { |lang|
+        where(status_type: PROPERTY)
+          .select("id, code, color, name::json->>'#{lang}' as as_name")
+      }
 
-        scope :property_own, -> {
-          find_by(status_type: PROPERTY, code: PROPERTY_OWN)
-        }
+      scope :property_own, lambda {
+        find_by(status_type: PROPERTY, code: PROPERTY_OWN)
+      }
 
-        scope :property_rented, -> {
-          find_by(status_type: PROPERTY, code: PROPERTY_RENTED)
-        }
+      scope :property_rented, lambda {
+        find_by(status_type: PROPERTY, code: PROPERTY_RENTED)
+      }
 
-        scope :property_loan, -> {
-          find_by(status_type: PROPERTY, code: PROPERTY_LOAN)
-        }
+      scope :property_loan, lambda {
+        find_by(status_type: PROPERTY, code: PROPERTY_LOAN)
+      }
     end
   end
 end

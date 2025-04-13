@@ -135,6 +135,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
   create_table "properties", force: :cascade do |t|
     t.jsonb "name", null: false
     t.string "token", null: false
+    t.integer "created_by", null: false
+    t.integer "updated_by", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_properties_on_token", unique: true
@@ -147,8 +149,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
     t.jsonb "name_as", default: {}
     t.integer "min_range", default: 1
     t.integer "max_range", default: 1
-    t.string "prefix", null: false
+    t.string "prefix"
     t.string "input", default: "list", null: false
+    t.integer "created_by", null: false
+    t.integer "updated_by", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_property_attributes_on_property_id"

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::V1::Enterprises::ProfileController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/enterprise/profile?lang=es
   def index
     policy.can_read!

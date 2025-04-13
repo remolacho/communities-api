@@ -1,8 +1,7 @@
 class Api::V1::Suggestions::ListOwnController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/suggestion/list_own
   def index
-    render json: {success: true, data: serializer, paginate: paginate}
+    render json: { success: true, data: serializer, paginate: paginate }
   end
 
   private

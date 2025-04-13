@@ -16,6 +16,5 @@
 #
 FactoryBot.define do
   factory :answers_petition do
-    
   end
 end

@@ -1,8 +1,7 @@
 class Api::V1::Petitions::ListGroupRolesController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/petition/list_group_roles
   def index
-    render json: {success: true, data: serializer, paginate: paginate}
+    render json: { success: true, data: serializer, paginate: paginate }
   end
 
   private

@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV['EMAIL_FROM']
+  default from: ENV.fetch('EMAIL_FROM', nil)
   layout 'mailer'
 
   private
@@ -9,7 +9,10 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def logo(enterprise)
-    return attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/logo2.png") unless enterprise.logo.present?
+    unless enterprise.logo.present?
+      return attachments.inline['logo.png'] =
+               File.read("#{Rails.root.join('app/assets/images/logo2.png')}")
+    end
 
     @logo = enterprise.logo_url
   end

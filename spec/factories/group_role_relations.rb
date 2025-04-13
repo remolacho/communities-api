@@ -18,6 +18,6 @@
 FactoryBot.define do
   factory :group_role_relation do
     role_id { role.id }
-    group_role_id  { group_role.id }
+    group_role_id { group_role.id }
   end
 end

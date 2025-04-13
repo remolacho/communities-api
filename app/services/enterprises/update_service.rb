@@ -2,6 +2,7 @@
 
 class Enterprises::UpdateService
   attr_accessor :user, :enterprise, :data
+
   def initialize(user:, enterprise:, data:)
     @user = user
     @enterprise = enterprise
@@ -9,7 +10,7 @@ class Enterprises::UpdateService
   end
 
   def call
-    raise ArgumentError, I18n.t("services.enterprises.update.data_empty") unless data.present?
+    raise ArgumentError, I18n.t('services.enterprises.update.data_empty') unless data.present?
 
     rejected_attrs
 
@@ -24,12 +25,26 @@ class Enterprises::UpdateService
   private
 
   def rejected_attrs
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :id) if data.key?(:id)
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :token) if data.key?(:token)
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :active) if data.key?(:active)
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :reference_regex) if data.key?(:reference_regex)
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :short_name) if data.key?(:short_name)
-    raise ArgumentError, I18n.t("services.enterprises.update.attribute.not_allowed", attr: :subdomain) if data.key?(:subdomain)
+    raise ArgumentError, I18n.t('services.enterprises.update.attribute.not_allowed', attr: :id) if data.key?(:id)
+    raise ArgumentError, I18n.t('services.enterprises.update.attribute.not_allowed', attr: :token) if data.key?(:token)
+
+    if data.key?(:active)
+      raise ArgumentError,
+            I18n.t('services.enterprises.update.attribute.not_allowed', attr: :active)
+    end
+    if data.key?(:reference_regex)
+      raise ArgumentError,
+            I18n.t('services.enterprises.update.attribute.not_allowed',
+                   attr: :reference_regex)
+    end
+    if data.key?(:short_name)
+      raise ArgumentError,
+            I18n.t('services.enterprises.update.attribute.not_allowed', attr: :short_name)
+    end
+    return unless data.key?(:subdomain)
+
+    raise ArgumentError,
+          I18n.t('services.enterprises.update.attribute.not_allowed', attr: :subdomain)
   end
 
   def allowed_data
@@ -38,10 +53,10 @@ class Enterprises::UpdateService
   end
 
   def define_logo(params)
-    params.reject{ |k, _| k == :logo }
+    params.reject { |k, _| k == :logo }
   end
 
   def define_banner(params)
-    params.reject{ |k, _| k == :banner }
+    params.reject { |k, _| k == :banner }
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ::StatusesPetitions::List::AllowedCodesService do
+RSpec.describe StatusesPetitions::List::AllowedCodesService do
   include_context 'reviewing_status_petition_stuff'
 
   context 'when the user owner petition want change the status to reviewing to other' do

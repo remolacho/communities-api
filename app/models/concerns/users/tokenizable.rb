@@ -8,7 +8,7 @@ module Users
       end while User.exists?(reset_password_key: reset_password_key)
 
       self.reset_password_key_expires_at = expired
-      self.save!
+      save!
     end
 
     def generate_active_token!
@@ -16,7 +16,7 @@ module Users
         self.active_key = SecureRandom.uuid
       end while User.exists?(active_key: active_key)
 
-      self.save!
+      save!
     end
   end
 end

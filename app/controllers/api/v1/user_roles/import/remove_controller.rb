@@ -1,5 +1,4 @@
 class Api::V1::UserRoles::Import::RemoveController < ApplicationController
-
   # DELETE /:enterprise_subdomain/v1/user_roles/import/remove
   def delete
     policy.can_write!
@@ -13,7 +12,7 @@ class Api::V1::UserRoles::Import::RemoveController < ApplicationController
                 I18n.t('services.user_roles.import.create.remove.error')
               end
 
-    render json: {success: true, message: message, errors: service.errors}
+    render json: { success: true, message: message, errors: service.errors }
   end
 
   private

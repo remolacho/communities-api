@@ -11,8 +11,8 @@ class Users::ListService
 
   def call(page = 1)
     enterprise.users
-              .includes(:user_enterprise)
-              .ransack(search.call)
-              .result.page(page.to_i)
+      .includes(:user_enterprise)
+      .ransack(search.call)
+      .result.page(page.to_i)
   end
 end

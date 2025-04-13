@@ -28,7 +28,7 @@ FactoryBot.define do
 
   trait :complaint do
     name { 'Queja' }
-    slug { "Queja".parameterize }
+    slug { 'Queja'.parameterize }
   end
 
   trait :claim do

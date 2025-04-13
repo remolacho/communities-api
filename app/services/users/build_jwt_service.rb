@@ -7,7 +7,7 @@ class Users::BuildJwtService
 
   def initialize(user:, quantity: 1, unit: 'd')
     @user = user
-    @prefix = 'Bearer'.freeze
+    @prefix = 'Bearer'
     @quantity = quantity
     @unit = unit
   end

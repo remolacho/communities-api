@@ -1,11 +1,10 @@
 class Api::V1::Petitions::DetailController < ApplicationController
-
   # GET /:enterprise_subdomain/v1/petition/detail/:token
   def show
     policy.can_read!
 
-    render json: {success: true,  data: ::Petitions::DetailSerializer.new(petition,
-                                                                          enterprise_subdomain: enterprise.subdomain)}
+    render json: { success: true, data: ::Petitions::DetailSerializer.new(petition,
+                                                                          enterprise_subdomain: enterprise.subdomain) }
   end
 
   private

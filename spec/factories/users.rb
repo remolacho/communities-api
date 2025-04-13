@@ -36,10 +36,12 @@ FactoryBot.define do
     token { SecureRandom.uuid }
     name { FFaker::Name.first_name }
     lastname { FFaker::Name.last_name }
-    identifier { "#{FFaker::IdentificationESCL.rut}-#{20 + Random.rand(110)}" }
-    email { "#{FFaker::Name.first_name}.#{20 + Random.rand(11)}#{20 + Random.rand(11)}#{20 + Random.rand(11)}@community.com" }
-    reference { "T4-P11-A1102" }
-    phone { "3174131149" }
+    identifier { "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}" }
+    email do
+      "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com"
+    end
+    reference { 'T4-P11-A1102' }
+    phone { '3174131149' }
     password { password }
     password_confirmation { password }
   end

@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
+RSpec.describe Api::V1::Users::ForgotPasswordController, type: :request do
   include_context 'sign_in_stuff'
 
   let(:lang) { 'es' }
@@ -11,11 +11,12 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
   path '/{enterprise_subdomain}/v1/users/forgot_password/verifier/{token}' do
     get 'Create a new request for verifier token to change password' do
       tags 'Community API V1 Users'
-      description "Allow to users verifier to change password"
+      description 'Allow to users verifier to change password'
       produces 'application/json'
       consumes 'application/json'
 
-      parameter name: :enterprise_subdomain, in: :path, type: :string, description: 'this subdomain of enterprise create in creations tenant'
+      parameter name: :enterprise_subdomain, in: :path, type: :string,
+                description: 'this subdomain of enterprise create in creations tenant'
       parameter name: :token, in: :path, type: :string, description: 'this token represent the reset_password_key'
       parameter name: :lang, in: :query, type: :string, description: 'is optional by default is "es"'
 
@@ -32,10 +33,10 @@ RSpec.describe  Api::V1::Users::ForgotPasswordController, type: :request do
                  }
                }
 
-        let(:token) {
-          forgot = ::Users::ForgotPasswordService.new(email: user.email)
+        let(:token) do
+          forgot = Users::ForgotPasswordService.new(email: user.email)
           forgot.call.reset_password_key
-        }
+        end
 
         run_test!
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Menus::Users::Items::AssignRolesItem < ::UserRoles::Import::Create::Policy
+class Menus::Users::Items::AssignRolesItem < UserRoles::Import::Create::Policy
   def initialize(user:)
     super(current_user: user)
   end

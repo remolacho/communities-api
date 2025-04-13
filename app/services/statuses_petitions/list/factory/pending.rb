@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class StatusesPetitions::List::Factory::Pending < StatusesPetitions::List::Factory::Base
-
   private
 
   # override

@@ -7,7 +7,7 @@ class Api::V1::Users::ForgotPasswordController < ApplicationController
   def create
     ::Users::ForgotPasswordService.new(email: allowed_params[:email]).call
 
-    render json: { success: true, message: I18n.t("services.users.forgot_password.success") }
+    render json: { success: true, message: I18n.t('services.users.forgot_password.success') }
   end
 
   # GET /:enterprise_subdomain/v1/users/forgot_password/verifier/:token
@@ -27,7 +27,7 @@ class Api::V1::Users::ForgotPasswordController < ApplicationController
   private
 
   def allowed_params_change
-    @allowed_params_change ||=  params.require(:forgot_password).permit(:password, :password_confirmation)
+    @allowed_params_change ||= params.require(:forgot_password).permit(:password, :password_confirmation)
   end
 
   def allowed_params

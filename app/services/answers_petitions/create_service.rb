@@ -29,7 +29,7 @@ class AnswersPetitions::CreateService
     return unless allowed_mail?
 
     AnswerPetitionMailer.notify(user: user_petition,
-                                enterprise: user.enterprise ,
+                                enterprise: user.enterprise,
                                 petition: petition,
                                 answer: answer).deliver_now!
   end
@@ -39,7 +39,7 @@ class AnswersPetitions::CreateService
   end
 
   def has_data!
-    raise ArgumentError, I18n.t("services.answers_petitions.create.data_empty") unless data.present?
+    raise ArgumentError, I18n.t('services.answers_petitions.create.data_empty') unless data.present?
   end
 
   def policy
@@ -52,7 +52,7 @@ class AnswersPetitions::CreateService
 
   def allowed_data
     data.merge!(user_id: user.id)
-    data.reject{ |k, _| k == :files }
+    data.reject { |k, _| k == :files }
   end
 
   def validate_attach_files_service

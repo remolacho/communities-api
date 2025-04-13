@@ -12,6 +12,7 @@ class AnswersPetitions::DetailSerializer < ActiveModel::Serializer
     ::Users::BasicProfileSerializer.new(object.user,
                                         enterprise_subdomain: enterprise_subdomain)
   end
+
   def date_at
     object.created_at
   end

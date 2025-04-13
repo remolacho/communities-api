@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::SignInService
-
   attr_accessor :email, :password
 
   def initialize(email:, password:)

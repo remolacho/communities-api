@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Menus::Enterprise::Items::EditItem < ::Enterprises::Update::Policy
+class Menus::Enterprise::Items::EditItem < Enterprises::Update::Policy
   def initialize(user:)
     super(current_user: user)
   end

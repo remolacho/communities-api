@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::List::Policy < ::BasePolicy
+class Users::List::Policy < BasePolicy
   attr_accessor :enterprise
 
   def initialize(current_user:, enterprise:)
