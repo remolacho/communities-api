@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-  `- ruby 3.0.0`
+  `- ruby 3.2.2`
 
 
 * System dependencies
@@ -18,7 +18,7 @@ Things you may want to cover:
 * Configuration
   - bundle install
   - change application.example.yml to application.yml
-  
+
 
 * Database creation
   - rake db:create
@@ -28,13 +28,13 @@ Things you may want to cover:
 * Database initialization
   - rake db:migrate
   - rake db:migrate RAILS_ENV=test
-  
+
 
 * How to run the test suite
   - rails rswag:specs:swaggerize (runner the test and create documentation)
   - rails g rspec:swagger namespace::controller_name
   - rspec
-  
+
 
 * Services (job queues, cache servers, search engines, etc.)
 
