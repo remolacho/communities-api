@@ -1,50 +1,54 @@
-class Petitions::DetailSerializer < ActiveModel::Serializer
-  attributes :id,
-             :title,
-             :token,
-             :message,
-             :ticket,
-             :updated_at,
-             :created_at
+# frozen_string_literal: true
 
-  attribute :status
-  attribute :category
-  attribute :group_role
-  attribute :user
-  attribute :setting
+module Petitions
+  class DetailSerializer < ActiveModel::Serializer
+    attributes :id,
+               :title,
+               :token,
+               :message,
+               :ticket,
+               :updated_at,
+               :created_at
 
-  def status
-    ActiveModelSerializers::SerializableResource.new(object.status,
-                                                     serializer: ::Statuses::DetailSerializer)
-  end
+    attribute :status
+    attribute :category
+    attribute :group_role
+    attribute :user
+    attribute :setting
 
-  def category
-    ActiveModelSerializers::SerializableResource.new(object.category_petition,
-                                                     serializer: ::CategoryPetitions::DetailSerializer)
-  end
+    def status
+      ActiveModelSerializers::SerializableResource.new(object.status,
+                                                       serializer: ::Statuses::DetailSerializer)
+    end
 
-  def user
-    ::Users::BasicProfileSerializer.new(object.user,
-                                        enterprise_subdomain: enterprise_subdomain)
-  end
+    def category
+      ActiveModelSerializers::SerializableResource.new(object.category_petition,
+                                                       serializer: ::CategoryPetitions::DetailSerializer)
+    end
 
-  def group_role
-    ActiveModelSerializers::SerializableResource.new(object.group_role,
-                                                     serializer: ::GroupRoles::DetailSerializer)
-  end
+    def user
+      ::Users::BasicProfileSerializer.new(object.user,
+                                          enterprise_subdomain: enterprise_subdomain)
+    end
 
-  def setting
-    {
-      reply: {
-        description: 'Only reply if is different to resolve',
-        action: !object.status.code.eql?(Status::PETITION_RESOLVE)
+    def group_role
+      ActiveModelSerializers::SerializableResource.new(object.group_role,
+                                                       serializer: ::GroupRoles::DetailSerializer)
+    end
+
+    def setting
+      {
+        reply: {
+          description: 'Only reply if is different to resolve',
+          action: !object.status.code.eql?(Status::PETITION_RESOLVE)
+        }
       }
-    }
-  end
+    end
 
-  private
+    private
 
-  def enterprise_subdomain
-    instance_options[:enterprise_subdomain]
+    def enterprise_subdomain
+      instance_options[:enterprise_subdomain]
+    end
   end
 end

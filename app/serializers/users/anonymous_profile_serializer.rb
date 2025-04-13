@@ -1,28 +1,32 @@
-class Users::AnonymousProfileSerializer < ActiveModel::Serializer
-  attribute :id
-  attribute :name
-  attribute :lastname
-  attribute :avatar_url
+# frozen_string_literal: true
 
-  def id
-    nil
-  end
+module Users
+  class AnonymousProfileSerializer < ActiveModel::Serializer
+    attribute :id
+    attribute :name
+    attribute :lastname
+    attribute :avatar_url
 
-  def name
-    I18n.t('services.users.anonymous.name')
-  end
+    def id
+      nil
+    end
 
-  def lastname
-    I18n.t('services.users.anonymous.lastname')
-  end
+    def name
+      I18n.t('services.users.anonymous.name')
+    end
 
-  def avatar_url
-    nil
-  end
+    def lastname
+      I18n.t('services.users.anonymous.lastname')
+    end
 
-  private
+    def avatar_url
+      nil
+    end
 
-  def enterprise_subdomain
-    instance_options[:enterprise_subdomain]
+    private
+
+    def enterprise_subdomain
+      instance_options[:enterprise_subdomain]
+    end
   end
 end

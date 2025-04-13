@@ -1,35 +1,39 @@
-class Users::ProfileSerializer < ActiveModel::Serializer
-  attributes :id,
-             :name,
-             :lastname,
-             :email,
-             :reference,
-             :identifier,
-             :phone,
-             :token
+# frozen_string_literal: true
 
-  attribute :avatar_url
-  attribute :setting
+module Users
+  class ProfileSerializer < ActiveModel::Serializer
+    attributes :id,
+               :name,
+               :lastname,
+               :email,
+               :reference,
+               :identifier,
+               :phone,
+               :token
 
-  def avatar_url
-    raise ArgumentError if enterprise_subdomain.nil?
+    attribute :avatar_url
+    attribute :setting
 
-    object.avatar_url(enterprise_subdomain)
-  end
+    def avatar_url
+      raise ArgumentError if enterprise_subdomain.nil?
 
-  def setting
-    {
-      can_edit: object.id == current_user.id
-    }
-  end
+      object.avatar_url(enterprise_subdomain)
+    end
 
-  private
+    def setting
+      {
+        can_edit: object.id == current_user.id
+      }
+    end
 
-  def enterprise_subdomain
-    instance_options[:enterprise_subdomain]
-  end
+    private
 
-  def current_user
-    instance_options[:current_user]
+    def enterprise_subdomain
+      instance_options[:enterprise_subdomain]
+    end
+
+    def current_user
+      instance_options[:current_user]
+    end
   end
 end

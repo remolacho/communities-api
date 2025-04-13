@@ -1,29 +1,33 @@
-class Users::ListSerializer < ActiveModel::Serializer
-  attributes :id,
-             :name,
-             :lastname,
-             :email,
-             :reference,
-             :identifier,
-             :phone,
-             :token
+# frozen_string_literal: true
 
-  attribute :avatar_url
-  attribute :active
+module Users
+  class ListSerializer < ActiveModel::Serializer
+    attributes :id,
+               :name,
+               :lastname,
+               :email,
+               :reference,
+               :identifier,
+               :phone,
+               :token
 
-  def avatar_url
-    raise ArgumentError if enterprise_subdomain.nil?
+    attribute :avatar_url
+    attribute :active
 
-    object.avatar_url(enterprise_subdomain)
-  end
+    def avatar_url
+      raise ArgumentError if enterprise_subdomain.nil?
 
-  def active
-    object.user_enterprise.active
-  end
+      object.avatar_url(enterprise_subdomain)
+    end
 
-  private
+    def active
+      object.user_enterprise.active
+    end
 
-  def enterprise_subdomain
-    instance_options[:enterprise_subdomain]
+    private
+
+    def enterprise_subdomain
+      instance_options[:enterprise_subdomain]
+    end
   end
 end

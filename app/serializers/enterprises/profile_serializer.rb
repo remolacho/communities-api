@@ -1,29 +1,33 @@
-class Enterprises::ProfileSerializer < ActiveModel::Serializer
-  attributes :id,
-             :token,
-             :name,
-             :rut,
-             :address,
-             :email,
-             :subdomain,
-             :reference_regex,
-             :short_name,
-             :active,
-             :created_at,
-             :updated_at
+# frozen_string_literal: true
 
-  attribute :logo_url
-  attribute :banner_url
+module Enterprises
+  class ProfileSerializer < ActiveModel::Serializer
+    attributes :id,
+               :token,
+               :name,
+               :rut,
+               :address,
+               :email,
+               :subdomain,
+               :reference_regex,
+               :short_name,
+               :active,
+               :created_at,
+               :updated_at
 
-  def logo_url
-    raise ArgumentError if object.subdomain.nil?
+    attribute :logo_url
+    attribute :banner_url
 
-    object.logo_url
-  end
+    def logo_url
+      raise ArgumentError if object.subdomain.nil?
 
-  def banner_url
-    raise ArgumentError if object.subdomain.nil?
+      object.logo_url
+    end
 
-    object.banner_url
+    def banner_url
+      raise ArgumentError if object.subdomain.nil?
+
+      object.banner_url
+    end
   end
 end

@@ -1,8 +1,12 @@
-class GroupRoles::DetailSerializer < ActiveModel::Serializer
-  attributes :id
-  attribute :name
+# frozen_string_literal: true
 
-  def name
-    object.name[I18n.locale.to_s]
+module GroupRoles
+  class DetailSerializer < ActiveModel::Serializer
+    attributes :id
+    attribute :name
+
+    def name
+      object.name[I18n.locale.to_s]
+    end
   end
 end

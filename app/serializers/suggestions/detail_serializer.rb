@@ -1,23 +1,27 @@
-class Suggestions::DetailSerializer < ActiveModel::Serializer
-  attributes :id,
-             :token,
-             :message,
-             :ticket,
-             :read,
-             :anonymous
+# frozen_string_literal: true
 
-  attribute :user
+module Suggestions
+  class DetailSerializer < ActiveModel::Serializer
+    attributes :id,
+               :token,
+               :message,
+               :ticket,
+               :read,
+               :anonymous
 
-  def user
-    return ::Users::AnonymousProfileSerializer.new(object.user) if object.anonymous
+    attribute :user
 
-    ::Users::BasicProfileSerializer.new(object.user,
-                                        enterprise_subdomain: enterprise_subdomain)
-  end
+    def user
+      return ::Users::AnonymousProfileSerializer.new(object.user) if object.anonymous
 
-  private
+      ::Users::BasicProfileSerializer.new(object.user,
+                                          enterprise_subdomain: enterprise_subdomain)
+    end
 
-  def enterprise_subdomain
-    instance_options[:enterprise_subdomain]
+    private
+
+    def enterprise_subdomain
+      instance_options[:enterprise_subdomain]
+    end
   end
 end
