@@ -1,22 +1,28 @@
 # frozen_string_literal: true
 
-class Menus::Users::Items::AssignRolesItem < UserRoles::Import::Create::Policy
-  def initialize(user:)
-    super(current_user: user)
-  end
+module Menus
+  module Users
+    module Items
+      class AssignRolesItem < UserRoles::Import::Create::Policy
+        def initialize(user:)
+          super(current_user: user)
+        end
 
-  def perform
-    {
-      assignRoles: {
-        code: 'assignRoles',
-        show: can_show?
-      }
-    }
-  end
+        def perform
+          {
+            assignRoles: {
+              code: 'assignRoles',
+              show: can_show?
+            }
+          }
+        end
 
-  private
+        private
 
-  def can_show?
-    @can_show ||= has_role?
+        def can_show?
+          @can_show ||= has_role?
+        end
+      end
+    end
   end
 end

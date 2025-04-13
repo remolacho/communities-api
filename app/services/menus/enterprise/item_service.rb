@@ -1,36 +1,40 @@
 # frozen_string_literal: true
 
-class Menus::Enterprise::ItemService < Enterprises::Profile::Policy
-  def initialize(user:)
-    super(current_user: user)
-  end
+module Menus
+  module Enterprise
+    class ItemService < ::Enterprises::Profile::Policy
+      def initialize(user:)
+        super(current_user: user)
+      end
 
-  def perform
-    {
-      enterprise: {
-        code: 'enterprise',
-        show: can_show?,
-        items: items
-      }
-    }
-  end
+      def perform
+        {
+          enterprise: {
+            code: 'enterprise',
+            show: can_show?,
+            items: items
+          }
+        }
+      end
 
-  private
+      private
 
-  def items
-    {}.merge!(detail_item.perform)
-      .merge!(edit_item.perform)
-  end
+      def items
+        {}.merge!(detail_item.perform)
+          .merge!(edit_item.perform)
+      end
 
-  def detail_item
-    ::Menus::Enterprise::Items::DetailItem.new(user: current_user, can_show: can_show?)
-  end
+      def detail_item
+        Items::DetailItem.new(user: current_user, can_show: can_show?)
+      end
 
-  def edit_item
-    ::Menus::Enterprise::Items::EditItem.new(user: current_user)
-  end
+      def edit_item
+        Items::EditItem.new(user: current_user)
+      end
 
-  def can_show?
-    @can_show ||= has_role?
+      def can_show?
+        @can_show ||= has_role?
+      end
+    end
   end
 end

@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
-class Menus::Suggestions::Items::CreateItem
-  attr_accessor :user
+module Menus
+  module Suggestions
+    module Items
+      class CreateItem
+        attr_accessor :user
 
-  def initialize(user:)
-    @user = user
-  end
+        def initialize(user:)
+          @user = user
+        end
 
-  def perform
-    {
-      create: {
-        code: 'create',
-        show: true
-      }
-    }
+        def perform
+          {
+            create: {
+              code: 'create',
+              show: true
+            }
+          }
+        end
+      end
+    end
   end
 end

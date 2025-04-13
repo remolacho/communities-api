@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
-class Users::ListService
-  attr_accessor :user, :enterprise, :search
+module Users
+  class ListService
+    attr_accessor :user, :enterprise, :search
 
-  def initialize(user:, enterprise:, search:)
-    @user = user
-    @enterprise = enterprise
-    @search = search
-  end
+    def initialize(user:, enterprise:, search:)
+      @user = user
+      @enterprise = enterprise
+      @search = search
+    end
 
-  def call(page = 1)
-    enterprise.users
-      .includes(:user_enterprise)
-      .ransack(search.call)
-      .result.page(page.to_i)
+    def call(page = 1)
+      enterprise.users
+        .includes(:user_enterprise)
+        .ransack(search.call)
+        .result.page(page.to_i)
+    end
   end
 end

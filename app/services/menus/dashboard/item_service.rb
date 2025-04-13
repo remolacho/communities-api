@@ -1,18 +1,22 @@
 # frozen_string_literal: true
 
-class Menus::Dashboard::ItemService
-  attr_accessor :user
+module Menus
+  module Dashboard
+    class ItemService
+      attr_accessor :user
 
-  def initialize(user:)
-    @user = user
-  end
+      def initialize(user:)
+        @user = user
+      end
 
-  def perform
-    {
-      dashboard: {
-        code: 'dashboard',
-        show: true
-      }
-    }
+      def perform
+        {
+          dashboard: {
+            code: 'dashboard',
+            show: true
+          }
+        }
+      end
+    end
   end
 end

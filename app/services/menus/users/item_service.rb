@@ -1,44 +1,48 @@
 # frozen_string_literal: true
 
-class Menus::Users::ItemService
-  attr_accessor :user
+module Menus
+  module Users
+    class ItemService
+      attr_accessor :user
 
-  def initialize(user:)
-    @user = user
-  end
+      def initialize(user:)
+        @user = user
+      end
 
-  def perform
-    {
-      users: {
-        code: 'users',
-        show: true,
-        items: items
-      }
-    }
-  end
+      def perform
+        {
+          users: {
+            code: 'users',
+            show: true,
+            items: items
+          }
+        }
+      end
 
-  private
+      private
 
-  def items
-    {}.merge!(profile_item.perform)
-      .merge!(list_item.perform)
-      .merge!(assign_roles.perform)
-      .merge!(remove_roles.perform)
-  end
+      def items
+        {}.merge!(profile_item.perform)
+          .merge!(list_item.perform)
+          .merge!(assign_roles.perform)
+          .merge!(remove_roles.perform)
+      end
 
-  def profile_item
-    ::Menus::Users::Items::ProfileItem.new(user: user)
-  end
+      def profile_item
+        Items::ProfileItem.new(user: user)
+      end
 
-  def list_item
-    ::Menus::Users::Items::ListItem.new(user: user)
-  end
+      def list_item
+        Items::ListItem.new(user: user)
+      end
 
-  def assign_roles
-    ::Menus::Users::Items::AssignRolesItem.new(user: user)
-  end
+      def assign_roles
+        Items::AssignRolesItem.new(user: user)
+      end
 
-  def remove_roles
-    ::Menus::Users::Items::RemoveRolesItem.new(user: user)
+      def remove_roles
+        Items::RemoveRolesItem.new(user: user)
+      end
+    end
   end
 end

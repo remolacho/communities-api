@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
-class Menus::Pqrs::Items::SelfListItem
-  attr_accessor :user
+module Menus
+  module Pqrs
+    module Items
+      class SelfListItem
+        attr_accessor :user
 
-  def initialize(user:)
-    @user = user
-  end
+        def initialize(user:)
+          @user = user
+        end
 
-  def perform
-    {
-      selfPqrs: {
-        code: 'selfPqrs',
-        show: true
-      }
-    }
+        def perform
+          {
+            selfPqrs: {
+              code: 'selfPqrs',
+              show: true
+            }
+          }
+        end
+      end
+    end
   end
 end
