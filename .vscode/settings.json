@@ -8,7 +8,7 @@
         "editor.acceptSuggestionOnEnter": "on",
         "editor.definitionLinkOpensInPeek": false
     },
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Dracula Theme",
     "workbench.preferredDarkColorTheme": "One Dark Pro",
     "editor.tokenColorCustomizations": {
         "[One Dark Pro]": {
