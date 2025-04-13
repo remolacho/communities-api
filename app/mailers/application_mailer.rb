@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationMailer < ActionMailer::Base
   default from: ENV.fetch('EMAIL_FROM', nil)
   layout 'mailer'
@@ -9,9 +11,9 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def logo(enterprise)
-    unless enterprise.logo.present?
+    if enterprise.logo.blank?
       return attachments.inline['logo.png'] =
-               File.read("#{Rails.root.join('app/assets/images/logo2.png')}")
+               File.read(Rails.root.join('app/assets/images/logo2.png').to_s)
     end
 
     @logo = enterprise.logo_url

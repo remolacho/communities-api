@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersMailer < ApplicationMailer
   def recover_password(user:, enterprise:)
     return unless can_send_email?

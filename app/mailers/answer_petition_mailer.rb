@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswerPetitionMailer < ApplicationMailer
   def notify(user:, enterprise:, petition:, answer:)
     return unless can_send_email?
