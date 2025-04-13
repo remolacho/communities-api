@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
-class Menus::Users::Items::ProfileItem
-  attr_accessor :user
+module Menus
+  module Users
+    module Items
+      class ProfileItem
+        attr_accessor :user
 
-  def initialize(user:)
-    @user = user
-  end
+        def initialize(user:)
+          @user = user
+        end
 
-  def perform
-    {
-      profile: {
-        code: 'profile',
-        show: true
-      }
-    }
+        def perform
+          {
+            profile: {
+              code: 'profile',
+              show: true
+            }
+          }
+        end
+      end
+    end
   end
 end

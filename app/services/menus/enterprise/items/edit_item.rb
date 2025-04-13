@@ -1,22 +1,28 @@
 # frozen_string_literal: true
 
-class Menus::Enterprise::Items::EditItem < Enterprises::Update::Policy
-  def initialize(user:)
-    super(current_user: user)
-  end
+module Menus
+  module Enterprise
+    module Items
+      class EditItem < ::Enterprises::Update::Policy
+        def initialize(user:)
+          super(current_user: user)
+        end
 
-  def perform
-    {
-      edit: {
-        code: 'edit',
-        show: can_show?
-      }
-    }
-  end
+        def perform
+          {
+            edit: {
+              code: 'edit',
+              show: can_show?
+            }
+          }
+        end
 
-  private
+        private
 
-  def can_show?
-    @can_show ||= has_role?
+        def can_show?
+          @can_show ||= has_role?
+        end
+      end
+    end
   end
 end

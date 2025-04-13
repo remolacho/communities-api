@@ -1,68 +1,70 @@
 # frozen_string_literal: true
 
-class Users::SignUpService
-  attr_accessor :enterprise, :data
+module Users
+  class SignUpService
+    attr_accessor :enterprise, :data
 
-  MAX_REFERENCE = 2
+    MAX_REFERENCE = 2
 
-  def initialize(enterprise:, data:)
-    @enterprise = enterprise
-    @data = data
-  end
-
-  def call
-    ActiveRecord::Base.transaction do
-      valid_reference!
-
-      user = User.create!(allowed_data)
-
-      create_user_enterprise.call(user)
-
-      user.generate_active_token!
-
-      create_user_role(user).call
-
-      user
+    def initialize(enterprise:, data:)
+      @enterprise = enterprise
+      @data = data
     end
-  end
 
-  private
+    def call
+      ActiveRecord::Base.transaction do
+        valid_reference!
 
-  def valid_reference!
-    return unless enterprise.reference_regex.present?
+        user = User.create!(allowed_data)
 
-    regex = Regexp.new(enterprise.reference_regex)
+        create_user_enterprise.call(user)
 
-    unless data[:reference].present?
+        user.generate_active_token!
+
+        create_user_role(user).call
+
+        user
+      end
+    end
+
+    private
+
+    def valid_reference!
+      return unless enterprise.reference_regex.present?
+
+      regex = Regexp.new(enterprise.reference_regex)
+
+      unless data[:reference].present?
+        raise ActiveRecord::RecordNotFound,
+              I18n.t('services.users.sign_up.validation.error.reference.empty')
+      end
+      unless data[:reference].match(regex)
+        raise ActiveRecord::RecordNotFound,
+              I18n.t('services.users.sign_up.validation.error.reference.format')
+      end
+      return unless record_user_limit >= MAX_REFERENCE
+
       raise ActiveRecord::RecordNotFound,
-            I18n.t('services.users.sign_up.validation.error.reference.empty')
+            I18n.t('services.users.sign_up.validation.error.reference.limit',
+                   limit: MAX_REFERENCE)
     end
-    unless data[:reference].match(regex)
-      raise ActiveRecord::RecordNotFound,
-            I18n.t('services.users.sign_up.validation.error.reference.format')
+
+    def record_user_limit
+      User.where(reference: data[:reference]).count
     end
-    return unless record_user_limit >= MAX_REFERENCE
 
-    raise ActiveRecord::RecordNotFound,
-          I18n.t('services.users.sign_up.validation.error.reference.limit',
-                 limit: MAX_REFERENCE)
-  end
+    def allowed_data
+      data[:token] = SecureRandom.uuid
 
-  def record_user_limit
-    User.where(reference: data[:reference]).count
-  end
+      data
+    end
 
-  def allowed_data
-    data[:token] = SecureRandom.uuid
+    def create_user_enterprise
+      ::UserEnterprises::Create.new(enterprise: enterprise)
+    end
 
-    data
-  end
-
-  def create_user_enterprise
-    ::UserEnterprises::Create.new(enterprise: enterprise)
-  end
-
-  def create_user_role(user)
-    ::UserRoles::OwnerAdmin::Create.new(user: user)
+    def create_user_role(user)
+      ::UserRoles::OwnerAdmin::Create.new(user: user)
+    end
   end
 end
