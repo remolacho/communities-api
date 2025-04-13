@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
-class UpdateStatusPetition::Policy < BasePolicy
-  attr_accessor :petition, :status
+module UpdateStatusPetition
+  class Policy < BasePolicy
+    attr_accessor :petition, :status
 
-  def initialize(current_user:, petition:, status:)
-    super(current_user: current_user)
+    def initialize(current_user:, petition:, status:)
+      super(current_user: current_user)
 
-    @petition = petition
-    @status = status
-  end
-
-  def can_write!
-    loudly do
-      statuses.exists?(status.code)
+      @petition = petition
+      @status = status
     end
-  end
 
-  private
+    def can_write!
+      loudly do
+        statuses.exists?(status.code)
+      end
+    end
 
-  def statuses
-    ::StatusesPetitions::List::AllowedCodesService.new(user: current_user, petition: petition)
+    private
+
+    def statuses
+      ::StatusesPetitions::List::AllowedCodesService.new(user: current_user, petition: petition)
+    end
   end
 end
