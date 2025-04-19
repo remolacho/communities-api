@@ -1,0 +1,8 @@
+es:
+  services:
+    user_properties:
+      import:
+        process_data:
+          errors:
+            user_not_found: "No se encontró el usuario con el identificador: %{identifier}"
+            property_not_found: "No se encontró la propiedad con la localización: %{location}"

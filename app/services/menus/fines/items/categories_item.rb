@@ -10,8 +10,8 @@ module Menus
 
         def perform
           {
-            list: {
-              code: 'list',
+            categories_fine_list: {
+              code: 'categories_fine_list',
               show: can_show?
             }
           }

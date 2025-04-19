@@ -21,6 +21,24 @@ RSpec.describe Api::V1::Properties::Import::CreateController do
       parameter name: :property_import_file, in: :formData, type: :file,
                 required: true, description: 'XLSX file with properties to import'
 
+      response 200, 'properties imported successfully' do
+        let(:Authorization) { sign_in }
+        let(:property_import_file) { success_file }
+
+        schema type: :object,
+               properties: {
+                 success: { type: :boolean, default: true },
+                 message: { type: :string }
+               }
+
+        before do
+          user_role_admin
+          entity_permissions
+        end
+
+        run_test!
+      end
+
       response 403, 'error forbidden!!!' do
         let(:Authorization) { sign_in }
         let(:property_import_file) { success_file }
@@ -33,6 +51,23 @@ RSpec.describe Api::V1::Properties::Import::CreateController do
 
         before do
           user_role_coexistence_member
+          entity_permissions
+        end
+
+        run_test!
+      end
+
+      response 404, 'error not found' do
+        let(:Authorization) { sign_in }
+        let(:property_import_file) { status_error_file }
+
+        schema type: :object,
+               properties: {
+                 error: { type: :string }
+               }
+
+        before do
+          user_role_admin
           entity_permissions
         end
 

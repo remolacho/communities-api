@@ -31,4 +31,8 @@ class PropertyOwnerType < ApplicationRecord
 
   # Scopes
   scope :active, -> { where(active: true) }
+
+  def self.default
+    @default ||= find_by(code: 'propietario')
+  end
 end

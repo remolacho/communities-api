@@ -68,4 +68,11 @@ RSpec.shared_context 'import_categories_stuff' do
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
   end
+
+  let(:only_headers_file) do
+    Rack::Test::UploadedFile.new(
+      './spec/files/category_fines/only_headers.xlsx',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+  end
 end

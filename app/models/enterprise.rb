@@ -19,18 +19,21 @@
 #  token                 :string           not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  country_id            :bigint           not null
 #
 # Indexes
 #
-#  index_enterprises_on_email      (email) UNIQUE
-#  index_enterprises_on_subdomain  (subdomain) UNIQUE
-#  index_enterprises_on_token      (token) UNIQUE
+#  index_enterprises_on_country_id  (country_id)
+#  index_enterprises_on_email       (email) UNIQUE
+#  index_enterprises_on_subdomain   (subdomain) UNIQUE
+#  index_enterprises_on_token       (token) UNIQUE
 #
 class Enterprise < ApplicationRecord
   include ::Enterprises::Validable
   include ::Enterprises::LogoRoutable
   include ::Enterprises::BannerRoutable
 
+  belongs_to :country
   has_many :category_petitions, dependent: :destroy
   has_many :user_enterprises, dependent: :destroy
   has_many :users, through: :user_enterprises

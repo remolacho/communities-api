@@ -13,9 +13,10 @@
 #
 # Indexes
 #
-#  index_properties_on_enterprise_id     (enterprise_id)
-#  index_properties_on_property_type_id  (property_type_id)
-#  index_properties_on_status_id         (status_id)
+#  index_properties_on_enterprise_id                  (enterprise_id)
+#  index_properties_on_property_type_id               (property_type_id)
+#  index_properties_on_property_type_id_and_location  (property_type_id,location) UNIQUE
+#  index_properties_on_status_id                      (status_id)
 #
 # Foreign Keys
 #
@@ -24,12 +25,15 @@
 #  fk_rails_...  (status_id => statuses.id)
 #
 class Property < ApplicationRecord
+  include ::Properties::Ransackable
+
   # Relationships
   belongs_to :enterprise
   belongs_to :property_type
   belongs_to :status
-  has_many :user_properties, dependent: :restrict_with_error
+  has_many :user_properties, dependent: :destroy
   has_many :users, through: :user_properties
+  has_many :fines, dependent: :restrict_with_error
 
   # Validations
   validates :location, presence: true

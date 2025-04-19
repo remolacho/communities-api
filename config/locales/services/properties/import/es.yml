@@ -1,0 +1,13 @@
+es:
+  services:
+    properties:
+      import:
+        read_xlsx:
+          errors:
+            file_blank: "El archivo está vacío"
+            status_not_found: "El estado de la propiedad code %{code} no se encuentra en la fila %{index}"
+            property_type_not_found: "Tipo de propiedad %{name} no esta presente fila %{index}"
+            invalid_location: "Localización %{location} no esta presente fila %{index}"
+            status_blank: "El estado de la propiedad no esta presente en la fila %{index}"
+        create:
+          success: "Las propiedades fueron agregadas"

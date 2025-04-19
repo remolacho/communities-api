@@ -19,7 +19,7 @@ RSpec.describe Fines::Categories::ListService do
 
       it 'returns only active categories' do
         total_categories = CategoryFine.count
-        result = service.call
+        result = service.hierarchy
 
         expect(result.count).to eq(total_categories - 1) # total minus inactive
         expect(result).not_to include(category_fine_inactive)

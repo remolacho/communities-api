@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_28_020119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,7 +83,20 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
     t.index ["slug"], name: "index_category_petitions_on_slug", unique: true
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "currency_code", null: false
+    t.string "currency_symbol", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code", unique: true
+    t.index ["name"], name: "index_countries_on_name", unique: true
+  end
+
   create_table "enterprises", force: :cascade do |t|
+    t.bigint "country_id", null: false
     t.string "identifier", null: false
     t.string "document_type", default: "NIT", null: false
     t.string "social_reason", null: false
@@ -98,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_enterprises_on_country_id"
     t.index ["email"], name: "index_enterprises_on_email", unique: true
     t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
@@ -115,6 +129,27 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
     t.datetime "updated_at", null: false
     t.index ["role_id", "entity_type"], name: "index_entity_permissions_on_role_id_and_entity_type", unique: true
     t.index ["role_id"], name: "index_entity_permissions_on_role_id"
+  end
+
+  create_table "fines", force: :cascade do |t|
+    t.bigint "status_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.bigint "category_fine_id", null: false
+    t.string "token", null: false
+    t.string "ticket", null: false
+    t.string "title", null: false
+    t.string "message", null: false
+    t.string "fine_type", null: false
+    t.float "value", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_fine_id"], name: "index_fines_on_category_fine_id"
+    t.index ["property_id"], name: "index_fines_on_property_id"
+    t.index ["status_id"], name: "index_fines_on_status_id"
+    t.index ["ticket"], name: "index_fines_on_ticket", unique: true
+    t.index ["token"], name: "index_fines_on_token", unique: true
+    t.index ["user_id"], name: "index_fines_on_user_id"
   end
 
   create_table "follow_petitions", force: :cascade do |t|
@@ -177,6 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["enterprise_id"], name: "index_properties_on_enterprise_id"
+    t.index ["property_type_id", "location"], name: "index_properties_on_property_type_id_and_location", unique: true
     t.index ["property_type_id"], name: "index_properties_on_property_type_id"
     t.index ["status_id"], name: "index_properties_on_status_id"
   end

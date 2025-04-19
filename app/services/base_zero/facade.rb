@@ -14,10 +14,16 @@ module BaseZero
         tenant = BaseZero::EnterpriseTenant.new(subdomain: enterprise_params[:subdomain]).create
         puts "✓ Created tenant: #{tenant.subdomain}"
 
+        puts '• Creating countries...'
+        BaseZero::CreateCountriesService.new.call
+        country = Country.find_by!(code: enterprise_params[:country_code])
+        puts '✓ Created countries'
+
+        puts '• Switching to tenant schema...'
         Apartment::Tenant.switch!(tenant.subdomain)
         puts "✓ Switched to tenant schema: #{Apartment::Tenant.current}"
 
-        enterprise = BaseZero::CreateEnterpriseService.new(tenant, enterprise_params).call
+        enterprise = BaseZero::CreateEnterpriseService.new(tenant, enterprise_params, country).call
         puts "✓ Created enterprise: #{enterprise.name}"
 
         puts "\n=== Creating base components ===\n"

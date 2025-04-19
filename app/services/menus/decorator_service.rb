@@ -17,6 +17,7 @@ module Menus
       @menu.pqrs_item        = Pqrs::ItemService.new(user: user)
       @menu.fines_item       = Fines::ItemService.new(user: user)
       @menu.properties_item  = Properties::ItemService.new(user: user)
+      @menu.settings_item    = Settings::ItemService.new(user: user)
       @menu.build
     end
   end

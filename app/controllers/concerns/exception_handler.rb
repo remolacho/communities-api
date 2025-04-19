@@ -13,6 +13,7 @@ module ExceptionHandler
     rescue_from PolicyException, with: :forbidden
     rescue_from ArgumentError, with: :argument_error
     rescue_from NoMethodError, with: :locked
+    rescue_from NotImplementedError, with: :not_implemented
   end
 
   def duplicate(exception)
@@ -46,6 +47,11 @@ module ExceptionHandler
   def invalid_statement(exception)
     message = exception.message || 'Invalid database operation'
     json_response(response: { success: false, message: message, data: {} }, status: :unprocessable_entity)
+  end
+
+  def not_implemented(exception)
+    message = exception.message || 'Not implemented'
+    json_response(response: { success: false, message: message, data: {} }, status: :not_implemented)
   end
 
   private

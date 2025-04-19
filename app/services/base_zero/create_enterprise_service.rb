@@ -2,12 +2,13 @@
 
 module BaseZero
   class CreateEnterpriseService
-    attr_reader :tenant, :enterprise_params, :reference_regex
+    attr_reader :tenant, :enterprise_params, :reference_regex, :country
 
-    def initialize(tenant, enterprise_params)
+    def initialize(tenant, enterprise_params, country)
       @tenant = tenant
       @enterprise_params = enterprise_params
       @reference_regex = enterprise_params[:reference_regex] || generate_reference_regex
+      @country = country
     end
 
     def call
@@ -24,6 +25,7 @@ module BaseZero
         enterprise.short_name = generate_short_name
         enterprise.email = enterprise_params[:email]
         enterprise.reference_regex = reference_regex
+        enterprise.country_id = country.id
       end
     end
 

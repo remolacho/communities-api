@@ -187,6 +187,21 @@ paths:
                       banner_url:
                         type: string
                         nullable: true
+                      country:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          code:
+                            type: string
+                          currency_code:
+                            type: string
+                          currency_symbol:
+                            type: string
+                          active:
+                            type: boolean
         '403':
           description: error user not valid!!!
           content:
@@ -646,6 +661,18 @@ paths:
                         parent_category_fine_id:
                           type: integer
                           nullable: true
+                  paginate:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                        description: Number of items per page
+                      total_pages:
+                        type: integer
+                        description: Total number of pages
+                      current_page:
+                        type: integer
+                        description: Current page number
         '403':
           description: error forbidden!!!
           content:
@@ -658,6 +685,235 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/fines/statuses/all/{type}":
+    get:
+      summary: Find all statuses of fines by type
+      tags:
+      - Community API V1 Statuses Fines
+      description: Allow users to find all statuses of fines by type (legal or warning)
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        description: Type of fine status (legal or warning)
+        enum:
+        - legal
+        - warning
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional, default is "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        as_name:
+                          type: string
+                        code:
+                          type: string
+                        color:
+                          type: string
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '423':
+          description: invalid type
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/fines/statuses/list/{token}":
+    get:
+      summary: Find all available statuses for a fine
+      tags:
+      - Community API V1 Statuses Fine
+      description: Allow users to find all available statuses according to fine type
+        and current state
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise created in tenant creation
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: Token of the fine
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional language parameter, defaults to "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: success lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        code:
+                          type: string
+                        description:
+                          type: string
+        '403':
+          description: error unauthorized access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error fine not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/fines/statuses/update/{token}":
+    put:
+      summary: Change status of a fine
+      tags:
+      - Community API V1 Fines
+      description: Allow users to change the status of fines
+      parameters:
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise created in tenant creation
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: path
+        description: Token of the fine to update
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Optional language parameter, defaults to "es"
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+      responses:
+        '200':
+          description: Status updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '404':
+          description: Fine not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: Status change not allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fine:
+                  type: object
+                  properties:
+                    status_id:
+                      type: integer
   "/{enterprise_subdomain}/v1/group_roles/list_petitions":
     get:
       summary: List of group of roles by petitions entity
@@ -1856,6 +2112,224 @@ paths:
                   properties:
                     status_id:
                       type: integer
+  "/{enterprise_subdomain}/v1/properties/create":
+    post:
+      summary: Create a new property
+      tags:
+      - Community API V1 Properties
+      description: Creates a new property with the given parameters
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: property created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  property:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      location:
+                        type: string
+                      active:
+                        type: boolean
+                      enterprise_id:
+                        type: integer
+                      property_type_id:
+                        type: integer
+                      status_id:
+                        type: integer
+                    required:
+                    - id
+                    - location
+                    - active
+                    - enterprise_id
+                    - property_type_id
+                    - status_id
+                required:
+                - success
+                - property
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: property type not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '422':
+          description: invalid location format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property:
+                  type: object
+                  properties:
+                    property_type_id:
+                      type: integer
+                    location:
+                      type: string
+                    status_id:
+                      type: integer
+                  required:
+                  - property_type_id
+                  - location
+                  - status_id
+  "/{enterprise_subdomain}/v1/properties/delete/{id}":
+    delete:
+      summary: Toggle property active status
+      tags:
+      - Community API V1 Properties
+      description: Toggles the active status of a property (active to inactive or
+        vice versa)
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Property ID
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: property deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                required:
+                - success
+                - message
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/properties/import/create":
+    post:
+      summary: Import properties from XLSX file
+      tags:
+      - Community API V1 Properties Import
+      description: Allow users to import properties from an XLSX file
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: properties imported successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '403':
+          description: error forbidden!!!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: error not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+        required: true
+        description: XLSX file with properties to import
   "/{enterprise_subdomain}/v1/properties/import/template":
     get:
       summary: Download template for property import
@@ -1884,6 +2358,165 @@ paths:
           description: error forbidden!!!
           content:
             application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/properties/list":
+    get:
+      summary: List all properties
+      tags:
+      - Community API V1 Properties
+      description: Returns a list of properties
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      - name: search_attr
+        in: query
+        description: is optional represent the field of find
+        schema:
+          type: string
+      - name: term
+        in: query
+        description: is optional represent the value of find
+        schema:
+          type: string
+      - name: status_id
+        in: query
+        description: is optional represent the value of find
+        schema:
+          type: string
+      - name: property_type_id
+        in: query
+        description: is optional represent the value of find
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: is optional represent the number page of find
+        schema:
+          type: string
+      responses:
+        '200':
+          description: properties listed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        location:
+                          type: string
+                        active:
+                          type: boolean
+                        enterprise_id:
+                          type: integer
+                        property_type_id:
+                          type: integer
+                        status_id:
+                          type: integer
+                        property_type_name:
+                          type: string
+                        status_name:
+                          type: string
+                  paginate:
+                    type: object
+                    properties:
+                      limit:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      current_page:
+                        type: integer
+                required:
+                - success
+                - data
+                - paginate
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+  "/{enterprise_subdomain}/v1/properties/property_types/all":
+    get:
+      summary: List all property types
+      tags:
+      - Community API V1 Properties
+      description: Returns a list of active property types
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: is optional by default is "es"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: property types listed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        active:
+                          type: boolean
+                required:
+                - success
+                - data
+        '403':
+          description: forbidden access
+          content:
+            application/json:
               schema:
                 type: object
                 properties:
@@ -1938,7 +2571,7 @@ paths:
                         color:
                           type: string
         '403':
-          description: error user logged!
+          description: forbidden access
           content:
             application/json:
               schema:
@@ -1949,6 +2582,102 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/properties/update/{id}":
+    put:
+      summary: Update an existing property
+      tags:
+      - Community API V1 Properties
+      description: Updates an existing property with the given parameters
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: ID of the property to update
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: property updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  property:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      location:
+                        type: string
+                      active:
+                        type: boolean
+                      enterprise_id:
+                        type: integer
+                      property_type_id:
+                        type: integer
+                      status_id:
+                        type: integer
+                    required:
+                    - id
+                    - location
+                    - active
+                    - enterprise_id
+                    - property_type_id
+                    - status_id
+                required:
+                - success
+                - property
+        '403':
+          description: forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: property not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property:
+                  type: object
+                  properties:
+                    property_type_id:
+                      type: integer
+                    location:
+                      type: string
+                    status_id:
+                      type: integer
   "/{enterprise_subdomain}/v1/suggestion/create":
     post:
       summary: Create a new suggestion
@@ -2375,6 +3104,138 @@ paths:
                     default: false
                   message:
                     type: string
+  "/{enterprise_subdomain}/v1/user_properties/import/create":
+    post:
+      summary: Import user properties from XLSX file
+      tags:
+      - Community API V1 User Properties Import
+      description: Allow users to import user properties from an XLSX file
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user properties imported successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '422':
+          description: invalid header format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '404':
+          description: user not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+        required: true
+        description: XLSX file with user properties to import
+  "/{enterprise_subdomain}/v1/user_properties/import/remove":
+    delete:
+      summary: Remove user properties from XLSX file
+      tags:
+      - Community API V1 User Properties Import
+      description: Allow users to remove user properties from an XLSX file
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+      - name: enterprise_subdomain
+        in: path
+        description: Subdomain of enterprise
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user properties removed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  message:
+                    type: string
+        '422':
+          description: invalid header format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+        '403':
+          description: forbidden access
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  message:
+                    type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: file
+        required: true
+        description: XLSX file with user properties to remove
   "/{enterprise_subdomain}/v1/user_roles/import/create":
     post:
       summary: Allow to users create roles to users

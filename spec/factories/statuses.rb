@@ -90,4 +90,60 @@ FactoryBot.define do
     code { Statuses::Codes::PROPERTY_EMPTY }
     status_type { Statuses::Types::PROPERTY }
   end
+
+  # Legal fine statuses
+  trait :fine_legal_assigned do
+    name { { es: 'Asignada', en: 'Assigned' } }
+    code { Statuses::Codes::FINE_LEGAL_ASSIGNED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_closed do
+    name { { es: 'Cerrada', en: 'Closed' } }
+    code { Statuses::Codes::FINE_LEGAL_CLOSED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_pending do
+    name { { es: 'Pendiente', en: 'Pending' } }
+    code { Statuses::Codes::FINE_LEGAL_PENDING }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_rejected do
+    name { { es: 'Rechazada', en: 'Rejected' } }
+    code { Statuses::Codes::FINE_LEGAL_REJECTED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_paid do
+    name { { es: 'Pagada', en: 'Paid' } }
+    code { Statuses::Codes::FINE_LEGAL_PAID }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  # Warning fine statuses
+  trait :fine_warning_assigned do
+    name { { es: 'Asignada', en: 'Assigned' } }
+    code { Statuses::Codes::FINE_WARNING_ASSIGNED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_warning_closed do
+    name { { es: 'Cerrada', en: 'Closed' } }
+    code { Statuses::Codes::FINE_WARNING_CLOSED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_warning_finished do
+    name { { es: 'Finalizada', en: 'Finished' } }
+    code { Statuses::Codes::FINE_WARNING_FINISHED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_legal_claim do
+    name { { es: 'Reclamada', en: 'Claimed' } }
+    code { Statuses::Codes::FINE_LEGAL_CLAIM }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
 end

@@ -9,7 +9,7 @@ require 'enterprise_elevator'
 
 Apartment.configure do |config|
   config.tenant_names = -> { Tenant.pluck(:subdomain) }
-  config.excluded_models = %w[Tenant]
+  config.excluded_models = %w[Tenant Country]
 end
 
 # Rails.application.config.middleware.use EnterpriseElevator

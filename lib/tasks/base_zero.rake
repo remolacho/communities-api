@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
 # rake base_zero:help
-# rake "base_zero:init[altos-de-berlin,'Altos de Berlin',123456789,admin@altosdeberlin.com]"
+# rake "base_zero:init[altos-de-berlin,Altos de Berlin,123456789,admin@altosdeberlin.com, CO]"
 
 # enterprise_params = {
-#   subdomain: 'altos-de-berlin',
+#   subdomain: altos-de-berlin,
 #   name: 'Altos de Berlin',
 #   identifier: '123456789',
 #   email: 'admin@altosdeberlin.com',
 #   reference_regex: '^T[0-4]-P(1[0-6]|[1-9])-A((10[1-8])|(20[1-8])|(30[1-8])|(40[1-8])|(50[1-8])|(60[1-8])|(70[1-8])|(80[1-8])|(90[1-8])|(100[1-8])|(110[1-8])|(120[1-8])|(130[1-8])|(140[1-8])|(150[1-8])|(160[1-8]))$'
+#   country_code: 'CO'
 # }
 namespace :base_zero do
-  desc 'Initialize Base Zero with enterprise parameters. Example: rake base_zero:init[subdomain,social_reason,identifier,email]'
-  task :init, [:subdomain, :social_reason, :identifier, :email] => :environment do |_task, args|
-    unless args[:subdomain] && args[:social_reason] && args[:identifier] && args[:email]
+  desc 'Initialize Base Zero with enterprise parameters. Example: rake base_zero:init[subdomain,social_reason,identifier,email,country_code]'
+  task :init, [:subdomain, :social_reason, :identifier, :email, :country_code] => :environment do |_task, args|
+    unless args[:subdomain] && args[:social_reason] && args[:identifier] && args[:email] && args[:country_code]
       raise ArgumentError,
-            'Missing required parameters. Usage: rake base_zero:init[subdomain,social_reason,identifier,email]'
+            'Missing required parameters. Usage: rake base_zero:init[subdomain,social_reason,identifier,email,country_code]'
     end
 
     begin
@@ -27,7 +28,8 @@ namespace :base_zero do
         name: args[:social_reason],
         identifier: args[:identifier],
         email: args[:email],
-        reference_regex: generate_reference_regex
+        reference_regex: generate_reference_regex,
+        country_code: args[:country_code]
       }
 
       facade = BaseZero::Facade.new(tenant_params)

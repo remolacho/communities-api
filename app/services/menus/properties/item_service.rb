@@ -23,11 +23,11 @@ module Menus
 
       def items
         @items ||= {}
-          .merge!(import_item.perform)
+          .merge!(list_item.perform)
       end
 
-      def import_item
-        Items::ImportPropertiesItem.new(user: user)
+      def list_item
+        Items::ListPropertiesItem.new(user: user)
       end
 
       def can_show?

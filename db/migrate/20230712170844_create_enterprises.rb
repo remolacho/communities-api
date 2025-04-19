@@ -1,6 +1,7 @@
 class CreateEnterprises < ActiveRecord::Migration[7.0]
   def change
     create_table :enterprises do |t|
+      t.references :country, null: false, index: true
       t.string :identifier, null: false
       t.string :document_type, null: false, default: 'NIT'
       t.string :social_reason, null: false

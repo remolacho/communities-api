@@ -10,15 +10,12 @@ module Fines
         @page = page
       end
 
-      def call
-        root_ids = categories.pluck(:id)
-        CategoryFine.with_recursive_children(root_ids)
+      def hierarchy
+        @hierarchy ||= CategoryFine.with_recursive_children(roots.pluck(:id))
       end
 
-      private
-
-      def categories
-        @categories ||= CategoryFine
+      def roots
+        @roots ||= CategoryFine
           .active
           .roots
           .page(page.to_i)

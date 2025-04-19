@@ -32,6 +32,14 @@ RSpec.describe Fines::Categories::ImportService do
             ActiveRecord::StatementInvalid
           )
         end
+
+        it 'file only contains headers raises an error' do
+          service = described_class.new(user: user, file: only_headers_file)
+          expect { service.call }.to raise_error(
+            ArgumentError,
+            I18n.t('services.fines.categories.no_data')
+          )
+        end
       end
 
       context 'when file has valid data' do

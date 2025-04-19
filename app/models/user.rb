@@ -51,6 +51,9 @@ class User < ApplicationRecord
   has_many :user_properties, dependent: :destroy
   has_many :properties, through: :user_properties
   has_many :property_owner_types, through: :user_properties
+  has_many :user_enterprises, dependent: :destroy
+  has_many :enterprises, through: :user_enterprises
+  has_many :fines, dependent: :restrict_with_error
 
   has_one_attached :avatar, dependent: :purge
 

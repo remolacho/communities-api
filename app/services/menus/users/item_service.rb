@@ -28,8 +28,6 @@ module Menus
       def items
         @items ||= {}.merge!(list_item.perform)
           .merge!(profile_item.perform)
-          .merge!(assign_roles.perform)
-          .merge!(remove_roles.perform)
       end
 
       def profile_item
@@ -38,14 +36,6 @@ module Menus
 
       def list_item
         Items::ListItem.new(user: user)
-      end
-
-      def assign_roles
-        Items::AssignRolesItem.new(user: user)
-      end
-
-      def remove_roles
-        Items::RemoveRolesItem.new(user: user)
       end
     end
   end

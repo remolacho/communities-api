@@ -70,20 +70,62 @@ module BaseZero
               code: ::Statuses::Property::PROPERTY_EMPTY,
               status_type: ::Statuses::Types::PROPERTY,
               color: '#FF9800'
+            },
+            {
+              name: { es: 'Asignada', en: 'Assigned' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_ASSIGNED,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#7AC6EB'
+            },
+            {
+              name: { es: 'Cerrada', en: 'Closed' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_CLOSED,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#8BE939'
+            },
+            {
+              name: { es: 'Pendiente', en: 'Pending' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_PENDING,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#D6EAF3'
+            },
+            {
+              name: { es: 'Rechazada', en: 'Rejected' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_REJECTED,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#F0553B'
+            },
+            {
+              name: { es: 'Pagada', en: 'Paid' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_PAID,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#8BE939'
+            },
+            {
+              name: { es: 'Advertencia Asignada', en: 'Warning Assigned' },
+              code: ::Statuses::FineWarning::FINE_WARNING_ASSIGNED,
+              status_type: ::Statuses::Types::FINE_WARNING,
+              color: '#FFA726'
+            },
+            {
+              name: { es: 'Advertencia Cerrada', en: 'Warning Closed' },
+              code: ::Statuses::FineWarning::FINE_WARNING_CLOSED,
+              status_type: ::Statuses::Types::FINE_WARNING,
+              color: '#8BE939'
+            },
+            {
+              name: { es: 'Advertencia Finalizada', en: 'Warning Finished' },
+              code: ::Statuses::FineWarning::FINE_WARNING_FINISHED,
+              status_type: ::Statuses::Types::FINE_WARNING,
+              color: '#3B8FF0'
+            },
+            {
+              name: { es: 'Reclamada', en: 'Claimed' },
+              code: ::Statuses::FineLegal::FINE_LEGAL_CLAIM,
+              status_type: ::Statuses::Types::FINE_LEGAL,
+              color: '#3B8FF0'
             }
           ]
-        end
-
-        def petition_statuses
-          all.select { |status| status[:status_type] == ::Statuses::Types::PETITION }
-        end
-
-        def property_statuses
-          all.select { |status| status[:status_type] == ::Statuses::Types::PROPERTY }
-        end
-
-        def answer_statuses
-          all.select { |status| status[:status_type] == ::Statuses::Types::ANSWER }
         end
       end
     end

@@ -20,10 +20,14 @@ class Status < ApplicationRecord
   include ::Statuses::PetitionFindable
   include ::Statuses::AnswerFindable
   include ::Statuses::PropertyFindable
+  include ::Statuses::FineLegalFindable
+  include ::Statuses::FineWarningFindable
+
   has_enumeration_for :status_type, with: Statuses::Types, create_helpers: true
   has_enumeration_for :code, with: Statuses::Codes, create_helpers: true
 
   has_many :properties, dependent: :restrict_with_error
+  has_many :fines, dependent: :restrict_with_error
   has_many :petitions, dependent: :destroy
   has_many :follow_petitions, dependent: :destroy
 

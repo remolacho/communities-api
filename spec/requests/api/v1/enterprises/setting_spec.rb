@@ -31,7 +31,18 @@ RSpec.describe Api::V1::Enterprises::SettingController do
                            subdomain: { type: :string },
                            name: { type: :string },
                            logo_url: { type: :string, nullable: true },
-                           banner_url: { type: :string, nullable: true }
+                           banner_url: { type: :string, nullable: true },
+                           country: {
+                             type: :object,
+                             properties: {
+                               id: { type: :integer },
+                               name: { type: :string },
+                               code: { type: :string },
+                               currency_code: { type: :string },
+                               currency_symbol: { type: :string },
+                               active: { type: :boolean }
+                             }
+                           }
                          } }
                }
 

@@ -13,9 +13,20 @@ module Menus
         {
           dashboard: {
             code: 'dashboard',
-            show: true
+            show: true,
+            items: items
           }
         }
+      end
+
+      private
+
+      def items
+        @items ||= {}.merge!(pqr_graph_item.perform)
+      end
+
+      def pqr_graph_item
+        Items::PqrGraphItem.new(user: user)
       end
     end
   end

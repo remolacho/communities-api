@@ -9,6 +9,11 @@ module Enterprises
     attribute :logo_url
     attribute :banner_url
     attribute :menu
+    attribute :country
+
+    def country
+      ::Countries::DetailSerializer.new(object.country).as_json
+    end
 
     def logo_url
       raise ArgumentError if object.subdomain.nil?

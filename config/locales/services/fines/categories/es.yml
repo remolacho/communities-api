@@ -6,6 +6,7 @@ es:
         file_not_readable: 'El archivo no se puede leer'
         file_required: 'El archivo Excel es requerido'
         invalid_header: 'El encabezado del archivo no es válido'
+        no_data: 'El archivo no contiene datos para importar'
         delete:
           success: 'Categoría desactivada exitosamente'
         import:

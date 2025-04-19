@@ -2,7 +2,7 @@
 
 require 'swagger_helper'
 
-RSpec.describe Api::V1::Petitions::Statuses::AllController do
+RSpec.describe Api::V1::Properties::Statuses::AllController do
   include_context 'status_properties_stuff'
 
   let(:lang) { 'es' }
@@ -22,6 +22,11 @@ RSpec.describe Api::V1::Petitions::Statuses::AllController do
 
       response 200, 'success lists' do
         let(:Authorization) { sign_in }
+
+        before do
+          user_role_admin
+          entity_permissions
+        end
 
         schema type: :object,
                properties: {
@@ -43,8 +48,13 @@ RSpec.describe Api::V1::Petitions::Statuses::AllController do
         run_test!
       end
 
-      response 403, 'error user logged!' do
-        let(:Authorization) { '' }
+      response 403, 'forbidden access' do
+        let(:Authorization) { sign_in }
+
+        before do
+          user_role_coexistence_member
+          entity_permissions
+        end
 
         schema type: :object,
                properties: {

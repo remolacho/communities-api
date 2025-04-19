@@ -42,6 +42,8 @@ class CategoryFine < ApplicationRecord
                                   foreign_key: 'parent_category_fine_id',
                                   dependent: :destroy
 
+  has_many :fines, dependent: :restrict_with_error
+
   # Validations
   validates :code, presence: true, uniqueness: { scope: :enterprise_id }
   validates :name, presence: true

@@ -1,0 +1,9 @@
+es:
+  services:
+    properties:
+      create:
+        errors:
+          property_type_not_found: "El tipo de propiedad no existe"
+          invalid_location: "El formato de la localización no es válido"
+      delete:
+        success: "Propiedad eliminada"

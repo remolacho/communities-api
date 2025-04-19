@@ -19,12 +19,14 @@
 #  token                 :string           not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  country_id            :bigint           not null
 #
 # Indexes
 #
-#  index_enterprises_on_email      (email) UNIQUE
-#  index_enterprises_on_subdomain  (subdomain) UNIQUE
-#  index_enterprises_on_token      (token) UNIQUE
+#  index_enterprises_on_country_id  (country_id)
+#  index_enterprises_on_email       (email) UNIQUE
+#  index_enterprises_on_subdomain   (subdomain) UNIQUE
+#  index_enterprises_on_token       (token) UNIQUE
 #
 
 FactoryBot.define do
@@ -41,5 +43,6 @@ FactoryBot.define do
     reference_regex do
       '^T[0-4]-P(1[0-6]|[1-9])-A((10[1-8])|(20[1-8])|(30[1-8])|(40[1-8])|(50[1-8])|(60[1-8])|(70[1-8])|(80[1-8])|(90[1-8])|(100[1-8])|(110[1-8])|(120[1-8])|(130[1-8])|(140[1-8])|(150[1-8])|(160[1-8]))$'
     end
+    association :country
   end
 end

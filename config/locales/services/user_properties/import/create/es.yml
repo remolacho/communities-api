@@ -1,0 +1,8 @@
+es:
+  services:
+    user_properties:
+      import:
+        create:
+          success: "La importación de propietarios se ha realizado exitosamente"
+          errors:
+            invalid_file: "El archivo es inválido o está corrupto"

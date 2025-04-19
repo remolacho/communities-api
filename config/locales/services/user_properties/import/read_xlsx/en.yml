@@ -1,0 +1,7 @@
+en:
+  services:
+    user_properties:
+      import:
+        read_xlsx:
+          errors:
+            invalid_header: "The file must contain the columns: identifier, location"

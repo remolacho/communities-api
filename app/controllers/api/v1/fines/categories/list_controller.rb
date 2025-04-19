@@ -9,19 +9,23 @@ module Api
           def index
             policy.can_read!
 
-            render json: { success: true, data: serializer }
+            render json: { success: true, data: serializer, paginate: paginate }
           end
 
           private
 
           def serializer
-            ActiveModelSerializers::SerializableResource.new(categories_list,
+            ActiveModelSerializers::SerializableResource.new(service.hierarchy,
                                                              each_serializer: ::Fines::Categories::DetailSerializer)
               .as_json
           end
 
-          def categories_list
-            @categories_list ||= service.call
+          def paginate
+            {
+              limit: service.roots.limit_value,
+              total_pages: service.roots.total_pages,
+              current_page: service.roots.current_page
+            }
           end
 
           def service

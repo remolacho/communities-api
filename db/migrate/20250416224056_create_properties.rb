@@ -8,5 +8,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.boolean :active, null: false, default: true
       t.timestamps
     end
+
+    add_index :properties, [:property_type_id, :location], unique: true
   end
 end

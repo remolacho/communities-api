@@ -5,6 +5,7 @@ module Enterprises
     attributes :id,
                :token,
                :name,
+               :document_type,
                :identifier,
                :social_reason,
                :address,

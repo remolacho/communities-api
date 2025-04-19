@@ -1,0 +1,8 @@
+en:
+  services:
+    user_properties:
+      import:
+        process_data:
+          errors:
+            user_not_found: "User not found for identifier: %{identifier}"
+            property_not_found: "Property not found for location: %{location}"

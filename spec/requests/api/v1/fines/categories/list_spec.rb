@@ -42,6 +42,14 @@ RSpec.describe Api::V1::Fines::Categories::ListController do
                        parent_category_fine_id: { type: :integer, nullable: true }
                      }
                    }
+                 },
+                 paginate: {
+                   type: :object,
+                   properties: {
+                     limit: { type: :integer, description: 'Number of items per page' },
+                     total_pages: { type: :integer, description: 'Total number of pages' },
+                     current_page: { type: :integer, description: 'Current page number' }
+                   }
                  }
                }
 

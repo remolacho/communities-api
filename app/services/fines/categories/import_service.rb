@@ -16,17 +16,22 @@ module Fines
         raise ArgumentError, I18n.t('services.fines.categories.file_not_readable') if xlsx.nil?
 
         valid_header!
+        validate_has_data!
         process_excel
       end
 
       private
+
+      def validate_has_data!
+        raise ArgumentError, I18n.t('services.fines.categories.no_data') if xlsx.last_row <= 1
+      end
 
       def process_excel
         categories_data = []
         parent_relations = {}
 
         (2..xlsx.last_row).each do |i|
-          row = Hash[header.zip(xlsx.row(i))]
+          row = header.zip(xlsx.row(i)).to_h
           next unless valid_row?(row)
 
           parent_relations[row['code']] = row['parent_code'] if row['parent_code'].present?

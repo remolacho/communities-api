@@ -5,7 +5,9 @@ module Statuses
     associate_values(
       petition: 'petition',
       answer: 'answer',
-      property: 'property'
+      property: 'property',
+      fine_legal: 'fine-legal',
+      fine_warning: 'fine-warning'
     )
   end
 end

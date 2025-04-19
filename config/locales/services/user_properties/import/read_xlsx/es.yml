@@ -1,0 +1,7 @@
+es:
+  services:
+    user_properties:
+      import:
+        read_xlsx:
+          errors:
+            invalid_header: "El archivo debe contener las columnas: identificador, localizacion"

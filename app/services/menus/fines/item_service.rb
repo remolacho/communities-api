@@ -23,25 +23,20 @@ module Menus
 
       def items
         @items ||= {}
-          .merge!(list_item.perform)
-          .merge!(create_item.perform)
-          .merge!(import_item.perform)
+          .merge!(categories_fine_list_item.perform)
+          .merge!(create_fine_item.perform)
       end
 
       def can_show?
         @can_show ||= items.values.any? { |item| item[:show] }
       end
 
-      def list_item
+      def categories_fine_list_item
         Items::CategoriesItem.new(user: user)
       end
 
-      def create_item
-        Items::CreateCategoryItem.new(user: user)
-      end
-
-      def import_item
-        Items::ImportCategoryItem.new(user: user)
+      def create_fine_item
+        Items::CreateItem.new(user: user)
       end
     end
   end
