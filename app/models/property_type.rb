@@ -35,4 +35,11 @@ class PropertyType < ApplicationRecord
 
   # Scopes
   scope :active, -> { where(active: true) }
+
+  def location_regex_valid?(location)
+    return false if location.blank?
+
+    regex = Regexp.new(location_regex)
+    location.match?(regex)
+  end
 end

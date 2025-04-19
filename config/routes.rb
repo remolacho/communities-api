@@ -147,6 +147,10 @@ Rails.application.routes.draw do
             resources :template, only: [:index]
             resources :create, only: [:create]
           end
+
+          resources :create, only: [:create]
+          resources :update, only: [:update]
+          resources :list, only: [:index]
         end
 
       end

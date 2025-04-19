@@ -177,6 +177,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_16_224214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["enterprise_id"], name: "index_properties_on_enterprise_id"
+    t.index ["property_type_id", "location"], name: "index_properties_on_property_type_id_and_location", unique: true
     t.index ["property_type_id"], name: "index_properties_on_property_type_id"
     t.index ["status_id"], name: "index_properties_on_status_id"
   end

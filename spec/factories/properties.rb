@@ -13,9 +13,10 @@
 #
 # Indexes
 #
-#  index_properties_on_enterprise_id     (enterprise_id)
-#  index_properties_on_property_type_id  (property_type_id)
-#  index_properties_on_status_id         (status_id)
+#  index_properties_on_enterprise_id                  (enterprise_id)
+#  index_properties_on_property_type_id               (property_type_id)
+#  index_properties_on_property_type_id_and_location  (property_type_id,location) UNIQUE
+#  index_properties_on_status_id                      (status_id)
 #
 # Foreign Keys
 #

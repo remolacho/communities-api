@@ -27,7 +27,7 @@ module Properties
       end
 
       def import_sheet_headers
-        ['tipo-propiedad', 'localización'] | status_headers
+        ['tipo-propiedad', 'localizacion'] | status_headers
       end
 
       def status_headers

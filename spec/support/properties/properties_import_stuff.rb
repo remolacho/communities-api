@@ -57,9 +57,9 @@ RSpec.shared_context 'properties_import_stuff' do
     )
   end
 
-  let(:success_without_status_file) do
+  let(:error_without_status_file) do
     Rack::Test::UploadedFile.new(
-      './spec/files/properties/success_without_status.xlsx',
+      './spec/files/properties/error_without_status.xlsx',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
   end
@@ -81,6 +81,13 @@ RSpec.shared_context 'properties_import_stuff' do
   let(:type_error_file) do
     Rack::Test::UploadedFile.new(
       './spec/files/properties/type_error.xlsx',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+  end
+
+  let(:status_error_file) do
+    Rack::Test::UploadedFile.new(
+      './spec/files/properties/status_error.xlsx',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
   end

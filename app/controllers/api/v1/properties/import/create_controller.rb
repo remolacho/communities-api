@@ -10,8 +10,11 @@ module Api
             policy.can_write!
 
             ::Properties::Import::CreateService.new(
+              user: current_user,
               file: allowed_params
             ).call
+
+            render json: { success: true, message: I18n.t('services.properties.import.create.success') }
           end
 
           private
