@@ -23,7 +23,7 @@ RSpec.describe Api::V1::Users::ChangeStatusController do
 
       response 200, 'success!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_admin
           sign_in
         end
@@ -42,8 +42,12 @@ RSpec.describe Api::V1::Users::ChangeStatusController do
         run_test!
       end
 
-      response 403, 'error the user has not role!!!' do
-        let(:Authorization) { sign_in }
+      response 403, 'error the user has not role can_write!!!' do
+        let(:Authorization) do
+          entity_roles
+          user_role_manager
+          sign_in
+        end
 
         schema type: :object,
                properties: {
@@ -52,7 +56,6 @@ RSpec.describe Api::V1::Users::ChangeStatusController do
                }
 
         let(:token) do
-          group_role_relations
           user_enterprise_to_change
           user_to_change.token
         end
@@ -62,7 +65,7 @@ RSpec.describe Api::V1::Users::ChangeStatusController do
 
       response 404, 'error the user token!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_admin
           sign_in
         end

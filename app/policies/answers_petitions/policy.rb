@@ -12,13 +12,19 @@ module AnswersPetitions
 
     def can_read!
       loudly do
-        owner? || role?
+        owner? || role_petition?(:can_read)
       end
     end
 
     def can_write!
       loudly do
-        owner? || role?
+        owner? || role_petition?(:can_write)
+      end
+    end
+
+    def can_destroy!
+      loudly do
+        owner? || role_petition?(:can_destroy)
       end
     end
 
@@ -28,8 +34,13 @@ module AnswersPetitions
       petition.user_id == current_user.id
     end
 
-    def role?
-      (petition.roles.ids & current_user.roles.ids).any?
+    def role_petition?(permission)
+      role?(permission) && (petition.roles.ids & current_user.roles.ids).any?
+    end
+
+    # override
+    def entity
+      @entity ||= AnswersPetition.name
     end
   end
 end

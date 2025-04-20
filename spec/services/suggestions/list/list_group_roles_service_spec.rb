@@ -7,12 +7,13 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
 
   context 'When 1 user want see list of Suggestions' do
     it 'return error, the user has not roles' do
+      entity_permissions
       filter = Suggestions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
       expect { service.call }.to raise_error(PolicyException)
     end
 
-    it 'return error, the group role not found' do
+    it 'return error, the entity role not found' do
       user_role_manager
 
       filter = Suggestions::Filter::QueryService.new(params: {})
@@ -21,8 +22,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return error, the role not found, has not access' do
+      entity_permissions
       user_role_manager
-      group_listed_suggestions
 
       filter = Suggestions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
@@ -30,19 +31,17 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return error, the role not found, has not access owner' do
+      entity_permissions
       user_role_owner
-      group_listed_suggestions
-      group_role_relations
 
       filter = Suggestions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
       expect { service.call }.to raise_error(PolicyException)
     end
 
-    it 'return success, but empty for role manager' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+    it 'return success, but empty for role admin' do
+      entity_permissions
+      user_role_admin
 
       filter = Suggestions::Filter::QueryService.new(params: {})
       service = described_class.new(user: user, filter: filter, page: 1)
@@ -50,9 +49,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions without filter' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
       acum = suggestions_anonymous.size
       acum += suggestions.size
 
@@ -62,9 +60,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions read' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
       acum = suggestions_readed.size
       suggestions.size
 
@@ -76,9 +73,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions anonymous' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
       acum = suggestions_anonymous.size
       suggestions.size
 
@@ -90,9 +86,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions read and anonymous' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
       acum = suggestions_anonymous_readed.size
       suggestions.size
 
@@ -104,9 +99,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions that are not anonymous' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
 
       acum = suggestions.size
       acum += suggestions_readed.size
@@ -122,9 +116,8 @@ RSpec.describe Suggestions::List::ListGroupRolesService do
     end
 
     it 'return success, all suggestions that are not read' do
-      user_role_manager
-      group_listed_suggestions
-      group_role_relations
+      entity_permissions
+      user_role_admin
 
       acum = suggestions.size
       acum += suggestions_anonymous.size

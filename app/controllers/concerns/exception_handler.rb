@@ -8,7 +8,8 @@ module ExceptionHandler
     rescue_from ActiveModel::UnknownAttributeError, with: :argument_error
     rescue_from ActiveRecord::RecordNotUnique, with: :duplicate
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :not_found
+    rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
+    rescue_from ActiveRecord::StatementInvalid, with: :invalid_statement
     rescue_from PolicyException, with: :forbidden
     rescue_from ArgumentError, with: :argument_error
     rescue_from NoMethodError, with: :locked
@@ -19,13 +20,11 @@ module ExceptionHandler
     json_response(response: { success: false, message: message }, status: :unprocessable_entity)
   end
 
-  # :nodoc:
   def not_found(exception)
     message = exception.message || 'Not Found'
     json_response(response: { success: false, message: message }, status: :not_found)
   end
 
-  # :nodoc:
   def forbidden(invalid)
     json_response(response: { success: false, message: invalid.to_s || 'Forbidden', data: {} }, status: :forbidden)
   end
@@ -35,9 +34,18 @@ module ExceptionHandler
                   status: :locked)
   end
 
-  # :nodoc:
   def argument_error(invalid)
     json_response(response: { success: false, message: invalid.to_s, data: {} }, status: :unprocessable_entity)
+  end
+
+  def invalid_record(exception)
+    message = exception.message || 'Invalid database operation'
+    json_response(response: { success: false, message: message, data: {} }, status: :unprocessable_entity)
+  end
+
+  def invalid_statement(exception)
+    message = exception.message || 'Invalid database operation'
+    json_response(response: { success: false, message: message, data: {} }, status: :unprocessable_entity)
   end
 
   private

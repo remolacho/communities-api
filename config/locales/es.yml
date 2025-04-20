@@ -140,6 +140,7 @@ es:
       wrong_length:
         one: no tiene la longitud correcta (%{count} carácter exactos)
         other: no tiene la longitud correcta (%{count} caracteres exactos)
+      invalid_format: "El formato es inválido"
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:

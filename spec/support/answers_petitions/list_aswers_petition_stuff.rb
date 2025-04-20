@@ -15,6 +15,25 @@ shared_context 'list_answers_petition_stuff' do
   let(:user_2) { @user_2 ||= FactoryBot.create(:user) }
   let(:user_enterprise_petition) {  FactoryBot.create(:user_enterprise, user_id: user_2.id, enterprise_id: enterprise_helper.id, active: true) }
 
+  let(:entity_permissions) do
+    [
+      FactoryBot.create(:entity_permission,
+        role: role_coexistence_member,
+        entity_type: AnswersPetition.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true),
+      FactoryBot.create(:entity_permission,
+        role: role_council_member,
+        entity_type: AnswersPetition.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true)
+    ]
+  end
+
   let(:group_role) {
     group = FactoryBot.create(:group_role, :council_coexistence)
 

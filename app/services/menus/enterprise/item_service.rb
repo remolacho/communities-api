@@ -2,9 +2,11 @@
 
 module Menus
   module Enterprise
-    class ItemService < ::Enterprises::Profile::Policy
+    class ItemService
+      attr_reader :current_user
+
       def initialize(user:)
-        super(current_user: user)
+        @current_user = user
       end
 
       def perform
@@ -20,20 +22,20 @@ module Menus
       private
 
       def items
-        {}.merge!(detail_item.perform)
+        @items ||= {}.merge!(detail_item.perform)
           .merge!(edit_item.perform)
       end
 
+      def can_show?
+        @can_show ||= items.values.any? { |item| item[:show] }
+      end
+
       def detail_item
-        Items::DetailItem.new(user: current_user, can_show: can_show?)
+        Items::DetailItem.new(user: current_user)
       end
 
       def edit_item
         Items::EditItem.new(user: current_user)
-      end
-
-      def can_show?
-        @can_show ||= role?
       end
     end
   end

@@ -64,9 +64,8 @@ RSpec.describe Api::V1::Suggestions::ListGroupRolesController do
                }
 
         let(:anonymous) do
-          user_role_manager
-          group_listed_suggestions
-          group_role_relations
+          entity_permissions
+          user_role_admin
           suggestions_anonymous
           true
         end
@@ -93,6 +92,8 @@ RSpec.describe Api::V1::Suggestions::ListGroupRolesController do
                }
 
         let(:anonymous) do
+          entity_permissions
+          user_role_manager
           suggestions_anonymous
           nil
         end

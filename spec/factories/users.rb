@@ -7,6 +7,7 @@
 #  id                            :bigint           not null, primary key
 #  active_key                    :string
 #  active_key_expires_at         :datetime
+#  document_type                 :string           default("CC"), not null
 #  email                         :string           not null
 #  identifier                    :string           not null
 #  lang                          :string           default("es"), not null

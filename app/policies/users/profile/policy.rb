@@ -13,30 +13,19 @@ module Users
 
       def can_read!
         loudly do
-          owner? || role?
+          owner? || role?(:can_read)
         end
       end
 
       private
 
+      # override
+      def entity
+        @entity ||= User.name
+      end
+
       def owner?
         current_user.id == profile.id
-      end
-
-      def role?
-        group_role.present? && !group_role_relations.zero?
-      end
-
-      def group_role_relations
-        @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids).count
-      end
-
-      def group_role
-        @group_role ||= GroupRole.find_by(code: :show_user, entity_type: User::ENTITY_TYPE)
-      end
-
-      def user_roles_ids
-        @user_roles_ids ||= current_user.roles.ids
       end
     end
   end

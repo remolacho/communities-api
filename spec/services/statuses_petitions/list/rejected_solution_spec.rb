@@ -15,16 +15,17 @@ RSpec.describe StatusesPetitions::List::Factory::RejectedSolution do
       service = described_class.new(user: user_2, petition: petition)
       result = service.call
 
-      expect(result.detect { |r| r[:code] == Status::PETITION_CONFIRM }).to be_present
+      expect(result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_CONFIRM }).to be_present
     end
 
-    it 'the user with role has access to list status rejected solution according to in petition' do
+    it 'the user has access to list status rejected solution according to in petition' do
       user_role
 
       service = described_class.new(user: user, petition: petition)
       result = service.call
 
-      expect(result.detect { |r| r[:code] == Status::PETITION_PENDING }).to be_present
+      expect(result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_PENDING }).to be_present
+      expect(result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_REVIEWING }).to be_present
     end
   end
 end

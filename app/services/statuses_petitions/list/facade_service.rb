@@ -21,7 +21,7 @@ module StatusesPetitions
         return Factory::Rejected.new(user: user, petition: petition)         if petition.rejected?
         return Factory::Reviewing.new(user: user, petition: petition)        if petition.reviewing?
 
-        if petition.by_confirm?
+        if petition.confirm?
           return Factory::Confirm.new(user: user,
                                       petition: petition)
         end

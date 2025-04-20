@@ -13,7 +13,7 @@ module Suggestions
 
       def can_read!
         loudly do
-          owner? || role?
+          owner? || role?(:can_read)
         end
       end
 
@@ -23,20 +23,9 @@ module Suggestions
         current_user.id == suggestion.user_id
       end
 
-      def role?
-        group_role.present? && !group_role_relations.zero?
-      end
-
-      def group_role_relations
-        @group_role_relations ||= group_role.group_role_relations.where(role_id: user_roles_ids).count
-      end
-
-      def group_role
-        @group_role ||= GroupRole.find_by(code: :show_suggestion, entity_type: Suggestion::ENTITY_TYPE)
-      end
-
-      def user_roles_ids
-        @user_roles_ids ||= current_user.roles.ids
+      # override
+      def entity
+        @entity ||= Suggestion.name
       end
     end
   end

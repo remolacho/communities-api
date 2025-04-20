@@ -8,6 +8,7 @@ RSpec.describe AnswersPetitions::CreateService do
   context 'when you want create 1 answer to PQR' do
     it 'error max limit files' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {
@@ -28,6 +29,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'error type files attached' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {
@@ -46,6 +48,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'error size files attached' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {
@@ -64,6 +67,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'success the user has role in the petition' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {

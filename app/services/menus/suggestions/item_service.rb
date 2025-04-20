@@ -13,7 +13,7 @@ module Menus
         {
           suggestions: {
             code: 'suggestions',
-            show: true,
+            show: can_show?,
             items: items
           }
         }
@@ -22,9 +22,13 @@ module Menus
       private
 
       def items
-        {}.merge!(create_item.perform)
+        @items ||= {}.merge!(create_item.perform)
           .merge!(self_list.perform)
           .merge!(list_item.perform)
+      end
+
+      def can_show?
+        @can_show ||= items.values.any? { |item| item[:show] }
       end
 
       def create_item

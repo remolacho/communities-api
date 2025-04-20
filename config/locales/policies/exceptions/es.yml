@@ -1,0 +1,5 @@
+es:
+  policies:
+    exceptions:
+      unauthorized: 'No estás autorizado para acceder a este recurso'
+      not_implemented: 'Debes implementar el método entity'

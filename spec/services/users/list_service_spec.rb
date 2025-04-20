@@ -29,7 +29,8 @@ RSpec.describe Users::ListService do
     end
 
     it 'return all users only role manager' do
-      user.user_roles.find_by(role_id: role_owner.id).delete
+      entity_roles
+      user_roles_manager
 
       search = Users::Searches::QueryTermService.new(attr: '', term: '')
       service = described_class.new(user: user, enterprise: enterprise, search: search)

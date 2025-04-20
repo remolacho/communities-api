@@ -76,12 +76,76 @@ erDiagram
   - has_many :user_roles
   - has_many :users, through: :user_roles
   - has_many :group_roles
+- Propósito:
+  - Gestión de permisos generales del sistema
+  - Control de acceso a funcionalidades
+  - Definición de capacidades de usuario
 
 #### `GroupRole`
-- Agrupa roles para gestión de permisos
+- Gestiona la privacidad y visibilidad de registros entre grupos
+- Propósito principal:
+  - Control de acceso a nivel de grupo para peticiones y registros
+  - Permite a usuarios definir qué grupos pueden ver sus registros
+  - Facilita la privacidad y compartición selectiva de información
 - Relaciones:
   - belongs_to :role
   - has_many :group_role_relations
+- Casos de uso:
+  - Definir visibilidad de peticiones entre diferentes grupos
+  - Controlar acceso a registros específicos
+  - Gestionar privacidad de contenido
+
+#### `GroupRoleRelation`
+- Implementa las relaciones de visibilidad entre grupos y registros
+- Propósito:
+  - Establece conexiones entre grupos y registros específicos
+  - Define permisos de visibilidad granulares
+  - Permite control de acceso flexible a nivel de registro
+- Relaciones:
+  - belongs_to :group_role
+  - belongs_to :role
+- Funcionalidad:
+  - Permite a usuarios especificar qué grupos pueden ver sus registros
+  - Facilita la compartición selectiva de información
+  - Mantiene la privacidad de registros entre diferentes grupos
+
+### `UserRole`
+- Une usuarios con roles del sistema
+- Relaciones:
+  - belongs_to :user
+  - belongs_to :role
+- Propósito:
+  - Asignar roles generales del sistema a usuarios
+  - Definir permisos base de usuario
+  - Controlar acceso a funcionalidades del sistema
+
+## Notas sobre el Sistema de Roles
+
+### Separación de Responsabilidades
+1. **Roles Generales del Sistema**
+   - Gestionados por `Role` y `UserRole`
+   - Controlan acceso a funcionalidades del sistema
+   - Definen permisos generales de usuario
+
+2. **Control de Visibilidad por Grupos**
+   - Manejado por `GroupRole` y `GroupRoleRelation`
+   - Enfocado en privacidad y visibilidad de registros
+   - Permite control granular de acceso a nivel de registro
+
+### Casos de Uso Típicos
+1. **Creación de Peticiones**
+   - Usuario crea una petición
+   - Selecciona grupos que pueden verla mediante GroupRole
+   - Sistema establece relaciones de visibilidad con GroupRoleRelation
+
+2. **Control de Acceso**
+   - Roles generales controlan qué pueden hacer los usuarios
+   - GroupRoles controlan qué pueden ver los usuarios
+
+### Consideraciones de Seguridad
+- Validación de permisos a nivel de sistema y grupo
+- Segregación clara entre permisos de acción y visibilidad
+- Control granular de acceso a registros
 
 ### Gestión de Propiedades
 #### `Property`

@@ -57,7 +57,10 @@ RSpec.describe Api::V1::Petitions::Files::ListController do
                  message: { type: :string }
                }
 
-        let(:token) { petition.token }
+        let(:token) do
+          user_role_coexistence_member
+          petition.token
+        end
 
         run_test!
       end

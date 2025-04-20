@@ -12,7 +12,13 @@ shared_context 'create_answer_petition_stuff' do
   let(:user) { current_user }
   let(:category) { @category ||= FactoryBot.create(:category_petition, :petition , enterprise: enterprise_helper) }
 
+  let(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
+  let(:role_council_member){ FactoryBot.create(:role, :council_member) }
+
   let(:user_answer) { @user_answer ||= FactoryBot.create(:user) }
+  let(:user_role_answer){
+    FactoryBot.create(:user_role, user_id: user_answer.id, role_id: role_council_member.id)
+  }
 
   let(:user_enterprise_answer) {
     @user_enterprise_answer ||= FactoryBot.create(:user_enterprise,
@@ -22,8 +28,18 @@ shared_context 'create_answer_petition_stuff' do
 
   }
 
-  let(:role_coexistence_member){ FactoryBot.create(:role, :coexistence_member) }
-  let(:role_council_member){ FactoryBot.create(:role, :council_member) }
+  let(:entity_permissions) do
+    [
+      FactoryBot.create(:entity_permission,
+        role: role_coexistence_member,
+        entity_type: AnswersPetition.name,
+        can_write: true),
+      FactoryBot.create(:entity_permission,
+        role: role_council_member,
+        entity_type: AnswersPetition.name,
+        can_write: true)
+    ]
+  end
 
   let(:group_role) {
     group = FactoryBot.create(:group_role, :council_coexistence)
@@ -35,32 +51,26 @@ shared_context 'create_answer_petition_stuff' do
   }
 
   let(:petition) {
-    status_pending
-
-    data = {
+    FactoryBot.create(:petition,
       title: "Test PQR",
-      message: "message test 1",
-      category_petition_id: category.id,
-      group_role_id: group_role.id
-    }
-
-    ::Petitions::CreateService.new(user: user, data: data).call
+      message: "This is a test message for the petition",
+      category_petition: category,
+      group_role: group_role,
+      status: status_pending,
+      token: SecureRandom.uuid,
+      ticket: "PQR-#{Time.current.to_i}",
+      user: user)
   }
 
   let(:petition_user_answer) {
-    status_pending
-
-    data = {
+    FactoryBot.create(:petition,
       title: "Test PQR",
-      message: "message test 1",
-      category_petition_id: category.id,
-      group_role_id: group_role.id
-    }
-
-    ::Petitions::CreateService.new(user: user_answer, data: data).call
-  }
-
-  let(:user_role_answer){
-    FactoryBot.create(:user_role, user_id: user_answer.id, role_id: role_council_member.id)
+      message: "This is a test message for the petition",
+      category_petition: category,
+      group_role: group_role,
+      status: status_pending,
+      token: SecureRandom.uuid,
+      ticket: "PQR-#{Time.current.to_i}",
+      user: user_answer)
   }
 end

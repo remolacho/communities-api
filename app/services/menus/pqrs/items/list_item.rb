@@ -20,7 +20,7 @@ module Menus
         private
 
         def can_show?
-          @can_show ||= role?
+          @can_show ||= role?(:can_read)
         end
       end
     end

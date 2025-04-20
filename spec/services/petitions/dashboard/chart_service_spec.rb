@@ -20,12 +20,12 @@ RSpec.describe Petitions::Dashboard::ChartStatusesService do
       service = described_class.new(user: user, statuses: statuses)
       result = service.call
 
-      pending_h = result.detect { |r| r[:code] == 'pet-pending' }
-      reviewing_h = result.detect { |r| r[:code] == 'pet-reviewing' }
-      rejected_h = result.detect { |r| r[:code] == 'pet-rejected' }
-      resolved_h = result.detect { |r| r[:code] == 'pet-resolve' }
-      confirm_h = result.detect { |r| r[:code] == 'pet-confirm' }
-      rejected_solution_h = result.detect { |r| r[:code] == 'pet-rejected-solution' }
+      pending_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_PENDING }
+      reviewing_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_REVIEWING }
+      rejected_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_REJECTED }
+      resolved_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_RESOLVED }
+      confirm_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_CONFIRM }
+      rejected_solution_h = result.detect { |r| r[:code] == ::Statuses::Petition::PETITION_REJECTED_SOLUTION }
 
       expect(pending_h[:percentage] == pending).to be(true)
       expect(reviewing_h[:percentage] == reviewing).to be(true)

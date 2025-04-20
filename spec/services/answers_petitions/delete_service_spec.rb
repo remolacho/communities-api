@@ -9,7 +9,7 @@ RSpec.describe AnswersPetitions::DeleteService do
     it 'error the user cannot delete because status is resolve' do
       current_answer = answer
       current_petition = current_answer.petition
-      current_petition.status_id = Status.petition_resolve.id
+      current_petition.status_id = Status.petition_resolved.id
       current_petition.save!
 
       service = described_class.new(answer: current_answer, user: user)

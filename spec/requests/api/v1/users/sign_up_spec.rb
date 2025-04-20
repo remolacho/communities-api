@@ -51,7 +51,7 @@ RSpec.describe Api::V1::Users::SignInController do
         run_test!
       end
 
-      response 404, 'error email empty and other attribute!!!' do
+      response 422, 'error email empty and other attribute!!!' do
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: false },
