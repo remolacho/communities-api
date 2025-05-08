@@ -41,6 +41,7 @@ RSpec.describe Api::V1::Petitions::Answers::Files::ListController do
                }
 
         let(:id) do
+          entity_permissions
           user_enterprise_answer
           user_role_answer
 

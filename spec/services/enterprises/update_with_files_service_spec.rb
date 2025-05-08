@@ -14,7 +14,8 @@ RSpec.describe Enterprises::UpdateService do
         address: 'Altos de Berlin',
         email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
         name: 'Test community 1',
-        rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+        social_reason: 'Test community 1',
+        identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
         logo: logo
       }
 
@@ -30,7 +31,8 @@ RSpec.describe Enterprises::UpdateService do
         address: 'Altos de Berlin',
         email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
         name: 'Test community 1',
-        rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+        social_reason: 'Test community 1',
+        identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
         banner: banner
       }
 
@@ -46,7 +48,8 @@ RSpec.describe Enterprises::UpdateService do
         address: 'Altos de Berlin',
         email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
         name: 'Test community 1',
-        rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+        social_reason: 'Test community 1',
+        identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
         logo: logo
       }
 
@@ -62,7 +65,8 @@ RSpec.describe Enterprises::UpdateService do
         address: 'Altos de Berlin',
         email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
         name: 'Test community 1',
-        rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+        social_reason: 'Test community 1',
+        identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
         banner: banner
       }
 
@@ -81,7 +85,8 @@ RSpec.describe Enterprises::UpdateService do
         address: 'Altos de Berlin',
         email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
         name: 'Test community 1',
-        rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+        social_reason: 'Test community 1',
+        identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
         logo: logo,
         banner: banner
       }

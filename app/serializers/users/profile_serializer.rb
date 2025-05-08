@@ -7,6 +7,7 @@ module Users
                :lastname,
                :email,
                :reference,
+               :document_type,
                :identifier,
                :phone,
                :token

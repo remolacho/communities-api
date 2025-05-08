@@ -23,7 +23,7 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController do
       response 200, 'success, but It can finish with errors!!' do
         let(:Authorization) do
           new_user
-          group_role_relations_assign
+          entity_roles
           user_role_admin
           sign_in
         end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::UserRoles::Import::CreateController do
       response 403, 'user not role admin or super admin!!!' do
         let(:Authorization) do
           new_user
-          group_role_relations_assign
+          entity_roles
           user_role_coexistence
           sign_in
         end

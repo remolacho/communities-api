@@ -53,7 +53,7 @@ RSpec.describe Api::V1::Users::ForgotPasswordController do
         run_test!
       end
 
-      response 404, 'error password not match!!!' do
+      response 422, 'error password not match!!!' do
         schema type: :object,
                properties: {
                  success: { type: :boolean, default: false },

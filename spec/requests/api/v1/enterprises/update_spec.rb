@@ -28,7 +28,8 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
               name: { type: :string },
               email: { type: :string },
               address: { type: :string },
-              rut: { type: :string },
+              identifier: { type: :string },
+              social_reason: { type: :string },
               logo: { type: :string, description: 'the file of image' },
               banner: { type: :string, description: 'the file of image' }
             }
@@ -38,7 +39,7 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
 
       response 200, 'success!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_admin
           sign_in
         end
@@ -51,7 +52,8 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
               address: 'Altos de Berlin',
               email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
               name: 'Test community 1',
-              rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}"
+              identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+              social_reason: 'Test community 1'
             }
           }
         end
@@ -67,7 +69,7 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
 
       response 404, 'error enterprise not valid!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_admin
           sign_in
         end
@@ -80,7 +82,8 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
               address: 'Altos de Berlin',
               email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
               name: 'Test community 1',
-              rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}"
+              identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+              social_reason: 'Test community 1'
             }
           }
         end
@@ -96,7 +99,7 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
 
       response 404, 'error enterprise not found!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_admin
           sign_in
         end
@@ -109,7 +112,8 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
               address: 'Altos de Berlin',
               email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
               name: 'Test community 1',
-              rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}"
+              identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+              social_reason: 'Test community 1'
             }
           }
         end
@@ -123,9 +127,9 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
         run_test!
       end
 
-      response 403, 'error user not valid!!!' do
+      response 403, 'error user not valid, has not edit permission!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles_without_edit
           user_role_manager
           sign_in
         end
@@ -138,7 +142,8 @@ RSpec.describe Api::V1::Enterprises::UpdateController do
               address: 'Altos de Berlin',
               email: "#{FFaker::Name.first_name}.#{Random.rand(20..30)}#{Random.rand(20..30)}#{Random.rand(20..30)}@community.com",
               name: 'Test community 1',
-              rut: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}"
+              identifier: "#{FFaker::IdentificationESCL.rut}-#{Random.rand(20..129)}",
+              social_reason: 'Test community 1'
             }
           }
         end

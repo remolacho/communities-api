@@ -3,14 +3,37 @@
 shared_context 'enterprise_profile_stuff' do
   include RequestHelpers
 
-  let(:role_admin){ FactoryBot.create(:role, :role_admin) }
-  let(:role_manager){ FactoryBot.create(:role, :manager) }
+  let(:role_admin) { FactoryBot.create(:role, :role_admin) }
+  let(:role_manager) { FactoryBot.create(:role, :manager) }
 
-  let(:group_show_enterprise) { FactoryBot.create(:group_role, :show_enterprise) }
+  let(:entity_roles) {
+    [
+      FactoryBot.create(:entity_permission,
+        role: role_admin,
+        entity_type: Enterprise.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      ),
+      FactoryBot.create(:entity_permission,
+        role: role_manager,
+        entity_type: Enterprise.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      )
+    ]
+  }
 
-  let(:group_role_relations) {
-    [FactoryBot.create(:group_role_relation, role: role_admin, group_role: group_show_enterprise),
-     FactoryBot.create(:group_role_relation, role: role_manager, group_role: group_show_enterprise)]
+  let(:entity_roles_without_read) {
+    [
+      FactoryBot.create(:entity_permission,
+        role: role_manager,
+        entity_type: Enterprise.name
+      )
+    ]
   }
 
   let!(:user) { current_user }

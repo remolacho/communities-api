@@ -23,9 +23,10 @@ RSpec.describe Api::V1::Users::ListController do
       parameter name: :term, in: :query, type: :string, description: 'is optional represent the value of find'
       parameter name: :page, in: :query, type: :string, description: 'is optional represent the number page of find'
 
-      response 200, 'success!!!' do
+      response 200, 'success can list!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
+          user_roles_manager
           sign_in
         end
 
@@ -67,7 +68,8 @@ RSpec.describe Api::V1::Users::ListController do
 
       response 403, 'error the user has not role!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
+          user_roles_owner
           sign_in
         end
 
@@ -78,10 +80,7 @@ RSpec.describe Api::V1::Users::ListController do
                }
 
         let(:attr) { '' }
-        let(:term) do
-          user.user_roles.find_by(role_id: role_manager.id).delete
-          ''
-        end
+        let(:term) { '' }
         let(:page) { '1' }
 
         run_test!

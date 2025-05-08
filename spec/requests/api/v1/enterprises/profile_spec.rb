@@ -21,7 +21,7 @@ RSpec.describe Api::V1::Enterprises::ProfileController do
 
       response 200, 'success!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles
           user_role_manager
           sign_in
         end
@@ -32,7 +32,8 @@ RSpec.describe Api::V1::Enterprises::ProfileController do
                  data: { type: :object,
                          properties: {
                            id: { type: :integer },
-                           rut: { type: :string },
+                           identifier: { type: :string },
+                           social_reason: { type: :string },
                            email: { type: :string },
                            token: { type: :string },
                            name: { type: :string },
@@ -51,9 +52,10 @@ RSpec.describe Api::V1::Enterprises::ProfileController do
         run_test!
       end
 
-      response 403, 'error user not valid!!!' do
+      response 403, 'error user has not read permission!!!' do
         let(:Authorization) do
-          group_role_relations
+          entity_roles_without_read
+          user_role_manager
           sign_in
         end
 

@@ -3,21 +3,22 @@
 module Menus
   module Enterprise
     module Items
-      class DetailItem
-        attr_accessor :user, :can_show
-
-        def initialize(user:, can_show:)
-          @user = user
-          @can_show = can_show
+      class DetailItem < ::Enterprises::Profile::Policy
+        def initialize(user:)
+          super(current_user: user)
         end
 
         def perform
           {
             detail: {
               code: 'detail',
-              show: can_show
+              show: can_show?
             }
           }
+        end
+
+        def can_show?
+          @can_show ||= role?(:can_read)
         end
       end
     end

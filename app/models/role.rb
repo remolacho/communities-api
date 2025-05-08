@@ -15,9 +15,10 @@
 #  index_roles_on_slug  (slug) UNIQUE
 #
 class Role < ApplicationRecord
-  has_many :user_roles
+  has_many :user_roles, dependent: :destroy
   has_many :users, through: :user_roles
-  has_many :group_role_relations
+  has_many :group_role_relations, dependent: :destroy
   has_many :group_roles, through: :group_role_relations
   has_many :petitions, through: :group_roles
+  has_many :entity_permissions, dependent: :destroy
 end

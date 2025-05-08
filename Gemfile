@@ -29,6 +29,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+348_360
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -63,8 +64,9 @@ gem 'active_model_serializers'
 gem 'annotate', '~> 3.2.0'
 gem 'auth_jwt_go', '~> 1.0.3'
 gem 'aws-sdk-s3'
-gem 'caxlsx', '~> 3.4'
 gem 'bcrypt'
+gem 'caxlsx', '~> 3.4'
+gem 'enumerate_it', '~> 3.1'
 gem 'figaro', '~> 1.2.0'
 gem 'jwt', '~> 2.4.1'
 gem 'kaminari'
@@ -78,8 +80,6 @@ gem 'ros-apartment', require: 'apartment'
 gem 'rswag'
 gem 'rubyzip', '~> 2.3.0'
 gem 'zip-zip'
-
-gem 'dockerfile-rails', '>= 1.5', group: :development
 
 gem 'redis', '~> 5.0'
 

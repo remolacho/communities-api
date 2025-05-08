@@ -12,6 +12,7 @@ RSpec.describe AnswersPetitions::CreateService do
     end
 
     it 'error message status resolved' do
+      entity_permissions
       p = petition
       p.status_id = status_resolved.id
       p.save!
@@ -35,7 +36,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'error message not allow role' do
       user_enterprise_answer
-
+      entity_permissions
       data = {
         message: 'test message 1'
       }
@@ -55,6 +56,7 @@ RSpec.describe AnswersPetitions::CreateService do
 
     it 'success the user has role in the petition' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {

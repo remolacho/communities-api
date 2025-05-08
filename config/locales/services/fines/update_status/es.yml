@@ -1,0 +1,5 @@
+es:
+  services:
+    fines:
+      update_status:
+        success: "El estado de la multa ha sido actualizado exitosamente"

@@ -110,6 +110,21 @@ Rails.application.routes.draw do
           resources :list, only: [:index]
         end
 
+        namespace :fines do
+          namespace :categories do
+            resources :list, only: [:index]
+            resources :create, only: [:create]
+            resources :import, only: [:create]
+            resources :delete, only: [:destroy]
+          end
+
+          namespace :statuses do
+            get 'all/:type', to: 'all#index'
+            get 'list/:token', to: 'list#index'
+            put 'update/:token', to: 'update_status#update'
+          end
+        end
+
         namespace :group_roles do
           resources :list_petitions, only: [:index]
         end
@@ -133,8 +148,32 @@ Rails.application.routes.draw do
           namespace :statuses do
             get 'all', to: 'all#index'
           end
+
+          namespace :property_types do
+            get 'all', to: 'all#index'
+          end
+
+          namespace :import do
+            resources :template, only: [:index]
+            resources :create, only: [:create]
+          end
+
+          resources :create, only: [:create]
+          resources :update, only: [:update]
+          resources :list, only: [:index]
+          resources :delete, only: [:destroy]
         end
 
+        namespace :user_properties do
+          namespace :import do
+            resources :create, only: [:create]
+            resources :remove, path: '', only: [] do
+              collection do
+                delete 'remove', to: 'remove#delete'
+              end
+            end
+          end
+        end
       end
     end
   end

@@ -8,6 +8,7 @@ RSpec.describe AnswersPetitions::Files::ListService do
   context 'when you want get the files of the answer' do
     it 'success files attached empty!!!' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {
@@ -23,6 +24,7 @@ RSpec.describe AnswersPetitions::Files::ListService do
 
     it 'success files attached!!!' do
       user_enterprise_answer
+      entity_permissions
       user_role_answer
 
       data = {

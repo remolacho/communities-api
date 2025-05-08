@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: petitions
@@ -24,7 +26,7 @@
 #  index_petitions_on_user_id               (user_id)
 #
 class Petition < ApplicationRecord
-  include ::Petitions::Statustable
+  include ::Statuses::PetitionStatusTable
   include ::Petitions::Ransackable
   include ::Petitions::Validable
   include ::Petitions::FileRoutable
@@ -33,9 +35,9 @@ class Petition < ApplicationRecord
   belongs_to :status
   belongs_to :group_role
   belongs_to :category_petition
-  has_many :answers_petitions
+  has_many :answers_petitions, dependent: :destroy
   has_many :roles, through: :group_role
-  has_many :follow_petitions
+  has_many :follow_petitions, dependent: :destroy
 
   has_many_attached :files, dependent: :purge
 

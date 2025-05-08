@@ -14,6 +14,43 @@ shared_context 'list_group_roles_petitions_stuff' do
   let(:role_owner_admin){ FactoryBot.create(:role, :owner_admin) }
   let(:role_admin){ FactoryBot.create(:role, :role_admin) }
 
+  let(:entity_permissions) {
+    [
+      FactoryBot.create(:entity_permission,
+        role: role_coexistence_member,
+        entity_type: Petition.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      ),
+      FactoryBot.create(:entity_permission,
+        role: role_council_member,
+        entity_type: Petition.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      ),
+      FactoryBot.create(:entity_permission,
+        role: role_owner_admin,
+        entity_type: Petition.name,
+        can_read: false,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      ),
+      FactoryBot.create(:entity_permission,
+        role: role_admin,
+        entity_type: Petition.name,
+        can_read: true,
+        can_write: true,
+        can_destroy: true,
+        can_change_status: true
+      )
+    ]
+  }
+
   let(:group_role_council_coexistence) {
     group = FactoryBot.create(:group_role, :council_coexistence)
 
@@ -46,6 +83,7 @@ shared_context 'list_group_roles_petitions_stuff' do
   let(:petitions) {
     status_pending
     user_enterprise_2
+    entity_permissions
 
     c = [
       {
@@ -72,6 +110,7 @@ shared_context 'list_group_roles_petitions_stuff' do
   let(:complaints) {
     status_pending
     user_enterprise_2
+    entity_permissions
 
     c = [
       {
@@ -98,6 +137,7 @@ shared_context 'list_group_roles_petitions_stuff' do
   let(:claims) {
     status_pending
     user_enterprise_2
+    entity_permissions
 
     c = [
       {

@@ -19,66 +19,131 @@
 
 FactoryBot.define do
   factory :status do
+    sequence(:name) { |n| "Status #{n}" }
+    sequence(:code) { |n| "ST#{n}" }
+    status_type { 'test' }
   end
 
   trait :petition_pending do
     name { { es: 'Pendiente', en: 'Pending' } }
-    code { Status::PETITION_PENDING }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_PENDING }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :petition_reviewing do
     name { { es: 'En revisión', en: 'In review' } }
-    code { Status::PETITION_REVIEWING }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_REVIEWING }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :petition_rejected do
     name { { es: 'Rechazada', en: 'Rejected' } }
-    code { Status::PETITION_REJECTED }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_REJECTED }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :petition_confirm do
     name { { es: 'Confirmar solución', en: 'Confirm solution' } }
-    code { Status::PETITION_CONFIRM }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_CONFIRM }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :petition_rejected_solution do
     name { { es: 'Rechazo de la solución', en: 'Rejected solution' } }
-    code { Status::PETITION_REJECTED_SOLUTION }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_REJECTED_SOLUTION }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :petition_resolved do
     name { { es: 'Resuelta', en: 'Resolve' } }
-    code { Status::PETITION_RESOLVE }
-    status_type { Status::PETITION }
+    code { Statuses::Codes::PETITION_RESOLVED }
+    status_type { Statuses::Types::PETITION }
   end
 
   trait :answer_delete do
     name { { es: 'Respuesta eliminada', en: 'Answer destroy' } }
-    code { Status::ANSWER_DELETE }
-    status_type { Status::ANSWER }
+    code { Statuses::Codes::ANSWER_DELETED }
+    status_type { Statuses::Types::ANSWER }
   end
 
   # Estatus de las propiedades
   trait :property_own do
     name { { es: 'Propio', en: 'Own' } }
-    code { Status::PROPERTY_OWN }
-    status_type { Status::PROPERTY }
+    code { Statuses::Codes::PROPERTY_OWN }
+    status_type { Statuses::Types::PROPERTY }
   end
 
   trait :property_rented do
     name { { es: 'Rentado', en: 'Rented' } }
-    code { Status::PROPERTY_RENTED }
-    status_type { Status::PROPERTY }
+    code { Statuses::Codes::PROPERTY_RENTED }
+    status_type { Statuses::Types::PROPERTY }
   end
 
   trait :property_loan do
     name { { es: 'Prestado', en: 'Loan' } }
-    code { Status::PROPERTY_LOAN }
-    status_type { Status::PROPERTY }
+    code { Statuses::Codes::PROPERTY_LOAN }
+    status_type { Statuses::Types::PROPERTY }
+  end
+
+  trait :property_empty do
+    name { { es: 'Vacio', en: 'Empty' } }
+    code { Statuses::Codes::PROPERTY_EMPTY }
+    status_type { Statuses::Types::PROPERTY }
+  end
+
+  # Legal fine statuses
+  trait :fine_legal_assigned do
+    name { { es: 'Asignada', en: 'Assigned' } }
+    code { Statuses::Codes::FINE_LEGAL_ASSIGNED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_closed do
+    name { { es: 'Cerrada', en: 'Closed' } }
+    code { Statuses::Codes::FINE_LEGAL_CLOSED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_pending do
+    name { { es: 'Pendiente', en: 'Pending' } }
+    code { Statuses::Codes::FINE_LEGAL_PENDING }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_rejected do
+    name { { es: 'Rechazada', en: 'Rejected' } }
+    code { Statuses::Codes::FINE_LEGAL_REJECTED }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  trait :fine_legal_paid do
+    name { { es: 'Pagada', en: 'Paid' } }
+    code { Statuses::Codes::FINE_LEGAL_PAID }
+    status_type { Statuses::Types::FINE_LEGAL }
+  end
+
+  # Warning fine statuses
+  trait :fine_warning_assigned do
+    name { { es: 'Asignada', en: 'Assigned' } }
+    code { Statuses::Codes::FINE_WARNING_ASSIGNED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_warning_closed do
+    name { { es: 'Cerrada', en: 'Closed' } }
+    code { Statuses::Codes::FINE_WARNING_CLOSED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_warning_finished do
+    name { { es: 'Finalizada', en: 'Finished' } }
+    code { Statuses::Codes::FINE_WARNING_FINISHED }
+    status_type { Statuses::Types::FINE_WARNING }
+  end
+
+  trait :fine_legal_claim do
+    name { { es: 'Reclamada', en: 'Claimed' } }
+    code { Statuses::Codes::FINE_LEGAL_CLAIM }
+    status_type { Statuses::Types::FINE_LEGAL }
   end
 end

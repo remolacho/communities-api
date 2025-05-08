@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_28_020119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
     t.index ["user_id"], name: "index_answers_petitions_on_user_id"
   end
 
+  create_table "category_fines", force: :cascade do |t|
+    t.string "name"
+    t.string "code", null: false
+    t.bigint "enterprise_id", null: false
+    t.bigint "created_by_id", null: false
+    t.boolean "active", default: true, null: false
+    t.string "formula"
+    t.float "value"
+    t.string "description"
+    t.bigint "parent_category_fine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_category_fines_on_code"
+    t.index ["created_by_id"], name: "index_category_fines_on_created_by_id"
+    t.index ["enterprise_id", "code"], name: "index_category_fines_on_enterprise_id_and_code", unique: true
+    t.index ["enterprise_id"], name: "index_category_fines_on_enterprise_id"
+    t.index ["parent_category_fine_id"], name: "index_category_fines_on_parent_category_fine_id"
+  end
+
   create_table "category_petitions", force: :cascade do |t|
     t.bigint "enterprise_id", null: false
     t.string "name", null: false
@@ -64,8 +83,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
     t.index ["slug"], name: "index_category_petitions_on_slug", unique: true
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "currency_code", null: false
+    t.string "currency_symbol", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code", unique: true
+    t.index ["name"], name: "index_countries_on_name", unique: true
+  end
+
   create_table "enterprises", force: :cascade do |t|
-    t.string "rut", null: false
+    t.bigint "country_id", null: false
+    t.string "identifier", null: false
+    t.string "document_type", default: "NIT", null: false
+    t.string "social_reason", null: false
+    t.string "placeholder_reference", default: "T4-P11-A1102", null: false
     t.string "token", null: false
     t.string "subdomain", null: false
     t.string "email", null: false
@@ -76,9 +111,45 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_enterprises_on_country_id"
     t.index ["email"], name: "index_enterprises_on_email", unique: true
     t.index ["subdomain"], name: "index_enterprises_on_subdomain", unique: true
     t.index ["token"], name: "index_enterprises_on_token", unique: true
+  end
+
+  create_table "entity_permissions", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.string "entity_type", null: false
+    t.boolean "can_read", default: false
+    t.boolean "can_write", default: false
+    t.boolean "can_destroy", default: false
+    t.boolean "can_change_status", default: false
+    t.jsonb "custom_permissions", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id", "entity_type"], name: "index_entity_permissions_on_role_id_and_entity_type", unique: true
+    t.index ["role_id"], name: "index_entity_permissions_on_role_id"
+  end
+
+  create_table "fines", force: :cascade do |t|
+    t.bigint "status_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.bigint "category_fine_id", null: false
+    t.string "token", null: false
+    t.string "ticket", null: false
+    t.string "title", null: false
+    t.string "message", null: false
+    t.string "fine_type", null: false
+    t.float "value", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_fine_id"], name: "index_fines_on_category_fine_id"
+    t.index ["property_id"], name: "index_fines_on_property_id"
+    t.index ["status_id"], name: "index_fines_on_status_id"
+    t.index ["ticket"], name: "index_fines_on_ticket", unique: true
+    t.index ["token"], name: "index_fines_on_token", unique: true
+    t.index ["user_id"], name: "index_fines_on_user_id"
   end
 
   create_table "follow_petitions", force: :cascade do |t|
@@ -133,30 +204,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.jsonb "name", null: false
-    t.string "token", null: false
-    t.integer "created_by", null: false
-    t.integer "updated_by", null: false
+    t.bigint "enterprise_id", null: false
+    t.bigint "property_type_id", null: false
+    t.bigint "status_id", null: false
+    t.string "location", null: false
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["token"], name: "index_properties_on_token", unique: true
+    t.index ["enterprise_id"], name: "index_properties_on_enterprise_id"
+    t.index ["property_type_id", "location"], name: "index_properties_on_property_type_id_and_location", unique: true
+    t.index ["property_type_id"], name: "index_properties_on_property_type_id"
+    t.index ["status_id"], name: "index_properties_on_status_id"
   end
 
-  create_table "property_attributes", force: :cascade do |t|
-    t.bigint "property_id"
-    t.string "token", null: false
-    t.jsonb "name", default: {}, null: false
-    t.jsonb "name_as", default: {}
-    t.integer "min_range", default: 1
-    t.integer "max_range", default: 1
-    t.string "prefix"
-    t.string "input", default: "list", null: false
-    t.integer "created_by", null: false
-    t.integer "updated_by", null: false
+  create_table "property_owner_types", force: :cascade do |t|
+    t.bigint "enterprise_id", null: false
+    t.string "code", null: false
+    t.string "name", null: false
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["property_id"], name: "index_property_attributes_on_property_id"
-    t.index ["token"], name: "index_property_attributes_on_token", unique: true
+    t.index ["code"], name: "index_property_owner_types_on_code", unique: true
+    t.index ["enterprise_id"], name: "index_property_owner_types_on_enterprise_id"
+  end
+
+  create_table "property_types", force: :cascade do |t|
+    t.bigint "enterprise_id", null: false
+    t.string "code", null: false
+    t.string "name", null: false
+    t.boolean "active", default: true, null: false
+    t.string "location_regex", null: false
+    t.string "placeholder", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_property_types_on_code", unique: true
+    t.index ["enterprise_id"], name: "index_property_types_on_enterprise_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -215,15 +297,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
   end
 
   create_table "user_properties", force: :cascade do |t|
-    t.bigint "property_id"
-    t.bigint "user_id"
-    t.bigint "status_id"
-    t.string "observation", null: false
-    t.jsonb "property_attributes", default: {}, null: false
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.bigint "property_owner_type_id", null: false
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_user_properties_on_property_id"
-    t.index ["status_id"], name: "index_user_properties_on_status_id"
+    t.index ["property_owner_type_id"], name: "index_user_properties_on_property_owner_type_id"
+    t.index ["user_id", "property_id"], name: "index_user_properties_on_user_id_and_property_id", unique: true
     t.index ["user_id"], name: "index_user_properties_on_user_id"
   end
 
@@ -241,6 +323,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
 
   create_table "users", force: :cascade do |t|
     t.string "identifier", null: false
+    t.string "document_type", default: "CC", null: false
     t.string "name", null: false
     t.string "lastname", null: false
     t.string "token", null: false
@@ -265,4 +348,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_181206) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "category_fines", "enterprises"
+  add_foreign_key "category_fines", "users", column: "created_by_id"
+  add_foreign_key "entity_permissions", "roles"
+  add_foreign_key "properties", "enterprises"
+  add_foreign_key "properties", "property_types"
+  add_foreign_key "properties", "statuses"
+  add_foreign_key "property_owner_types", "enterprises"
+  add_foreign_key "property_types", "enterprises"
+  add_foreign_key "user_properties", "properties"
+  add_foreign_key "user_properties", "property_owner_types"
+  add_foreign_key "user_properties", "users"
 end

@@ -1,0 +1,6 @@
+es:
+  services:
+    user_properties:
+      import:
+        remove:
+          success: "Las relaciones de propietarios han sido desactivadas exitosamente"
